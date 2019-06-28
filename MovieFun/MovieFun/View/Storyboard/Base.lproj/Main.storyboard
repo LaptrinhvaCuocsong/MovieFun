@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vpe-Gy-fvP">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Account-->
+        <scene sceneID="yoc-lg-T68">
+            <objects>
+                <viewController id="h6C-oH-3Vw" customClass="AccountViewController" customModule="MovieFun" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DEQ-Lm-50Q">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="5hm-t2-gBz"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Account" id="MxC-kQ-Bs7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Kv-0j-gtp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1697.1014492753625" y="975.66964285714278"/>
+        </scene>
+        <!--Favourite Movie-->
+        <scene sceneID="oTJ-qc-OuC">
+            <objects>
+                <viewController id="MRV-F3-i5q" customClass="FavoriteMovieViewController" customModule="MovieFun" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7QN-Qi-GcZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="FLy-pC-rui"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Favourite Movie" id="KS5-0c-iM0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zZh-AJ-Lf0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3494.202898550725" y="-22.098214285714285"/>
+        </scene>
+        <!--Comment List-->
+        <scene sceneID="LEf-A5-Rac">
+            <objects>
+                <viewController id="LaI-HY-JMu" customClass="CommentListViewController" customModule="MovieFun" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="u6f-a2-Hbx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="BXb-RI-ApT"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Comment List" id="GqR-g1-CFi"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HQK-r0-BOQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3494.202898550725" y="675"/>
+        </scene>
+        <!--Movie List-->
+        <scene sceneID="czG-DF-hs9">
+            <objects>
+                <viewController id="Z22-om-z9b" customClass="MovieListViewController" customModule="MovieFun" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yfg-Wk-iIl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iNO-P1-Cib">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Z22-om-z9b" id="BMA-Wa-Oaa"/>
+                                    <outlet property="delegate" destination="Z22-om-z9b" id="6eR-Ti-4qw"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="0O6-PB-WgM" firstAttribute="trailing" secondItem="iNO-P1-Cib" secondAttribute="trailing" id="0w3-3e-aH4"/>
+                            <constraint firstItem="iNO-P1-Cib" firstAttribute="top" secondItem="0O6-PB-WgM" secondAttribute="top" id="j13-vT-AnF"/>
+                            <constraint firstItem="0O6-PB-WgM" firstAttribute="bottom" secondItem="iNO-P1-Cib" secondAttribute="bottom" id="uHH-J3-uUw"/>
+                            <constraint firstItem="iNO-P1-Cib" firstAttribute="leading" secondItem="0O6-PB-WgM" secondAttribute="leading" id="zN2-dp-U7z"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0O6-PB-WgM"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Movie List" id="pNk-Ah-ft6">
+                        <barButtonItem key="rightBarButtonItem" image="search" id="egM-FP-XeL">
+                            <connections>
+                                <action selector="searchMovie:" destination="Z22-om-z9b" id="ADr-ii-Qm0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="movieTableView" destination="iNO-P1-Cib" id="vIq-ZN-z0f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tS0-nL-MEj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1773.913043478261" y="-305.35714285714283"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="1ea-C2-l2h">
+            <objects>
+                <tabBarController id="Vpe-Gy-fvP" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="v20-bd-VwD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="N0X-an-oEt" kind="relationship" relationship="viewControllers" id="f6s-vM-qof"/>
+                        <segue destination="7lN-pt-cdv" kind="relationship" relationship="viewControllers" id="RBz-Ru-Onc"/>
+                        <segue destination="tjW-iK-PiH" kind="relationship" relationship="viewControllers" id="IEA-lN-KXL"/>
+                        <segue destination="knU-RT-RRg" kind="relationship" relationship="viewControllers" id="N79-Zt-rTs"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tze-Ib-odf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-88" y="247"/>
+        </scene>
+        <!--Movie List-->
+        <scene sceneID="juy-3W-qLT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="N0X-an-oEt" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Movie List" image="video-icon" id="d0f-n8-XXn"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Zdz-UD-3XK">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Z22-om-z9b" kind="relationship" relationship="rootViewController" id="W5K-ns-Dk8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rz1-mv-lkK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="863.768115942029" y="-305.35714285714283"/>
+        </scene>
+        <!--Favorite movie-->
+        <scene sceneID="4Ne-UK-uRL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7lN-pt-cdv" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorite movie" image="heart" id="9tA-NB-iPv"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XmE-F6-W8R">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MRV-F3-i5q" kind="relationship" relationship="rootViewController" id="HLe-bb-VWE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dzw-em-TOL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2584.057971014493" y="-22.098214285714285"/>
+        </scene>
+        <!--Comment List-->
+        <scene sceneID="U3Z-Zq-FmH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tjW-iK-PiH" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Comment List" image="chat" id="0Ib-7L-xwQ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Obk-Nw-M1a">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="LaI-HY-JMu" kind="relationship" relationship="rootViewController" id="NwC-i1-rnt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GUv-dq-Ixf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2584.057971014493" y="675"/>
+        </scene>
+        <!--Account-->
+        <scene sceneID="yvF-aB-xFe">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="knU-RT-RRg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Account" image="user" id="PoC-Et-FiU"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dMu-50-Kjb">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="h6C-oH-3Vw" kind="relationship" relationship="rootViewController" id="xJc-oK-EMp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J2T-Gh-vJ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="786.95652173913049" y="975.66964285714278"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="chat" width="32" height="32"/>
+        <image name="heart" width="32" height="32"/>
+        <image name="search" width="32" height="32"/>
+        <image name="user" width="32" height="32"/>
+        <image name="video-icon" width="32" height="32"/>
+    </resources>
+</document>
