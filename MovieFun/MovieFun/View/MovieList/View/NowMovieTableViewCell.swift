@@ -10,7 +10,7 @@ import UIKit
 
 class NowMovieTableViewCell: UITableViewCell, MovieListCell {
     
-    static let nibName = "NowMovieMovieTableViewCell"
+    static let nibName = "NowMovieTableViewCell"
     static let cellIdentify = "nowMovieCell"
     
     func setUp(with viewModel: MovieListCellViewModel) {
