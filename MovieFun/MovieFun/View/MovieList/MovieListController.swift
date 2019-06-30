@@ -17,13 +17,41 @@ class MovieListController {
     }
     
     func start() {
-        
+        movieListViewModel!.isLoading!.value = true
+        movieListViewModel!.isHiddenMovieTableView!.value = true
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {[weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.movieListViewModel!.isLoading!.value = false
+            strongSelf.movieListViewModel!.isHiddenMovieTableView!.value = false
+            strongSelf.buildViewModels()
+        }
+    }
+    
+    private func buildViewModels() {
+        let newMovieSectionVM = MovieListSectionViewModel()
+        let newMovieCellVM = NewMovieCellViewModel()
+        newMovieSectionVM.rowViewModels!.value!.append(newMovieCellVM)
+        let nowMovieSectionVM = MovieListSectionViewModel()
+        let nowMovieCellVM = NowMovieCellViewModel()
+        nowMovieSectionVM.rowViewModels!.value!.append(nowMovieCellVM)
+        let topRateSectionVM = MovieListSectionViewModel()
+        let topRateCellVM = TopRateCellViewModel()
+        topRateSectionVM.rowViewModels!.value!.append(topRateCellVM)
+        let trailerSectionVM = MovieListSectionViewModel()
+        let trailerCellVM = TrailersMovieCellViewModel()
+        trailerSectionVM.rowViewModels!.value!.append(trailerCellVM)
+        movieListViewModel!.sectionViewModels!.value!.append(newMovieSectionVM)
+        movieListViewModel!.sectionViewModels!.value!.append(nowMovieSectionVM)
+        movieListViewModel!.sectionViewModels!.value!.append(topRateSectionVM)
+        movieListViewModel!.sectionViewModels!.value!.append(trailerSectionVM)
     }
     
     func cellIdentify(of viewModel: MovieListCellViewModel) -> String {
         switch viewModel {
         case is NowMovieCellViewModel:
-            return NowMovieMovieTableViewCell.cellIdentify
+            return NowMovieTableViewCell.cellIdentify
         case is NewMovieCellViewModel:
             return NewMovieTableViewCell.cellIdentify
         case is TopRateCellViewModel:

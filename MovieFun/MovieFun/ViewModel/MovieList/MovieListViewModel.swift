@@ -11,6 +11,7 @@ import Foundation
 class MovieListViewModel {
     
     var isLoading: DynamicType<Bool>?
+    var isHiddenMovieTableView: DynamicType<Bool>?
     var sectionViewModels: DynamicType<[MovieListSectionViewModel]>?
     
 }

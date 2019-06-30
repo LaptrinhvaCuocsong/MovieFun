@@ -12,4 +12,8 @@ class MovieListSectionViewModel {
     
     var rowViewModels: DynamicType<[MovieListCellViewModel]>?
     
+    init() {
+        rowViewModels = DynamicType<[MovieListCellViewModel]>(value: [MovieListCellViewModel]())
+    }
+    
 }

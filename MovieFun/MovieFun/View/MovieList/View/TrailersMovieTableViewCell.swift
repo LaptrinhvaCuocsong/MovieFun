@@ -8,8 +8,13 @@
 
 import UIKit
 
-class TrailersMovieTableViewCell: UITableViewCell {
+class TrailersMovieTableViewCell: UITableViewCell, MovieListCell {
     
-    static let cellIdentify = "trailersMovieCell"
+    static let nibName = "TrailersMovieTableViewCell"
+    static let cellIdentify = "trailerMovieCell"
+    
+    func setUp(with viewModel: MovieListCellViewModel) {
+        
+    }
     
 }

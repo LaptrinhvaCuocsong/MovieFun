@@ -9,7 +9,5 @@
 import Foundation
 
 class TrailersMovieCellViewModel: MovieListCellViewModel {
-    
-    
-    
+        
 }

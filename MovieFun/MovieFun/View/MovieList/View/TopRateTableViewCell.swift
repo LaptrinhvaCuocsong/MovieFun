@@ -8,8 +8,13 @@
 
 import UIKit
 
-class TopRateTableViewCell: UITableViewCell {
+class TopRateTableViewCell: UITableViewCell, MovieListCell {
     
+    static let nibName = "TopRateTableViewCell"
     static let cellIdentify = "topRateCell"
+    
+    func setUp(with viewModel: MovieListCellViewModel) {
+        
+    }
     
 }

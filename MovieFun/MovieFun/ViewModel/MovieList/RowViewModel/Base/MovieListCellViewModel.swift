@@ -9,7 +9,4 @@
 import Foundation
 
 protocol MovieListCellViewModel {
-    
-    
-    
 }

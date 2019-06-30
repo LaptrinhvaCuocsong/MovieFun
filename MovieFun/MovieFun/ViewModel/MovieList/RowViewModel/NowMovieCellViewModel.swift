@@ -9,7 +9,4 @@
 import Foundation
 
 class NowMovieCellViewModel: MovieListCellViewModel {
-    
-    
-    
 }
