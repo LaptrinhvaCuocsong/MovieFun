@@ -16,3 +16,7 @@ enum StoryBoardName: String {
     case MAIN = "Main"
     case UTILS = "Utils"
 }
+
+enum Language: String {
+    case en_US = "en_US"
+}

@@ -23,6 +23,6 @@ class Movie {
     var backdropPath: String?
     var adult: Bool?
     var overview: String?
-    var releaseDate: Data?
+    var releaseDate: Date?
     
 }

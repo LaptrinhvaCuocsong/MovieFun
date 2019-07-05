@@ -7,8 +7,8 @@ target 'MovieFun' do
 
   # Pods for MovieFun
 
-pod 'SwiftyJSON'
-
-pod 'Alamofire'
+  pod 'Alamofire'
+  
+  pod 'SwiftyJSON'
 
 end

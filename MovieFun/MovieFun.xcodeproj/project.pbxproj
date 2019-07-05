@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A104A70A22C90EEA0039B5AA /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104A70922C90EEA0039B5AA /* MovieListCell.swift */; };
+		A104A70D22C91A080039B5AA /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104A70C22C91A080039B5AA /* MovieService.swift */; };
+		A104A71122C98D400039B5AA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104A71022C98D400039B5AA /* Utils.swift */; };
 		A107EC1622C51C3300A711DA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A107EC1522C51C3300A711DA /* Constants.swift */; };
 		A107EC1B22C5272A00A711DA /* NowMovieView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A107EC1722C5272900A711DA /* NowMovieView.xib */; };
 		A107EC1C22C5272A00A711DA /* NowMovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A107EC1822C5272A00A711DA /* NowMovieTableViewCell.xib */; };
@@ -44,6 +46,8 @@
 /* Begin PBXFileReference section */
 		4F855BCDB526970A5659EB69 /* Pods-MovieFun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieFun.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieFun/Pods-MovieFun.release.xcconfig"; sourceTree = "<group>"; };
 		A104A70922C90EEA0039B5AA /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
+		A104A70C22C91A080039B5AA /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
+		A104A71022C98D400039B5AA /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		A107EC1522C51C3300A711DA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A107EC1722C5272900A711DA /* NowMovieView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NowMovieView.xib; sourceTree = "<group>"; };
 		A107EC1822C5272A00A711DA /* NowMovieTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NowMovieTableViewCell.xib; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 		A1083E0B22C291DB0083F906 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				A104A70C22C91A080039B5AA /* MovieService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -297,6 +302,7 @@
 			children = (
 				A107EC1522C51C3300A711DA /* Constants.swift */,
 				A1460AB422C679CA00E4BAA5 /* DynamicType.swift */,
+				A104A71022C98D400039B5AA /* Utils.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -442,7 +448,9 @@
 				A1083E0722C283F00083F906 /* CommentListViewController.swift in Sources */,
 				A107EC2122C52B9B00A711DA /* TopRateTableViewCell.swift in Sources */,
 				A1A3E31622C3C64900C5DF5F /* NewMovieTableViewCell.swift in Sources */,
+				A104A71122C98D400039B5AA /* Utils.swift in Sources */,
 				A1460AB322C6796A00E4BAA5 /* MovieListSectionViewModel.swift in Sources */,
+				A104A70D22C91A080039B5AA /* MovieService.swift in Sources */,
 				A1083E0922C284330083F906 /* AccountViewController.swift in Sources */,
 				A1460ABF22C6810200E4BAA5 /* TrailersMovieCellViewModel.swift in Sources */,
 				A1460AC122C682CF00E4BAA5 /* MovieListCellViewModel.swift in Sources */,
