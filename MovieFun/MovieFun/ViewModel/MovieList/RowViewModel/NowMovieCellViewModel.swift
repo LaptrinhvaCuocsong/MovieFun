@@ -9,4 +9,11 @@
 import Foundation
 
 class NowMovieCellViewModel: MovieListCellViewModel {
+    
+    var nowMovies: DynamicType<[Movie]>?
+    
+    init(nowMovies: DynamicType<[Movie]>) {
+        self.nowMovies = nowMovies
+    }
+    
 }

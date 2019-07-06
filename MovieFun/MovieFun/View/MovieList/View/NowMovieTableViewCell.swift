@@ -14,9 +14,6 @@ class NowMovieTableViewCell: UITableViewCell, MovieListCell {
     static let cellIdentify = "nowMovieCell"
     
     func setUp(with viewModel: MovieListCellViewModel) {
-        guard let nowMovieVM = viewModel as? NowMovieCellViewModel else {
-            return
-        }
         // setup nowMovieVM
     }
     

@@ -21,38 +21,28 @@ class MovieService {
     private var nowMovies: [Movie]?
     private var topRateMovies: [Movie]?
     private let dispatchGroup = DispatchGroup()
-    private var haveError: Bool = false
     
-    func fetchMovieList(completion: ()?) {
+    func fetchMovieList(completion: (([Movie]?, [Movie]?, [Movie]?) -> Void)?) {
+        weak var weakSelf = self
         dispatchGroup.enter()
-        self.fetchMovie(url: NEW_MOVIE_URL, language: .en_US, page: 1) {[weak self] (movies, error) in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.newMovies = movies
-            strongSelf.dispatchGroup.leave()
-            strongSelf.haveError = error != nil ? true: strongSelf.haveError
+        self.fetchMovie(url: NEW_MOVIE_URL, language: .en_US, page: 1) { (movies, error) in
+            weakSelf?.newMovies = movies
+            weakSelf?.dispatchGroup.leave()
         }
         dispatchGroup.enter()
-        self.fetchMovie(url: NOW_MOVIE_URL, language: .en_US, page: 1) {[weak self] (movies, error) in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.nowMovies = movies
-            strongSelf.dispatchGroup.leave()
-            strongSelf.haveError = error != nil ? true: strongSelf.haveError
+        self.fetchMovie(url: NOW_MOVIE_URL, language: .en_US, page: 1) { (movies, error) in
+            weakSelf?.nowMovies = movies
+            weakSelf?.dispatchGroup.leave()
         }
         dispatchGroup.enter()
-        self.fetchMovie(url: TOP_RATE_MOVIE_URL, language: .en_US, page: 1) {[weak self] (movies, error) in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.topRateMovies = movies
-            strongSelf.dispatchGroup.leave()
-            strongSelf.haveError = error != nil ? true: strongSelf.haveError
+        self.fetchMovie(url: TOP_RATE_MOVIE_URL, language: .en_US, page: 1) { (movies, error) in
+            weakSelf?.topRateMovies = movies
+            weakSelf?.dispatchGroup.leave()
         }
         dispatchGroup.notify(queue: .main) {
-            
+            if let com = completion {
+                com(weakSelf?.newMovies, weakSelf?.nowMovies, weakSelf?.topRateMovies)
+            }
         }
     }
     
@@ -66,7 +56,10 @@ class MovieService {
                     return
                 }
                 if dataResponse.result.isSuccess {
-                    let json = JSON(dataResponse)
+                    guard let value = dataResponse.result.value else {
+                        return
+                    }
+                    let json = JSON(value)
                     if let results = json["results"].array {
                         var movieList = [Movie]()
                         for item in results {

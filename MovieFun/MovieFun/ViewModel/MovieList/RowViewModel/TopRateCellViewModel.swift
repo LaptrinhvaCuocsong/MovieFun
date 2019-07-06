@@ -10,4 +10,10 @@ import Foundation
 
 class TopRateCellViewModel: MovieListCellViewModel {
 
+    var topRateMovies: DynamicType<[Movie]>?
+    
+    init(topRateMovies: DynamicType<[Movie]>) {
+        self.topRateMovies = topRateMovies
+    }
+    
 }
