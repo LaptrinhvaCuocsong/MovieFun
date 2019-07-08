@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import AlamofireImage
 
 class MovieService {
     
@@ -16,11 +17,21 @@ class MovieService {
     private let NOW_MOVIE_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=%@&language=%@&page=%d"
     private let TOP_RATE_MOVIE_URL = "https://api.themoviedb.org/3/movie/top_rated?api_key=%@&language=%@&page=%d"
     private let TRAILER_MOVIE_URL = "https://api.themoviedb.org/3/movie/%@/videos?api_key=%@&language=%@"
+    private let IMAGE_URL = "https://image.tmdb.org/t/p/%@/%@"
     private let DATE_FORMAT = "yyyy-mm-dd"
     private var newMovies: [Movie]?
     private var nowMovies: [Movie]?
     private var topRateMovies: [Movie]?
     private let dispatchGroup = DispatchGroup()
+    
+    let imageCache = AutoPurgingImageCache(
+        memoryCapacity: UInt64(100).megabytes(),
+        preferredMemoryUsageAfterPurge: UInt64(60).megabytes()
+    )
+    
+    static let share = MovieService()
+    
+    //MARK: - Movie Fetching
     
     func fetchMovieList(completion: (([Movie]?, [Movie]?, [Movie]?) -> Void)?) {
         weak var weakSelf = self
@@ -84,6 +95,32 @@ class MovieService {
     func fetchTrailerMovie(movieId: String, language: Language, completion: (([Movie]?, Error?) -> Void)?) {
     }
     
+    func fetchImage(posterSize: PosterSize, posterPath: String, completion: ((UIImage?) -> Void)?) {
+        let completion: ((UIImage?) -> Void) = completion ?? {_ in}
+        do {
+            let url = try String(format: IMAGE_URL, posterSize.rawValue, posterPath).asURL()
+            if let image = self.cachedImage(for: url.absoluteString) {
+                completion(image)
+                return
+            }
+            Alamofire.request(url).responseImage {[weak self] (dataResponse) in
+                if dataResponse.result.isSuccess {
+                    if let image = dataResponse.result.value {
+                        completion(image)
+                        self?.cache(image: image, for: url.absoluteString)
+                    }
+                }
+                else {
+                    completion(nil)
+                }
+            }
+        }
+        catch {
+            print(error)
+            completion(nil)
+        }
+    }
+    
     private func parseMovieJson(json: JSON) -> Movie {
         let movie = Movie()
         let movieJson = json.dictionaryValue
@@ -102,5 +139,15 @@ class MovieService {
         movie.overview = movieJson["overview"]?.string
         movie.releaseDate = Utils.dateFromString(dateFormat: DATE_FORMAT, string: movieJson["release_date"]?.string)
         return movie
+    }
+    
+    //MARK: - Image Caching
+    
+    private func cache(image: UIImage, for identify: String) {
+        self.imageCache.add(image, withIdentifier: identify)
+    }
+    
+    private func cachedImage(for identify: String) -> UIImage? {
+        return self.imageCache.image(withIdentifier: identify)
     }
 }

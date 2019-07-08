@@ -10,5 +10,7 @@ target 'MovieFun' do
   pod 'Alamofire'
   
   pod 'SwiftyJSON'
+  
+  pod 'AlamofireImage'
 
 end

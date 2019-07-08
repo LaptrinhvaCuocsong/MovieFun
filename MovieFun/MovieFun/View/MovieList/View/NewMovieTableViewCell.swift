@@ -12,7 +12,8 @@ class NewMovieTableViewCell: UITableViewCell, MovieListCell {
 
     @IBOutlet weak var pagingStackView: UIStackView!
     @IBOutlet weak var newMovieCollectionView: UICollectionView!
-
+    @IBOutlet weak var widthPagingStackView: NSLayoutConstraint!
+    
     static let nibName = "NewMovieTableViewCell"
     static let cellIdentify = "newMovieCell"
     
@@ -21,20 +22,26 @@ class NewMovieTableViewCell: UITableViewCell, MovieListCell {
     
     func setUp(with viewModel: MovieListCellViewModel) {
         if let newMovieCellVM = viewModel as? NewMovieCellViewModel {
+            newMovieCollectionView.register(UINib(nibName: NewMovieCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: NewMovieCollectionViewCell.cellIdentify)
             newMovieCollectionView.delegate = newMovieCellVM
             newMovieCollectionView.dataSource = newMovieCellVM
-            self.setPagingStackView(movieSize: newMovieCellVM.newMovies!.value!.count)
+            self.setPagingStackView()
         }
     }
     
-    private func setPagingStackView(movieSize: Int) {
-        let size = movieSize / 4 + 1
-        for _ in 1...size {
-            let frame = CGRect(x: 0.0, y: 0.0, width: pagingStackView.height, height: pagingStackView.height)
+    private func setPagingStackView() {
+        for (_, view) in pagingStackView.arrangedSubviews.enumerated() {
+            view.removeFromSuperview()
+            pagingStackView.removeArrangedSubview(view)
+        }
+        let width = pagingStackView.height
+        widthPagingStackView.constant = CGFloat(4.0 * width + (4.0 - 1)*5.0)
+        for _ in 1...4 {
+            let frame = CGRect(x: 0.0, y: 0.0, width: pagingStackView.height, height: width)
             let view = UIView(frame: frame)
-            view.layer.cornerRadius = 10.0
+            view.layer.cornerRadius = 5.0
             view.clipsToBounds = true
-            view.backgroundColor = .white
+            view.backgroundColor = .gray
             pagingStackView.addArrangedSubview(view)
         }
     }

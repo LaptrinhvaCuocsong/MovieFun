@@ -22,12 +22,26 @@ extension NewMovieCellViewModel: UICollectionViewDataSource, UICollectionViewDel
     
     //MARK: - UICollectionViewDataSource
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 16
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewMovieCollectionViewCell.cellIdentify, for: indexPath) as! NewMovieCollectionViewCell
+        let movie = newMovies!.value![indexPath.section]
+        cell.setContent(title: movie.title, voteAverage: movie.voteAverage, posterPath: movie.posterPath)
+        return cell
+    }
+    
+    //MARK: - UICollectionViewDelegateFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.width
+        return CGSize(width: width/4, height: collectionView.height)
     }
     
 }
