@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="trailerCollectionViewCell" id="gTV-IL-0wX" customClass="TrailerCollectionViewCell" customModule="MovieFun" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="394" height="203"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="394" height="203"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="81z-zF-jk7">
+                        <rect key="frame" x="0.0" y="0.0" width="394" height="168.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="81z-zF-jk7" secondAttribute="height" multiplier="292:125" id="VZ8-kg-fok"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Em9-3I-hBp">
+                        <rect key="frame" x="165" y="69.5" width="64" height="64"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="64" id="KfP-fh-mRm"/>
+                            <constraint firstAttribute="width" constant="64" id="Zn6-Tx-Etf"/>
+                        </constraints>
+                        <state key="normal" image="play-button"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKO-1O-iVX">
+                        <rect key="frame" x="0.0" y="178.5" width="394" height="24.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Em9-3I-hBp" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="9kj-3Q-dHy"/>
+                <constraint firstItem="81z-zF-jk7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="VgS-tS-2N6"/>
+                <constraint firstAttribute="bottom" secondItem="ZKO-1O-iVX" secondAttribute="bottom" id="aou-aZ-t6X"/>
+                <constraint firstItem="81z-zF-jk7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bxU-uW-nXR"/>
+                <constraint firstAttribute="trailing" secondItem="81z-zF-jk7" secondAttribute="trailing" id="hMO-D9-1X5"/>
+                <constraint firstItem="Em9-3I-hBp" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ilx-3b-kyO"/>
+                <constraint firstItem="ZKO-1O-iVX" firstAttribute="top" secondItem="81z-zF-jk7" secondAttribute="bottom" constant="10" id="uIL-cC-AVj"/>
+                <constraint firstAttribute="trailing" secondItem="ZKO-1O-iVX" secondAttribute="trailing" id="y94-gt-uBx"/>
+                <constraint firstItem="ZKO-1O-iVX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="zhk-Hr-ZQK"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="imageView" destination="81z-zF-jk7" id="Dki-k8-mgb"/>
+                <outlet property="playButton" destination="Em9-3I-hBp" id="ibF-4W-koh"/>
+                <outlet property="titleLabel" destination="ZKO-1O-iVX" id="W2d-gq-BEB"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="120.20089285714285"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="play-button" width="64" height="64"/>
+    </resources>
+</document>

@@ -8,5 +8,32 @@
 
 import UIKit
 
-class ComingSoonMovieView: UIView {
+class NowMovieView: UIView {
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var voteRageLabel: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    @IBOutlet weak var overviewLabel: UILabel!
+    
+    static let nibName = "NowMovieView"
+    
+    static func createNowMovieView() -> NowMovieView {
+        let nib = UINib(nibName: nibName, bundle: nil)
+        let nowMovieView = nib.instantiate(withOwner: self, options: nil).first as! NowMovieView
+        return nowMovieView
+    }
+    
+    func setContent(title: String?, rage: Double?, releaseDate: Date?, overview: String?, posterPath: String?) {
+        titleLabel.text = title
+        voteRageLabel.text = "\(rage ?? 0.0)"
+        releaseDateLabel.text = Utils.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: releaseDate)
+        overviewLabel.text = overview
+        if let posterPath = posterPath {
+            MovieService.share.fetchImage(imageSize: .w185, imageName: posterPath) {[weak self] (image) in
+                self?.imageView.image = image
+            }
+        }
+    }
+    
 }

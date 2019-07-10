@@ -28,7 +28,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch more all now movies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kcz-p9-qjV">
                         <rect key="frame" x="10" y="117.5" width="146" height="14"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8Q-2J-iJC">
@@ -37,27 +37,33 @@
                         <state key="normal" title="See All →">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
+                        <connections>
+                            <action selector="seeAll:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="e8r-DB-tNo"/>
+                        </connections>
                     </button>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hzP-MR-bdF">
-                        <rect key="frame" x="10" y="45" width="394" height="67.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hzP-MR-bdF">
+                        <rect key="frame" x="10" y="45" width="394" height="44.5"/>
                     </stackView>
                 </subviews>
-                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.83058647260273977" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="S8Q-2J-iJC" secondAttribute="trailing" constant="10" id="2I5-uS-INl"/>
                     <constraint firstItem="sjM-rE-tih" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="LC6-7A-4PV"/>
                     <constraint firstAttribute="bottom" secondItem="S8Q-2J-iJC" secondAttribute="bottom" constant="10" id="M9o-y7-Jcq"/>
                     <constraint firstItem="hzP-MR-bdF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="P4C-49-Ecb"/>
                     <constraint firstAttribute="trailing" secondItem="hzP-MR-bdF" secondAttribute="trailing" constant="10" id="XXh-an-vzu"/>
-                    <constraint firstItem="Kcz-p9-qjV" firstAttribute="top" secondItem="hzP-MR-bdF" secondAttribute="bottom" constant="5" id="dsQ-tM-Hrj"/>
                     <constraint firstItem="sjM-rE-tih" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="hzu-ns-FBg"/>
                     <constraint firstItem="Kcz-p9-qjV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="o1X-Qb-ezJ"/>
+                    <constraint firstItem="S8Q-2J-iJC" firstAttribute="top" secondItem="hzP-MR-bdF" secondAttribute="bottom" constant="20" id="ojw-fV-djl"/>
                     <constraint firstItem="hzP-MR-bdF" firstAttribute="top" secondItem="sjM-rE-tih" secondAttribute="bottom" constant="15" id="s2X-oQ-jRZ"/>
                     <constraint firstItem="Kcz-p9-qjV" firstAttribute="centerY" secondItem="S8Q-2J-iJC" secondAttribute="centerY" id="sIu-Qd-6mA"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="nowMovieStackView" destination="hzP-MR-bdF" id="tZz-sP-CKB"/>
+            </connections>
             <point key="canvasLocation" x="2.8985507246376816" y="52.901785714285715"/>
         </tableViewCell>
     </objects>

@@ -30,7 +30,7 @@ class NewMovieCollectionViewCell: UICollectionViewCell {
         titleLabel.text = title
         rageLabel.text = "\(voteAverage ?? 0.0)"
         if let posterPath = posterPath {
-            movieService.fetchImage(posterSize: .w500, posterPath: posterPath) {[weak self] (image) in
+            movieService.fetchImage(imageSize: .w500, imageName: posterPath) {[weak self] (image) in
                 guard let strongSelf = self else {
                     return
                 }

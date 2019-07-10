@@ -17,11 +17,12 @@ class MovieService {
     private let NOW_MOVIE_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=%@&language=%@&page=%d"
     private let TOP_RATE_MOVIE_URL = "https://api.themoviedb.org/3/movie/top_rated?api_key=%@&language=%@&page=%d"
     private let TRAILER_MOVIE_URL = "https://api.themoviedb.org/3/movie/%@/videos?api_key=%@&language=%@"
+    private let POPULAR_MOVIE_URL = "https://api.themoviedb.org/3/movie/popular?api_key=%@&language=%@&page=%d"
     private let IMAGE_URL = "https://image.tmdb.org/t/p/%@/%@"
-    private let DATE_FORMAT = "yyyy-mm-dd"
     private var newMovies: [Movie]?
     private var nowMovies: [Movie]?
     private var topRateMovies: [Movie]?
+    private var popularMovies: [Movie]?
     private let dispatchGroup = DispatchGroup()
     
     let imageCache = AutoPurgingImageCache(
@@ -33,7 +34,7 @@ class MovieService {
     
     //MARK: - Movie Fetching
     
-    func fetchMovieList(completion: (([Movie]?, [Movie]?, [Movie]?) -> Void)?) {
+    func fetchMovieList(completion: (([Movie]?, [Movie]?, [Movie]?, [Movie]?) -> Void)?) {
         weak var weakSelf = self
         dispatchGroup.enter()
         self.fetchMovie(url: NEW_MOVIE_URL, language: .en_US, page: 1) { (movies, error) in
@@ -50,9 +51,14 @@ class MovieService {
             weakSelf?.topRateMovies = movies
             weakSelf?.dispatchGroup.leave()
         }
+        dispatchGroup.enter()
+        self.fetchMovie(url: POPULAR_MOVIE_URL, language: .en_US, page: 1) { (movies, error) in
+            weakSelf?.popularMovies = movies
+            weakSelf?.dispatchGroup.leave()
+        }
         dispatchGroup.notify(queue: .main) {
             if let com = completion {
-                com(weakSelf?.newMovies, weakSelf?.nowMovies, weakSelf?.topRateMovies)
+                com(weakSelf?.newMovies, weakSelf?.nowMovies, weakSelf?.topRateMovies, weakSelf?.popularMovies)
             }
         }
     }
@@ -95,10 +101,10 @@ class MovieService {
     func fetchTrailerMovie(movieId: String, language: Language, completion: (([Movie]?, Error?) -> Void)?) {
     }
     
-    func fetchImage(posterSize: PosterSize, posterPath: String, completion: ((UIImage?) -> Void)?) {
+    func fetchImage(imageSize: PosterSize, imageName: String, completion: ((UIImage?) -> Void)?) {
         let completion: ((UIImage?) -> Void) = completion ?? {_ in}
         do {
-            let url = try String(format: IMAGE_URL, posterSize.rawValue, posterPath).asURL()
+            let url = try String(format: IMAGE_URL, imageSize.rawValue, imageName).asURL()
             if let image = self.cachedImage(for: url.absoluteString) {
                 completion(image)
                 return
@@ -137,7 +143,7 @@ class MovieService {
         movie.backdropPath = movieJson["backdrop_path"]?.string
         movie.adult = movieJson["adult"]?.bool
         movie.overview = movieJson["overview"]?.string
-        movie.releaseDate = Utils.dateFromString(dateFormat: DATE_FORMAT, string: movieJson["release_date"]?.string)
+        movie.releaseDate = Utils.dateFromString(dateFormat: Utils.YYYY_MM_DD, string: movieJson["release_date"]?.string)
         return movie
     }
     

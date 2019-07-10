@@ -21,17 +21,17 @@ class MovieListController {
     func start() {
         movieListViewModel!.isLoading!.value = true
         movieListViewModel!.isHiddenMovieTableView!.value = true
-        movieListService!.fetchMovieList {[weak self] (newMovies, nowMovies, topRateMovies) in
+        movieListService!.fetchMovieList {[weak self] (newMovies, nowMovies, topRateMovies, popularMovies) in
             guard let strongSelf = self else {
                 return
             }
             strongSelf.movieListViewModel!.isLoading!.value = false
             strongSelf.movieListViewModel!.isHiddenMovieTableView!.value = false
-            strongSelf.buildViewModels(newMovies: newMovies, nowMovies: nowMovies, topRateMovies: topRateMovies)
+            strongSelf.buildViewModels(newMovies: newMovies, nowMovies: nowMovies, topRateMovies: topRateMovies, popularMovies: popularMovies)
         }
     }
     
-    private func buildViewModels(newMovies: [Movie]?, nowMovies: [Movie]?, topRateMovies: [Movie]?) {
+    private func buildViewModels(newMovies: [Movie]?, nowMovies: [Movie]?, topRateMovies: [Movie]?, popularMovies: [Movie]?) {
         var newMovieSectionVM: MovieListSectionViewModel?
         if let newMovies = newMovies {
             newMovieSectionVM = MovieListSectionViewModel()
@@ -56,11 +56,13 @@ class MovieListController {
             movieListViewModel!.sectionViewModels!.value!.append(topRateSectionVM!)
         }
         
-        let trailerSectionVM = MovieListSectionViewModel()
-        let trailerCellVM = TrailersMovieCellViewModel()
-        trailerSectionVM.rowViewModels!.value!.append(trailerCellVM)
-        
-        movieListViewModel!.sectionViewModels!.value!.append(trailerSectionVM)
+        var trailerSectionVM: MovieListSectionViewModel?
+        if let popularMovies = popularMovies {
+            trailerSectionVM = MovieListSectionViewModel()
+            let trailerCellVM = TrailersMovieCellViewModel(trailerMovies: DynamicType<[Movie]>(value: popularMovies))
+            trailerSectionVM?.rowViewModels!.value!.append(trailerCellVM)
+            movieListViewModel!.sectionViewModels!.value!.append(trailerSectionVM!)
+        }
     }
     
     func cellIdentify(of viewModel: MovieListCellViewModel) -> String {

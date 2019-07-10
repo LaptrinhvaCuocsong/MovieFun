@@ -39,7 +39,7 @@ class NewMovieTableViewCell: UITableViewCell, MovieListCell {
         for _ in 1...4 {
             let frame = CGRect(x: 0.0, y: 0.0, width: pagingStackView.height, height: width)
             let view = UIView(frame: frame)
-            view.layer.cornerRadius = 5.0
+            view.layer.cornerRadius = 4.0
             view.clipsToBounds = true
             view.backgroundColor = .gray
             pagingStackView.addArrangedSubview(view)

@@ -56,7 +56,7 @@
                     </stackView>
                 </subviews>
             </view>
-            <color key="backgroundColor" red="0.17252564430236816" green="0.17256247997283936" blue="0.17252331972122192" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="HHO-JY-1zm" secondAttribute="trailing" constant="5" id="LOX-ef-JaF"/>
                 <constraint firstItem="Dts-bN-ivz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="VLI-MF-Yih"/>
