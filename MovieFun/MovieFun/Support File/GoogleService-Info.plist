@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>505697069701-754is0cup86se5n9ruk6mekmetl13sqa.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.505697069701-754is0cup86se5n9ruk6mekmetl13sqa</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCZNxYUfMPNcz24pEdL1Sz9gzpmhLv-Xpo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>505697069701</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.piedpiper.moviefun</string>
+	<key>PROJECT_ID</key>
+	<string>moviefun-d1808</string>
+	<key>STORAGE_BUCKET</key>
+	<string>moviefun-d1808.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:505697069701:ios:2599d80b257fdd18</string>
+	<key>DATABASE_URL</key>
+	<string>https://moviefun-d1808.firebaseio.com</string>
+</dict>
+</plist>

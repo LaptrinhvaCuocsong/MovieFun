@@ -37,6 +37,9 @@ class NewMovieCollectionViewCell: UICollectionViewCell {
                 strongSelf.imageView.image = image
             }
         }
+        else {
+            imageView.image = UIImage(named: "image-not-found")
+        }
     }
     
 }

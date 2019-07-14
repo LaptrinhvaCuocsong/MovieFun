@@ -25,23 +25,26 @@ class NewMovieTableViewCell: UITableViewCell, MovieListCell {
             newMovieCollectionView.register(UINib(nibName: NewMovieCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: NewMovieCollectionViewCell.cellIdentify)
             newMovieCollectionView.delegate = newMovieCellVM
             newMovieCollectionView.dataSource = newMovieCellVM
-            self.setPagingStackView()
+            self.setPagingStackView(index: 0)
+            newMovieCellVM.currentIndex!.listener = {[weak self] index in
+                self?.setPagingStackView(index: index)
+            }
         }
     }
     
-    private func setPagingStackView() {
+    private func setPagingStackView(index: Int) {
         for (_, view) in pagingStackView.arrangedSubviews.enumerated() {
             view.removeFromSuperview()
             pagingStackView.removeArrangedSubview(view)
         }
         let width = pagingStackView.height
         widthPagingStackView.constant = CGFloat(4.0 * width + (4.0 - 1)*5.0)
-        for _ in 1...4 {
+        for i in 0...3  {
             let frame = CGRect(x: 0.0, y: 0.0, width: pagingStackView.height, height: width)
             let view = UIView(frame: frame)
             view.layer.cornerRadius = 4.0
             view.clipsToBounds = true
-            view.backgroundColor = .gray
+            view.backgroundColor = i == index ? .white : .gray
             pagingStackView.addArrangedSubview(view)
         }
     }

@@ -26,7 +26,7 @@ class MovieService {
     private let dispatchGroup = DispatchGroup()
     
     let imageCache = AutoPurgingImageCache(
-        memoryCapacity: UInt64(100).megabytes(),
+        memoryCapacity: UInt64(500).megabytes(),
         preferredMemoryUsageAfterPurge: UInt64(60).megabytes()
     )
     
@@ -63,7 +63,19 @@ class MovieService {
         }
     }
     
-    func fetchMovie(url: String, language: Language, page: Int, completion: (([Movie]?, Error?) -> Void)?) {
+    func fetchFavoriteMovie(completion: (([Movie]?) -> Void)?) {
+        let completion:(([Movie]?) -> Void) = completion ?? {_ in}
+        self.fetchMovie(url: TOP_RATE_MOVIE_URL, language: .en_US, page: 1) { (movies, error) in
+            if error == nil {
+                completion(movies)
+            }
+            else {
+                completion(nil)
+            }
+        }
+    }
+    
+    private func fetchMovie(url: String, language: Language, page: Int, completion: (([Movie]?, Error?) -> Void)?) {
         let completion: (([Movie]?, Error?) -> Void) = completion ?? {_,_ in }
         do {
             let url = try String(format: url, Constants.API_KEY, language.rawValue, page).asURL()

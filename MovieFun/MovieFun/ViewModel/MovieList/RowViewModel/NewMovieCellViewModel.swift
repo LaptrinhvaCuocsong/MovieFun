@@ -11,14 +11,16 @@ import UIKit
 class NewMovieCellViewModel: NSObject, MovieListCellViewModel {
     
     var newMovies: DynamicType<[Movie]>?
+    var currentIndex: DynamicType<Int>?
     
     init(newMovies: DynamicType<[Movie]>) {
         self.newMovies = newMovies
+        currentIndex = DynamicType<Int>(value: 0)
     }
     
 }
 
-extension NewMovieCellViewModel: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension NewMovieCellViewModel: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     //MARK: - UICollectionViewDataSource
     
@@ -44,4 +46,14 @@ extension NewMovieCellViewModel: UICollectionViewDataSource, UICollectionViewDel
         return CGSize(width: width/4, height: collectionView.height)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0.0, left: 2.5, bottom: 0.0, right: 2.5)
+    }
+    
+    //MARK: - UIScrollViewDelegate
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let width = scrollView.width
+        currentIndex!.value = Int(Double(scrollView.contentOffset.x) / width)
+    }
 }

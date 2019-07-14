@@ -20,13 +20,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HHO-JY-1zm">
-                        <rect key="frame" x="5" y="5" width="190" height="190"/>
+                        <rect key="frame" x="10" y="5" width="180" height="180"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="HHO-JY-1zm" secondAttribute="height" multiplier="1:1" id="OhH-lX-1B9"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dts-bN-ivz">
-                        <rect key="frame" x="10" y="204" width="180" height="17"/>
+                        <rect key="frame" x="0.0" y="204" width="200" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="o7q-s8-R5B"/>
                         </constraints>
@@ -58,10 +58,10 @@
             </view>
             <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="HHO-JY-1zm" secondAttribute="trailing" constant="5" id="LOX-ef-JaF"/>
-                <constraint firstItem="Dts-bN-ivz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="VLI-MF-Yih"/>
-                <constraint firstAttribute="trailing" secondItem="Dts-bN-ivz" secondAttribute="trailing" constant="10" id="Whr-FV-4QH"/>
-                <constraint firstItem="HHO-JY-1zm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="c8M-FM-vyw"/>
+                <constraint firstAttribute="trailing" secondItem="HHO-JY-1zm" secondAttribute="trailing" constant="10" id="LOX-ef-JaF"/>
+                <constraint firstItem="Dts-bN-ivz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="VLI-MF-Yih"/>
+                <constraint firstAttribute="trailing" secondItem="Dts-bN-ivz" secondAttribute="trailing" id="Whr-FV-4QH"/>
+                <constraint firstItem="HHO-JY-1zm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="c8M-FM-vyw"/>
                 <constraint firstItem="HHO-JY-1zm" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="cEi-1h-wOw"/>
                 <constraint firstAttribute="bottom" secondItem="CdE-Pm-oKo" secondAttribute="bottom" constant="20" id="iMp-eV-0Zs"/>
                 <constraint firstItem="CdE-Pm-oKo" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="sqJ-lZ-Yfh"/>

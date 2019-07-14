@@ -24,5 +24,8 @@ class TrailerCollectionViewCell: UICollectionViewCell {
                 self?.imageView.image = image
             }
         }
+        else {
+            imageView.image = UIImage(named: "image-not-found")
+        }
     }
 }

@@ -12,6 +12,8 @@ class MovieListViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @IBOutlet weak var movieTableView: UITableView!
     
+    let heightOfFooterView: Double = 5.0
+    
     var viewModel: MovieListViewModel {
         return controller.movieListViewModel!
     }
@@ -105,6 +107,16 @@ class MovieListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat(heightOfFooterView)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.width, height: heightOfFooterView))
+        view.backgroundColor = .darkGray
+        return view
     }
     
 }

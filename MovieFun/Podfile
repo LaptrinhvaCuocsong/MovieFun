@@ -13,4 +13,6 @@ target 'MovieFun' do
   
   pod 'AlamofireImage'
 
+  pod 'Firebase/Core'
+  
 end

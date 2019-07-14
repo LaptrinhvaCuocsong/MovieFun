@@ -1,0 +1,19 @@
+//
+//  FavoriteRowViewModel.swift
+//  MovieFun
+//
+//  Created by nguyen manh hung on 7/13/19.
+//  Copyright © 2019 nguyen manh hung. All rights reserved.
+//
+
+import Foundation
+
+class FavoriteRowViewModel: NSObject {
+    
+    var favoriteMovie: DynamicType<Movie>?
+    
+    init(movie: DynamicType<Movie>) {
+        favoriteMovie = movie
+    }
+    
+}

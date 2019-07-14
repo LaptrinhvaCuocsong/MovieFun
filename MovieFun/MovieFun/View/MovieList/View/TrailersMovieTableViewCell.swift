@@ -23,12 +23,15 @@ class TrailersMovieTableViewCell: UITableViewCell, MovieListCell {
             trailerCollectionView.delegate = trailerVM
             trailerCollectionView.dataSource = trailerVM
             trailerCollectionView.register(UINib(nibName: TrailerCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: TrailerCollectionViewCell.cellIdentify)
-            setPagingStackView()
+            setPagingStackView(index: 0)
+            trailerVM.currentIndex!.listener = {[weak self] index in
+                self?.setPagingStackView(index: index)
+            }
             setTrailerStackView(movies: [Movie](trailerVM.trailerMovies!.value![0..<4]))
         }
     }
     
-    private func setPagingStackView() {
+    private func setPagingStackView(index: Int) {
         for (_, view) in pagingStackView.arrangedSubviews.enumerated() {
             view.removeFromSuperview()
             pagingStackView.removeArrangedSubview(view)
@@ -36,12 +39,12 @@ class TrailersMovieTableViewCell: UITableViewCell, MovieListCell {
         let width = pagingStackView.height
         let size = 6.0
         widthPagingStackView.constant = CGFloat(size * width + (size - 1)*5.0)
-        for _ in 1...Int(size) {
+        for i in 0..<Int(size) {
             let frame = CGRect(x: 0.0, y: 0.0, width: pagingStackView.height, height: width)
             let view = UIView(frame: frame)
             view.layer.cornerRadius = 4.0
             view.clipsToBounds = true
-            view.backgroundColor = .gray
+            view.backgroundColor = i == index ? .white : .gray
             pagingStackView.addArrangedSubview(view)
         }
     }

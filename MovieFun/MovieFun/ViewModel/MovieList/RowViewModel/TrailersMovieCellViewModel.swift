@@ -11,9 +11,11 @@ import UIKit
 class TrailersMovieCellViewModel:NSObject, MovieListCellViewModel {
     
     var trailerMovies: DynamicType<[Movie]>?
+    var currentIndex: DynamicType<Int>?
     
     init(trailerMovies: DynamicType<[Movie]>) {
         self.trailerMovies = trailerMovies
+        currentIndex = DynamicType<Int>(value: 0)
     }
     
 }
@@ -37,6 +39,15 @@ extension TrailersMovieCellViewModel: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.width, height: collectionView.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0.0, left: 5.0, bottom: 0.0, right: 5.0)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let width = scrollView.width
+        currentIndex!.value = Int(Double(scrollView.contentOffset.x) / width)
     }
     
 }
