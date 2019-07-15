@@ -14,6 +14,8 @@ class AccountViewModel: NSObject, UITableViewDelegate, UITableViewDataSource {
     var username: DynamicType<String>?
     var accountSectionViewModels: DynamicType<[AccountSectionViewModel]>?
     
+    private let HEIGHT_OF_CELL = 80.0
+    
     override init() {
         super.init()
         accountImage = DynamicType<UIImage>(value: UIImage(named: "image-not-found")!)
@@ -60,8 +62,21 @@ class AccountViewModel: NSObject, UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
+    //MARKL - UITableViewDelegate
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0
+        return CGFloat(HEIGHT_OF_CELL)
+    }
+    
+    @available(iOS 11.0, *)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let cell = tableView.cellForRow(at: indexPath)
+        if let cell = cell as? AccountCell {
+            if cell.isEdit() {
+                
+            }
+        }
+        return nil
     }
     
 }

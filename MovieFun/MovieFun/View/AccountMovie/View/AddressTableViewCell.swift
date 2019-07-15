@@ -21,6 +21,15 @@ class AddressTableViewCell: UITableViewCell, AccountCell {
         }
     }
     
+    func isEdit() -> Bool {
+        return true
+    }
+    
+    @available(iOS 11.0, *)
+    func editAction() -> UIContextualAction? {
+        return nil
+    }
+    
     private func setContent(address: String?) {
         addressLabel.text = address
     }

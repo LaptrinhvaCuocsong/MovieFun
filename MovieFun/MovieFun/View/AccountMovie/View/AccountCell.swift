@@ -6,10 +6,15 @@
 //  Copyright © 2019 nguyen manh hung. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol AccountCell {
     
     func setUp(with viewModel: AccountRowViewModel)
+    
+    func isEdit() -> Bool
+    
+    @available(iOS 11.0, *)
+    func editAction() -> UIContextualAction?
     
 }

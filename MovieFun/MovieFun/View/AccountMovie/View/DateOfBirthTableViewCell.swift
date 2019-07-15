@@ -21,6 +21,15 @@ class DateOfBirthTableViewCell: UITableViewCell, AccountCell {
         }
     }
     
+    func isEdit() -> Bool {
+        return true
+    }
+    
+    @available(iOS 11.0, *)
+    func editAction() -> UIContextualAction? {
+        return nil
+    }
+    
     private func setContent(dateOfBirth: Date?) {
         dateOfBirthLabel.text = Utils.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: dateOfBirth)
     }

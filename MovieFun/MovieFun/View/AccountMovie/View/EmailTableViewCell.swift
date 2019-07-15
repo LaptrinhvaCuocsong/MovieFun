@@ -21,6 +21,15 @@ class EmailTableViewCell: UITableViewCell, AccountCell {
         }
     }
     
+    func isEdit() -> Bool {
+        return false
+    }
+    
+    @available(iOS 11.0, *)
+    func editAction() -> UIContextualAction? {
+        return nil
+    }
+    
     private func setContent(email: String?) {
         emailLabel.text = email
     }

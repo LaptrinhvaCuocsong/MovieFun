@@ -22,6 +22,15 @@ class UsernameTableViewCell: UITableViewCell, AccountCell {
         }
     }
     
+    func isEdit() -> Bool {
+        return true
+    }
+    
+    @available(iOS 11.0, *)
+    func editAction() -> UIContextualAction? {
+        return nil
+    }
+    
     private func setContent(imageName: String?, username: String?) {
         accountImage.image = UIImage(named: imageName ?? "image-not-found")
         usernameLabel.text = username
