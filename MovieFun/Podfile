@@ -11,8 +11,8 @@ target 'MovieFun' do
   
   pod 'SwiftyJSON'
   
-  pod 'AlamofireImage'
-
   pod 'Firebase/Core'
+  
+  pod 'SDWebImage'
   
 end

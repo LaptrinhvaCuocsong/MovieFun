@@ -11,7 +11,7 @@ import Foundation
 class Movie {
     
     var vouteCount: Int?
-    var id: String?
+    var id: Int?
     var video: Bool?
     var voteAverage: Double?
     var title: String?
@@ -19,7 +19,7 @@ class Movie {
     var posterPath: String?
     var originalLanguage: String?
     var originalTitle: String?
-    var genreIds: [String]?
+    var genreIds: [Int]?
     var backdropPath: String?
     var adult: Bool?
     var overview: String?

@@ -30,9 +30,7 @@ class NowMovieView: UIView {
         releaseDateLabel.text = Utils.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: releaseDate)
         overviewLabel.text = overview
         if let posterPath = posterPath {
-            MovieService.share.fetchImage(imageSize: .w185, imageName: posterPath) {[weak self] (image) in
-                self?.imageView.image = image
-            }
+            imageView.setImage(imageName: posterPath, imageSize: .original)
         }
         else {
             imageView.image = UIImage(named: "image-not-found")

@@ -8,10 +8,18 @@
 
 import UIKit
 
+protocol NewMovieCellViewModelDelegate: class {
+    
+    func push(viewController: UIViewController, animated: Bool)
+    
+}
+
 class NewMovieCellViewModel: NSObject, MovieListCellViewModel {
     
     var newMovies: DynamicType<[Movie]>?
     var currentIndex: DynamicType<Int>?
+    
+    weak var delegate: NewMovieCellViewModelDelegate?
     
     init(newMovies: DynamicType<[Movie]>) {
         self.newMovies = newMovies
@@ -48,6 +56,14 @@ extension NewMovieCellViewModel: UICollectionViewDataSource, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0.0, left: 2.5, bottom: 0.0, right: 2.5)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = newMovies!.value![indexPath.section]
+        if let movieId = movie.id {
+            let movieDetailVC = MovieDetailViewController.createMovieDetailViewController(with: "\(movieId)")
+            delegate?.push(viewController: movieDetailVC, animated: true)
+        }
     }
     
     //MARK: - UIScrollViewDelegate

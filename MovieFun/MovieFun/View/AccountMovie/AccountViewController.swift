@@ -27,6 +27,7 @@ class AccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         setAccountTableView()
         setImageView()
         controller.start()
@@ -58,6 +59,14 @@ class AccountViewController: UIViewController {
     private func setImageView() {
         accountImageView.layer.cornerRadius = CGFloat(accountImageView.width/2)
         accountImageView.clipsToBounds = true
+    }
+    
+}
+
+extension AccountViewController: AccountViewModelDelegate {
+    
+    func present(viewController: UIViewController, animated: Bool) {
+        present(viewController, animated: animated, completion: nil)
     }
     
 }

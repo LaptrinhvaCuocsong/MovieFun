@@ -21,7 +21,7 @@ enum Language: String {
     case en_US = "en_US"
 }
 
-enum PosterSize: String {
+enum ImageSize: String {
     case w92 = "w92"
     case w154 = "w154"
     case w185 = "w185"

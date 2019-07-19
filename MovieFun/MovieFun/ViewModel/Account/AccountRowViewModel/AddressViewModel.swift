@@ -7,9 +7,17 @@
 //
 
 import Foundation
+import UIKit
+
+protocol AddressViewModelDelegate: class {
+    
+    func present(viewController: UIViewController, animated: Bool)
+    
+}
 
 class AddressViewModel: AccountRowViewModel {
     
+    weak var delegate: AddressViewModelDelegate?
     var address: DynamicType<String>?
     
     init() {

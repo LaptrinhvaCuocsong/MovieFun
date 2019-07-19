@@ -32,9 +32,7 @@ class FavoriteTableViewCell: UITableViewCell, FavoriteMovieCell {
         overviewLabel.text = movie.overview
         adultImage.isHidden = !(movie.adult ?? true)
         if let posterPath = movie.posterPath {
-            MovieService.share.fetchImage(imageSize: .original, imageName: posterPath) {[weak self] (image) in
-                self?.posterImage.image = image
-            }
+            posterImage.setImage(imageName: posterPath, imageSize: .original)
         }
         else {
             posterImage.image = UIImage(named: "image-not-found")

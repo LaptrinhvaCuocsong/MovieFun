@@ -8,8 +8,15 @@
 
 import UIKit
 
+protocol AccountViewModelDelegate: class {
+    
+    func present(viewController: UIViewController, animated: Bool)
+    
+}
+
 class AccountViewModel: NSObject, UITableViewDelegate, UITableViewDataSource {
     
+    weak var delegate: AccountViewModelDelegate?
     var accountImage: DynamicType<UIImage>?
     var username: DynamicType<String>?
     var accountSectionViewModels: DynamicType<[AccountSectionViewModel]>?
@@ -72,11 +79,19 @@ class AccountViewModel: NSObject, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let cell = tableView.cellForRow(at: indexPath)
         if let cell = cell as? AccountCell {
-            if cell.isEdit() {
-                
+            if let editAction = cell.editAction() {
+                return UISwipeActionsConfiguration(actions: [editAction])
             }
         }
         return nil
+    }
+    
+}
+
+extension AccountViewModel: UsernameViewModelDelegate, EmailViewModelDelegate,AddressViewModelDelegate, DateOfBirthViewModelDelegate {
+    
+    func present(viewController: UIViewController, animated: Bool) {
+        delegate?.present(viewController: viewController, animated: animated)
     }
     
 }

@@ -25,9 +25,7 @@ class TrailerMovieView: UIView {
     func setContent(title: String?, posterPath: String?) {
         titleLabel.text = title
         if let posterPath = posterPath {
-            MovieService.share.fetchImage(imageSize: .w185, imageName: posterPath) {[weak self] (image) in
-                self?.imageView.image = image
-            }
+            imageView.setImage(imageName: posterPath, imageSize: .original)
         }
         else {
             imageView.image = UIImage(named: "image-not-found")

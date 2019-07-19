@@ -7,9 +7,17 @@
 //
 
 import Foundation
+import UIKit
+
+protocol DateOfBirthViewModelDelegate: class {
+    
+    func present(viewController: UIViewController, animated: Bool)
+    
+}
 
 class DateOfBirthViewModel: AccountRowViewModel {
     
+    weak var delegate: DateOfBirthViewModelDelegate?
     var dateOfBirth: DynamicType<Date>?
     
 }

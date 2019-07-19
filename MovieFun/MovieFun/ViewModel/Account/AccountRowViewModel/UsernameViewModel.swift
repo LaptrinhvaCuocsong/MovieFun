@@ -7,9 +7,17 @@
 //
 
 import Foundation
+import UIKit
+
+protocol UsernameViewModelDelegate: class {
+    
+    func present(viewController: UIViewController, animated: Bool)
+    
+}
 
 class UsernameViewModel: AccountRowViewModel {
 
+    weak var delegate: UsernameViewModelDelegate?
     var imageName: DynamicType<String>?
     var username: DynamicType<String>?
     

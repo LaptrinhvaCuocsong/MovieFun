@@ -14,20 +14,43 @@ class DateOfBirthTableViewCell: UITableViewCell, AccountCell {
     
     static let nibName = "DateOfBirthTableViewCell"
     static let cellIdentify = "dateOfBirthTableViewCell"
+    var dateOfBirthVM: DateOfBirthViewModel?
     
     func setUp(with viewModel: AccountRowViewModel) {
         if let dateOfBirthVM = viewModel as? DateOfBirthViewModel {
+            self.dateOfBirthVM = dateOfBirthVM
             setContent(dateOfBirth: dateOfBirthVM.dateOfBirth?.value)
         }
     }
     
-    func isEdit() -> Bool {
-        return true
-    }
-    
     @available(iOS 11.0, *)
     func editAction() -> UIContextualAction? {
-        return nil
+        let editAction = UIContextualAction(style: .normal, title: nil) {[weak self] (action, view, completion) in
+            self?.dateOfBirthVM?.delegate?.present(viewController: self!.dateOfBirthAlertVC(), animated: true)
+        }
+        editAction.image = UIImage(named: "writing")
+        editAction.backgroundColor = .cyan
+        return editAction
+    }
+    
+    private func dateOfBirthAlertVC() -> UIAlertController {
+        let alertVC = UIAlertController(title: "Date Of Birth", message: nil, preferredStyle: .alert)
+        alertVC.addTextField {[weak self] (textField) in
+            textField.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
+            textField.placeholder = "YYYY/MM/DD"
+            textField.inputView = self?.datePicker()
+        }
+        alertVC.addAction(UIAlertAction(title: "Edit", style: .default, handler: { (_) in
+            
+        }))
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        return alertVC
+    }
+    
+    private func datePicker() -> UIDatePicker {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        return datePicker
     }
     
     private func setContent(dateOfBirth: Date?) {

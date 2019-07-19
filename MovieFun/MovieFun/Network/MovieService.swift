@@ -9,7 +9,6 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-import AlamofireImage
 
 class MovieService {
     
@@ -18,17 +17,11 @@ class MovieService {
     private let TOP_RATE_MOVIE_URL = "https://api.themoviedb.org/3/movie/top_rated?api_key=%@&language=%@&page=%d"
     private let TRAILER_MOVIE_URL = "https://api.themoviedb.org/3/movie/%@/videos?api_key=%@&language=%@"
     private let POPULAR_MOVIE_URL = "https://api.themoviedb.org/3/movie/popular?api_key=%@&language=%@&page=%d"
-    private let IMAGE_URL = "https://image.tmdb.org/t/p/%@/%@"
     private var newMovies: [Movie]?
     private var nowMovies: [Movie]?
     private var topRateMovies: [Movie]?
     private var popularMovies: [Movie]?
     private let dispatchGroup = DispatchGroup()
-    
-    let imageCache = AutoPurgingImageCache(
-        memoryCapacity: UInt64(500).megabytes(),
-        preferredMemoryUsageAfterPurge: UInt64(60).megabytes()
-    )
     
     static let share = MovieService()
     
@@ -113,37 +106,11 @@ class MovieService {
     func fetchTrailerMovie(movieId: String, language: Language, completion: (([Movie]?, Error?) -> Void)?) {
     }
     
-    func fetchImage(imageSize: PosterSize, imageName: String, completion: ((UIImage?) -> Void)?) {
-        let completion: ((UIImage?) -> Void) = completion ?? {_ in}
-        do {
-            let url = try String(format: IMAGE_URL, imageSize.rawValue, imageName).asURL()
-            if let image = self.cachedImage(for: url.absoluteString) {
-                completion(image)
-                return
-            }
-            Alamofire.request(url).responseImage {[weak self] (dataResponse) in
-                if dataResponse.result.isSuccess {
-                    if let image = dataResponse.result.value {
-                        completion(image)
-                        self?.cache(image: image, for: url.absoluteString)
-                    }
-                }
-                else {
-                    completion(nil)
-                }
-            }
-        }
-        catch {
-            print(error)
-            completion(nil)
-        }
-    }
-    
     private func parseMovieJson(json: JSON) -> Movie {
         let movie = Movie()
         let movieJson = json.dictionaryValue
         movie.vouteCount = movieJson["vote_count"]?.int
-        movie.id = movieJson["id"]?.string
+        movie.id = movieJson["id"]?.int
         movie.video = movieJson["video"]?.bool
         movie.voteAverage = movieJson["vote_average"]?.double
         movie.title = movieJson["title"]?.string
@@ -151,7 +118,7 @@ class MovieService {
         movie.posterPath = movieJson["poster_path"]?.string
         movie.originalLanguage = movieJson["original_language"]?.string
         movie.originalTitle = movieJson["original_title"]?.string
-        movie.genreIds = movieJson["genre_ids"]?.arrayObject as? [String]
+        movie.genreIds = movieJson["genre_ids"]?.arrayObject as? [Int]
         movie.backdropPath = movieJson["backdrop_path"]?.string
         movie.adult = movieJson["adult"]?.bool
         movie.overview = movieJson["overview"]?.string
@@ -159,13 +126,4 @@ class MovieService {
         return movie
     }
     
-    //MARK: - Image Caching
-    
-    private func cache(image: UIImage, for identify: String) {
-        self.imageCache.add(image, withIdentifier: identify)
-    }
-    
-    private func cachedImage(for identify: String) -> UIImage? {
-        return self.imageCache.image(withIdentifier: identify)
-    }
 }

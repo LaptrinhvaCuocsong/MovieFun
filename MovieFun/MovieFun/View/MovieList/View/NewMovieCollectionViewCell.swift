@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AlamofireImage
 import Alamofire
 
 class NewMovieCollectionViewCell: UICollectionViewCell {
@@ -30,12 +29,7 @@ class NewMovieCollectionViewCell: UICollectionViewCell {
         titleLabel.text = title
         rageLabel.text = "\(voteAverage ?? 0.0)"
         if let posterPath = posterPath {
-            movieService.fetchImage(imageSize: .w500, imageName: posterPath) {[weak self] (image) in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.imageView.image = image
-            }
+            imageView.setImage(imageName: posterPath, imageSize: .original)
         }
         else {
             imageView.image = UIImage(named: "image-not-found")

@@ -15,6 +15,8 @@ class NowMovieTableViewCell: UITableViewCell, MovieListCell {
     static let nibName = "NowMovieTableViewCell"
     static let cellIdentify = "nowMovieCell"
     
+    private let HEIGHT_OF_CELL = 160.0
+    
     func setUp(with viewModel: MovieListCellViewModel) {
         if let nowMovieVM = viewModel as? NowMovieCellViewModel {
             let movies = nowMovieVM.nowMovies!.value![0..<3]
@@ -36,6 +38,7 @@ class NowMovieTableViewCell: UITableViewCell, MovieListCell {
         }
         for (_, movie) in nowMovies.enumerated() {
             let nowMovieView = NowMovieView.createNowMovieView()
+            nowMovieView.heightAnchor.constraint(equalToConstant: CGFloat(HEIGHT_OF_CELL)).isActive = true
             nowMovieView.setContent(title: movie.title, rage: movie.voteAverage, releaseDate: movie.releaseDate, overview: movie.overview, posterPath: movie.posterPath)
             nowMovieStackView.addArrangedSubview(nowMovieView)
         }

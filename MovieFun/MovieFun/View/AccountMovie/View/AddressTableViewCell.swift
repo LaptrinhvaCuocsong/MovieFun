@@ -14,20 +14,36 @@ class AddressTableViewCell: UITableViewCell, AccountCell {
     
     static let nibName = "AddressTableViewCell"
     static let cellIdentify = "addressTableViewCell"
+    var addressVM: AddressViewModel?
     
     func setUp(with viewModel: AccountRowViewModel) {
         if let addressVM = viewModel as? AddressViewModel {
+            self.addressVM = addressVM
             setContent(address: addressVM.address?.value)
         }
     }
     
-    func isEdit() -> Bool {
-        return true
-    }
-    
     @available(iOS 11.0, *)
     func editAction() -> UIContextualAction? {
-        return nil
+        let editAction = UIContextualAction(style: .normal, title: nil) {[weak self] (action, view, completion) in
+            self?.addressVM?.delegate?.present(viewController: self!.addressAlertVC(), animated: true)
+        }
+        editAction.image = UIImage(named: "writing")
+        editAction.backgroundColor = .cyan
+        return editAction
+    }
+    
+    private func addressAlertVC() -> UIAlertController {
+        let alertVC = UIAlertController(title: "Address", message: nil, preferredStyle: .alert)
+        alertVC.addTextField { (textField) in
+            textField.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
+            textField.placeholder = "Address"
+        }
+        alertVC.addAction(UIAlertAction(title: "Edit", style: .default, handler: { (_) in
+            
+        }))
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        return alertVC
     }
     
     private func setContent(address: String?) {

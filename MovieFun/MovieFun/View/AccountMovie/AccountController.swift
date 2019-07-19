@@ -26,16 +26,20 @@ class AccountController {
         let accountSectionVM = AccountSectionViewModel()
         accountViewModel?.accountSectionViewModels?.value?.append(accountSectionVM)
         let usernameVM = UsernameViewModel()
+        usernameVM.delegate = accountViewModel
         usernameVM.imageName?.value = "man"
         usernameVM.username?.value = "hungmanh"
         accountSectionVM.accountRowViewModels?.value?.append(usernameVM)
         let emailVM = EmailViewModel()
+        emailVM.delegate = accountViewModel
         emailVM.email?.value = "kasavavava@gmail.com"
         accountSectionVM.accountRowViewModels?.value?.append(emailVM)
         let addressVM = AddressViewModel()
+        addressVM.delegate = accountViewModel
         addressVM.address?.value = "Ha Noi"
         accountSectionVM.accountRowViewModels?.value?.append(addressVM)
         let dateOfBirthVM = DateOfBirthViewModel()
+        dateOfBirthVM.delegate = accountViewModel
         dateOfBirthVM.dateOfBirth?.value = Date()
         accountSectionVM.accountRowViewModels?.value?.append(dateOfBirthVM)
     }

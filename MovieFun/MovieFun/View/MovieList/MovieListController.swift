@@ -36,6 +36,7 @@ class MovieListController {
         if let newMovies = newMovies {
             newMovieSectionVM = MovieListSectionViewModel()
             let newMovieCellVM = NewMovieCellViewModel(newMovies: DynamicType<[Movie]>(value: newMovies))
+            newMovieCellVM.delegate = movieListViewModel
             newMovieSectionVM!.rowViewModels!.value!.append(newMovieCellVM)
             movieListViewModel!.sectionViewModels!.value!.append(newMovieSectionVM!)
         }

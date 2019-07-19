@@ -11,9 +11,7 @@ import UIKit
 protocol AccountCell {
     
     func setUp(with viewModel: AccountRowViewModel)
-    
-    func isEdit() -> Bool
-    
+        
     @available(iOS 11.0, *)
     func editAction() -> UIContextualAction?
     

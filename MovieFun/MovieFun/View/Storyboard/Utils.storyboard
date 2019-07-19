@@ -51,5 +51,39 @@
             </objects>
             <point key="canvasLocation" x="61" y="192"/>
         </scene>
+        <!--Movie Detail View Controller-->
+        <scene sceneID="jYT-im-x4o">
+            <objects>
+                <viewController storyboardIdentifier="MovieDetailViewController" id="F1r-D5-WyJ" customClass="MovieDetailViewController" customModule="MovieFun" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Tih-0S-IaN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dqk-dF-KLr">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="F1r-D5-WyJ" id="PZB-h3-CfI"/>
+                                    <outlet property="delegate" destination="F1r-D5-WyJ" id="eZM-IA-vIQ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="ASd-LL-ezt" firstAttribute="bottom" secondItem="dqk-dF-KLr" secondAttribute="bottom" id="8rR-69-BEk"/>
+                            <constraint firstItem="dqk-dF-KLr" firstAttribute="top" secondItem="ASd-LL-ezt" secondAttribute="top" id="D72-Yn-gXm"/>
+                            <constraint firstItem="ASd-LL-ezt" firstAttribute="trailing" secondItem="dqk-dF-KLr" secondAttribute="trailing" id="Vot-TA-sxb"/>
+                            <constraint firstItem="dqk-dF-KLr" firstAttribute="leading" secondItem="ASd-LL-ezt" secondAttribute="leading" id="YPs-d4-0aE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ASd-LL-ezt"/>
+                    </view>
+                    <connections>
+                        <outlet property="movieDetailTableView" destination="dqk-dF-KLr" id="JS2-BT-jUv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c3U-aQ-FRK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1012" y="192"/>
+        </scene>
     </scenes>
 </document>

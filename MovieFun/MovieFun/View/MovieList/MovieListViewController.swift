@@ -26,6 +26,7 @@ class MovieListViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         initBinding()
         registerCell()
+        viewModel.delegate = self
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {[weak self] in
             guard let strongSelf = self else {
                 return
@@ -117,6 +118,16 @@ class MovieListViewController: UIViewController, UITableViewDelegate, UITableVie
         let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: self.view.width, height: heightOfFooterView))
         view.backgroundColor = .darkGray
         return view
+    }
+    
+}
+
+extension MovieListViewController: MovieListViewModelDelegate {
+    
+    func push(viewController: UIViewController, animated: Bool) {
+        if let naviController = self.navigationController {
+            naviController.pushViewController(viewController, animated: animated)
+        }
     }
     
 }

@@ -27,9 +27,7 @@ class TopRateCollectionViewCell: UICollectionViewCell {
         }
         overviewLabel.text = overview
         if let backdropPath = backdropPath {
-            MovieService.share.fetchImage(imageSize: .original, imageName: backdropPath) {[weak self] (image) in
-                self?.imageView.image = image
-            }
+            imageView.setImage(imageName: backdropPath, imageSize: .original)
         }
         else {
             imageView.image = UIImage(named: "image-not-found")
