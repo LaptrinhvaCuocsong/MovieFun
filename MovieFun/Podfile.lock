@@ -53,12 +53,14 @@ PODS:
   - SDWebImage (5.0.6):
     - SDWebImage/Core (= 5.0.6)
   - SDWebImage/Core (5.0.6)
+  - SVProgressHUD (2.2.5)
   - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - Firebase/Core
   - SDWebImage
+  - SVProgressHUD (~> 2.2)
   - SwiftyJSON
 
 SPEC REPOS:
@@ -72,6 +74,7 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - SDWebImage
+    - SVProgressHUD
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -84,8 +87,9 @@ SPEC CHECKSUMS:
   GoogleUtilities: d2b0e277a95962e09bb27f5cd42f5f0b6a506c7d
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: e21ce4245788d87436067f9d9ec6b250dc1d9fea
+PODFILE CHECKSUM: 12f6d3136a7b00b538b8d1db881b1b260656255f
 
 COCOAPODS: 1.5.3

@@ -19,14 +19,14 @@ class CastTableViewCell: UITableViewCell, MovieDetailCell {
     func setUp(with viewModel: MovieDetailRowViewModel) {
         if let viewModel = viewModel as? CastViewModel {
             castVM = viewModel
-            setContent()
+            castCollectionView.delegate = castVM
+            castCollectionView.dataSource = castVM
+            registerCell()
         }
     }
     
-    func setContent() {
-        if let castVM = castVM, let movie = castVM.movie?.value {
-            
-        }
+    private func registerCell() {
+        castCollectionView.register(UINib(nibName: CastCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: CastCollectionViewCell.cellIdentify)
     }
     
 }

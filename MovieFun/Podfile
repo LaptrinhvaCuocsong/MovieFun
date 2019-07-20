@@ -14,5 +14,7 @@ target 'MovieFun' do
   pod 'Firebase/Core'
   
   pod 'SDWebImage'
+
+  pod 'SVProgressHUD', '~> 2.2'
   
 end

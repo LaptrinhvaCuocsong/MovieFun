@@ -18,10 +18,14 @@ class MovieService {
     private let TRAILER_MOVIE_URL = "https://api.themoviedb.org/3/movie/%@/videos?api_key=%@&language=%@"
     private let POPULAR_MOVIE_URL = "https://api.themoviedb.org/3/movie/popular?api_key=%@&language=%@&page=%d"
     private let MOVIE_DETAIL_URL = "https://api.themoviedb.org/3/movie/%@?api_key=%@&language=%@"
+    private let MOVIE_CAST_URL = "https://api.themoviedb.org/3/movie/%@/credits?api_key=%@"
     private var newMovies: [Movie]?
     private var nowMovies: [Movie]?
     private var topRateMovies: [Movie]?
     private var popularMovies: [Movie]?
+    private var movieDetail: Movie?
+    private var movieDetailCast: [Cast]?
+    
     private let dispatchGroup = DispatchGroup()
     
     static let share = MovieService()
@@ -69,6 +73,29 @@ class MovieService {
         }
     }
     
+    func fetchMovieDetail(movieId: String, language: Language, completion: ((Movie?, [Cast]?) -> Void)?) {
+        weak var weakSelf = self
+        dispatchGroup.enter()
+        fetchMovie(movieId: movieId, language: language) { (movie, error) in
+            if error == nil {
+                weakSelf?.movieDetail = movie
+            }
+            weakSelf?.dispatchGroup.leave()
+        }
+        dispatchGroup.enter()
+        fetchMovieCast(movieId: movieId) { (casts, error) in
+            if error == nil {
+                weakSelf?.movieDetailCast = casts
+            }
+            weakSelf?.dispatchGroup.leave()
+        }
+        dispatchGroup.notify(queue: .main) {
+            if completion != nil {
+                completion!(weakSelf?.movieDetail, weakSelf?.movieDetailCast)
+            }
+        }
+    }
+    
     private func fetchMovie(url: String, language: Language, page: Int, completion: (([Movie]?, Error?) -> Void)?) {
         let completion: (([Movie]?, Error?) -> Void) = completion ?? {_,_ in }
         do {
@@ -104,7 +131,7 @@ class MovieService {
         }
     }
     
-    func fetchMovieDetail(movieId: String, language: Language, completion: ((Movie?, Error?) -> Void)?) {
+    private func fetchMovie(movieId: String, language: Language, completion: ((Movie?, Error?) -> Void)?) {
         let completion: ((Movie?, Error?) -> Void) = completion ?? {_, _ in}
         do {
             let url = try String(format: MOVIE_DETAIL_URL, movieId, Constants.API_KEY, language.rawValue).asURL()
@@ -130,6 +157,53 @@ class MovieService {
             print(error)
             completion(nil, error)
         }
+    }
+    
+    private func fetchMovieCast(movieId: String, completion: (([Cast]?, Error?) -> Void)?) {
+        let completion: (([Cast]?, Error?) -> Void) = completion ?? {_, _ in}
+        do {
+            let url = try String(format: MOVIE_CAST_URL, movieId, Constants.API_KEY).asURL()
+            let dataRequest = Alamofire.request(url, method: .get)
+            dataRequest.validate().responseJSON {[weak self] (response) in
+                guard let strongSelf = self else {
+                    return
+                }
+                if response.result.isSuccess {
+                    guard let value = response.result.value else {
+                        return
+                    }
+                    let json = JSON(value)
+                    if let results = json["cast"].array {
+                        var casts = [Cast]()
+                        for jsonItem in results {
+                            casts.append(strongSelf.parseCast(json: jsonItem))
+                        }
+                        completion(casts, nil)
+                    }
+                }
+                else {
+                    completion(nil, nil)
+                }
+            }
+        }
+        catch {
+            print(error)
+            completion(nil, error)
+        }
+    }
+    
+    private func parseCast(json: JSON) -> Cast {
+        let cast = Cast()
+        let castJson = json.dictionaryValue
+        cast.castId = castJson["cast_id"]?.int
+        cast.character = castJson["character"]?.string
+        cast.creditId = castJson["credit_id"]?.string
+        cast.gender = castJson["gender"]?.int
+        cast.name = castJson["name"]?.string
+        cast.id = castJson["id"]?.int
+        cast.order = castJson["order"]?.int
+        cast.profilePath = castJson["profile_path"]?.string
+        return cast
     }
     
     private func parseMovieJson(json: JSON) -> Movie {

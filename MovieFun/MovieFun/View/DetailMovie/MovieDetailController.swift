@@ -20,17 +20,15 @@ class MovieDetailController {
         if let movieId = movieDetailViewModel?.movieId?.value {
             if Utils.validateNumber(string: movieId) {
                 movieDetailViewModel?.isFetching?.value = true
-                MovieService.share.fetchMovieDetail(movieId: movieId, language: .en_US) {[weak self] (movie, error) in
-                    if error == nil {
-                        self?.buildViewModel(movie: movie)
-                        self?.movieDetailViewModel?.isFetching?.value = false
-                    }
+                MovieService.share.fetchMovieDetail(movieId: movieId, language: .en_US) {[weak self] (movie, casts) in
+                    self?.buildViewModel(movie: movie, casts: casts)
+                    self?.movieDetailViewModel?.isFetching?.value = false
                 }
             }
         }
     }
     
-    private func buildViewModel(movie: Movie?) {
+    private func buildViewModel(movie: Movie?, casts: [Cast]?) {
         if let movie = movie {
             let sectionVM = MovieDetailSectionViewModel()
             movieDetailViewModel?.movieDetailSectionViewModels?.value?.append(sectionVM)
@@ -40,9 +38,12 @@ class MovieDetailController {
             let contentVM = ContentViewModel()
             contentVM.movie = DynamicType<Movie>(value: movie)
             sectionVM.movieDetailRowViewModels?.value?.append(contentVM)
-            let castVM = CastViewModel()
-            castVM.movie = DynamicType<Movie>(value: movie)
-            sectionVM.movieDetailRowViewModels?.value?.append(castVM)
+            if let casts = casts {
+                let castVM = CastViewModel()
+                castVM.movie = DynamicType<Movie>(value: movie)
+                castVM.casts = DynamicType<[Cast]>(value: casts)
+                sectionVM.movieDetailRowViewModels?.value?.append(castVM)
+            }
         }
     }
     
