@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol NowMovieViewDelegate: class {
+    
+    func push(viewController: UIViewController, animated: Bool)
+    
+}
+
 class NowMovieView: UIView {
     
     @IBOutlet weak var imageView: UIImageView!
@@ -17,6 +23,9 @@ class NowMovieView: UIView {
     @IBOutlet weak var overviewLabel: UILabel!
     
     static let nibName = "NowMovieView"
+    var movieId: String?
+    var tapGesture: UITapGestureRecognizer?
+    weak var delegate: NowMovieViewDelegate?
     
     static func createNowMovieView() -> NowMovieView {
         let nib = UINib(nibName: nibName, bundle: nil)
@@ -24,7 +33,7 @@ class NowMovieView: UIView {
         return nowMovieView
     }
     
-    func setContent(title: String?, rage: Double?, releaseDate: Date?, overview: String?, posterPath: String?) {
+    func setContent(movieId: Int?, title: String?, rage: Double?, releaseDate: Date?, overview: String?, posterPath: String?) {
         titleLabel.text = title
         voteRageLabel.text = "\(rage ?? 0.0)"
         releaseDateLabel.text = Utils.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: releaseDate)
@@ -34,6 +43,18 @@ class NowMovieView: UIView {
         }
         else {
             imageView.image = UIImage(named: Constants.IMAGE_NOT_FOUND)
+        }
+        if let movieId = movieId {
+            self.movieId = "\(movieId)"
+            tapGesture = UITapGestureRecognizer(target: self, action: #selector(pushToMovieDetailViewController))
+            self.addGestureRecognizer(tapGesture!)
+        }
+    }
+    
+    @objc private func pushToMovieDetailViewController() {
+        if let movieId = movieId {
+            let movieDetailVC = MovieDetailViewController.createMovieDetailViewController(with: movieId)
+            delegate?.push(viewController: movieDetailVC, animated: true)
         }
     }
     

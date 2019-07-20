@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol TopRateCellViewModelDelegate: class {
+    
+    func push(viewController: UIViewController, animated: Bool)
+    
+}
+
 class TopRateCellViewModel: NSObject, MovieListCellViewModel {
 
     var topRateMovies: DynamicType<[Movie]>?
     var currentIndex: DynamicType<Int>?
+    weak var delegate: TopRateCellViewModelDelegate?
     
     init(topRateMovies: DynamicType<[Movie]>) {
         self.topRateMovies = topRateMovies

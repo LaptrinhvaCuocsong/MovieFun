@@ -44,6 +44,9 @@ class MovieDetailController {
                 castVM.casts = DynamicType<[Cast]>(value: casts)
                 sectionVM.movieDetailRowViewModels?.value?.append(castVM)
             }
+            let commentVM = CommentViewModel()
+            commentVM.movie = DynamicType<Movie>(value: movie)
+            sectionVM.movieDetailRowViewModels?.value?.append(commentVM)
         }
     }
     
@@ -55,6 +58,8 @@ class MovieDetailController {
             return ContentTableViewCell.cellIdentify
         case is CastViewModel:
             return CastTableViewCell.cellIdentify
+        case is CommentViewModel:
+            return CommentTableViewCell.cellIdentify
         default:
             return nil
         }

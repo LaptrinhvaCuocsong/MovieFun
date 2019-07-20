@@ -7,10 +7,18 @@
 //
 
 import Foundation
+import UIKit
+
+protocol NowMovieCellViewModelDelegate: class {
+    
+    func push(viewController: UIViewController, animated: Bool)
+    
+}
 
 class NowMovieCellViewModel: MovieListCellViewModel {
     
     var nowMovies: DynamicType<[Movie]>?
+    weak var delegate: NowMovieCellViewModelDelegate?
     
     init(nowMovies: DynamicType<[Movie]>) {
         self.nowMovies = nowMovies

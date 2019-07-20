@@ -45,6 +45,7 @@ class MovieListController {
         if let nowMovies = nowMovies {
             nowMovieSectionVM = MovieListSectionViewModel()
             let nowMovieCellVM = NowMovieCellViewModel(nowMovies: DynamicType<[Movie]>(value: nowMovies))
+            nowMovieCellVM.delegate = movieListViewModel
             nowMovieSectionVM!.rowViewModels!.value!.append(nowMovieCellVM)
             movieListViewModel!.sectionViewModels!.value!.append(nowMovieSectionVM!)
         }
@@ -53,6 +54,7 @@ class MovieListController {
         if let topRateMovies = topRateMovies {
             topRateSectionVM = MovieListSectionViewModel()
             let topRateCellVM = TopRateCellViewModel(topRateMovies: DynamicType<[Movie]>(value: topRateMovies))
+            topRateCellVM.delegate = movieListViewModel
             topRateSectionVM!.rowViewModels!.value!.append(topRateCellVM)
             movieListViewModel!.sectionViewModels!.value!.append(topRateSectionVM!)
         }
@@ -61,6 +63,7 @@ class MovieListController {
         if let popularMovies = popularMovies {
             trailerSectionVM = MovieListSectionViewModel()
             let trailerCellVM = TrailersMovieCellViewModel(trailerMovies: DynamicType<[Movie]>(value: popularMovies))
+            trailerCellVM.delegate = movieListViewModel
             trailerSectionVM?.rowViewModels!.value!.append(trailerCellVM)
             movieListViewModel!.sectionViewModels!.value!.append(trailerSectionVM!)
         }

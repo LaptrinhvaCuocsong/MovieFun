@@ -14,12 +14,14 @@ class NowMovieTableViewCell: UITableViewCell, MovieListCell {
     
     static let nibName = "NowMovieTableViewCell"
     static let cellIdentify = "nowMovieCell"
+    var nowMovieVM: NowMovieCellViewModel?
     
     private let HEIGHT_OF_CELL = 160.0
     
     func setUp(with viewModel: MovieListCellViewModel) {
-        if let nowMovieVM = viewModel as? NowMovieCellViewModel {
-            let movies = nowMovieVM.nowMovies!.value![0..<3]
+        if let viewModel = viewModel as? NowMovieCellViewModel {
+            nowMovieVM = viewModel
+            let movies = viewModel.nowMovies!.value![0..<3]
             self.setNowMovieStackView(nowMovies: Array(movies))
         }
     }
@@ -38,10 +40,19 @@ class NowMovieTableViewCell: UITableViewCell, MovieListCell {
         }
         for (_, movie) in nowMovies.enumerated() {
             let nowMovieView = NowMovieView.createNowMovieView()
+            nowMovieView.delegate = self
             nowMovieView.heightAnchor.constraint(equalToConstant: CGFloat(HEIGHT_OF_CELL)).isActive = true
-            nowMovieView.setContent(title: movie.title, rage: movie.voteAverage, releaseDate: movie.releaseDate, overview: movie.overview, posterPath: movie.posterPath)
+            nowMovieView.setContent(movieId: movie.id, title: movie.title, rage: movie.voteAverage, releaseDate: movie.releaseDate, overview: movie.overview, posterPath: movie.posterPath)
             nowMovieStackView.addArrangedSubview(nowMovieView)
         }
+    }
+    
+}
+
+extension NowMovieTableViewCell: NowMovieViewDelegate {
+    
+    func push(viewController: UIViewController, animated: Bool) {
+        nowMovieVM?.delegate?.push(viewController: viewController, animated: animated)
     }
     
 }

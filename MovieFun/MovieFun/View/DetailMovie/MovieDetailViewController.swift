@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class MovieDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -33,6 +34,7 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Movie Detail"
         setMovieDetailTableView()
         registerCell()
         viewModel.movieId?.value = movieId
@@ -44,6 +46,10 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate, UITableV
         viewModel.isFetching?.listener = {[weak self] (isFetching) in
             if !isFetching {
                 self?.movieDetailTableView.reloadData()
+                SVProgressHUD.dismiss()
+            }
+            else {
+                SVProgressHUD.show()
             }
         }
         viewModel.movieId?.listener = {[weak self] (movieId) in
@@ -60,6 +66,7 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate, UITableV
         movieDetailTableView.register(UINib(nibName: MoviePlayerTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: MoviePlayerTableViewCell.cellIdentify)
         movieDetailTableView.register(UINib(nibName: ContentTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: ContentTableViewCell.cellIdentify)
         movieDetailTableView.register(UINib(nibName: CastTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: CastTableViewCell.cellIdentify)
+        movieDetailTableView.register(UINib(nibName: CommentTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: CommentTableViewCell.cellIdentify)
     }
     
     //MARK: - UITableViewDataSource

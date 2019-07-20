@@ -25,7 +25,7 @@ class MovieListViewModel {
     
 }
 
-extension MovieListViewModel: NewMovieCellViewModelDelegate {
+extension MovieListViewModel: NewMovieCellViewModelDelegate, NowMovieCellViewModelDelegate, TopRateCellViewModelDelegate, TrailersMovieCellViewModelDelegate {
     
     func push(viewController: UIViewController, animated: Bool) {
         delegate?.push(viewController: viewController, animated: animated)

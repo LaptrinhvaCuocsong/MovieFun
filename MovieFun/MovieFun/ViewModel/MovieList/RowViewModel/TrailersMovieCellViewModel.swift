@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol TrailersMovieCellViewModelDelegate: class {
+    
+    func push(viewController: UIViewController, animated: Bool)
+    
+}
+
 class TrailersMovieCellViewModel:NSObject, MovieListCellViewModel {
     
     var trailerMovies: DynamicType<[Movie]>?
     var currentIndex: DynamicType<Int>?
+    weak var delegate: TrailersMovieCellViewModelDelegate?
     
     init(trailerMovies: DynamicType<[Movie]>) {
         self.trailerMovies = trailerMovies
