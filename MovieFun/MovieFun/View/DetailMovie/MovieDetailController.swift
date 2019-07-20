@@ -17,19 +17,33 @@ class MovieDetailController {
     }
     
     func start() {
-        buildViewModel()
+        if let movieId = movieDetailViewModel?.movieId?.value {
+            if Utils.validateNumber(string: movieId) {
+                movieDetailViewModel?.isFetching?.value = true
+                MovieService.share.fetchMovieDetail(movieId: movieId, language: .en_US) {[weak self] (movie, error) in
+                    if error == nil {
+                        self?.buildViewModel(movie: movie)
+                        self?.movieDetailViewModel?.isFetching?.value = false
+                    }
+                }
+            }
+        }
     }
     
-    private func buildViewModel() {
-        //demo
-        let sectionVM = MovieDetailSectionViewModel()
-        movieDetailViewModel?.movieDetailSectionViewModels?.value?.append(sectionVM)
-        let moviePlayerVM = MoviePlayerViewModel()
-        sectionVM.movieDetailRowViewModels?.value?.append(moviePlayerVM)
-        let contentVM = ContentViewModel()
-        sectionVM.movieDetailRowViewModels?.value?.append(contentVM)
-        let castVM = CastViewModel()
-        sectionVM.movieDetailRowViewModels?.value?.append(castVM)
+    private func buildViewModel(movie: Movie?) {
+        if let movie = movie {
+            let sectionVM = MovieDetailSectionViewModel()
+            movieDetailViewModel?.movieDetailSectionViewModels?.value?.append(sectionVM)
+            let moviePlayerVM = MoviePlayerViewModel()
+            moviePlayerVM.movie = DynamicType<Movie>(value: movie)
+            sectionVM.movieDetailRowViewModels?.value?.append(moviePlayerVM)
+            let contentVM = ContentViewModel()
+            contentVM.movie = DynamicType<Movie>(value: movie)
+            sectionVM.movieDetailRowViewModels?.value?.append(contentVM)
+            let castVM = CastViewModel()
+            castVM.movie = DynamicType<Movie>(value: movie)
+            sectionVM.movieDetailRowViewModels?.value?.append(castVM)
+        }
     }
     
     func cellIdentify(with viewModel: MovieDetailRowViewModel) -> String? {

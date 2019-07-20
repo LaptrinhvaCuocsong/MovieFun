@@ -32,7 +32,7 @@ class NewMovieCollectionViewCell: UICollectionViewCell {
             imageView.setImage(imageName: posterPath, imageSize: .original)
         }
         else {
-            imageView.image = UIImage(named: "image-not-found")
+            imageView.image = UIImage(named: Constants.IMAGE_NOT_FOUND)
         }
     }
     

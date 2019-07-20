@@ -35,7 +35,7 @@ class UsernameTableViewCell: UITableViewCell, AccountCell {
     }
     
     private func setContent(imageName: String?, username: String?) {
-        accountImage.image = UIImage(named: imageName ?? "image-not-found")
+        accountImage.image = UIImage(named: imageName ?? Constants.IMAGE_NOT_FOUND)
         usernameLabel.text = username
     }
     

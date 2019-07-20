@@ -35,7 +35,20 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         setMovieDetailTableView()
         registerCell()
+        viewModel.movieId?.value = movieId
+        initBinding()
         controller.start()
+    }
+    
+    private func initBinding() {
+        viewModel.isFetching?.listener = {[weak self] (isFetching) in
+            if !isFetching {
+                self?.movieDetailTableView.reloadData()
+            }
+        }
+        viewModel.movieId?.listener = {[weak self] (movieId) in
+            self?.controller.start()
+        }
     }
     
     private func setMovieDetailTableView() {

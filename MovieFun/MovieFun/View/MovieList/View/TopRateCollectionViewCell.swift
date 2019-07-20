@@ -30,7 +30,7 @@ class TopRateCollectionViewCell: UICollectionViewCell {
             imageView.setImage(imageName: backdropPath, imageSize: .original)
         }
         else {
-            imageView.image = UIImage(named: "image-not-found")
+            imageView.image = UIImage(named: Constants.IMAGE_NOT_FOUND)
         }
     }
 

@@ -17,6 +17,7 @@ class MovieService {
     private let TOP_RATE_MOVIE_URL = "https://api.themoviedb.org/3/movie/top_rated?api_key=%@&language=%@&page=%d"
     private let TRAILER_MOVIE_URL = "https://api.themoviedb.org/3/movie/%@/videos?api_key=%@&language=%@"
     private let POPULAR_MOVIE_URL = "https://api.themoviedb.org/3/movie/popular?api_key=%@&language=%@&page=%d"
+    private let MOVIE_DETAIL_URL = "https://api.themoviedb.org/3/movie/%@?api_key=%@&language=%@"
     private var newMovies: [Movie]?
     private var nowMovies: [Movie]?
     private var topRateMovies: [Movie]?
@@ -99,11 +100,36 @@ class MovieService {
             }
         } catch {
             print(error)
-            completion(nil, nil)
+            completion(nil, error)
         }
     }
     
-    func fetchTrailerMovie(movieId: String, language: Language, completion: (([Movie]?, Error?) -> Void)?) {
+    func fetchMovieDetail(movieId: String, language: Language, completion: ((Movie?, Error?) -> Void)?) {
+        let completion: ((Movie?, Error?) -> Void) = completion ?? {_, _ in}
+        do {
+            let url = try String(format: MOVIE_DETAIL_URL, movieId, Constants.API_KEY, language.rawValue).asURL()
+            let dataRequest = Alamofire.request(url, method: .get)
+            dataRequest.validate().responseJSON {[weak self] (response) in
+                guard let strongSelf = self else {
+                    return
+                }
+                if response.result.isSuccess {
+                    guard let value = response.result.value else {
+                        return
+                    }
+                    let json = JSON(value)
+                    let movie = strongSelf.parseMovieJson(json: json)
+                    completion(movie, nil)
+                }
+                else {
+                    completion(nil, nil)
+                }
+            }
+        }
+        catch {
+            print(error)
+            completion(nil, error)
+        }
     }
     
     private func parseMovieJson(json: JSON) -> Movie {

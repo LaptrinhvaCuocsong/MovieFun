@@ -50,6 +50,9 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="castCollectionView" destination="6rp-r5-Gy9" id="OkB-Et-MTA"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

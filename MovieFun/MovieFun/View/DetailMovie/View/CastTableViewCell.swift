@@ -10,11 +10,23 @@ import UIKit
 
 class CastTableViewCell: UITableViewCell, MovieDetailCell {
     
+    @IBOutlet weak var castCollectionView: UICollectionView!
+    
     static let nibName = "CastTableViewCell"
     static let cellIdentify = "castTableViewCell"
+    var castVM: CastViewModel?
     
     func setUp(with viewModel: MovieDetailRowViewModel) {
-        
+        if let viewModel = viewModel as? CastViewModel {
+            castVM = viewModel
+            setContent()
+        }
+    }
+    
+    func setContent() {
+        if let castVM = castVM, let movie = castVM.movie?.value {
+            
+        }
     }
     
 }

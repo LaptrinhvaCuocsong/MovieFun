@@ -10,6 +10,8 @@ import Foundation
 
 class Constants {
     static let API_KEY = "b437aba8c658e4a9673766fc9923250f"
+    
+    static let IMAGE_NOT_FOUND = "image-not-found"
 }
 
 enum StoryBoardName: String {

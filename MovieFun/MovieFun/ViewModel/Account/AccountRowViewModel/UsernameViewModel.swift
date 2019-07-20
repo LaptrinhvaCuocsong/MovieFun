@@ -22,7 +22,7 @@ class UsernameViewModel: AccountRowViewModel {
     var username: DynamicType<String>?
     
     init() {
-        imageName = DynamicType<String>(value: "image-not-found")
+        imageName = DynamicType<String>(value: Constants.IMAGE_NOT_FOUND)
         username = DynamicType<String>(value: "")
     }
     

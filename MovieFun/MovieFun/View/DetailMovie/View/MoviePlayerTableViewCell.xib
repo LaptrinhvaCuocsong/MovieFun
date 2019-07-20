@@ -28,41 +28,29 @@
                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TU9-AH-g1m">
                         <rect key="frame" x="175" y="201" width="64" height="64"/>
                         <state key="normal" image="play-button"/>
+                        <connections>
+                            <action selector="playVideo:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Kxk-JS-JcF"/>
+                        </connections>
                     </button>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="lHd-o7-zJa">
-                        <rect key="frame" x="10" y="10" width="57" height="30"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-left-white" translatesAutoresizingMaskIntoConstraints="NO" id="fmA-EP-Dpg">
-                                <rect key="frame" x="0.0" y="0.0" width="16" height="30"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TQJ-6X-ufh">
-                                <rect key="frame" x="22" y="0.0" width="35" height="30"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="Back">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
-                        </subviews>
-                    </stackView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="TU9-AH-g1m" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="0en-8q-RWu"/>
-                    <constraint firstItem="lHd-o7-zJa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="1XQ-iT-HjD"/>
                     <constraint firstItem="OKD-wn-1tR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5nZ-lg-A5H"/>
                     <constraint firstAttribute="trailing" secondItem="OKD-wn-1tR" secondAttribute="trailing" id="Xte-fn-onz"/>
-                    <constraint firstItem="lHd-o7-zJa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="YzU-FX-5rA"/>
                     <constraint firstItem="TU9-AH-g1m" firstAttribute="bottom" secondItem="OKD-wn-1tR" secondAttribute="bottom" constant="32" id="kLC-eJ-dJe"/>
                     <constraint firstItem="OKD-wn-1tR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="oCP-5b-NdN"/>
                     <constraint firstAttribute="bottom" secondItem="TU9-AH-g1m" secondAttribute="bottom" constant="10" id="rma-eF-L7s"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="movieImageView" destination="OKD-wn-1tR" id="ggd-2I-cei"/>
+            </connections>
             <point key="canvasLocation" x="47.826086956521742" y="35.491071428571423"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="arrow-left-white" width="16" height="16"/>
         <image name="play-button" width="64" height="64"/>
     </resources>
 </document>

@@ -11,5 +11,5 @@ import Foundation
 class MoviePlayerViewModel: MovieDetailRowViewModel {
     
     var movie: DynamicType<Movie>?
-        
+    
 }

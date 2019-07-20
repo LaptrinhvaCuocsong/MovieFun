@@ -10,11 +10,33 @@ import UIKit
 
 class MoviePlayerTableViewCell: UITableViewCell, MovieDetailCell {
     
+    @IBOutlet weak var movieImageView: UIImageView!
+    
     static let nibName = "MoviePlayerTableViewCell"
     static let cellIdentify = "moviePlayerTableViewCell"
+    var moviePlayerVM: MoviePlayerViewModel?
     
     func setUp(with viewModel: MovieDetailRowViewModel) {
-        
+        if let viewModel = viewModel as? MoviePlayerViewModel {
+            moviePlayerVM = viewModel
+            setContent()
+        }
+    }
+    
+    private func setContent() {
+        if let viewModel = moviePlayerVM, let movie = viewModel.movie?.value {
+            if let backdropPath = movie.backdropPath {
+                movieImageView.setImage(imageName: backdropPath, imageSize: .original)
+            }
+            else {
+                movieImageView.image = UIImage(named: Constants.IMAGE_NOT_FOUND)
+            }
+        }
+    }
+    
+    //MARK: - IBAction
+    
+    @IBAction func playVideo(_ sender: Any) {
     }
     
 }

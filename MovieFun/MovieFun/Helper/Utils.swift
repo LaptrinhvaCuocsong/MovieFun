@@ -30,4 +30,12 @@ class Utils {
         return dateFm.string(from: date)
     }
     
+    static func validateNumber(string: String?) -> Bool {
+        guard let string = string else {
+            return false
+        }
+        let predicate = NSPredicate(format: "SELF MATCHES %@", "\\d+")
+        return predicate.evaluate(with: string)
+    }
+    
 }

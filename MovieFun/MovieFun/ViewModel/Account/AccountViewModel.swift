@@ -25,7 +25,7 @@ class AccountViewModel: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     override init() {
         super.init()
-        accountImage = DynamicType<UIImage>(value: UIImage(named: "image-not-found")!)
+        accountImage = DynamicType<UIImage>(value: UIImage(named: Constants.IMAGE_NOT_FOUND)!)
         username = DynamicType<String>(value: "")
         accountSectionViewModels = DynamicType<[AccountSectionViewModel]>(value: [AccountSectionViewModel]())
     }

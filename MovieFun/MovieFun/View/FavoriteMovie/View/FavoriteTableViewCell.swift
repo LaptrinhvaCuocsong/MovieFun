@@ -35,7 +35,7 @@ class FavoriteTableViewCell: UITableViewCell, FavoriteMovieCell {
             posterImage.setImage(imageName: posterPath, imageSize: .original)
         }
         else {
-            posterImage.image = UIImage(named: "image-not-found")
+            posterImage.image = UIImage(named: Constants.IMAGE_NOT_FOUND)
         }
     }
         
