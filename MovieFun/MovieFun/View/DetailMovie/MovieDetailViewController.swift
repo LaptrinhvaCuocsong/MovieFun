@@ -42,6 +42,11 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate, UITableV
         controller.start()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewModel.isFetching?.value = false
+    }
+    
     private func initBinding() {
         viewModel.isFetching?.listener = {[weak self] (isFetching) in
             if !isFetching {

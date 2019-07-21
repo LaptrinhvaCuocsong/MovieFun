@@ -51,6 +51,40 @@
             </objects>
             <point key="canvasLocation" x="61" y="192"/>
         </scene>
+        <!--New Movie List View Controller-->
+        <scene sceneID="TaP-E4-BCZ">
+            <objects>
+                <viewController storyboardIdentifier="NewMovieListViewController" id="0Qn-2M-Azh" customClass="NewMovieListViewController" customModule="MovieFun" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1b6-37-spJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ELO-Be-uKW">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="0Qn-2M-Azh" id="GSW-07-WgC"/>
+                                    <outlet property="delegate" destination="0Qn-2M-Azh" id="chT-2b-Jjt"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ELO-Be-uKW" firstAttribute="leading" secondItem="0cO-O3-hMH" secondAttribute="leading" id="1eM-hB-0Jc"/>
+                            <constraint firstItem="0cO-O3-hMH" firstAttribute="bottom" secondItem="ELO-Be-uKW" secondAttribute="bottom" id="V0i-zy-CoB"/>
+                            <constraint firstItem="0cO-O3-hMH" firstAttribute="trailing" secondItem="ELO-Be-uKW" secondAttribute="trailing" id="eEH-qj-7cM"/>
+                            <constraint firstItem="ELO-Be-uKW" firstAttribute="top" secondItem="0cO-O3-hMH" secondAttribute="top" id="xzB-Ck-GjO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0cO-O3-hMH"/>
+                    </view>
+                    <connections>
+                        <outlet property="newMovieTableView" destination="ELO-Be-uKW" id="ivM-Xw-tkk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aL6-FL-m9M" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="65" y="853"/>
+        </scene>
         <!--Movie Detail View Controller-->
         <scene sceneID="jYT-im-x4o">
             <objects>
@@ -84,6 +118,87 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c3U-aQ-FRK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1012" y="192"/>
+        </scene>
+        <!--Now Movie List View Controller-->
+        <scene sceneID="aNK-nc-bEL">
+            <objects>
+                <viewController storyboardIdentifier="NowMovieListViewController" id="JlN-VH-Klj" customClass="NowMovieListViewController" customModule="MovieFun" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wbt-ve-dGe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XaY-i0-hnr">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kmo-G0-zat" firstAttribute="bottom" secondItem="XaY-i0-hnr" secondAttribute="bottom" id="39b-mI-trP"/>
+                            <constraint firstItem="kmo-G0-zat" firstAttribute="trailing" secondItem="XaY-i0-hnr" secondAttribute="trailing" id="T6N-l3-R44"/>
+                            <constraint firstItem="XaY-i0-hnr" firstAttribute="leading" secondItem="kmo-G0-zat" secondAttribute="leading" id="gRE-q0-ibN"/>
+                            <constraint firstItem="XaY-i0-hnr" firstAttribute="top" secondItem="kmo-G0-zat" secondAttribute="top" id="lXV-dB-DUE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kmo-G0-zat"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qCR-B3-Bqo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1012" y="846"/>
+        </scene>
+        <!--Top Rate List View Controller-->
+        <scene sceneID="aqI-W6-RXZ">
+            <objects>
+                <viewController storyboardIdentifier="TopRateListViewController" id="JTt-x6-BIg" customClass="TopRateListViewController" customModule="MovieFun" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cDt-j6-it2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EDX-yw-HgO">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="EDX-yw-HgO" firstAttribute="leading" secondItem="9kB-ms-Dfa" secondAttribute="leading" id="0aI-vG-xbO"/>
+                            <constraint firstItem="9kB-ms-Dfa" firstAttribute="trailing" secondItem="EDX-yw-HgO" secondAttribute="trailing" id="Mjy-Wj-c9b"/>
+                            <constraint firstItem="9kB-ms-Dfa" firstAttribute="bottom" secondItem="EDX-yw-HgO" secondAttribute="bottom" id="UI3-Vc-Svj"/>
+                            <constraint firstItem="EDX-yw-HgO" firstAttribute="top" secondItem="9kB-ms-Dfa" secondAttribute="top" id="jHZ-Lh-hcK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9kB-ms-Dfa"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nhj-ha-nUS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1896" y="846"/>
+        </scene>
+        <!--Trailer List View Controller-->
+        <scene sceneID="uId-vZ-3ve">
+            <objects>
+                <viewController storyboardIdentifier="TrailerListViewController" id="LHt-lf-M2c" customClass="TrailerListViewController" customModule="MovieFun" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7bc-EZ-FvR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="blc-Co-hRJ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="b4h-MB-TKb" firstAttribute="bottom" secondItem="blc-Co-hRJ" secondAttribute="bottom" id="6Hz-gR-gYv"/>
+                            <constraint firstItem="blc-Co-hRJ" firstAttribute="top" secondItem="b4h-MB-TKb" secondAttribute="top" id="QI4-W1-LgF"/>
+                            <constraint firstItem="b4h-MB-TKb" firstAttribute="trailing" secondItem="blc-Co-hRJ" secondAttribute="trailing" id="bep-qm-itn"/>
+                            <constraint firstItem="blc-Co-hRJ" firstAttribute="leading" secondItem="b4h-MB-TKb" secondAttribute="leading" id="cQb-lv-IbX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="b4h-MB-TKb"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D3c-gr-XWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2745" y="846"/>
         </scene>
     </scenes>
 </document>

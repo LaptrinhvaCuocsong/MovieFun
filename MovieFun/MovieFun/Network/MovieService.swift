@@ -61,6 +61,18 @@ class MovieService {
         }
     }
     
+    func fetchNewMovie(page: Int, language: Language, completion: (([Movie]?) -> Void)?) {
+        let completion: (([Movie]?) -> Void) = completion ?? {_ in}
+        self.fetchMovie(url: NEW_MOVIE_URL, language: language, page: page) { (movie, error) in
+            if let _ = error {
+                completion(nil)
+            }
+            else {
+                completion(movie)
+            }
+        }
+    }
+    
     func fetchFavoriteMovie(completion: (([Movie]?) -> Void)?) {
         let completion:(([Movie]?) -> Void) = completion ?? {_ in}
         self.fetchMovie(url: TOP_RATE_MOVIE_URL, language: .en_US, page: 1) { (movies, error) in

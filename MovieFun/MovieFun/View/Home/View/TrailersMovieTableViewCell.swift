@@ -27,7 +27,7 @@ class TrailersMovieTableViewCell: UITableViewCell, MovieListCell {
             trailerVM.currentIndex!.listener = {[weak self] index in
                 self?.setPagingStackView(index: index)
             }
-            setTrailerStackView(movies: [Movie](trailerVM.trailerMovies!.value![0..<4]))
+            setTrailerStackView(movies: [Movie](trailerVM.trailerMovies!.value![6..<10]))
         }
     }
     

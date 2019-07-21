@@ -52,6 +52,16 @@ extension TrailersMovieCellViewModel: UICollectionViewDelegate, UICollectionView
         return UIEdgeInsets(top: 0.0, left: 5.0, bottom: 0.0, right: 5.0)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = trailerMovies!.value![indexPath.section]
+        //demo
+        if let movieId = movie.id {
+            let movieDetailVC = MovieDetailViewController.createMovieDetailViewController(with: "\(movieId)")
+            delegate?.push(viewController: movieDetailVC, animated: true)
+        }
+        //push video view controller
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let width = scrollView.width
         currentIndex!.value = Int(Double(scrollView.contentOffset.x) / width)

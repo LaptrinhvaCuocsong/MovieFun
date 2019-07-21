@@ -16,12 +16,18 @@ class NewMovieTableViewCell: UITableViewCell, MovieListCell {
     
     static let nibName = "NewMovieTableViewCell"
     static let cellIdentify = "newMovieCell"
+    var newMovieCellVM: NewMovieCellViewModel?
+    
+    //MARK: - IBAction
     
     @IBAction func seeAllAction(_ sender: Any) {
+        let newMovieListVC = NewMovieListViewController.createNewMovieListViewController()
+        self.newMovieCellVM?.delegate?.push(viewController: newMovieListVC, animated: true)
     }
     
     func setUp(with viewModel: MovieListCellViewModel) {
         if let newMovieCellVM = viewModel as? NewMovieCellViewModel {
+            self.newMovieCellVM = newMovieCellVM
             newMovieCollectionView.register(UINib(nibName: NewMovieCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: NewMovieCollectionViewCell.cellIdentify)
             newMovieCollectionView.delegate = newMovieCellVM
             newMovieCollectionView.dataSource = newMovieCellVM
