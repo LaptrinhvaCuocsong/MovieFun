@@ -9,11 +9,13 @@
 import UIKit
 import SVProgressHUD
 
-class NewMovieListViewController: ListViewController, UITableViewDelegate, UITableViewDataSource {
+class NewMovieListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
 
     @IBOutlet weak var newMovieTableView: UITableView!
     
     private let HEIGHT_OF_CELL = 200.0
+    private var needLoadMore = true
+    private var isDidAppear = false
     
     static func createNewMovieListViewController() -> NewMovieListViewController {
         let storyBoard = UIStoryboard(name: StoryBoardName.UTILS.rawValue, bundle: nil)
@@ -30,23 +32,55 @@ class NewMovieListViewController: ListViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "New movie list"
+        navigationController?.hidesBarsOnSwipe = true
         registerCell()
         initBinding()
         controller.start()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setFooterTableView()
+        isDidAppear = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.hidesBarsOnSwipe = false
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         SVProgressHUD.dismiss()
+        isDidAppear = false
+    }
+    
+    private func setFooterTableView() {
+        let loadingTableView = LoadingTableView.createLoadingTableView()
+        newMovieTableView.tableFooterView = loadingTableView
     }
     
     private func initBinding() {
+        viewModel.isLoadMore?.listener = {[weak self] (isLoadMore) in
+            if !isLoadMore {
+                self?.newMovieTableView.reloadData()
+            }
+        }
+        viewModel.currentPage?.listener = {[weak self] (currentPage) in
+            if currentPage >= self!.viewModel.totalPage {
+                self?.newMovieTableView.tableFooterView = nil
+                self?.needLoadMore = false
+            }
+        }
         viewModel.isFetching?.listener = {[weak self] (isFetching) in
             if !isFetching {
+                self?.newMovieTableView.isHidden = false
                 self?.newMovieTableView.reloadData()
                 SVProgressHUD.dismiss()
             }
             else {
+                self?.newMovieTableView.isHidden = true
                 SVProgressHUD.show()
             }
         }
@@ -79,6 +113,21 @@ class NewMovieListViewController: ListViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(HEIGHT_OF_CELL)
+    }
+    
+    //MARK: - UIScrollViewDelegate
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if !isDidAppear {return}
+        let y = scrollView.contentOffset.y
+        let height = scrollView.contentSize.height
+        if (y >= height - CGFloat(scrollView.height)) {
+            if needLoadMore {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {[weak self] in
+                    self?.controller.loadMore()
+                }
+            }
+        }
     }
 
 }

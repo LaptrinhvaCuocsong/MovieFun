@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TopRateListViewController: ListViewController {
+class TopRateListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

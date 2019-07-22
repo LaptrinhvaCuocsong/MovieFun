@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TrailerListViewController: ListViewController {
+class TrailerListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

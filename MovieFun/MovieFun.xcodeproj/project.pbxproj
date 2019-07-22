@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1000B6622E3FB93004CB269 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000B6522E3FB93004CB269 /* ListViewController.swift */; };
 		A1000B6822E3FBA7004CB269 /* NewMovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000B6722E3FBA7004CB269 /* NewMovieListViewController.swift */; };
 		A1000B6A22E3FBB6004CB269 /* NowMovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000B6922E3FBB6004CB269 /* NowMovieListViewController.swift */; };
 		A1000B6C22E3FBC2004CB269 /* TopRateListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000B6B22E3FBC2004CB269 /* TopRateListViewController.swift */; };
@@ -18,6 +17,8 @@
 		A1000B7E22E409EC004CB269 /* NewMovieListRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000B7D22E409EC004CB269 /* NewMovieListRowViewModel.swift */; };
 		A1000B8222E418FE004CB269 /* NewMovieListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000B8022E418FE004CB269 /* NewMovieListTableViewCell.swift */; };
 		A1000B8322E418FE004CB269 /* NewMovieListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1000B8122E418FE004CB269 /* NewMovieListTableViewCell.xib */; };
+		A1007B2E22E4BA790086FD01 /* LoadingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1007B2D22E4BA790086FD01 /* LoadingTableView.swift */; };
+		A1007B3022E4BA930086FD01 /* LoadingTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1007B2F22E4BA930086FD01 /* LoadingTableView.xib */; };
 		A10435AB22DCCFDF00784A10 /* UIImageView+MF.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10435AA22DCCFDF00784A10 /* UIImageView+MF.swift */; };
 		A104A70A22C90EEA0039B5AA /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104A70922C90EEA0039B5AA /* MovieListCell.swift */; };
 		A104A70D22C91A080039B5AA /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104A70C22C91A080039B5AA /* MovieService.swift */; };
@@ -121,7 +122,6 @@
 
 /* Begin PBXFileReference section */
 		4F855BCDB526970A5659EB69 /* Pods-MovieFun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieFun.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieFun/Pods-MovieFun.release.xcconfig"; sourceTree = "<group>"; };
-		A1000B6522E3FB93004CB269 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		A1000B6722E3FBA7004CB269 /* NewMovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieListViewController.swift; sourceTree = "<group>"; };
 		A1000B6922E3FBB6004CB269 /* NowMovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowMovieListViewController.swift; sourceTree = "<group>"; };
 		A1000B6B22E3FBC2004CB269 /* TopRateListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopRateListViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +132,8 @@
 		A1000B7D22E409EC004CB269 /* NewMovieListRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieListRowViewModel.swift; sourceTree = "<group>"; };
 		A1000B8022E418FE004CB269 /* NewMovieListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieListTableViewCell.swift; sourceTree = "<group>"; };
 		A1000B8122E418FE004CB269 /* NewMovieListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMovieListTableViewCell.xib; sourceTree = "<group>"; };
+		A1007B2D22E4BA790086FD01 /* LoadingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableView.swift; sourceTree = "<group>"; };
+		A1007B2F22E4BA930086FD01 /* LoadingTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingTableView.xib; sourceTree = "<group>"; };
 		A10435AA22DCCFDF00784A10 /* UIImageView+MF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+MF.swift"; sourceTree = "<group>"; };
 		A104A70922C90EEA0039B5AA /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
 		A104A70C22C91A080039B5AA /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
@@ -268,21 +270,12 @@
 		A1000B6322E3FB3D004CB269 /* MovieList */ = {
 			isa = PBXGroup;
 			children = (
-				A1000B6422E3FB72004CB269 /* Base */,
 				A1000B7222E3FF8B004CB269 /* TrailerList */,
 				A1000B7122E3FF80004CB269 /* TopRateList */,
 				A1000B7022E3FF76004CB269 /* NowMovieList */,
 				A1000B6F22E3FF6E004CB269 /* NewMovieList */,
 			);
 			path = MovieList;
-			sourceTree = "<group>";
-		};
-		A1000B6422E3FB72004CB269 /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				A1000B6522E3FB93004CB269 /* ListViewController.swift */,
-			);
-			path = Base;
 			sourceTree = "<group>";
 		};
 		A1000B6F22E3FF6E004CB269 /* NewMovieList */ = {
@@ -615,6 +608,7 @@
 		A169EF9922C1459600AC7D6F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A1FAF0E022E468990072C738 /* Utils */,
 				A1000B6322E3FB3D004CB269 /* MovieList */,
 				A1806D8022DF7573009EA18F /* DetailMovie */,
 				A1460ACF22C694F200E4BAA5 /* LoadingMovie */,
@@ -757,6 +751,15 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		A1FAF0E022E468990072C738 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A1007B2D22E4BA790086FD01 /* LoadingTableView.swift */,
+				A1007B2F22E4BA930086FD01 /* LoadingTableView.xib */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		A1FEE11022DA3A3F000F317F /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -840,6 +843,7 @@
 				A1806D8722DF79D2009EA18F /* MoviePlayerTableViewCell.xib in Resources */,
 				A1806D8F22DF88E0009EA18F /* CastTableViewCell.xib in Resources */,
 				A1FC448422D416F000F59966 /* TopRateCollectionViewCell.xib in Resources */,
+				A1007B3022E4BA930086FD01 /* LoadingTableView.xib in Resources */,
 				A1460ACE22C692C300E4BAA5 /* Utils.storyboard in Resources */,
 				A1157C0822DAC93D008FC3D3 /* GoogleService-Info.plist in Resources */,
 				A1D1D72A22DB72FF001ABDE9 /* UsernameTableViewCell.xib in Resources */,
@@ -937,7 +941,6 @@
 				A105E04022D9BFDD00B85080 /* FavoriteSectionViewModel.swift in Sources */,
 				A1083E0722C283F00083F906 /* CommentListViewController.swift in Sources */,
 				A1157C1822DADD6F008FC3D3 /* AccountRowViewModel.swift in Sources */,
-				A1000B6622E3FB93004CB269 /* ListViewController.swift in Sources */,
 				A107EC2122C52B9B00A711DA /* TopRateTableViewCell.swift in Sources */,
 				A1A3E31622C3C64900C5DF5F /* NewMovieTableViewCell.swift in Sources */,
 				A1000B6C22E3FBC2004CB269 /* TopRateListViewController.swift in Sources */,
@@ -970,6 +973,7 @@
 				A104A70A22C90EEA0039B5AA /* MovieListCell.swift in Sources */,
 				A1460ABB22C6801300E4BAA5 /* NowMovieCellViewModel.swift in Sources */,
 				A1D1D73522DB7358001ABDE9 /* AddressTableViewCell.swift in Sources */,
+				A1007B2E22E4BA790086FD01 /* LoadingTableView.swift in Sources */,
 				A1000B6A22E3FBB6004CB269 /* NowMovieListViewController.swift in Sources */,
 				A1FC448322D416F000F59966 /* TopRateCollectionViewCell.swift in Sources */,
 				A1806D8E22DF88E0009EA18F /* CastTableViewCell.swift in Sources */,

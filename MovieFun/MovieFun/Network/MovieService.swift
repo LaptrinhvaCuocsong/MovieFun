@@ -35,23 +35,31 @@ class MovieService {
     func fetchMovieList(completion: (([Movie]?, [Movie]?, [Movie]?, [Movie]?) -> Void)?) {
         weak var weakSelf = self
         dispatchGroup.enter()
-        self.fetchMovie(url: NEW_MOVIE_URL, language: .en_US, page: 1) { (movies, error) in
-            weakSelf?.newMovies = movies
+        self.fetchMovie(url: NEW_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
+            if error == nil {
+                weakSelf?.newMovies = movies
+            }
             weakSelf?.dispatchGroup.leave()
         }
         dispatchGroup.enter()
-        self.fetchMovie(url: NOW_MOVIE_URL, language: .en_US, page: 1) { (movies, error) in
-            weakSelf?.nowMovies = movies
+        self.fetchMovie(url: NOW_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
+            if error == nil {
+                weakSelf?.nowMovies = movies
+            }
             weakSelf?.dispatchGroup.leave()
         }
         dispatchGroup.enter()
-        self.fetchMovie(url: TOP_RATE_MOVIE_URL, language: .en_US, page: 1) { (movies, error) in
-            weakSelf?.topRateMovies = movies
+        self.fetchMovie(url: TOP_RATE_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
+            if error == nil {
+                weakSelf?.topRateMovies = movies
+            }
             weakSelf?.dispatchGroup.leave()
         }
         dispatchGroup.enter()
-        self.fetchMovie(url: POPULAR_MOVIE_URL, language: .en_US, page: 1) { (movies, error) in
-            weakSelf?.popularMovies = movies
+        self.fetchMovie(url: POPULAR_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
+            if error == nil {
+                weakSelf?.popularMovies = movies
+            }
             weakSelf?.dispatchGroup.leave()
         }
         dispatchGroup.notify(queue: .main) {
@@ -61,21 +69,21 @@ class MovieService {
         }
     }
     
-    func fetchNewMovie(page: Int, language: Language, completion: (([Movie]?) -> Void)?) {
-        let completion: (([Movie]?) -> Void) = completion ?? {_ in}
-        self.fetchMovie(url: NEW_MOVIE_URL, language: language, page: page) { (movie, error) in
+    func fetchNewMovie(page: Int, language: Language, completion: ((Int?, [Movie]?) -> Void)?) {
+        let completion: ((Int?,[Movie]?) -> Void) = completion ?? {_,_ in}
+        self.fetchMovie(url: NEW_MOVIE_URL, language: language, page: page) { (totalPages, movie, error) in
             if let _ = error {
-                completion(nil)
+                completion(nil, nil)
             }
             else {
-                completion(movie)
+                completion(totalPages, movie)
             }
         }
     }
     
     func fetchFavoriteMovie(completion: (([Movie]?) -> Void)?) {
         let completion:(([Movie]?) -> Void) = completion ?? {_ in}
-        self.fetchMovie(url: TOP_RATE_MOVIE_URL, language: .en_US, page: 1) { (movies, error) in
+        self.fetchMovie(url: TOP_RATE_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
             if error == nil {
                 completion(movies)
             }
@@ -108,8 +116,8 @@ class MovieService {
         }
     }
     
-    private func fetchMovie(url: String, language: Language, page: Int, completion: (([Movie]?, Error?) -> Void)?) {
-        let completion: (([Movie]?, Error?) -> Void) = completion ?? {_,_ in }
+    private func fetchMovie(url: String, language: Language, page: Int, completion: ((Int?, [Movie]?, Error?) -> Void)?) {
+        let completion: ((Int?, [Movie]?, Error?) -> Void) = completion ?? {_,_,_ in }
         do {
             let url = try String(format: url, Constants.API_KEY, language.rawValue, page).asURL()
             let dataRequest = Alamofire.request(url, method: .get)
@@ -122,24 +130,24 @@ class MovieService {
                         return
                     }
                     let json = JSON(value)
-                    if let results = json["results"].array {
+                    if let results = json["results"].array, let totalPages = json["total_pages"].int {
                         var movieList = [Movie]()
                         for item in results {
                             movieList.append(strongSelf.parseMovieJson(json: item))
                         }
-                        completion(movieList, nil)
+                        completion(totalPages, movieList, nil)
                     }
                     else {
-                        completion(nil, nil)
+                        completion(nil, nil, nil)
                     }
                 }
                 else {
-                    completion(nil, dataResponse.result.error)
+                    completion(nil, nil, dataResponse.result.error)
                 }
             }
         } catch {
             print(error)
-            completion(nil, error)
+            completion(nil, nil, error)
         }
     }
     
