@@ -29,6 +29,8 @@ class NowMovieTableViewCell: UITableViewCell, MovieListCell {
     //MARK: - IBAction
     
     @IBAction func seeAll(_ sender: UIButton) {
+        let nowMovieListVC = NowMovieListViewController.createListViewController() as! NowMovieListViewController
+        nowMovieVM?.delegate?.push(viewController: nowMovieListVC, animated: true)
     }
     
     //MARK: - Private method

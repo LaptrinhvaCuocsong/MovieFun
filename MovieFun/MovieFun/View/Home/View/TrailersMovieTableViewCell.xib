@@ -49,45 +49,45 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch for all trailers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UNp-cy-tAK">
-                        <rect key="frame" x="10" y="494" width="104.5" height="14"/>
+                        <rect key="frame" x="10" y="486.5" width="104.5" height="14"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Hi6-4D-M4d">
-                        <rect key="frame" x="10" y="268" width="394" height="204.5"/>
+                        <rect key="frame" x="10" y="268" width="394" height="189.5"/>
                     </stackView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Igm-xK-1W8">
-                        <rect key="frame" x="338" y="492.5" width="66" height="17"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azT-y9-rlK">
+                        <rect key="frame" x="338" y="477.5" width="66" height="32"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="17" id="LU7-od-Ff9"/>
+                            <constraint firstAttribute="height" constant="32" id="Mqi-Hi-Qsc"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                         <state key="normal" title="See All →">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <connections>
-                            <action selector="seeAll:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0rX-YA-8tS"/>
+                            <action selector="seeAll:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Nhf-sJ-12t"/>
                         </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="Igm-xK-1W8" firstAttribute="top" secondItem="Hi6-4D-M4d" secondAttribute="bottom" constant="20" id="2jX-jY-snN"/>
+                    <constraint firstAttribute="bottom" secondItem="azT-y9-rlK" secondAttribute="bottom" constant="10" id="2dP-DM-JZm"/>
                     <constraint firstItem="m4v-GL-ynF" firstAttribute="top" secondItem="4iZ-Et-Iyj" secondAttribute="bottom" constant="15" id="6FO-uY-NTv"/>
                     <constraint firstItem="UNp-cy-tAK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="6vD-gT-TeF"/>
                     <constraint firstAttribute="trailing" secondItem="Hi6-4D-M4d" secondAttribute="trailing" constant="10" id="AQp-b5-AqD"/>
+                    <constraint firstAttribute="trailing" secondItem="azT-y9-rlK" secondAttribute="trailing" constant="10" id="Eop-pQ-P16"/>
                     <constraint firstAttribute="trailing" secondItem="m4v-GL-ynF" secondAttribute="trailing" constant="10" id="Mwc-AK-dZv"/>
                     <constraint firstItem="Hi6-4D-M4d" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="NTA-8J-WRj"/>
-                    <constraint firstAttribute="trailing" secondItem="Igm-xK-1W8" secondAttribute="trailing" constant="10" id="P5K-qy-Gda"/>
-                    <constraint firstItem="UNp-cy-tAK" firstAttribute="centerY" secondItem="Igm-xK-1W8" secondAttribute="centerY" id="Rja-j8-TKq"/>
                     <constraint firstAttribute="trailing" secondItem="cPh-j1-ZEM" secondAttribute="trailing" constant="10" id="TOz-0h-b6I"/>
                     <constraint firstItem="cPh-j1-ZEM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Zyq-SB-Jt7"/>
                     <constraint firstItem="4iZ-Et-Iyj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="a6X-8z-dTK"/>
                     <constraint firstItem="4iZ-Et-Iyj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="aAS-8J-gDK"/>
+                    <constraint firstItem="UNp-cy-tAK" firstAttribute="centerY" secondItem="azT-y9-rlK" secondAttribute="centerY" id="bjn-D1-t1m"/>
                     <constraint firstItem="m4v-GL-ynF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="e52-Z4-lNU"/>
                     <constraint firstItem="Hi6-4D-M4d" firstAttribute="top" secondItem="m4v-GL-ynF" secondAttribute="bottom" constant="20" id="fiT-50-qKs"/>
-                    <constraint firstAttribute="bottom" secondItem="Igm-xK-1W8" secondAttribute="bottom" constant="10" id="t9E-9b-mYr"/>
+                    <constraint firstItem="azT-y9-rlK" firstAttribute="top" secondItem="Hi6-4D-M4d" secondAttribute="bottom" constant="20" id="lqP-3Q-CbX"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

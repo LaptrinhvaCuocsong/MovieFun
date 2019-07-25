@@ -8,61 +8,76 @@
 
 import Foundation
 
-class NewMovieListController {
+class NewMovieListController: ListController {
     
-    var newMovieListViewModel: NewMovieListViewModel?
-    
-    init() {
-        newMovieListViewModel = NewMovieListViewModel()
+    override init() {
+        super.init()
+        listViewModel = NewMovieListViewModel()
     }
     
-    func start() {
-        newMovieListViewModel?.isFetching?.value = true
-        MovieService.share.fetchNewMovie(page: newMovieListViewModel!.currentPage!.value!, language: .en_US) {[weak self] (totalPages, movies) in
+    override func start() {
+        self.listViewModel?.isFetching?.value = true
+        MovieService.share.fetchNewMovie(page: 1, language: .en_US) {[weak self] (totalPages, movies) in
             guard let strongSelf = self else {
                 return
             }
             strongSelf.buildViewModel(totalPages: totalPages, movies: movies)
-            strongSelf.newMovieListViewModel?.isFetching?.value = false
-            let currentPage = strongSelf.newMovieListViewModel!.currentPage!.value!
-            strongSelf.newMovieListViewModel?.currentPage?.value = currentPage + 1
+            strongSelf.listViewModel?.isFetching?.value = false
+            strongSelf.listViewModel?.currentPage?.value = 2
         }
     }
     
-    func loadMore() {
-        newMovieListViewModel?.isLoadMore?.value = true
-        MovieService.share.fetchNewMovie(page: newMovieListViewModel!.currentPage!.value!, language: .en_US) {[weak self] (totalPages, movies) in
+    override func pullToRefresh(_ dispatchTime: DispatchTime) {
+        self.listViewModel?.isPullToRefresh?.value = true
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {[weak self] in
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.newMovieListViewModel?.isLoadMore?.value = false
-            strongSelf.buildViewModelAfterLoadMore(totalPages: totalPages, movies: movies)
-            let currentPage = strongSelf.newMovieListViewModel!.currentPage!.value!
-            strongSelf.newMovieListViewModel?.currentPage?.value = currentPage + 1
-        }
-    }
-    
-    private func buildViewModel(totalPages: Int?, movies: [Movie]?) {
-        if let movies = movies, let totalPages = totalPages {
-            newMovieListViewModel?.totalPage = totalPages
-            let newMovieSectionVM = NewMovieListSectionViewModel()
-            newMovieListViewModel!.newMovieListSectionViewModels?.value?.append(newMovieSectionVM)
-            for (_, movie) in movies.enumerated() {
-                let newMovieListRowVM = NewMovieListRowViewModel()
-                newMovieListRowVM.movie = DynamicType<Movie>(value: movie)
-                newMovieSectionVM.newMovieListRowViewModels?.value?.append(newMovieListRowVM)
+            MovieService.share.fetchNewMovie(page: 1, language: .en_US) { (totalPages, movies) in
+                strongSelf.buildViewModel(totalPages: totalPages, movies: movies)
+                strongSelf.listViewModel?.isPullToRefresh?.value = false
+                strongSelf.listViewModel?.currentPage?.value = 2
             }
         }
     }
     
-    private func buildViewModelAfterLoadMore(totalPages: Int?, movies: [Movie]?) {
+    override func loadMore(_ dispatchTime: DispatchTime) {
+        self.listViewModel?.isLoadMore?.value = true
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime) {[weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            MovieService.share.fetchNewMovie(page: strongSelf.listViewModel!.currentPage!.value!, language: .en_US) { (totalPages, movies) in
+                strongSelf.buildViewModelAfterLoadMore(totalPages: totalPages, movies: movies)
+                strongSelf.listViewModel?.isLoadMore?.value = false
+                let currentPage = strongSelf.listViewModel!.currentPage!.value!
+                strongSelf.listViewModel?.currentPage?.value = currentPage + 1
+            }
+        }
+    }
+    
+    override func buildViewModel(totalPages: Int?, movies: [Movie]?) {
         if let movies = movies, let totalPages = totalPages {
-            newMovieListViewModel?.totalPage = totalPages
-            let newMovieSectionVM = newMovieListViewModel!.newMovieListSectionViewModels!.value![0]
+            listViewModel?.listSectionViewModels?.value?.removeAll()
+            listViewModel?.totalPage = totalPages
+            let newMovieSectionVM = NewMovieListSectionViewModel()
+            listViewModel!.listSectionViewModels?.value?.append(newMovieSectionVM)
             for (_, movie) in movies.enumerated() {
                 let newMovieListRowVM = NewMovieListRowViewModel()
                 newMovieListRowVM.movie = DynamicType<Movie>(value: movie)
-                newMovieSectionVM.newMovieListRowViewModels?.value?.append(newMovieListRowVM)
+                newMovieSectionVM.listRowViewModels?.value?.append(newMovieListRowVM)
+            }
+        }
+    }
+    
+    override func buildViewModelAfterLoadMore(totalPages: Int?, movies: [Movie]?) {
+        if let movies = movies, let totalPages = totalPages {
+            listViewModel?.totalPage = totalPages
+            let newMovieSectionVM = listViewModel!.listSectionViewModels!.value![0]
+            for (_, movie) in movies.enumerated() {
+                let newMovieListRowVM = NewMovieListRowViewModel()
+                newMovieListRowVM.movie = DynamicType<Movie>(value: movie)
+                newMovieSectionVM.listRowViewModels?.value?.append(newMovieListRowVM)
             }
         }
     }

@@ -22,9 +22,11 @@ class NewMovieListTableViewCell: UITableViewCell {
     static let cellIdentify = "newMovieListTableViewCell"
     var newMovieListRowVM: NewMovieListRowViewModel?
     
-    func setUp(with viewModel: NewMovieListRowViewModel) {
-        newMovieListRowVM = viewModel
-        setContent()
+    func setUp(with viewModel: ListRowViewModel) {
+        if let viewModel = viewModel as? NewMovieListRowViewModel {
+            newMovieListRowVM = viewModel
+            setContent()
+        }
     }
     
     private func setContent() {
@@ -34,6 +36,7 @@ class NewMovieListTableViewCell: UITableViewCell {
             ratingLabel.text = "\(movie.voteAverage ?? 0.0)"
             overviewLabel.text = movie.overview
             adultImage.isHidden = !(movie.adult ?? true)
+            movieImage.image = nil
             if let posterPath = movie.posterPath {
                 movieImage.setImage(imageName: posterPath, imageSize: .original)
             }

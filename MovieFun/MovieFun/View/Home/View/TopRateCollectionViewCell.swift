@@ -26,11 +26,9 @@ class TopRateCollectionViewCell: UICollectionViewCell {
             heightTitleLable.constant = 34.0
         }
         overviewLabel.text = overview
+        imageView.image = nil
         if let backdropPath = backdropPath {
             imageView.setImage(imageName: backdropPath, imageSize: .original)
-        }
-        else {
-            imageView.image = UIImage(named: Constants.IMAGE_NOT_FOUND)
         }
     }
 

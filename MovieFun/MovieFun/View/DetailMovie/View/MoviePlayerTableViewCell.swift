@@ -25,11 +25,9 @@ class MoviePlayerTableViewCell: UITableViewCell, MovieDetailCell {
     
     private func setContent() {
         if let viewModel = moviePlayerVM, let movie = viewModel.movie?.value {
+            movieImageView.image = nil
             if let backdropPath = movie.backdropPath {
                 movieImageView.setImage(imageName: backdropPath, imageSize: .original)
-            }
-            else {
-                movieImageView.image = UIImage(named: Constants.IMAGE_NOT_FOUND)
             }
         }
     }

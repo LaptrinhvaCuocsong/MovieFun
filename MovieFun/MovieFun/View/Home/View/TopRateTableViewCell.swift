@@ -16,9 +16,11 @@ class TopRateTableViewCell: UITableViewCell, MovieListCell {
     
     static let nibName = "TopRateTableViewCell"
     static let cellIdentify = "topRateCell"
+    var topRateVM: TopRateCellViewModel?
     
     func setUp(with viewModel: MovieListCellViewModel) {
         if let topRateVM = viewModel as? TopRateCellViewModel {
+            self.topRateVM = topRateVM
             topRateCollection.delegate = topRateVM
             topRateCollection.dataSource = topRateVM
             topRateCollection.register(UINib(nibName: TopRateCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: TopRateCollectionViewCell.cellIdentify)
@@ -49,6 +51,8 @@ class TopRateTableViewCell: UITableViewCell, MovieListCell {
     
     //MARK: - IBAction
     @IBAction func seeAll(_ sender: Any) {
+        let topRateListVC = TopRateListViewController.createListViewController()
+        topRateVM?.delegate?.push(viewController: topRateListVC, animated: true)
     }
     
 }

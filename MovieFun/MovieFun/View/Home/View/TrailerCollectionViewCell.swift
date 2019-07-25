@@ -19,11 +19,9 @@ class TrailerCollectionViewCell: UICollectionViewCell {
     
     func setContent(title: String?, backdropPath: String?) {
         titleLabel.text = title
+        imageView.image = nil
         if let backdropPath = backdropPath {
             imageView.setImage(imageName: backdropPath, imageSize: .original)
-        }
-        else {
-            imageView.image = UIImage(named: Constants.IMAGE_NOT_FOUND)
         }
     }
 }

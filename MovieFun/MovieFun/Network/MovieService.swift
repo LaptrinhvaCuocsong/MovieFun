@@ -81,6 +81,42 @@ class MovieService {
         }
     }
     
+    func fetchNowMovie(page: Int, language: Language, completion: ((Int?, [Movie]?) -> Void)?) {
+        let completion: ((Int?,[Movie]?) -> Void) = completion ?? {_,_ in}
+        self.fetchMovie(url: NOW_MOVIE_URL, language: language, page: page) { (totalPages, movie, error) in
+            if let _ = error {
+                completion(nil, nil)
+            }
+            else {
+                completion(totalPages, movie)
+            }
+        }
+    }
+    
+    func fetchTopRateMovie(page: Int, language: Language, completion: ((Int?, [Movie]?) -> Void)?) {
+        let completion: ((Int?,[Movie]?) -> Void) = completion ?? {_,_ in}
+        self.fetchMovie(url: TOP_RATE_MOVIE_URL, language: language, page: page) { (totalPages, movie, error) in
+            if let _ = error {
+                completion(nil, nil)
+            }
+            else {
+                completion(totalPages, movie)
+            }
+        }
+    }
+    
+    func fetchPopularMovie(page: Int, language: Language, completion: ((Int?, [Movie]?) -> Void)?) {
+        let completion: ((Int?,[Movie]?) -> Void) = completion ?? {_,_ in}
+        self.fetchMovie(url: POPULAR_MOVIE_URL, language: language, page: page) { (totalPages, movie, error) in
+            if let _ = error {
+                completion(nil, nil)
+            }
+            else {
+                completion(totalPages, movie)
+            }
+        }
+    }
+    
     func fetchFavoriteMovie(completion: (([Movie]?) -> Void)?) {
         let completion:(([Movie]?) -> Void) = completion ?? {_ in}
         self.fetchMovie(url: TOP_RATE_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in

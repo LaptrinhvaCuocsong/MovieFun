@@ -8,12 +8,11 @@
 
 import Foundation
 
-class NewMovieListSectionViewModel {
+class NewMovieListSectionViewModel: ListSectionViewModel {
     
-    var newMovieListRowViewModels: DynamicType<[NewMovieListRowViewModel]>?
-    
-    init() {
-        newMovieListRowViewModels = DynamicType<[NewMovieListRowViewModel]>(value: [NewMovieListRowViewModel]())
+    override init() {
+        super.init()
+        listRowViewModels = DynamicType<[ListRowViewModel]>(value: [NewMovieListRowViewModel]())
     }
     
 }

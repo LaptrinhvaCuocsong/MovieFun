@@ -34,7 +34,6 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.hidesBarsOnSwipe = true
         navigationItem.title = "Movie Detail"
         setMovieDetailTableView()
         registerCell()
@@ -42,12 +41,7 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate, UITableV
         initBinding()
         controller.start()
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.hidesBarsOnSwipe = false
-    }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         viewModel.isFetching?.value = false

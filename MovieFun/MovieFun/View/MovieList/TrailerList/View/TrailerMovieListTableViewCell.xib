@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="trailerMovieListTableViewCell" id="gpW-TF-pUF" customClass="TrailerMovieListTableViewCell" customModule="MovieFun" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="210"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gpW-TF-pUF" id="tRe-LK-ega">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="209.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKL-cf-ZDN">
+                        <rect key="frame" x="0.0" y="174.5" width="414" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="myU-yq-hFi"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lUm-mI-W6N">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="164.5"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKc-nb-g31">
+                        <rect key="frame" x="175" y="73" width="64" height="64"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="64" id="GFq-qY-J9H"/>
+                            <constraint firstAttribute="height" constant="64" id="ZIQ-0Z-8DG"/>
+                        </constraints>
+                        <state key="normal" image="play-button"/>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="lUm-mI-W6N" secondAttribute="trailing" id="5h6-rI-jnX"/>
+                    <constraint firstAttribute="trailing" secondItem="qKL-cf-ZDN" secondAttribute="trailing" id="BhD-sC-axC"/>
+                    <constraint firstItem="lUm-mI-W6N" firstAttribute="top" secondItem="tRe-LK-ega" secondAttribute="top" id="HSG-Q0-0Rx"/>
+                    <constraint firstItem="qKL-cf-ZDN" firstAttribute="top" secondItem="lUm-mI-W6N" secondAttribute="bottom" constant="10" id="caS-WA-Lcd"/>
+                    <constraint firstItem="SKc-nb-g31" firstAttribute="centerX" secondItem="tRe-LK-ega" secondAttribute="centerX" id="g78-yd-cld"/>
+                    <constraint firstItem="SKc-nb-g31" firstAttribute="centerY" secondItem="tRe-LK-ega" secondAttribute="centerY" id="tqT-mg-nRW"/>
+                    <constraint firstItem="qKL-cf-ZDN" firstAttribute="leading" secondItem="tRe-LK-ega" secondAttribute="leading" id="uoq-4w-lz5"/>
+                    <constraint firstItem="lUm-mI-W6N" firstAttribute="leading" secondItem="tRe-LK-ega" secondAttribute="leading" id="vMn-lV-PA3"/>
+                    <constraint firstAttribute="bottom" secondItem="qKL-cf-ZDN" secondAttribute="bottom" constant="15" id="wBl-zH-QKu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="playButton" destination="SKc-nb-g31" id="MRb-ZM-s6r"/>
+                <outlet property="titleLabel" destination="qKL-cf-ZDN" id="Hhn-1v-CQB"/>
+                <outlet property="trailerImageView" destination="lUm-mI-W6N" id="K5b-nn-Cuw"/>
+            </connections>
+            <point key="canvasLocation" x="216" y="248"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="play-button" width="64" height="64"/>
+    </resources>
+</document>

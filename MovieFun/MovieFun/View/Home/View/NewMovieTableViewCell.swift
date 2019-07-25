@@ -21,7 +21,7 @@ class NewMovieTableViewCell: UITableViewCell, MovieListCell {
     //MARK: - IBAction
     
     @IBAction func seeAllAction(_ sender: Any) {
-        let newMovieListVC = NewMovieListViewController.createNewMovieListViewController()
+        let newMovieListVC = NewMovieListViewController.createListViewController() as! NewMovieListViewController
         self.newMovieCellVM?.delegate?.push(viewController: newMovieListVC, animated: true)
     }
     

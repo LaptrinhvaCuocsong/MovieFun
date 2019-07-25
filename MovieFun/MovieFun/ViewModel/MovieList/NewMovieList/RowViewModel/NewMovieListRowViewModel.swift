@@ -8,8 +8,5 @@
 
 import Foundation
 
-class NewMovieListRowViewModel {
-    
-    var movie: DynamicType<Movie>?
-    
+class NewMovieListRowViewModel: ListRowViewModel {
 }

@@ -59,12 +59,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ELO-Be-uKW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ELO-Be-uKW">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="0Qn-2M-Azh" id="GSW-07-WgC"/>
-                                    <outlet property="delegate" destination="0Qn-2M-Azh" id="chT-2b-Jjt"/>
+                                    <outlet property="dataSource" destination="0Qn-2M-Azh" id="Dx7-aI-Fxe"/>
+                                    <outlet property="delegate" destination="0Qn-2M-Azh" id="gSM-zd-BMX"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -78,7 +78,7 @@
                         <viewLayoutGuide key="safeArea" id="0cO-O3-hMH"/>
                     </view>
                     <connections>
-                        <outlet property="newMovieTableView" destination="ELO-Be-uKW" id="ivM-Xw-tkk"/>
+                        <outlet property="movieListTableView" destination="ELO-Be-uKW" id="67v-Hm-ro2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aL6-FL-m9M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -127,9 +127,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XaY-i0-hnr">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XaY-i0-hnr">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="JlN-VH-Klj" id="s77-rd-UUx"/>
+                                    <outlet property="delegate" destination="JlN-VH-Klj" id="EXl-9A-yPZ"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -141,6 +145,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kmo-G0-zat"/>
                     </view>
+                    <connections>
+                        <outlet property="movieListTableView" destination="XaY-i0-hnr" id="6fo-ls-Dq7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qCR-B3-Bqo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -154,9 +161,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EDX-yw-HgO">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EDX-yw-HgO">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="JTt-x6-BIg" id="Oay-5d-5FP"/>
+                                    <outlet property="delegate" destination="JTt-x6-BIg" id="lLQ-SM-mxE"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -168,6 +179,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9kB-ms-Dfa"/>
                     </view>
+                    <connections>
+                        <outlet property="movieListTableView" destination="EDX-yw-HgO" id="91K-hk-uvY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nhj-ha-nUS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -181,9 +195,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="blc-Co-hRJ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="blc-Co-hRJ">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="LHt-lf-M2c" id="PK7-bh-bFG"/>
+                                    <outlet property="delegate" destination="LHt-lf-M2c" id="WI9-DL-2rt"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -195,6 +213,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b4h-MB-TKb"/>
                     </view>
+                    <connections>
+                        <outlet property="movieListTableView" destination="blc-Co-hRJ" id="Bhb-eb-6Cj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D3c-gr-XWJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

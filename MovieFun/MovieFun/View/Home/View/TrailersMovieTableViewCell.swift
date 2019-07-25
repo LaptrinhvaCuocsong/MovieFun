@@ -17,9 +17,11 @@ class TrailersMovieTableViewCell: UITableViewCell, MovieListCell {
     
     static let nibName = "TrailersMovieTableViewCell"
     static let cellIdentify = "trailerMovieCell"
+    var trailerMV: TrailersMovieCellViewModel?
     
     func setUp(with viewModel: MovieListCellViewModel) {
         if let trailerVM = viewModel as? TrailersMovieCellViewModel {
+            self.trailerMV = trailerVM
             trailerCollectionView.delegate = trailerVM
             trailerCollectionView.dataSource = trailerVM
             trailerCollectionView.register(UINib(nibName: TrailerCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: TrailerCollectionViewCell.cellIdentify)
@@ -64,5 +66,7 @@ class TrailersMovieTableViewCell: UITableViewCell, MovieListCell {
     //MARK: - IBAction
     
     @IBAction func seeAll(_ sender: Any) {
+        let trailerListVC = TrailerListViewController.createListViewController()
+        trailerMV?.delegate?.push(viewController: trailerListVC, animated: true)
     }
 }
