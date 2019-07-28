@@ -17,43 +17,44 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QbR-MV-idB">
-                    <rect key="frame" x="0.0" y="0.0" width="99" height="152.5"/>
+                    <rect key="frame" x="0.0" y="0.0" width="99" height="175"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="QbR-MV-idB" secondAttribute="height" multiplier="129:199" id="1sr-hd-uK8"/>
+                        <constraint firstAttribute="width" secondItem="QbR-MV-idB" secondAttribute="height" multiplier="99:175" id="WGo-AI-HNB"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKm-Dy-5hw">
-                    <rect key="frame" x="0.0" y="162.5" width="99" height="42.5"/>
+                    <rect key="frame" x="0.0" y="185" width="99" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="hKR-8v-MIm"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ne-WX-jYG">
-                    <rect key="frame" x="27.5" y="80.5" width="44" height="44"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-button" translatesAutoresizingMaskIntoConstraints="NO" id="GBe-A4-ipo">
+                    <rect key="frame" x="33.5" y="71.5" width="32" height="32"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="a3w-hM-HZf"/>
-                        <constraint firstAttribute="width" constant="44" id="vup-sC-9KX"/>
+                        <constraint firstAttribute="width" constant="32" id="3Wv-62-v17"/>
+                        <constraint firstAttribute="height" constant="32" id="wNs-o0-dIz"/>
                     </constraints>
-                    <state key="normal" image="play-button"/>
-                </button>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="2ne-WX-jYG" firstAttribute="centerY" secondItem="28x-IT-KyA" secondAttribute="centerY" id="3w2-DB-Ae1"/>
-                <constraint firstItem="mgP-Bw-cb2" firstAttribute="trailing" secondItem="sKm-Dy-5hw" secondAttribute="trailing" id="79y-vh-JCw"/>
-                <constraint firstItem="sKm-Dy-5hw" firstAttribute="top" secondItem="QbR-MV-idB" secondAttribute="bottom" constant="10" id="Bcv-RT-Ns0"/>
-                <constraint firstItem="QbR-MV-idB" firstAttribute="top" secondItem="28x-IT-KyA" secondAttribute="top" id="IXZ-dK-U5O"/>
-                <constraint firstItem="sKm-Dy-5hw" firstAttribute="leading" secondItem="mgP-Bw-cb2" secondAttribute="leading" id="Q7V-sa-o6S"/>
-                <constraint firstItem="2ne-WX-jYG" firstAttribute="centerX" secondItem="28x-IT-KyA" secondAttribute="centerX" id="QAA-vl-hIf"/>
-                <constraint firstItem="QbR-MV-idB" firstAttribute="leading" secondItem="mgP-Bw-cb2" secondAttribute="leading" id="Ve7-0S-JyK"/>
-                <constraint firstItem="mgP-Bw-cb2" firstAttribute="trailing" secondItem="QbR-MV-idB" secondAttribute="trailing" id="bcl-QU-aMW"/>
-                <constraint firstAttribute="bottom" secondItem="sKm-Dy-5hw" secondAttribute="bottom" id="kBX-i7-ndo"/>
+                <constraint firstItem="sKm-Dy-5hw" firstAttribute="trailing" secondItem="mgP-Bw-cb2" secondAttribute="trailing" id="IIs-dM-e9M"/>
+                <constraint firstItem="GBe-A4-ipo" firstAttribute="centerX" secondItem="QbR-MV-idB" secondAttribute="centerX" id="Ic4-Fs-y5L"/>
+                <constraint firstItem="sKm-Dy-5hw" firstAttribute="top" secondItem="QbR-MV-idB" secondAttribute="bottom" constant="10" id="TEZ-VX-sbH"/>
+                <constraint firstItem="sKm-Dy-5hw" firstAttribute="leading" secondItem="mgP-Bw-cb2" secondAttribute="leading" id="bEn-mD-wDa"/>
+                <constraint firstItem="QbR-MV-idB" firstAttribute="trailing" secondItem="mgP-Bw-cb2" secondAttribute="trailing" id="d4f-we-I2I"/>
+                <constraint firstItem="GBe-A4-ipo" firstAttribute="centerY" secondItem="QbR-MV-idB" secondAttribute="centerY" id="hno-Yh-OLr"/>
+                <constraint firstAttribute="bottom" secondItem="sKm-Dy-5hw" secondAttribute="bottom" id="lQx-Cp-CKl"/>
+                <constraint firstItem="QbR-MV-idB" firstAttribute="leading" secondItem="mgP-Bw-cb2" secondAttribute="leading" id="uhA-lU-FcP"/>
+                <constraint firstItem="QbR-MV-idB" firstAttribute="top" secondItem="28x-IT-KyA" secondAttribute="top" id="vk0-f1-l0u"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="mgP-Bw-cb2"/>
             <connections>
                 <outlet property="imageView" destination="QbR-MV-idB" id="RT8-OZ-dSW"/>
-                <outlet property="playButton" destination="2ne-WX-jYG" id="h5b-hU-V33"/>
                 <outlet property="titleLabel" destination="sKm-Dy-5hw" id="QuD-Wb-FeF"/>
             </connections>
             <point key="canvasLocation" x="-125.36231884057972" y="79.352678571428569"/>

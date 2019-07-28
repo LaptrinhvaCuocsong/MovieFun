@@ -19,6 +19,7 @@ class MovieService {
     private let POPULAR_MOVIE_URL = "https://api.themoviedb.org/3/movie/popular?api_key=%@&language=%@&page=%d"
     private let MOVIE_DETAIL_URL = "https://api.themoviedb.org/3/movie/%@?api_key=%@&language=%@"
     private let MOVIE_CAST_URL = "https://api.themoviedb.org/3/movie/%@/credits?api_key=%@"
+    private let VIDEO_MOVIE_URL = "https://api.themoviedb.org/3/movie/%@/videos?api_key=%@&language=%@"
     private var newMovies: [Movie]?
     private var nowMovies: [Movie]?
     private var topRateMovies: [Movie]?
@@ -152,6 +153,25 @@ class MovieService {
         }
     }
     
+    func fetchVideo(movieId: String, languge: Language, completion: ((Video?) -> Void)?) {
+        let completion: ((Video?) -> Void) = completion ?? {_ in}
+        fetchMovieVideo(movieId: movieId, language: languge) { (videos, error) in
+            if error == nil && videos != nil {
+                var trailerVideo: Video?
+                for video in videos! {
+                    if video.site == "YouTube" && video.type == VideoType.TRAILER {
+                        trailerVideo = video
+                        break
+                    }
+                }
+                completion(trailerVideo)
+            }
+            else {
+                completion(nil)
+            }
+        }
+    }
+    
     private func fetchMovie(url: String, language: Language, page: Int, completion: ((Int?, [Movie]?, Error?) -> Void)?) {
         let completion: ((Int?, [Movie]?, Error?) -> Void) = completion ?? {_,_,_ in }
         do {
@@ -159,10 +179,12 @@ class MovieService {
             let dataRequest = Alamofire.request(url, method: .get)
             dataRequest.validate().responseJSON {[weak self] (dataResponse) in
                 guard let strongSelf = self else {
+                    completion(nil, nil, nil)
                     return
                 }
                 if dataResponse.result.isSuccess {
                     guard let value = dataResponse.result.value else {
+                        completion(nil, nil, nil)
                         return
                     }
                     let json = JSON(value)
@@ -194,10 +216,12 @@ class MovieService {
             let dataRequest = Alamofire.request(url, method: .get)
             dataRequest.validate().responseJSON {[weak self] (response) in
                 guard let strongSelf = self else {
+                    completion(nil, nil)
                     return
                 }
                 if response.result.isSuccess {
                     guard let value = response.result.value else {
+                        completion(nil, nil)
                         return
                     }
                     let json = JSON(value)
@@ -222,10 +246,12 @@ class MovieService {
             let dataRequest = Alamofire.request(url, method: .get)
             dataRequest.validate().responseJSON {[weak self] (response) in
                 guard let strongSelf = self else {
+                    completion(nil, nil)
                     return
                 }
                 if response.result.isSuccess {
                     guard let value = response.result.value else {
+                        completion(nil, nil)
                         return
                     }
                     let json = JSON(value)
@@ -246,6 +272,59 @@ class MovieService {
             print(error)
             completion(nil, error)
         }
+    }
+    
+    private func fetchMovieVideo(movieId: String, language: Language, completion: (([Video]?, Error?) -> Void)?) {
+        let completion: (([Video]?, Error?) -> Void) = completion ?? {_,_ in}
+        do {
+            let url = try String(format: VIDEO_MOVIE_URL, movieId, Constants.API_KEY, language.rawValue).asURL()
+            let dataRequest = Alamofire.request(url, method: .get)
+            dataRequest.responseJSON {[weak self] (dataResponse) in
+                guard let strongSelf = self else {
+                    completion(nil, nil)
+                    return
+                }
+                if dataResponse.result.isSuccess {
+                    guard let value = dataResponse.result.value else {
+                        completion(nil, nil)
+                        return
+                    }
+                    let json = JSON(value)
+                    if let results = json["results"].array {
+                        var videos = [Video]()
+                        for result in results {
+                            videos.append(strongSelf.parseVideo(json: result))
+                        }
+                        completion(videos, nil)
+                    }
+                    else {
+                        completion(nil, nil)
+                    }
+                }
+                
+                else {
+                    completion(nil, nil)
+                }
+            }
+        }
+        catch {
+            print(error)
+            completion(nil, error)
+        }
+    }
+    
+    private func parseVideo(json: JSON) -> Video {
+        let video = Video()
+        let videoJson = json.dictionaryValue
+        video.id = videoJson["id"]?.string
+        video.iso6391 = videoJson["iso_639_1"]?.string
+        video.iso31661 = videoJson["iso_3166_1"]?.string
+        video.key = videoJson["key"]?.string
+        video.name = videoJson["name"]?.string
+        video.site = videoJson["site"]?.string
+        video.size = videoJson["size"]?.int
+        video.type = Utils.videoTypeFromString(string: videoJson["type"]?.string)
+        return video
     }
     
     private func parseCast(json: JSON) -> Cast {

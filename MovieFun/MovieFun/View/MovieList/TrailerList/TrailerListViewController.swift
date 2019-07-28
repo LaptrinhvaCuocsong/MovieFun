@@ -57,7 +57,12 @@ class TrailerListViewController: ListViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        super.tableView(tableView, didSelectRowAt: indexPath)
+        let sectionVM = self.viewModel!.listSectionViewModels!.value![indexPath.section]
+        let rowVM = sectionVM.listRowViewModels!.value![indexPath.row]
+        if let movie = rowVM.movie?.value, let movieId = movie.id {
+            let videoListVC = VideoListViewController.createVideoListViewController(movieId: "\(movieId)")
+            self.navigationController?.pushViewController(videoListVC, animated: true)
+        }
     }
 
 }

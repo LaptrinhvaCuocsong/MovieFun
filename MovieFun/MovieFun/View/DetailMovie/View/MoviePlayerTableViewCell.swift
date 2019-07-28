@@ -35,6 +35,10 @@ class MoviePlayerTableViewCell: UITableViewCell, MovieDetailCell {
     //MARK: - IBAction
     
     @IBAction func playVideo(_ sender: Any) {
+        if let moviePlayerVM = moviePlayerVM, let movie = moviePlayerVM.movie?.value, let movieId = movie.id {
+            let videoListVC = VideoListViewController.createVideoListViewController(movieId: "\(movieId)")
+            moviePlayerVM.delegate?.pushToViewController(viewController: videoListVC, animated: true)
+        }
     }
     
 }

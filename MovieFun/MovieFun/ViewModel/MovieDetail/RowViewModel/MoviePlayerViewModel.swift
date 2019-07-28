@@ -7,9 +7,17 @@
 //
 
 import Foundation
+import UIKit
+
+protocol MoviePlayerViewModelDelegate: class {
+    
+    func pushToViewController(viewController: UIViewController, animated: Bool)
+    
+}
 
 class MoviePlayerViewModel: MovieDetailRowViewModel {
     
     var movie: DynamicType<Movie>?
+    weak var delegate: MoviePlayerViewModelDelegate?
     
 }

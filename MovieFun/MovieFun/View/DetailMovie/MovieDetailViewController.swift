@@ -37,9 +37,12 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate, UITableV
         navigationItem.title = "Movie Detail"
         setMovieDetailTableView()
         registerCell()
-        viewModel.movieId?.value = movieId
-        initBinding()
-        controller.start()
+        if let movieId = movieId {
+            viewModel.movieId?.value = movieId
+            viewModel.delegate = self
+            initBinding()
+            controller.start()
+        }
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -104,4 +107,12 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate, UITableV
         return UITableView.automaticDimension
     }
 
+}
+
+extension MovieDetailViewController: MovieDetailViewModelDelegate {
+    
+    func pushToViewController(viewController: UIViewController, animated: Bool) {
+        self.navigationController?.pushViewController(viewController, animated: animated)
+    }
+    
 }

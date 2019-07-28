@@ -58,7 +58,8 @@ class TrailersMovieTableViewCell: UITableViewCell, MovieListCell {
         }
         for (_, movie) in movies.enumerated() {
             let trailerMovieView = TrailerMovieView.createTrailerMovieView()
-            trailerMovieView.setContent(title: movie.title, posterPath: movie.posterPath)
+            trailerMovieView.delegate = self
+            trailerMovieView.setContent(movieId: movie.id, title: movie.title, posterPath: movie.posterPath)
             trailerStackView.addArrangedSubview(trailerMovieView)
         }
     }
@@ -69,4 +70,12 @@ class TrailersMovieTableViewCell: UITableViewCell, MovieListCell {
         let trailerListVC = TrailerListViewController.createListViewController()
         trailerMV?.delegate?.push(viewController: trailerListVC, animated: true)
     }
+}
+
+extension TrailersMovieTableViewCell: TrailerMovieViewDelegate {
+    
+    func push(viewController: UIViewController, animated: Bool) {
+        self.trailerMV?.delegate?.push(viewController: viewController, animated: animated)
+    }
+    
 }

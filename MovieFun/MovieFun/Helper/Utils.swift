@@ -38,4 +38,16 @@ class Utils {
         return predicate.evaluate(with: string)
     }
     
+    static func videoTypeFromString(string: String?) -> VideoType? {
+        if string == "Teaser" {
+            return VideoType.TEASER
+        }
+        else if string == "Trailer" {
+            return VideoType.TRAILER
+        }
+        else {
+            return nil
+        }
+    }
+    
 }

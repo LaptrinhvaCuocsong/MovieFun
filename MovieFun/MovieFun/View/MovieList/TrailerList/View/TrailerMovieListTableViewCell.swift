@@ -11,7 +11,6 @@ import UIKit
 class TrailerMovieListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var trailerImageView: UIImageView!
-    @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     
     static let nibName = "TrailerMovieListTableViewCell"

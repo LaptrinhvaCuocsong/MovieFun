@@ -33,6 +33,7 @@ class MovieDetailController {
             let sectionVM = MovieDetailSectionViewModel()
             movieDetailViewModel?.movieDetailSectionViewModels?.value?.append(sectionVM)
             let moviePlayerVM = MoviePlayerViewModel()
+            moviePlayerVM.delegate = movieDetailViewModel
             moviePlayerVM.movie = DynamicType<Movie>(value: movie)
             sectionVM.movieDetailRowViewModels?.value?.append(moviePlayerVM)
             let contentVM = ContentViewModel()

@@ -55,7 +55,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Hi6-4D-M4d">
-                        <rect key="frame" x="10" y="268" width="394" height="189.5"/>
+                        <rect key="frame" x="10" y="263" width="394" height="194.5"/>
                     </stackView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="azT-y9-rlK">
                         <rect key="frame" x="338" y="477.5" width="66" height="32"/>
@@ -86,7 +86,7 @@
                     <constraint firstItem="4iZ-Et-Iyj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="aAS-8J-gDK"/>
                     <constraint firstItem="UNp-cy-tAK" firstAttribute="centerY" secondItem="azT-y9-rlK" secondAttribute="centerY" id="bjn-D1-t1m"/>
                     <constraint firstItem="m4v-GL-ynF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="e52-Z4-lNU"/>
-                    <constraint firstItem="Hi6-4D-M4d" firstAttribute="top" secondItem="m4v-GL-ynF" secondAttribute="bottom" constant="20" id="fiT-50-qKs"/>
+                    <constraint firstItem="Hi6-4D-M4d" firstAttribute="top" secondItem="m4v-GL-ynF" secondAttribute="bottom" constant="15" id="fiT-50-qKs"/>
                     <constraint firstItem="azT-y9-rlK" firstAttribute="top" secondItem="Hi6-4D-M4d" secondAttribute="bottom" constant="20" id="lqP-3Q-CbX"/>
                 </constraints>
             </tableViewCellContentView>

@@ -13,7 +13,6 @@ class ContentTableViewCell: UITableViewCell, MovieDetailCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
     
-    
     static let nibName = "ContentTableViewCell"
     static let cellIdentify = "contentTableViewCell"
     var contentVM: ContentViewModel?
@@ -27,9 +26,14 @@ class ContentTableViewCell: UITableViewCell, MovieDetailCell {
     
     private func setContent() {
         if let viewModel = contentVM, let movie = viewModel.movie?.value {
-            titleLabel.text = movie.title
-            overviewLabel.text = movie.overview
-            layoutIfNeeded()
+            if let movieTitle = movie.title {
+                titleLabel.setAttributeText(text: movieTitle, lineHeight: 22)
+                layoutIfNeeded()
+            }
+            if let overview = movie.overview {
+                overviewLabel.setAttributeText(text: overview, lineHeight: 17)
+                layoutIfNeeded()
+            }
         }
     }
     

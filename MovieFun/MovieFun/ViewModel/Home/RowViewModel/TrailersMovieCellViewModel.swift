@@ -56,8 +56,8 @@ extension TrailersMovieCellViewModel: UICollectionViewDelegate, UICollectionView
         let movie = trailerMovies!.value![indexPath.section]
         //demo
         if let movieId = movie.id {
-            let movieDetailVC = MovieDetailViewController.createMovieDetailViewController(with: "\(movieId)")
-            delegate?.push(viewController: movieDetailVC, animated: true)
+            let videoListVC = VideoListViewController.createVideoListViewController(movieId: "\(movieId)")
+            delegate?.push(viewController: videoListVC, animated: true)
         }
         //push video view controller
     }

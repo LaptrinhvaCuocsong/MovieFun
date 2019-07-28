@@ -30,14 +30,13 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lUm-mI-W6N">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="164.5"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SKc-nb-g31">
-                        <rect key="frame" x="175" y="73" width="64" height="64"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play-button" translatesAutoresizingMaskIntoConstraints="NO" id="p2X-X6-340">
+                        <rect key="frame" x="175" y="50.5" width="64" height="64"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="64" id="GFq-qY-J9H"/>
-                            <constraint firstAttribute="height" constant="64" id="ZIQ-0Z-8DG"/>
+                            <constraint firstAttribute="width" constant="64" id="Lvm-6u-GOC"/>
+                            <constraint firstAttribute="height" constant="64" id="gXY-IJ-f8X"/>
                         </constraints>
-                        <state key="normal" image="play-button"/>
-                    </button>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
@@ -45,15 +44,14 @@
                     <constraint firstAttribute="trailing" secondItem="qKL-cf-ZDN" secondAttribute="trailing" id="BhD-sC-axC"/>
                     <constraint firstItem="lUm-mI-W6N" firstAttribute="top" secondItem="tRe-LK-ega" secondAttribute="top" id="HSG-Q0-0Rx"/>
                     <constraint firstItem="qKL-cf-ZDN" firstAttribute="top" secondItem="lUm-mI-W6N" secondAttribute="bottom" constant="10" id="caS-WA-Lcd"/>
-                    <constraint firstItem="SKc-nb-g31" firstAttribute="centerX" secondItem="tRe-LK-ega" secondAttribute="centerX" id="g78-yd-cld"/>
-                    <constraint firstItem="SKc-nb-g31" firstAttribute="centerY" secondItem="tRe-LK-ega" secondAttribute="centerY" id="tqT-mg-nRW"/>
+                    <constraint firstItem="p2X-X6-340" firstAttribute="centerY" secondItem="lUm-mI-W6N" secondAttribute="centerY" id="omo-UK-P6y"/>
+                    <constraint firstItem="p2X-X6-340" firstAttribute="centerX" secondItem="lUm-mI-W6N" secondAttribute="centerX" id="tec-b7-Ysj"/>
                     <constraint firstItem="qKL-cf-ZDN" firstAttribute="leading" secondItem="tRe-LK-ega" secondAttribute="leading" id="uoq-4w-lz5"/>
                     <constraint firstItem="lUm-mI-W6N" firstAttribute="leading" secondItem="tRe-LK-ega" secondAttribute="leading" id="vMn-lV-PA3"/>
                     <constraint firstAttribute="bottom" secondItem="qKL-cf-ZDN" secondAttribute="bottom" constant="15" id="wBl-zH-QKu"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="playButton" destination="SKc-nb-g31" id="MRb-ZM-s6r"/>
                 <outlet property="titleLabel" destination="qKL-cf-ZDN" id="Hhn-1v-CQB"/>
                 <outlet property="trailerImageView" destination="lUm-mI-W6N" id="K5b-nn-Cuw"/>
             </connections>

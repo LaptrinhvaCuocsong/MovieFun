@@ -8,13 +8,21 @@
 
 import UIKit
 
+protocol TrailerMovieViewDelegate: class {
+    
+    func push(viewController: UIViewController, animated: Bool)
+    
+}
+
 class TrailerMovieView: UIView {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var playButton: UIButton!
     
+    weak var delegate: TrailerMovieViewDelegate?
     static let nibName = "TrailerMovieView"
+    var movieId: Int?
+    var tapGesture: UITapGestureRecognizer?
     
     static func createTrailerMovieView() -> TrailerMovieView {
         let nib = UINib(nibName: nibName, bundle: nil)
@@ -22,14 +30,23 @@ class TrailerMovieView: UIView {
         return trailerMovieView
     }
     
-    func setContent(title: String?, posterPath: String?) {
+    func setContent(movieId: Int?, title: String?, posterPath: String?) {
         titleLabel.text = title
+        imageView.image = nil
         if let posterPath = posterPath {
             imageView.setImage(imageName: posterPath, imageSize: .original)
         }
-        else {
-            imageView.image = UIImage(named: Constants.IMAGE_NOT_FOUND)
+        if let movieId = movieId {
+            self.movieId = movieId
+            self.tapGesture = UITapGestureRecognizer(target: self, action: #selector(pushToVideoListViewController))
+            self.addGestureRecognizer(tapGesture!)
         }
     }
     
+    @objc private func pushToVideoListViewController() {
+        if let movieId = movieId {
+            let videoListVC = VideoListViewController.createVideoListViewController(movieId: "\(movieId)")
+            delegate?.push(viewController: videoListVC, animated: true)
+        }
+    }
 }

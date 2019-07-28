@@ -30,7 +30,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         self.initViewModel()
         self.setNavigationItem()
-        self.navigationController?.hidesBarsOnSwipe = true
         self.setRefreshControl()
         self.registerCell()
         self.initBinding()
@@ -43,8 +42,14 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         isDidAppear = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.hidesBarsOnSwipe = true
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.hidesBarsOnSwipe = false
     }
     

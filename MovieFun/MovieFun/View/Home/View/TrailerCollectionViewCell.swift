@@ -11,7 +11,6 @@ import UIKit
 class TrailerCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     
     static let nibName = "TrailerCollectionViewCell"

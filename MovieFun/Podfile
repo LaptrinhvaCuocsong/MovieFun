@@ -16,5 +16,7 @@ target 'MovieFun' do
   pod 'SDWebImage'
 
   pod 'SVProgressHUD', '~> 2.2'
+
+  pod 'YoutubePlayer-in-WKWebView', '~> 0.3'
   
 end
