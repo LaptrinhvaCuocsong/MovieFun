@@ -13,6 +13,7 @@ class TrailerMovieListViewModel: ListViewModel {
     override init() {
         super.init()
         listSectionViewModels = DynamicType<[ListSectionViewModel]>(value: [TrailerMovieListSectionViewModel]())
+        url = MovieService.POPULAR_MOVIE_URL
     }
     
 }

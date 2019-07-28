@@ -29,6 +29,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initViewModel()
+        self.viewModel?.delegate = self
         self.setNavigationItem()
         self.setRefreshControl()
         self.registerCell()
@@ -170,4 +171,16 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
+}
+
+extension ListViewController: ListViewModelDelegate {
+    
+    func presentSpinner() {
+        SVProgressHUD.show()
+    }
+    
+    func dismissSpinner() {
+        SVProgressHUD.dismiss()
+    }
+    
 }

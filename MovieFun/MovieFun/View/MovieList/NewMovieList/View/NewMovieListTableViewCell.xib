@@ -144,7 +144,7 @@
                 <outlet property="overviewLabel" destination="NQp-dE-MEv" id="5ZE-N6-GK3"/>
                 <outlet property="ratingLabel" destination="3cg-q2-Qeg" id="Vdd-4z-hV3"/>
                 <outlet property="releaseDateLabel" destination="mHL-PJ-8qI" id="wOU-kz-S1b"/>
-                <outlet property="startButton" destination="oIc-4a-TPC" id="mNk-ql-czJ"/>
+                <outlet property="starButton" destination="oIc-4a-TPC" id="voj-0H-TWu"/>
                 <outlet property="titleLabel" destination="scV-O5-8uo" id="TyD-Lf-7R1"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="120.53571428571428"/>

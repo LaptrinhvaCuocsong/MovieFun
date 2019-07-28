@@ -19,4 +19,6 @@ target 'MovieFun' do
 
   pod 'YoutubePlayer-in-WKWebView', '~> 0.3'
   
+  pod 'RealmSwift'
+  
 end

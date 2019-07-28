@@ -29,6 +29,10 @@
 		A105E04422D9C30B00B85080 /* FavoriteMovieController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105E04322D9C30B00B85080 /* FavoriteMovieController.swift */; };
 		A105E04622D9CF1400B85080 /* FavoriteMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105E04522D9CF1400B85080 /* FavoriteMovieCell.swift */; };
 		A1065C0B22ECABD00063DA69 /* UILabel+MF.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1065C0A22ECABD00063DA69 /* UILabel+MF.swift */; };
+		A1065C0E22ED41C50063DA69 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1065C0D22ED41C50063DA69 /* RealmService.swift */; };
+		A1065C1122ED430E0063DA69 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1065C1022ED430E0063DA69 /* MovieModel.swift */; };
+		A1065C1422ED59FF0063DA69 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1065C1322ED59FF0063DA69 /* AccountService.swift */; };
+		A1065C1722ED5C100063DA69 /* FavoriteMovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1065C1622ED5C100063DA69 /* FavoriteMovieService.swift */; };
 		A107EC1622C51C3300A711DA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A107EC1522C51C3300A711DA /* Constants.swift */; };
 		A107EC1B22C5272A00A711DA /* NowMovieView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A107EC1722C5272900A711DA /* NowMovieView.xib */; };
 		A107EC1C22C5272A00A711DA /* NowMovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A107EC1822C5272A00A711DA /* NowMovieTableViewCell.xib */; };
@@ -172,6 +176,10 @@
 		A105E04322D9C30B00B85080 /* FavoriteMovieController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieController.swift; sourceTree = "<group>"; };
 		A105E04522D9CF1400B85080 /* FavoriteMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieCell.swift; sourceTree = "<group>"; };
 		A1065C0A22ECABD00063DA69 /* UILabel+MF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+MF.swift"; sourceTree = "<group>"; };
+		A1065C0D22ED41C50063DA69 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		A1065C1022ED430E0063DA69 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
+		A1065C1322ED59FF0063DA69 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
+		A1065C1622ED5C100063DA69 /* FavoriteMovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieService.swift; sourceTree = "<group>"; };
 		A107EC1522C51C3300A711DA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A107EC1722C5272900A711DA /* NowMovieView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NowMovieView.xib; sourceTree = "<group>"; };
 		A107EC1822C5272A00A711DA /* NowMovieTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NowMovieTableViewCell.xib; sourceTree = "<group>"; };
@@ -438,10 +446,29 @@
 			path = SectionViewModel;
 			sourceTree = "<group>";
 		};
+		A1065C0C22ED419F0063DA69 /* LocalDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				A1065C0F22ED42D80063DA69 /* Model */,
+				A1065C0D22ED41C50063DA69 /* RealmService.swift */,
+			);
+			path = LocalDatabase;
+			sourceTree = "<group>";
+		};
+		A1065C0F22ED42D80063DA69 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A1065C1022ED430E0063DA69 /* MovieModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A1083E0B22C291DB0083F906 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				A1065C1322ED59FF0063DA69 /* AccountService.swift */,
 				A104A70C22C91A080039B5AA /* MovieService.swift */,
+				A1065C1622ED5C100063DA69 /* FavoriteMovieService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -757,6 +784,7 @@
 		A169EF8622C1440300AC7D6F /* MovieFun */ = {
 			isa = PBXGroup;
 			children = (
+				A1065C0C22ED419F0063DA69 /* LocalDatabase */,
 				A1083E0B22C291DB0083F906 /* Network */,
 				A169EF8722C1440300AC7D6F /* AppDelegate.swift */,
 				A169EF9D22C145B100AC7D6F /* Helper */,
@@ -1113,6 +1141,8 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-MovieFun/Pods-MovieFun-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -1125,6 +1155,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -1207,11 +1239,13 @@
 				A1D1D72922DB72FF001ABDE9 /* UsernameTableViewCell.swift in Sources */,
 				A1187CE622D63F0100E596F7 /* TrailerMovieView.swift in Sources */,
 				A1806D8222DF758D009EA18F /* MovieDetailViewController.swift in Sources */,
+				A1065C1122ED430E0063DA69 /* MovieModel.swift in Sources */,
 				A1D1D74522DB796D001ABDE9 /* DateOfBirthViewModel.swift in Sources */,
 				A1FF5BCB22D0FF56004B334B /* NewMovieCollectionViewCell.swift in Sources */,
 				A1FCB97722EA7CCD0065595C /* VideoListViewController.swift in Sources */,
 				A1FAEE1422E2F7B800FBF351 /* CommentTableViewCell.swift in Sources */,
 				A1FF5BC622D0E19B004B334B /* UIView+MF.swift in Sources */,
+				A1065C1722ED5C100063DA69 /* FavoriteMovieService.swift in Sources */,
 				A104A70A22C90EEA0039B5AA /* MovieListCell.swift in Sources */,
 				A1460ABB22C6801300E4BAA5 /* NowMovieCellViewModel.swift in Sources */,
 				A1D1D73522DB7358001ABDE9 /* AddressTableViewCell.swift in Sources */,
@@ -1254,6 +1288,7 @@
 				A1FFF3F622EB5C2D0059A860 /* Video.swift in Sources */,
 				A1FE3F0622E6204700F780DA /* ListViewController.swift in Sources */,
 				A1460AB922C67FD700E4BAA5 /* NewMovieCellViewModel.swift in Sources */,
+				A1065C0E22ED41C50063DA69 /* RealmService.swift in Sources */,
 				A1FEE11322DA3A6A000F317F /* CommentListTableViewCell.swift in Sources */,
 				A1157C1422DADCB4008FC3D3 /* AccountViewModel.swift in Sources */,
 				A1FE3F1122E62A5200F780DA /* ListController.swift in Sources */,
@@ -1272,6 +1307,7 @@
 				A1157C0422DAC3F6008FC3D3 /* GroupComment.swift in Sources */,
 				A1BFED2D22D2B13E005F4000 /* UInt64+MF.swift in Sources */,
 				A10435AB22DCCFDF00784A10 /* UIImageView+MF.swift in Sources */,
+				A1065C1422ED59FF0063DA69 /* AccountService.swift in Sources */,
 				A1460ABD22C680EE00E4BAA5 /* TopRateCellViewModel.swift in Sources */,
 				A1157C0222DAC2CB008FC3D3 /* CommentListRowViewModel.swift in Sources */,
 			);

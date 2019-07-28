@@ -41,6 +41,9 @@
                             <constraint firstAttribute="height" constant="32" id="LQL-dx-S4y"/>
                         </constraints>
                         <state key="normal" image="star-64"/>
+                        <connections>
+                            <action selector="selectFavoriteMovie:" destination="PTO-Op-vad" eventType="touchUpInside" id="ACm-jE-6T8"/>
+                        </connections>
                     </button>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="adult-64" translatesAutoresizingMaskIntoConstraints="NO" id="SvP-uh-QDU">
                         <rect key="frame" x="317" y="37" width="40" height="40"/>
@@ -141,7 +144,7 @@
                 <outlet property="overviewLabel" destination="4w6-qA-sXg" id="7HX-KR-m3J"/>
                 <outlet property="ratingLabel" destination="YqD-rI-y5O" id="nIS-2M-qO0"/>
                 <outlet property="releaseDateLabel" destination="HXi-13-Gs7" id="yHL-yL-ZwL"/>
-                <outlet property="startButton" destination="OkW-E7-7l8" id="eVV-MB-efz"/>
+                <outlet property="starButton" destination="OkW-E7-7l8" id="0Tb-lx-OTM"/>
                 <outlet property="titleLabel" destination="cyD-Qc-XfO" id="sQA-3o-ecK"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="120.53571428571428"/>

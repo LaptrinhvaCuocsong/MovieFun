@@ -13,6 +13,7 @@ class NewMovieListViewModel: ListViewModel {
     override init() {
         super.init()
         listSectionViewModels = DynamicType<[ListSectionViewModel]>(value: [NewMovieListSectionViewModel]())
+        url = MovieService.NEW_MOVIE_URL
     }
     
 }

@@ -8,6 +8,14 @@
 
 import Foundation
 
+protocol ListViewModelDelegate: class {
+    
+    func presentSpinner()
+    
+    func dismissSpinner()
+    
+}
+
 class ListViewModel {
     
     var isPullToRefresh: DynamicType<Bool>?
@@ -16,13 +24,28 @@ class ListViewModel {
     var listSectionViewModels: DynamicType<[ListSectionViewModel]>?
     var totalPage: Int = 1
     var currentPage: DynamicType<Int>?
+    var url: String?
+    weak var delegate: ListViewModelDelegate?
     
     init() {
+        url = ""
         isPullToRefresh = DynamicType<Bool>(value: false)
         isLoadMore = DynamicType<Bool>(value: false)
         currentPage = DynamicType<Int>(value: 1)
         isFetching = DynamicType<Bool>(value: false)
         listSectionViewModels = DynamicType<[ListSectionViewModel]>(value: [ListSectionViewModel]())
+    }
+    
+}
+
+extension ListViewModel: ListRowViewModelDelegate {
+    
+    func presentSpinner() {
+        delegate?.presentSpinner()
+    }
+    
+    func dismissSpinner() {
+        delegate?.dismissSpinner()
     }
     
 }

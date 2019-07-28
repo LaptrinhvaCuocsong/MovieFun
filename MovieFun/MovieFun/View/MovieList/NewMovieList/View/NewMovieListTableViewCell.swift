@@ -13,10 +13,10 @@ class NewMovieListTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var adultImage: UIImageView!
-    @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var ratingLabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
     @IBOutlet weak var movieImage: UIImageView!
+    @IBOutlet weak var starButton: UIButton!
     
     static let nibName = "NewMovieListTableViewCell"
     static let cellIdentify = "newMovieListTableViewCell"
@@ -40,12 +40,43 @@ class NewMovieListTableViewCell: UITableViewCell {
             if let posterPath = movie.posterPath {
                 movieImage.setImage(imageName: posterPath, imageSize: .original)
             }
+            if let isFavoriteMovie = viewModel.isFavoriteMovie?.value {
+                if isFavoriteMovie {
+                    starButton.setImage(UIImage(named: "star-64-yellow"), for: .normal)
+                }
+                else {
+                    starButton.setImage(UIImage(named: "star-64"), for: .normal)
+                }
+            }
+            initBinding()
+        }
+    }
+    
+    private func initBinding() {
+        if let viewModel = newMovieListRowVM {
+            viewModel.isLoading?.listener = {(isLoading) in
+                if !isLoading {
+                    viewModel.delegate?.dismissSpinner()
+                }
+                else {
+                    viewModel.delegate?.presentSpinner()
+                }
+            }
+            viewModel.isFavoriteMovie?.listener = {[weak self] (isFavoriteMovie) in
+                if isFavoriteMovie {
+                    self?.starButton.setImage(UIImage(named: "star-64-yellow"), for: .normal)
+                }
+                else {
+                    self?.starButton.setImage(UIImage(named: "star-64"), for: .normal)
+                }
+            }
         }
     }
     
     //MARK: - IBAction
     
     @IBAction func selectFavoriteMovie(_ sender: Any) {
+        newMovieListRowVM?.selectFavoriteMovie()
     }
     
 }

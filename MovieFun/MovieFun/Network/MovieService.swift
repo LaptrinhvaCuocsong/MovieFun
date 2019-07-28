@@ -12,14 +12,14 @@ import SwiftyJSON
 
 class MovieService {
     
-    private let NEW_MOVIE_URL = "https://api.themoviedb.org/3/movie/upcoming?api_key=%@&language=%@&page=%d"
-    private let NOW_MOVIE_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=%@&language=%@&page=%d"
-    private let TOP_RATE_MOVIE_URL = "https://api.themoviedb.org/3/movie/top_rated?api_key=%@&language=%@&page=%d"
-    private let TRAILER_MOVIE_URL = "https://api.themoviedb.org/3/movie/%@/videos?api_key=%@&language=%@"
-    private let POPULAR_MOVIE_URL = "https://api.themoviedb.org/3/movie/popular?api_key=%@&language=%@&page=%d"
-    private let MOVIE_DETAIL_URL = "https://api.themoviedb.org/3/movie/%@?api_key=%@&language=%@"
-    private let MOVIE_CAST_URL = "https://api.themoviedb.org/3/movie/%@/credits?api_key=%@"
-    private let VIDEO_MOVIE_URL = "https://api.themoviedb.org/3/movie/%@/videos?api_key=%@&language=%@"
+    static let NEW_MOVIE_URL = "https://api.themoviedb.org/3/movie/upcoming?api_key=%@&language=%@&page=%d"
+    static let NOW_MOVIE_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=%@&language=%@&page=%d"
+    static let TOP_RATE_MOVIE_URL = "https://api.themoviedb.org/3/movie/top_rated?api_key=%@&language=%@&page=%d"
+    static let TRAILER_MOVIE_URL = "https://api.themoviedb.org/3/movie/%@/videos?api_key=%@&language=%@"
+    static let POPULAR_MOVIE_URL = "https://api.themoviedb.org/3/movie/popular?api_key=%@&language=%@&page=%d"
+    static let MOVIE_DETAIL_URL = "https://api.themoviedb.org/3/movie/%@?api_key=%@&language=%@"
+    static let MOVIE_CAST_URL = "https://api.themoviedb.org/3/movie/%@/credits?api_key=%@"
+    static let VIDEO_MOVIE_URL = "https://api.themoviedb.org/3/movie/%@/videos?api_key=%@&language=%@"
     private var newMovies: [Movie]?
     private var nowMovies: [Movie]?
     private var topRateMovies: [Movie]?
@@ -36,28 +36,28 @@ class MovieService {
     func fetchMovieList(completion: (([Movie]?, [Movie]?, [Movie]?, [Movie]?) -> Void)?) {
         weak var weakSelf = self
         dispatchGroup.enter()
-        self.fetchMovie(url: NEW_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
+        self.fetchMovie(url: MovieService.NEW_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
             if error == nil {
                 weakSelf?.newMovies = movies
             }
             weakSelf?.dispatchGroup.leave()
         }
         dispatchGroup.enter()
-        self.fetchMovie(url: NOW_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
+        self.fetchMovie(url: MovieService.NOW_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
             if error == nil {
                 weakSelf?.nowMovies = movies
             }
             weakSelf?.dispatchGroup.leave()
         }
         dispatchGroup.enter()
-        self.fetchMovie(url: TOP_RATE_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
+        self.fetchMovie(url: MovieService.TOP_RATE_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
             if error == nil {
                 weakSelf?.topRateMovies = movies
             }
             weakSelf?.dispatchGroup.leave()
         }
         dispatchGroup.enter()
-        self.fetchMovie(url: POPULAR_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
+        self.fetchMovie(url: MovieService.POPULAR_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
             if error == nil {
                 weakSelf?.popularMovies = movies
             }
@@ -70,57 +70,9 @@ class MovieService {
         }
     }
     
-    func fetchNewMovie(page: Int, language: Language, completion: ((Int?, [Movie]?) -> Void)?) {
-        let completion: ((Int?,[Movie]?) -> Void) = completion ?? {_,_ in}
-        self.fetchMovie(url: NEW_MOVIE_URL, language: language, page: page) { (totalPages, movie, error) in
-            if let _ = error {
-                completion(nil, nil)
-            }
-            else {
-                completion(totalPages, movie)
-            }
-        }
-    }
-    
-    func fetchNowMovie(page: Int, language: Language, completion: ((Int?, [Movie]?) -> Void)?) {
-        let completion: ((Int?,[Movie]?) -> Void) = completion ?? {_,_ in}
-        self.fetchMovie(url: NOW_MOVIE_URL, language: language, page: page) { (totalPages, movie, error) in
-            if let _ = error {
-                completion(nil, nil)
-            }
-            else {
-                completion(totalPages, movie)
-            }
-        }
-    }
-    
-    func fetchTopRateMovie(page: Int, language: Language, completion: ((Int?, [Movie]?) -> Void)?) {
-        let completion: ((Int?,[Movie]?) -> Void) = completion ?? {_,_ in}
-        self.fetchMovie(url: TOP_RATE_MOVIE_URL, language: language, page: page) { (totalPages, movie, error) in
-            if let _ = error {
-                completion(nil, nil)
-            }
-            else {
-                completion(totalPages, movie)
-            }
-        }
-    }
-    
-    func fetchPopularMovie(page: Int, language: Language, completion: ((Int?, [Movie]?) -> Void)?) {
-        let completion: ((Int?,[Movie]?) -> Void) = completion ?? {_,_ in}
-        self.fetchMovie(url: POPULAR_MOVIE_URL, language: language, page: page) { (totalPages, movie, error) in
-            if let _ = error {
-                completion(nil, nil)
-            }
-            else {
-                completion(totalPages, movie)
-            }
-        }
-    }
-    
     func fetchFavoriteMovie(completion: (([Movie]?) -> Void)?) {
         let completion:(([Movie]?) -> Void) = completion ?? {_ in}
-        self.fetchMovie(url: TOP_RATE_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
+        self.fetchMovie(url: MovieService.TOP_RATE_MOVIE_URL, language: .en_US, page: 1) { (totalPages, movies, error) in
             if error == nil {
                 completion(movies)
             }
@@ -172,7 +124,7 @@ class MovieService {
         }
     }
     
-    private func fetchMovie(url: String, language: Language, page: Int, completion: ((Int?, [Movie]?, Error?) -> Void)?) {
+    func fetchMovie(url: String, language: Language, page: Int, completion: ((Int?, [Movie]?, Error?) -> Void)?) {
         let completion: ((Int?, [Movie]?, Error?) -> Void) = completion ?? {_,_,_ in }
         do {
             let url = try String(format: url, Constants.API_KEY, language.rawValue, page).asURL()
@@ -212,7 +164,7 @@ class MovieService {
     private func fetchMovie(movieId: String, language: Language, completion: ((Movie?, Error?) -> Void)?) {
         let completion: ((Movie?, Error?) -> Void) = completion ?? {_, _ in}
         do {
-            let url = try String(format: MOVIE_DETAIL_URL, movieId, Constants.API_KEY, language.rawValue).asURL()
+            let url = try String(format: MovieService.MOVIE_DETAIL_URL, movieId, Constants.API_KEY, language.rawValue).asURL()
             let dataRequest = Alamofire.request(url, method: .get)
             dataRequest.validate().responseJSON {[weak self] (response) in
                 guard let strongSelf = self else {
@@ -242,7 +194,7 @@ class MovieService {
     private func fetchMovieCast(movieId: String, completion: (([Cast]?, Error?) -> Void)?) {
         let completion: (([Cast]?, Error?) -> Void) = completion ?? {_, _ in}
         do {
-            let url = try String(format: MOVIE_CAST_URL, movieId, Constants.API_KEY).asURL()
+            let url = try String(format: MovieService.MOVIE_CAST_URL, movieId, Constants.API_KEY).asURL()
             let dataRequest = Alamofire.request(url, method: .get)
             dataRequest.validate().responseJSON {[weak self] (response) in
                 guard let strongSelf = self else {
@@ -277,7 +229,7 @@ class MovieService {
     private func fetchMovieVideo(movieId: String, language: Language, completion: (([Video]?, Error?) -> Void)?) {
         let completion: (([Video]?, Error?) -> Void) = completion ?? {_,_ in}
         do {
-            let url = try String(format: VIDEO_MOVIE_URL, movieId, Constants.API_KEY, language.rawValue).asURL()
+            let url = try String(format: MovieService.VIDEO_MOVIE_URL, movieId, Constants.API_KEY, language.rawValue).asURL()
             let dataRequest = Alamofire.request(url, method: .get)
             dataRequest.responseJSON {[weak self] (dataResponse) in
                 guard let strongSelf = self else {
