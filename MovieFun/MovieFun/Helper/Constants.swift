@@ -17,6 +17,7 @@ class Constants {
 enum StoryBoardName: String {
     case MAIN = "Main"
     case UTILS = "Utils"
+    case LOGIN = "Login"
 }
 
 enum Language: String {

@@ -108,7 +108,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Uzy-7Z-HI4">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Uzy-7Z-HI4">
                                 <rect key="frame" x="0.0" y="148" width="414" height="665"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -119,23 +119,21 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HZl-BL-Qs1">
                                 <rect key="frame" x="0.0" y="88" width="414" height="60"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HeN-iq-IyH">
+                                    <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wPD-gc-Q8t">
                                         <rect key="frame" x="10" y="10" width="394" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="0ie-Q0-ssy"/>
+                                            <constraint firstAttribute="height" constant="40" id="t1w-Z0-5lV"/>
                                         </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                    </searchBar>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <constraints>
-                                    <constraint firstItem="HeN-iq-IyH" firstAttribute="centerX" secondItem="HZl-BL-Qs1" secondAttribute="centerX" id="1le-5a-IYj"/>
                                     <constraint firstAttribute="height" constant="60" id="7qE-aI-cYv"/>
-                                    <constraint firstAttribute="trailing" secondItem="HeN-iq-IyH" secondAttribute="trailing" constant="10" id="kea-2w-Q2c"/>
-                                    <constraint firstItem="HeN-iq-IyH" firstAttribute="leading" secondItem="HZl-BL-Qs1" secondAttribute="leading" constant="10" id="n36-e3-Nno"/>
-                                    <constraint firstItem="HeN-iq-IyH" firstAttribute="centerY" secondItem="HZl-BL-Qs1" secondAttribute="centerY" id="ugr-DT-HSz"/>
+                                    <constraint firstItem="wPD-gc-Q8t" firstAttribute="top" secondItem="HZl-BL-Qs1" secondAttribute="top" constant="10" id="GIU-LK-5hT"/>
+                                    <constraint firstItem="wPD-gc-Q8t" firstAttribute="leading" secondItem="HZl-BL-Qs1" secondAttribute="leading" constant="10" id="OvI-Ux-fPQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="wPD-gc-Q8t" secondAttribute="trailing" constant="10" id="wRG-me-rzj"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -154,7 +152,7 @@
                     <navigationItem key="navigationItem" title="Favourite Movie" id="KS5-0c-iM0"/>
                     <connections>
                         <outlet property="favoriteTableView" destination="Uzy-7Z-HI4" id="MX1-XH-x0e"/>
-                        <outlet property="searchTextField" destination="HeN-iq-IyH" id="ygq-vZ-865"/>
+                        <outlet property="searchBar" destination="wPD-gc-Q8t" id="Kio-fw-iE2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZh-AJ-Lf0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -251,6 +249,7 @@
                         <barButtonItem key="rightBarButtonItem" image="search" id="egM-FP-XeL">
                             <connections>
                                 <action selector="searchMovie:" destination="Z22-om-z9b" id="ADr-ii-Qm0"/>
+                                <segue destination="6Us-EV-ZbI" kind="presentation" id="8mT-jP-Cpk"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -261,6 +260,85 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tS0-nL-MEj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1773.913043478261" y="-305.35714285714283"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="c5D-1f-rUh">
+            <objects>
+                <navigationController id="6Us-EV-ZbI" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4cp-Yh-IhF">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="VuZ-U4-O3P" kind="relationship" relationship="rootViewController" id="ol7-8K-Boj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ECP-NT-9f2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2584" y="-690"/>
+        </scene>
+        <!--Search movie-->
+        <scene sceneID="UMq-AW-60p">
+            <objects>
+                <viewController storyboardIdentifier="SearchMovieViewController" id="VuZ-U4-O3P" customClass="SearchMovieViewController" customModule="MovieFun" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uw8-G1-gko">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0l-OE-3Og">
+                                <rect key="frame" x="0.0" y="88" width="414" height="60"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ijl-y9-vLV">
+                                        <rect key="frame" x="10" y="10" width="394" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Ijl-y9-vLV" secondAttribute="bottom" constant="10" id="LRw-ys-zex"/>
+                                    <constraint firstAttribute="height" constant="60" id="Vdu-tk-eZL"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ijl-y9-vLV" secondAttribute="trailing" constant="10" id="kcV-qB-j4d"/>
+                                    <constraint firstItem="Ijl-y9-vLV" firstAttribute="leading" secondItem="V0l-OE-3Og" secondAttribute="leading" constant="10" id="oYV-i4-XcD"/>
+                                    <constraint firstItem="Ijl-y9-vLV" firstAttribute="top" secondItem="V0l-OE-3Og" secondAttribute="top" constant="10" id="szL-jp-tB9"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fHp-ng-f7S">
+                                <rect key="frame" x="0.0" y="148" width="414" height="714"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="VuZ-U4-O3P" id="F49-GM-Sn7"/>
+                                    <outlet property="delegate" destination="VuZ-U4-O3P" id="MLK-ro-AgK"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="fHp-ng-f7S" firstAttribute="leading" secondItem="6NU-4f-Hpt" secondAttribute="leading" id="1VB-hD-Xez"/>
+                            <constraint firstItem="6NU-4f-Hpt" firstAttribute="bottom" secondItem="fHp-ng-f7S" secondAttribute="bottom" id="R8i-eH-s6P"/>
+                            <constraint firstItem="fHp-ng-f7S" firstAttribute="top" secondItem="V0l-OE-3Og" secondAttribute="bottom" id="UkO-eF-2eW"/>
+                            <constraint firstItem="V0l-OE-3Og" firstAttribute="top" secondItem="6NU-4f-Hpt" secondAttribute="top" id="eTN-so-6c9"/>
+                            <constraint firstItem="6NU-4f-Hpt" firstAttribute="trailing" secondItem="V0l-OE-3Og" secondAttribute="trailing" id="s9i-t4-UGK"/>
+                            <constraint firstItem="V0l-OE-3Og" firstAttribute="leading" secondItem="6NU-4f-Hpt" secondAttribute="leading" id="sPF-by-0pQ"/>
+                            <constraint firstItem="6NU-4f-Hpt" firstAttribute="trailing" secondItem="fHp-ng-f7S" secondAttribute="trailing" id="zsQ-lV-qS1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6NU-4f-Hpt"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Search movie" id="CZX-vY-St1">
+                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="0wi-zv-34x">
+                            <connections>
+                                <action selector="dismissViewController:" destination="VuZ-U4-O3P" id="Nc5-L9-ghz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="movieTableView" destination="fHp-ng-f7S" id="TMJ-IK-DAf"/>
+                        <outlet property="searchBar" destination="Ijl-y9-vLV" id="qmq-eZ-Grr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U8Y-TQ-Ppg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3494" y="-690"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="1ea-C2-l2h">

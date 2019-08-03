@@ -12,13 +12,13 @@ class FavoriteMovieService {
     
     static let share = FavoriteMovieService()
     
-    func addFavoriteMovie(movieId: Int, completion: ((Error?) -> Void)?) {
+    func addFavoriteMovie(movie: Movie, completion: ((Error?) -> Void)?) {
         let isLogin = AccountService.share.isLogin()
         if isLogin {
             
         }
         else {
-            RealmService.share.addFavoriteMovie(movieId: movieId, completion: completion)
+            RealmService.share.addFavoriteMovie(movie: movie, completion: completion)
         }
     }
     
@@ -39,6 +39,26 @@ class FavoriteMovieService {
         }
         else {
             RealmService.share.checkFavoriteMovie(movieIds: movieIds, completion: completion)
+        }
+    }
+    
+    func fetchFavoriteMovie(completion: (([MovieModel]?) -> Void)?) {
+        let isLogin = AccountService.share.isLogin()
+        if isLogin {
+            
+        }
+        else {
+            RealmService.share.fetchFavoriteMovie(completion: completion)
+        }
+    }
+    
+    func searchFavoriteMovie(searchText: String, completion: (([MovieModel]?) -> Void)?) {
+        let isLogin = AccountService.share.isLogin()
+        if isLogin {
+            
+        }
+        else {
+            RealmService.share.searchFavoriteMovie(searchText: searchText, completion: completion)
         }
     }
     

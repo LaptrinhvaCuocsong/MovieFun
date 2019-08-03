@@ -18,7 +18,21 @@ class FavoriteMovieController {
     
     func start() {
         favoriteMovieViewModel!.isFetching?.value = true
-        MovieService.share.fetchFavoriteMovie {[weak self] (movies) in
+        FavoriteMovieService.share.fetchFavoriteMovie {[weak self] (movieModels) in
+            let movies = movieModels?.map({ (movieModel) -> Movie in
+                return RealmService.share.getMovie(from: movieModel)
+            })
+            self?.buildViewModels(movies: movies)
+            self?.favoriteMovieViewModel?.isFetching?.value = false
+        }
+    }
+    
+    func search(searchText: String) {
+        favoriteMovieViewModel?.isFetching?.value = true
+        FavoriteMovieService.share.searchFavoriteMovie(searchText: searchText) {[weak self] (movieModels) in
+            let movies = movieModels?.map({ (movieModel) -> Movie in
+                return RealmService.share.getMovie(from: movieModel)
+            })
             self?.buildViewModels(movies: movies)
             self?.favoriteMovieViewModel?.isFetching?.value = false
         }
@@ -26,10 +40,12 @@ class FavoriteMovieController {
     
     func buildViewModels(movies: [Movie]?) {
         if let favoriteMovies = movies {
+            favoriteMovieViewModel?.sectionViewModels?.value?.removeAll()
             let favoriteSectionVM = FavoriteSectionViewModel()
             favoriteMovieViewModel!.sectionViewModels!.value!.append(favoriteSectionVM)
             for (_, movie) in favoriteMovies.enumerated() {
                 let favoriteRowVM = FavoriteRowViewModel(movie: DynamicType<Movie>(value: movie))
+                favoriteRowVM.delegate = favoriteMovieViewModel
                 favoriteSectionVM.rowViewModels!.value!.append(favoriteRowVM)
             }
         }

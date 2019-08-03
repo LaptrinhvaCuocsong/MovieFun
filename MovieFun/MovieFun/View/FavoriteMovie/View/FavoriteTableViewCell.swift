@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoriteTableViewCell: UITableViewCell, FavoriteMovieCell {
+class FavoriteTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
@@ -20,27 +20,32 @@ class FavoriteTableViewCell: UITableViewCell, FavoriteMovieCell {
     
     static let nibName = "FavoriteTableViewCell"
     static let cellIdentify = "favoriteTableViewCell"
+    var favoriteRowVM: FavoriteRowViewModel?
     
     func setUp(with viewModel: FavoriteRowViewModel) {
-        
+        favoriteRowVM = viewModel
+        if let movie = viewModel.favoriteMovie?.value {
+            setContent(with: movie)
+        }
     }
     
-    func setContent(with movie: Movie) {
+    private func setContent(with movie: Movie) {
         titleLabel.text = movie.title
         releaseDateLabel.text = Utils.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: movie.releaseDate)
         ratingLabel.text = "\(movie.voteAverage ?? 0.0)"
         overviewLabel.text = movie.overview
         adultImage.isHidden = !(movie.adult ?? true)
+        starButton.setImage(UIImage(named: "star-64-yellow"), for: .normal)
+        posterImage.image = nil
         if let posterPath = movie.posterPath {
             posterImage.setImage(imageName: posterPath, imageSize: .original)
-        }
-        else {
-            posterImage.image = UIImage(named: Constants.IMAGE_NOT_FOUND)
         }
     }
         
     //MARK - IBAction
     
-    @IBAction func selectFavoriteMovie(_ sender: Any) {
+    @IBAction func removeFavoriteMovie(_ sender: Any) {
+        starButton.setImage(UIImage(named: "star-64"), for: .normal)
+        favoriteRowVM?.removeFavoriteMovie()
     }
 }

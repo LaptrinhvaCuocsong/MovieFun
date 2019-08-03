@@ -23,6 +23,7 @@ class NewMovieCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         imageView.layer.cornerRadius = CGFloat(imageView.width/2)
         imageView.clipsToBounds = true
+        layoutIfNeeded()
     }
     
     func setContent(title: String?, voteAverage: Double?, posterPath: String?) {

@@ -32,6 +32,7 @@ class ContentTableViewCell: UITableViewCell, MovieDetailCell {
             }
             if let overview = movie.overview {
                 overviewLabel.setAttributeText(text: overview, lineHeight: 17)
+                overviewLabel.textAlignment = NSTextAlignment.center
                 layoutIfNeeded()
             }
         }

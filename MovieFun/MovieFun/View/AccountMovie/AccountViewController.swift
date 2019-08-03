@@ -27,10 +27,23 @@ class AccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if !AccountService.share.isLogin() {
+            addLoginViewController()
+            return
+        }
         viewModel.delegate = self
         setAccountTableView()
         setImageView()
         controller.start()
+    }
+    
+    private func addLoginViewController() {
+        let loginVC = LoginViewController.createLoginViewController()
+        loginVC.delegate = self
+        addChild(loginVC)
+        loginVC.view.frame = CGRect(x: 0.0, y: 0.0, width: view.width, height: view.height)
+        view.addSubview(loginVC.view)
+        didMove(toParent: self)
     }
     
     private func initBinding() {
@@ -67,6 +80,20 @@ extension AccountViewController: AccountViewModelDelegate {
     
     func present(viewController: UIViewController, animated: Bool) {
         present(viewController, animated: animated, completion: nil)
+    }
+    
+}
+
+extension AccountViewController: LoginViewControllerDelegate {
+    
+    func dismissFromParent(viewController: UIViewController) {
+        viewController.willMove(toParent: nil)
+        viewController.view.removeFromSuperview()
+        viewController.removeFromParent()
+        viewModel.delegate = self
+        setAccountTableView()
+        setImageView()
+        controller.start()
     }
     
 }

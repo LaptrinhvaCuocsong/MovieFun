@@ -20,6 +20,7 @@ class MovieService {
     static let MOVIE_DETAIL_URL = "https://api.themoviedb.org/3/movie/%@?api_key=%@&language=%@"
     static let MOVIE_CAST_URL = "https://api.themoviedb.org/3/movie/%@/credits?api_key=%@"
     static let VIDEO_MOVIE_URL = "https://api.themoviedb.org/3/movie/%@/videos?api_key=%@&language=%@"
+    static let SEARCH_MOVIE_URL = "https://api.themoviedb.org/3/search/movie?api_key=%@&language=%@&query=%@&page=%d"
     private var newMovies: [Movie]?
     private var nowMovies: [Movie]?
     private var topRateMovies: [Movie]?
@@ -160,6 +161,44 @@ class MovieService {
             completion(nil, nil, error)
         }
     }
+    
+    func searchMovie(searchText: String, page: Int, language: Language, completion: ((Int?, [Movie]?, Error?) -> Void)?) {
+        let completion: ((Int?, [Movie]?, Error?) -> Void) = completion ?? {_,_,_ in}
+        do {
+            let url = try String(format: MovieService.SEARCH_MOVIE_URL, Constants.API_KEY, language.rawValue, searchText, page).asURL()
+            let dataReq = Alamofire.request(url, method: .get)
+            dataReq.responseJSON {[weak self] (dataResponse) in
+                guard let strongSelf = self else {
+                    completion(nil, nil, nil    )
+                    return
+                }
+                if dataResponse.result.isSuccess {
+                    if let value = dataResponse.result.value {
+                        let json = JSON(value)
+                        if let results = json["results"].array, let totalPage = json["total_pages"].int {
+                            var movies = [Movie]()
+                            for item in results {
+                                movies.append(strongSelf.parseMovieJson(json: item))
+                            }
+                            completion(totalPage, movies, nil)
+                        }
+                    }
+                    else {
+                        completion(nil, nil, nil)
+                    }
+                }
+                else {
+                    completion(nil, nil, nil)
+                }
+            }
+        }
+        catch {
+            print(error)
+            completion(nil, nil, error)
+        }
+    }
+    
+    //MARK: - Private method
     
     private func fetchMovie(movieId: String, language: Language, completion: ((Movie?, Error?) -> Void)?) {
         let completion: ((Movie?, Error?) -> Void) = completion ?? {_, _ in}

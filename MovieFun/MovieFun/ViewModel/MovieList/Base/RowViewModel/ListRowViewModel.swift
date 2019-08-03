@@ -40,7 +40,7 @@ class ListRowViewModel {
                 }
             }
             else {
-                FavoriteMovieService.share.addFavoriteMovie(movieId: movie!.value!.id!) {[weak self] (error) in
+                FavoriteMovieService.share.addFavoriteMovie(movie: movie!.value!) {[weak self] (error) in
                     if error == nil {
                         self?.isFavoriteMovie?.value = !isFavoriteMovie
                     }
