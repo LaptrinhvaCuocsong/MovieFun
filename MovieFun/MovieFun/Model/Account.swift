@@ -8,8 +8,20 @@
 
 import Foundation
 
-class Account: NSObject {
+class Account {
     
+    var accountId: String
+    var username: String
+    var email: String
+    var address: String
+    var dateOfBirth: Date
     
+    init() {
+        accountId = "AccountId"
+        username = "Username"
+        email = "Email"
+        address = "Address"
+        dateOfBirth = Date()
+    }
     
 }

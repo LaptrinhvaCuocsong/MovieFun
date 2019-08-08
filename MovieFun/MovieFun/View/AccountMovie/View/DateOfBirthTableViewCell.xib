@@ -25,7 +25,7 @@
                             <constraint firstAttribute="width" secondItem="uG9-77-jUh" secondAttribute="height" multiplier="1:1" id="RfO-q3-yHO"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAv-Cm-s0M">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Of Birth" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAv-Cm-s0M">
                         <rect key="frame" x="79.5" y="10" width="324.5" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="RAD-ej-pwF"/>

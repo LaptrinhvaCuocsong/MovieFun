@@ -15,6 +15,8 @@ class DateOfBirthTableViewCell: UITableViewCell, AccountCell {
     static let nibName = "DateOfBirthTableViewCell"
     static let cellIdentify = "dateOfBirthTableViewCell"
     var dateOfBirthVM: DateOfBirthViewModel?
+    var datePicker: UIDatePicker?
+    var alertVC: UIAlertController?
     
     func setUp(with viewModel: AccountRowViewModel) {
         if let dateOfBirthVM = viewModel as? DateOfBirthViewModel {
@@ -34,23 +36,34 @@ class DateOfBirthTableViewCell: UITableViewCell, AccountCell {
     }
     
     private func dateOfBirthAlertVC() -> UIAlertController {
-        let alertVC = UIAlertController(title: "Date Of Birth", message: nil, preferredStyle: .alert)
-        alertVC.addTextField {[weak self] (textField) in
+        alertVC = UIAlertController(title: "Date Of Birth", message: nil, preferredStyle: .alert)
+        alertVC!.addTextField {[weak self] (textField) in
             textField.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
-            textField.placeholder = "YYYY/MM/DD"
-            textField.inputView = self?.datePicker()
+            textField.placeholder = "yyyy-mm-dd"
+            textField.inputView = self?.createDatePicker()
         }
-        alertVC.addAction(UIAlertAction(title: "Edit", style: .default, handler: { (_) in
-            
+        alertVC!.addAction(UIAlertAction(title: "Edit", style: .default, handler: {[weak self] (_) in
+            if let textField = self?.alertVC?.textFields?.first, let text = textField.text {
+                if let date = Utils.dateFromString(dateFormat: Utils.YYYY_MM_DD, string: text) {
+                    self?.dateOfBirthVM?.delegate?.updateDateOfBirth(date: date)
+                }
+            }
         }))
-        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        return alertVC
+        alertVC!.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        return alertVC!
     }
     
-    private func datePicker() -> UIDatePicker {
-        let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .date
-        return datePicker
+    private func createDatePicker() -> UIDatePicker {
+        datePicker = UIDatePicker()
+        datePicker!.datePickerMode = .date
+        datePicker?.addTarget(self, action: #selector(changeDate(sender:)), for: .valueChanged)
+        return datePicker!
+    }
+    
+    @objc private func changeDate(sender: UIDatePicker) {
+        if let alertVC = alertVC, let textField = alertVC.textFields?.first {
+            textField.text = Utils.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: sender.date)
+        }
     }
     
     private func setContent(dateOfBirth: Date?) {

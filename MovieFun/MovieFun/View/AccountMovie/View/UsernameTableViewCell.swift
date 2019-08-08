@@ -10,7 +10,6 @@ import UIKit
 
 class UsernameTableViewCell: UITableViewCell, AccountCell {
     
-    @IBOutlet weak var accountImage: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     
     static let nibName = "UsernameTableViewCell"
@@ -20,7 +19,7 @@ class UsernameTableViewCell: UITableViewCell, AccountCell {
     func setUp(with viewModel: AccountRowViewModel) {
         if let usernameVM = viewModel as? UsernameViewModel {
             self.usernameVM = usernameVM
-            setContent(imageName: usernameVM.imageName?.value, username: usernameVM.username?.value)
+            setContent(username: usernameVM.username?.value)
         }
     }
     
@@ -34,8 +33,7 @@ class UsernameTableViewCell: UITableViewCell, AccountCell {
         return editAction
     }
     
-    private func setContent(imageName: String?, username: String?) {
-        accountImage.image = UIImage(named: imageName ?? Constants.IMAGE_NOT_FOUND)
+    private func setContent(username: String?) {
         usernameLabel.text = username
     }
     
@@ -45,8 +43,10 @@ class UsernameTableViewCell: UITableViewCell, AccountCell {
             usernameTF.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
             usernameTF.placeholder = "Username"
         }
-        alertVC.addAction(UIAlertAction(title: "Edit", style: .default, handler: { (_) in
-            
+        alertVC.addAction(UIAlertAction(title: "Edit", style: .default, handler: {[weak self] (_) in
+            if let usernameTF = alertVC.textFields?.first, let username = usernameTF.text {
+                self?.usernameVM?.delegate?.updateUsername(username: username)
+            }
         }))
         alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         return alertVC

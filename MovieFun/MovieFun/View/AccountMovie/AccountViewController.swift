@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import SVProgressHUD
+import Photos
 
-class AccountViewController: UIViewController {
+class AccountViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var accountImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var accountTableView: UITableView!
+    
+    var imagePickerController: UIImagePickerController?
     
     var viewModel: AccountViewModel {
         get {
@@ -27,14 +31,33 @@ class AccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setImageView()
+        viewModel.delegate = self
+        setImagePickerController()
+        setAccountTableView()
+        registerCell()
+        initBinding()
         if !AccountService.share.isLogin() {
             addLoginViewController()
             return
         }
-        viewModel.delegate = self
-        setAccountTableView()
-        setImageView()
-        controller.start()
+        else {
+            controller.start()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        SVProgressHUD.dismiss()
+    }
+    
+    //MARK: - Private method
+    
+    private func setImagePickerController() {
+        imagePickerController = UIImagePickerController()
+        imagePickerController?.delegate = self
+        imagePickerController?.sourceType = .photoLibrary
+        imagePickerController?.allowsEditing = true
     }
     
     private func addLoginViewController() {
@@ -47,19 +70,49 @@ class AccountViewController: UIViewController {
     }
     
     private func initBinding() {
+        viewModel.isUpdate?.listener = {[weak self] (isUpdate) in
+            if !isUpdate {
+                self?.showAlertError()
+            }
+            else {
+                self?.accountTableView.reloadData()
+            }
+        }
+        viewModel.isFetching?.listener = {[weak self] (isFetching) in
+            if !isFetching {
+                self?.accountTableView.reloadData()
+                SVProgressHUD.dismiss()
+            }
+            else {
+                SVProgressHUD.show()
+            }
+        }
         viewModel.accountImage?.listener = {[weak self] (image) in
             self?.accountImageView.image = image
+        }
+        viewModel.email?.listener = {[weak self] (email) in
+            self?.emailLabel.text = email
         }
         viewModel.username?.listener = {[weak self] (username) in
             self?.usernameLabel.text = username
         }
+        viewModel.isFetchFail?.listener = {[weak self] (isFetchFail) in
+            if isFetchFail {
+                self?.addLoginViewController()
+            }
+        }
+    }
+    
+    private func showAlertError() {
+        let alertVC = UIAlertController(title: "Error", message: "Update faile", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
     }
     
     private func setAccountTableView() {
         accountTableView.delegate = viewModel
         accountTableView.dataSource = viewModel
         accountTableView.separatorColor = .none
-        registerCell()
     }
     
     private func registerCell() {
@@ -74,12 +127,87 @@ class AccountViewController: UIViewController {
         accountImageView.clipsToBounds = true
     }
     
+    private func showImagePickerController() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            present(self.imagePickerController!, animated: true, completion: nil)
+        }
+    }
+    
+    private func showAlertRequestOpenSetting() {
+        let alertVC = UIAlertController(title: nil, message: "Go to settings to allow us to access your photo gallery", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Open Setting", style: .default, handler: { (_) in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }))
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
+    }
+    
+    private func requestAuthorization() {
+        PHPhotoLibrary.requestAuthorization {[weak self] (status) in
+            switch status {
+            case .authorized:
+                self?.showImagePickerController()
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    //MARK: - IBAction
+    
+    @IBAction func selectImage(_ sender: UIButton) {
+        let authorizationStatus = PHPhotoLibrary.authorizationStatus()
+        switch authorizationStatus {
+        case .authorized:
+            showImagePickerController()
+            break
+        case .notDetermined:
+            requestAuthorization()
+            break
+        case .restricted:
+            fallthrough
+        case .denied:
+            showAlertRequestOpenSetting()
+            break
+        default:
+            break
+        }
+    }
+    
+    //MARK: UIImagePickerControllerDelegate
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            controller.uploadImage(image: image)
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 extension AccountViewController: AccountViewModelDelegate {
     
     func present(viewController: UIViewController, animated: Bool) {
         present(viewController, animated: animated, completion: nil)
+    }
+    
+    func updateUsername(username: String) {
+        controller.updateUsername(username: username)
+    }
+    
+    func updateAddress(address: String) {
+        controller.updateAddress(address: address)
+    }
+    
+    func updateDateOfBirth(date: Date) {
+        controller.updateDateOfBirth(date: date)
     }
     
 }
@@ -90,9 +218,6 @@ extension AccountViewController: LoginViewControllerDelegate {
         viewController.willMove(toParent: nil)
         viewController.view.removeFromSuperview()
         viewController.removeFromParent()
-        viewModel.delegate = self
-        setAccountTableView()
-        setImageView()
         controller.start()
     }
     

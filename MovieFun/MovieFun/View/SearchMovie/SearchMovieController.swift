@@ -28,8 +28,13 @@ class SearchMovieController {
                     FavoriteMovieService.share.checkFavoriteMovie(movieIds: self?.getMovieIdsFromListViewModel(), completion: { (isFavoriteMovies, error) in
                         if error == nil {
                             if let isFavoriteMovies = isFavoriteMovies {
-                                for (i, _) in rowVMs.enumerated() {
-                                    rowVMs[i].isFavoriteMovie?.value = isFavoriteMovies[i] ?? false
+                                for rowVM in rowVMs {
+                                    if let movieId = rowVM.movie?.value?.id {
+                                        rowVM.isFavoriteMovie?.value = isFavoriteMovies[movieId] ?? false
+                                    }
+                                    else {
+                                        rowVM.isFavoriteMovie?.value = false
+                                    }
                                 }
                             }
                         }
@@ -58,8 +63,13 @@ class SearchMovieController {
                     FavoriteMovieService.share.checkFavoriteMovie(movieIds: self?.getMovieIdsFromListViewModel(), completion: { (isFavoriteMovies, error) in
                         if error == nil {
                             if let isFavoriteMovies = isFavoriteMovies {
-                                for (i, _) in rowVMs.enumerated() {
-                                    rowVMs[i].isFavoriteMovie?.value = isFavoriteMovies[i] ?? false
+                                for rowVM in rowVMs {
+                                    if let movieId = rowVM.movie?.value?.id {
+                                        rowVM.isFavoriteMovie?.value = isFavoriteMovies[movieId] ?? false
+                                    }
+                                    else {
+                                        rowVM.isFavoriteMovie?.value = false
+                                    }
                                 }
                             }
                         }
@@ -101,8 +111,13 @@ class SearchMovieController {
                     FavoriteMovieService.share.checkFavoriteMovie(movieIds: self?.getMovieIdsFromListViewModel(), completion: { (isFavoriteMovies, error) in
                         if error == nil {
                             if let isFavoriteMovies = isFavoriteMovies {
-                                for (i, _) in rowVMs.enumerated() {
-                                    rowVMs[i].isFavoriteMovie?.value = isFavoriteMovies[i] ?? false
+                                for rowVM in rowVMs {
+                                    if let movieId = rowVM.movie?.value?.id {
+                                        rowVM.isFavoriteMovie?.value = isFavoriteMovies[movieId] ?? false
+                                    }
+                                    else {
+                                        rowVM.isFavoriteMovie?.value = false
+                                    }
                                 }
                             }
                         }
@@ -129,8 +144,13 @@ class SearchMovieController {
                     FavoriteMovieService.share.checkFavoriteMovie(movieIds: self?.getMovieIdsFromListViewModel(), completion: { (isFavoriteMovies, error) in
                         if error == nil {
                             if let isFavoriteMovies = isFavoriteMovies {
-                                for (i, _) in rowVMs.enumerated() {
-                                    rowVMs[i].isFavoriteMovie?.value = isFavoriteMovies[i] ?? false
+                                for rowVM in rowVMs {
+                                    if let movieId = rowVM.movie?.value?.id {
+                                        rowVM.isFavoriteMovie?.value = isFavoriteMovies[movieId] ?? false
+                                    }
+                                    else {
+                                        rowVM.isFavoriteMovie?.value = false
+                                    }
                                 }
                             }
                         }
@@ -188,15 +208,17 @@ class SearchMovieController {
         return nil
     }
     
-    private func getMovieIdsFromListViewModel() -> [Int?]? {
-        var movieIds: [Int?]?
+    private func getMovieIdsFromListViewModel() -> [Int]? {
+        var movieIds: [Int]?
         if let sectionVMs = self.searchMovieViewModel?.sectionViewModels?.value {
-            movieIds = [Int?]()
+            movieIds = [Int]()
             for sectionVM in sectionVMs {
                 if let rowVMs = sectionVM.rowViewModels?.value {
-                    movieIds?.append(contentsOf: rowVMs.map({ (rowVM) -> Int? in
-                        return rowVM.movie?.value?.id
-                    }))
+                    for rowVM in rowVMs {
+                        if let movieId = rowVM.movie?.value?.id {
+                            movieIds?.append(movieId)
+                        }
+                    }
                 }
             }
             return movieIds

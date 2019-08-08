@@ -18,10 +18,7 @@ class FavoriteMovieController {
     
     func start() {
         favoriteMovieViewModel!.isFetching?.value = true
-        FavoriteMovieService.share.fetchFavoriteMovie {[weak self] (movieModels) in
-            let movies = movieModels?.map({ (movieModel) -> Movie in
-                return RealmService.share.getMovie(from: movieModel)
-            })
+        FavoriteMovieService.share.fetchFavoriteMovie {[weak self] (movies) in
             self?.buildViewModels(movies: movies)
             self?.favoriteMovieViewModel?.isFetching?.value = false
         }
@@ -29,10 +26,7 @@ class FavoriteMovieController {
     
     func search(searchText: String) {
         favoriteMovieViewModel?.isFetching?.value = true
-        FavoriteMovieService.share.searchFavoriteMovie(searchText: searchText) {[weak self] (movieModels) in
-            let movies = movieModels?.map({ (movieModel) -> Movie in
-                return RealmService.share.getMovie(from: movieModel)
-            })
+        FavoriteMovieService.share.searchFavoriteMovie(searchText: searchText) {[weak self] (movies) in
             self?.buildViewModels(movies: movies)
             self?.favoriteMovieViewModel?.isFetching?.value = false
         }

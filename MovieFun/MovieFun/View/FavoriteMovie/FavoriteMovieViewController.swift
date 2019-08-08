@@ -40,6 +40,11 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
         controller.start()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        SVProgressHUD.dismiss()
+    }
+    
     private func initBinding() {
         viewModel.isFetching?.listener = {[weak self] (isFetching) in
             if !isFetching {

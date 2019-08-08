@@ -13,11 +13,17 @@ protocol DateOfBirthViewModelDelegate: class {
     
     func present(viewController: UIViewController, animated: Bool)
     
+    func updateDateOfBirth(date: Date)
+    
 }
 
 class DateOfBirthViewModel: AccountRowViewModel {
     
     weak var delegate: DateOfBirthViewModelDelegate?
     var dateOfBirth: DynamicType<Date>?
+    
+    init() {
+        dateOfBirth = DynamicType<Date>(value: Date())
+    }
     
 }

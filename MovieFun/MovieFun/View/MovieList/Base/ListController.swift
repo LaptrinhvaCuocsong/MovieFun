@@ -29,8 +29,13 @@ class ListController {
                     FavoriteMovieService.share.checkFavoriteMovie(movieIds: self?.getMovieIdsFromListViewModel(), completion: { (isFavoriteMovies, error) in
                         if error == nil {
                             if let isFavoriteMovies = isFavoriteMovies {
-                                for (i, _) in rowVMs.enumerated() {
-                                    rowVMs[i].isFavoriteMovie?.value = isFavoriteMovies[i] ?? false
+                                for rowVM in rowVMs {
+                                    if let movieId = rowVM.movie?.value?.id {
+                                        rowVM.isFavoriteMovie?.value = isFavoriteMovies[movieId] ?? false
+                                    }
+                                    else {
+                                        rowVM.isFavoriteMovie?.value = false
+                                    }
                                 }
                             }
                         }
@@ -61,8 +66,13 @@ class ListController {
                         FavoriteMovieService.share.checkFavoriteMovie(movieIds: self?.getMovieIdsFromListViewModel(), completion: { (isFavoriteMovies, error) in
                             if error == nil {
                                 if let isFavoriteMovies = isFavoriteMovies {
-                                    for (i, _) in rowVMs.enumerated() {
-                                        rowVMs[i].isFavoriteMovie?.value = isFavoriteMovies[i] ?? false
+                                    for rowVM in rowVMs {
+                                        if let movieId = rowVM.movie?.value?.id {
+                                            rowVM.isFavoriteMovie?.value = isFavoriteMovies[movieId] ?? false
+                                        }
+                                        else {
+                                            rowVM.isFavoriteMovie?.value = false
+                                        }
                                     }
                                 }
                             }
@@ -95,8 +105,13 @@ class ListController {
                         FavoriteMovieService.share.checkFavoriteMovie(movieIds: self?.getMovieIdsFromListViewModel(), completion: { (isFavoriteMovies, error) in
                             if error == nil {
                                 if let isFavoriteMovies = isFavoriteMovies {
-                                    for (i, _) in rowVMs.enumerated() {
-                                        rowVMs[i].isFavoriteMovie?.value = isFavoriteMovies[i] ?? false
+                                    for rowVM in rowVMs {
+                                        if let movieId = rowVM.movie?.value?.id {
+                                            rowVM.isFavoriteMovie?.value = isFavoriteMovies[movieId] ?? false
+                                        }
+                                        else {
+                                            rowVM.isFavoriteMovie?.value = false
+                                        }
                                     }
                                 }
                             }
@@ -136,15 +151,17 @@ class ListController {
         return nil
     }
     
-    func getMovieIdsFromListViewModel() -> [Int?]? {
-        var movieIds: [Int?]?
+    func getMovieIdsFromListViewModel() -> [Int]? {
+        var movieIds: [Int]?
         if let sectionVMs = self.listViewModel?.listSectionViewModels?.value {
-            movieIds = [Int?]()
+            movieIds = [Int]()
             for sectionVM in sectionVMs {
                 if let rowVMs = sectionVM.listRowViewModels?.value {
-                    movieIds?.append(contentsOf: rowVMs.map({ (rowVM) -> Int? in
-                        return rowVM.movie?.value?.id
-                    }))
+                    for rowVM in rowVMs {
+                        if let movieId = rowVM.movie?.value?.id {
+                            movieIds?.append(movieId)
+                        }
+                    }
                 }
             }
             return movieIds

@@ -9,7 +9,19 @@
 import Foundation
 
 class CommentListController {
+
+    var commentListViewModel: CommentListViewModel?
     
+    init() {
+        commentListViewModel = CommentListViewModel()
+    }
     
+    func start() {
+        
+    }
+    
+    private func buildViewModels(groupComments: [GroupComment]) {
+        
+    }
     
 }

@@ -28,8 +28,8 @@ class FavoriteRowViewModel: NSObject {
     func removeFavoriteMovie() {
         if let movieId = favoriteMovie?.value?.id {
             isLoading?.value = true
-            FavoriteMovieService.share.removeFavoriteMovie(movieId: movieId) {[weak self] (error) in
-                if error == nil {
+            FavoriteMovieService.share.removeFavoriteMovie(movieId: movieId) {[weak self] (deleteSuccess, error) in
+                if error == nil && deleteSuccess == nil {
                     self?.delegate?.reloadData()
                 }
                 self?.isLoading?.value = false

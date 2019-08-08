@@ -10,6 +10,6 @@ import Foundation
 
 class CommentListRowViewModel {
     
-    
+    var groupComment: DynamicType<GroupComment>?
     
 }

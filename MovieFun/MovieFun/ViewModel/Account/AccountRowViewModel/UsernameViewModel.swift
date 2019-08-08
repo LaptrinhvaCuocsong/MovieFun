@@ -13,16 +13,16 @@ protocol UsernameViewModelDelegate: class {
     
     func present(viewController: UIViewController, animated: Bool)
     
+    func updateUsername(username: String)
+    
 }
 
 class UsernameViewModel: AccountRowViewModel {
 
     weak var delegate: UsernameViewModelDelegate?
-    var imageName: DynamicType<String>?
     var username: DynamicType<String>?
     
     init() {
-        imageName = DynamicType<String>(value: Constants.IMAGE_NOT_FOUND)
         username = DynamicType<String>(value: "")
     }
     

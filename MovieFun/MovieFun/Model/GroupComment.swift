@@ -11,6 +11,7 @@ import Foundation
 class GroupComment {
     
     var movieId: String?
-    var groupAccountId: [Account]?
+    var newMessage: String?
+    var newSenderName: String?
     
 }

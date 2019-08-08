@@ -32,8 +32,8 @@ class ListRowViewModel {
         isLoading?.value = true
         if let isFavoriteMovie = isFavoriteMovie?.value {
             if isFavoriteMovie {
-                FavoriteMovieService.share.removeFavoriteMovie(movieId: movie!.value!.id!) {[weak self] (error) in
-                    if error == nil {
+                FavoriteMovieService.share.removeFavoriteMovie(movieId: movie!.value!.id!) {[weak self] (deleteSuccess, error) in
+                    if error == nil && deleteSuccess == true {
                         self?.isFavoriteMovie?.value = !isFavoriteMovie
                     }
                     self?.isLoading?.value = false

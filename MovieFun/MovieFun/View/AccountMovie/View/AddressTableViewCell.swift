@@ -40,7 +40,9 @@ class AddressTableViewCell: UITableViewCell, AccountCell {
             textField.placeholder = "Address"
         }
         alertVC.addAction(UIAlertAction(title: "Edit", style: .default, handler: { (_) in
-            
+            if let textField = alertVC.textFields?.first, let address = textField.text {
+                self.addressVM?.delegate?.updateAddress(address: address)
+            }
         }))
         alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         return alertVC

@@ -42,7 +42,17 @@ class LoginController {
             if error == nil {
                 if let user = user {
                     AccountService.share.setAccountId(accountId: user.uid)
-                    self?.loginViewModel?.isRegisterSuccess?.value = true
+                    let account = Account()
+                    account.accountId = user.uid
+                    account.email = user.email!
+                    AccountService.share.addAccount(account: account, completion: { (error) in
+                        if error == nil {
+                            self?.loginViewModel?.isRegisterSuccess?.value = true
+                        }
+                        else {
+                            self?.loginViewModel?.isRegisterSuccess?.value = false
+                        }
+                    })
                 }
             }
             else {

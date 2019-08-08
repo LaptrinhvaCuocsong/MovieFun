@@ -12,20 +12,35 @@ protocol AccountViewModelDelegate: class {
     
     func present(viewController: UIViewController, animated: Bool)
     
+    func updateUsername(username: String)
+    
+    func updateAddress(address: String)
+    
+    func updateDateOfBirth(date: Date)
+    
 }
 
 class AccountViewModel: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     weak var delegate: AccountViewModelDelegate?
+    var isUpdate: DynamicType<Bool>?
+    var isFetching: DynamicType<Bool>?
     var accountImage: DynamicType<UIImage>?
     var username: DynamicType<String>?
+    var email: DynamicType<String>?
     var accountSectionViewModels: DynamicType<[AccountSectionViewModel]>?
+    var isFetchFail: DynamicType<Bool>?
+    var account: Account?
     
     private let HEIGHT_OF_CELL = 80.0
     
     override init() {
         super.init()
+        isFetchFail = DynamicType<Bool>(value: false)
+        isUpdate = DynamicType<Bool>(value: false)
+        isFetching = DynamicType<Bool>(value: false)
         accountImage = DynamicType<UIImage>(value: UIImage(named: Constants.IMAGE_NOT_FOUND)!)
+        email = DynamicType<String>(value: "")
         username = DynamicType<String>(value: "")
         accountSectionViewModels = DynamicType<[AccountSectionViewModel]>(value: [AccountSectionViewModel]())
     }
@@ -90,8 +105,20 @@ class AccountViewModel: NSObject, UITableViewDelegate, UITableViewDataSource {
 
 extension AccountViewModel: UsernameViewModelDelegate, EmailViewModelDelegate,AddressViewModelDelegate, DateOfBirthViewModelDelegate {
     
+    func updateDateOfBirth(date: Date) {
+        delegate?.updateDateOfBirth(date: date)
+    }
+    
     func present(viewController: UIViewController, animated: Bool) {
         delegate?.present(viewController: viewController, animated: animated)
     }
     
+    func updateUsername(username: String) {
+        delegate?.updateUsername(username: username)
+    }
+    
+    func updateAddress(address: String) {
+        delegate?.updateAddress(address: address)
+    }
+
 }

@@ -10,4 +10,10 @@ import Foundation
 
 class CommentListViewModel {
     
+    var commentListSectionViewModels: DynamicType<[CommentListSectionViewModel]>?
+    
+    init() {
+        commentListSectionViewModels = DynamicType<[CommentListSectionViewModel]>(value: [CommentListSectionViewModel]())
+    }
+    
 }

@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import RealmSwift
+import Photos
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -19,6 +19,7 @@
 		A1000B8322E418FE004CB269 /* NewMovieListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1000B8122E418FE004CB269 /* NewMovieListTableViewCell.xib */; };
 		A1007B2E22E4BA790086FD01 /* LoadingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1007B2D22E4BA790086FD01 /* LoadingTableView.swift */; };
 		A1007B3022E4BA930086FD01 /* LoadingTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1007B2F22E4BA930086FD01 /* LoadingTableView.xib */; };
+		A1026F6422F8FF7F00D2C888 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1026F6322F8FF7F00D2C888 /* StorageService.swift */; };
 		A102B2FC22F3D5700024E8FC /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A102B2FB22F3D5700024E8FC /* Login.storyboard */; };
 		A102B2FF22F3F7230024E8FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102B2FE22F3F7230024E8FC /* LoginViewController.swift */; };
 		A102B30222F438210024E8FC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102B30122F438210024E8FC /* LoginViewModel.swift */; };
@@ -48,7 +49,6 @@
 		A107EC2622C531F000A711DA /* TrailersMovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A107EC2422C531F000A711DA /* TrailersMovieTableViewCell.xib */; };
 		A1083E0322C283AA0083F906 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1083E0222C283AA0083F906 /* MovieListViewController.swift */; };
 		A1083E0522C283CA0083F906 /* FavoriteMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1083E0422C283CA0083F906 /* FavoriteMovieViewController.swift */; };
-		A1083E0722C283F00083F906 /* CommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1083E0622C283F00083F906 /* CommentListViewController.swift */; };
 		A1083E0922C284330083F906 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1083E0822C284330083F906 /* AccountViewController.swift */; };
 		A1157BFE22DAC271008FC3D3 /* CommentListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1157BFD22DAC271008FC3D3 /* CommentListViewModel.swift */; };
 		A1157C0022DAC29D008FC3D3 /* CommentListSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1157BFF22DAC29D008FC3D3 /* CommentListSectionViewModel.swift */; };
@@ -96,6 +96,11 @@
 		A169EF8822C1440300AC7D6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A169EF8722C1440300AC7D6F /* AppDelegate.swift */; };
 		A169EF8D22C1440300AC7D6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A169EF8B22C1440300AC7D6F /* Main.storyboard */; };
 		A169EF8F22C1440500AC7D6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A169EF8E22C1440500AC7D6F /* Assets.xcassets */; };
+		A175BEB422FC3E20009718E3 /* CommentListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A175BEB322FC3E20009718E3 /* CommentListController.swift */; };
+		A175BEBA22FC3F24009718E3 /* CommentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A175BEB922FC3F24009718E3 /* CommentListViewController.swift */; };
+		A175BEBC22FC6B09009718E3 /* CommentListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A175BEBB22FC6B09009718E3 /* CommentListService.swift */; };
+		A175BEBF22FC8611009718E3 /* CommentListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A175BEBD22FC8610009718E3 /* CommentListTableViewCell.swift */; };
+		A175BEC022FC8611009718E3 /* CommentListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A175BEBE22FC8610009718E3 /* CommentListTableViewCell.xib */; };
 		A1806D8222DF758D009EA18F /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1806D8122DF758D009EA18F /* MovieDetailViewController.swift */; };
 		A1806D8622DF79D2009EA18F /* MoviePlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1806D8422DF79D2009EA18F /* MoviePlayerTableViewCell.swift */; };
 		A1806D8722DF79D2009EA18F /* MoviePlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1806D8522DF79D2009EA18F /* MoviePlayerTableViewCell.xib */; };
@@ -151,9 +156,6 @@
 		A1FE3F0D22E6231F00F780DA /* ListSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FE3F0C22E6231F00F780DA /* ListSectionViewModel.swift */; };
 		A1FE3F0F22E6233100F780DA /* ListRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FE3F0E22E6233100F780DA /* ListRowViewModel.swift */; };
 		A1FE3F1122E62A5200F780DA /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FE3F1022E62A5200F780DA /* ListController.swift */; };
-		A1FEE11322DA3A6A000F317F /* CommentListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FEE11122DA3A6A000F317F /* CommentListTableViewCell.swift */; };
-		A1FEE11422DA3A6A000F317F /* CommentListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FEE11222DA3A6A000F317F /* CommentListTableViewCell.xib */; };
-		A1FEE11622DA3C72000F317F /* CommentListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FEE11522DA3C72000F317F /* CommentListController.swift */; };
 		A1FF5BC622D0E19B004B334B /* UIView+MF.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FF5BC522D0E19B004B334B /* UIView+MF.swift */; };
 		A1FF5BCB22D0FF56004B334B /* NewMovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FF5BC922D0FF56004B334B /* NewMovieCollectionViewCell.swift */; };
 		A1FF5BCC22D0FF56004B334B /* NewMovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FF5BCA22D0FF56004B334B /* NewMovieCollectionViewCell.xib */; };
@@ -176,6 +178,7 @@
 		A1000B8122E418FE004CB269 /* NewMovieListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMovieListTableViewCell.xib; sourceTree = "<group>"; };
 		A1007B2D22E4BA790086FD01 /* LoadingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableView.swift; sourceTree = "<group>"; };
 		A1007B2F22E4BA930086FD01 /* LoadingTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingTableView.xib; sourceTree = "<group>"; };
+		A1026F6322F8FF7F00D2C888 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		A102B2FB22F3D5700024E8FC /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		A102B2FE22F3F7230024E8FC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A102B30122F438210024E8FC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -205,7 +208,6 @@
 		A107EC2422C531F000A711DA /* TrailersMovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrailersMovieTableViewCell.xib; sourceTree = "<group>"; };
 		A1083E0222C283AA0083F906 /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		A1083E0422C283CA0083F906 /* FavoriteMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieViewController.swift; sourceTree = "<group>"; };
-		A1083E0622C283F00083F906 /* CommentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListViewController.swift; sourceTree = "<group>"; };
 		A1083E0822C284330083F906 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		A1157BFD22DAC271008FC3D3 /* CommentListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListViewModel.swift; sourceTree = "<group>"; };
 		A1157BFF22DAC29D008FC3D3 /* CommentListSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListSectionViewModel.swift; sourceTree = "<group>"; };
@@ -255,6 +257,11 @@
 		A169EF8C22C1440300AC7D6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A169EF8E22C1440500AC7D6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A169EF9322C1440500AC7D6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A175BEB322FC3E20009718E3 /* CommentListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListController.swift; sourceTree = "<group>"; };
+		A175BEB922FC3F24009718E3 /* CommentListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListViewController.swift; sourceTree = "<group>"; };
+		A175BEBB22FC6B09009718E3 /* CommentListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListService.swift; sourceTree = "<group>"; };
+		A175BEBD22FC8610009718E3 /* CommentListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentListTableViewCell.swift; sourceTree = "<group>"; };
+		A175BEBE22FC8610009718E3 /* CommentListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentListTableViewCell.xib; sourceTree = "<group>"; };
 		A1806D8122DF758D009EA18F /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		A1806D8422DF79D2009EA18F /* MoviePlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePlayerTableViewCell.swift; sourceTree = "<group>"; };
 		A1806D8522DF79D2009EA18F /* MoviePlayerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoviePlayerTableViewCell.xib; sourceTree = "<group>"; };
@@ -310,9 +317,6 @@
 		A1FE3F0C22E6231F00F780DA /* ListSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSectionViewModel.swift; sourceTree = "<group>"; };
 		A1FE3F0E22E6233100F780DA /* ListRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowViewModel.swift; sourceTree = "<group>"; };
 		A1FE3F1022E62A5200F780DA /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
-		A1FEE11122DA3A6A000F317F /* CommentListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListTableViewCell.swift; sourceTree = "<group>"; };
-		A1FEE11222DA3A6A000F317F /* CommentListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentListTableViewCell.xib; sourceTree = "<group>"; };
-		A1FEE11522DA3C72000F317F /* CommentListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListController.swift; sourceTree = "<group>"; };
 		A1FF5BC522D0E19B004B334B /* UIView+MF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+MF.swift"; sourceTree = "<group>"; };
 		A1FF5BC922D0FF56004B334B /* NewMovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		A1FF5BCA22D0FF56004B334B /* NewMovieCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMovieCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -516,6 +520,8 @@
 				A1065C1322ED59FF0063DA69 /* AccountService.swift */,
 				A104A70C22C91A080039B5AA /* MovieService.swift */,
 				A1065C1622ED5C100063DA69 /* FavoriteMovieService.swift */,
+				A1026F6322F8FF7F00D2C888 /* StorageService.swift */,
+				A175BEBB22FC6B09009718E3 /* CommentListService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -784,8 +790,8 @@
 		A1460ACB22C6895300E4BAA5 /* CommentListMovie */ = {
 			isa = PBXGroup;
 			children = (
-				A1083E0622C283F00083F906 /* CommentListViewController.swift */,
-				A1FEE11522DA3C72000F317F /* CommentListController.swift */,
+				A175BEB922FC3F24009718E3 /* CommentListViewController.swift */,
+				A175BEB322FC3E20009718E3 /* CommentListController.swift */,
 				A1FEE11022DA3A3F000F317F /* View */,
 			);
 			path = CommentListMovie;
@@ -1097,8 +1103,8 @@
 		A1FEE11022DA3A3F000F317F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A1FEE11122DA3A6A000F317F /* CommentListTableViewCell.swift */,
-				A1FEE11222DA3A6A000F317F /* CommentListTableViewCell.xib */,
+				A175BEBD22FC8610009718E3 /* CommentListTableViewCell.swift */,
+				A175BEBE22FC8610009718E3 /* CommentListTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1186,6 +1192,7 @@
 				A1806D8F22DF88E0009EA18F /* CastTableViewCell.xib in Resources */,
 				A1FC448422D416F000F59966 /* TopRateCollectionViewCell.xib in Resources */,
 				A1007B3022E4BA930086FD01 /* LoadingTableView.xib in Resources */,
+				A175BEC022FC8611009718E3 /* CommentListTableViewCell.xib in Resources */,
 				A1460ACE22C692C300E4BAA5 /* Utils.storyboard in Resources */,
 				A1157C0822DAC93D008FC3D3 /* GoogleService-Info.plist in Resources */,
 				A1D1D72A22DB72FF001ABDE9 /* UsernameTableViewCell.xib in Resources */,
@@ -1196,7 +1203,6 @@
 				A107EC1C22C5272A00A711DA /* NowMovieTableViewCell.xib in Resources */,
 				A169EF8D22C1440300AC7D6F /* Main.storyboard in Resources */,
 				A102B2FC22F3D5700024E8FC /* Login.storyboard in Resources */,
-				A1FEE11422DA3A6A000F317F /* CommentListTableViewCell.xib in Resources */,
 				A1D1D73222DB7348001ABDE9 /* EmailTableViewCell.xib in Resources */,
 				A1187CE822D63F1300E596F7 /* TrailerMovieView.xib in Resources */,
 				A1000B8322E418FE004CB269 /* NewMovieListTableViewCell.xib in Resources */,
@@ -1306,7 +1312,6 @@
 				A1FCB97922EA7EE40065595C /* VideoListController.swift in Sources */,
 				A1460AB722C67DB000E4BAA5 /* Movie.swift in Sources */,
 				A105E04022D9BFDD00B85080 /* FavoriteSectionViewModel.swift in Sources */,
-				A1083E0722C283F00083F906 /* CommentListViewController.swift in Sources */,
 				A12CD82C22E8C9610060B096 /* NowMovieListTableViewCell.swift in Sources */,
 				A1157C1822DADD6F008FC3D3 /* AccountRowViewModel.swift in Sources */,
 				A107EC2122C52B9B00A711DA /* TopRateTableViewCell.swift in Sources */,
@@ -1318,15 +1323,18 @@
 				A1AA7CF322F1FC330013E6B6 /* SearchMovieRowViewModel.swift in Sources */,
 				A1000B6C22E3FBC2004CB269 /* TopRateListViewController.swift in Sources */,
 				A1F75FB622E9DBC90097ADF1 /* TrailerMovieListTableViewCell.swift in Sources */,
+				A175BEBF22FC8611009718E3 /* CommentListTableViewCell.swift in Sources */,
 				A1157C1622DADD1C008FC3D3 /* AccountSectionViewModel.swift in Sources */,
 				A1000B7E22E409EC004CB269 /* NewMovieListRowViewModel.swift in Sources */,
 				A104A71122C98D400039B5AA /* Utils.swift in Sources */,
 				A1D1D73F22DB790D001ABDE9 /* UsernameViewModel.swift in Sources */,
 				A105E04422D9C30B00B85080 /* FavoriteMovieController.swift in Sources */,
+				A175BEB422FC3E20009718E3 /* CommentListController.swift in Sources */,
 				A12CD82622E8C7160060B096 /* TopRateListRowViewModel.swift in Sources */,
 				A1806DA222DFEDD7009EA18F /* CastViewModel.swift in Sources */,
 				A1460AB322C6796A00E4BAA5 /* MovieListSectionViewModel.swift in Sources */,
 				A1000B6E22E3FBCF004CB269 /* TrailerListViewController.swift in Sources */,
+				A175BEBC22FC6B09009718E3 /* CommentListService.swift in Sources */,
 				A104A70D22C91A080039B5AA /* MovieService.swift in Sources */,
 				A1806D9222DF8BB9009EA18F /* CastCollectionViewCell.swift in Sources */,
 				A1083E0922C284330083F906 /* AccountViewController.swift in Sources */,
@@ -1336,7 +1344,6 @@
 				A1806D9A22DFED31009EA18F /* MovieDetailViewModel.swift in Sources */,
 				A1460ABF22C6810200E4BAA5 /* TrailersMovieCellViewModel.swift in Sources */,
 				A1FAEE1722E2FA4000FBF351 /* CommentViewModel.swift in Sources */,
-				A1FEE11622DA3C72000F317F /* CommentListController.swift in Sources */,
 				A1460AC122C682CF00E4BAA5 /* MovieListCellViewModel.swift in Sources */,
 				A1D1D72922DB72FF001ABDE9 /* UsernameTableViewCell.swift in Sources */,
 				A1187CE622D63F0100E596F7 /* TrailerMovieView.swift in Sources */,
@@ -1358,6 +1365,7 @@
 				A1FC448322D416F000F59966 /* TopRateCollectionViewCell.swift in Sources */,
 				A12CD81722E8C43B0060B096 /* NowMovieListViewModel.swift in Sources */,
 				A1806D8E22DF88E0009EA18F /* CastTableViewCell.swift in Sources */,
+				A1026F6422F8FF7F00D2C888 /* StorageService.swift in Sources */,
 				A1D1D73122DB7348001ABDE9 /* EmailTableViewCell.swift in Sources */,
 				A1065C0B22ECABD00063DA69 /* UILabel+MF.swift in Sources */,
 				A1806DA022DFEDC9009EA18F /* ContentViewModel.swift in Sources */,
@@ -1389,12 +1397,12 @@
 				A107EC1622C51C3300A711DA /* Constants.swift in Sources */,
 				A1187CE322D6281400E596F7 /* TrailerCollectionViewCell.swift in Sources */,
 				A1000B8222E418FE004CB269 /* NewMovieListTableViewCell.swift in Sources */,
+				A175BEBA22FC3F24009718E3 /* CommentListViewController.swift in Sources */,
 				A12CD82422E8C5EC0060B096 /* TopRateListSectionViewModel.swift in Sources */,
 				A1FFF3F622EB5C2D0059A860 /* Video.swift in Sources */,
 				A1FE3F0622E6204700F780DA /* ListViewController.swift in Sources */,
 				A1460AB922C67FD700E4BAA5 /* NewMovieCellViewModel.swift in Sources */,
 				A1065C0E22ED41C50063DA69 /* RealmService.swift in Sources */,
-				A1FEE11322DA3A6A000F317F /* CommentListTableViewCell.swift in Sources */,
 				A1AA7CF522F1FCE90013E6B6 /* SearchMovieSectionViewModel.swift in Sources */,
 				A102B2FF22F3F7230024E8FC /* LoginViewController.swift in Sources */,
 				A103F0A522F51AA700719D6F /* Account.swift in Sources */,

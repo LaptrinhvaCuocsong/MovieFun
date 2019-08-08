@@ -30,34 +30,29 @@ class RealmService {
         }
     }
     
-    func removeFavoriteMovie(movieId: Int, completion: ((Error?) -> Void)?) {
-        let completion: ((Error?) -> Void) = completion ?? {_ in}
+    func removeFavoriteMovie(movieId: Int, completion: ((Bool?, Error?) -> Void)?) {
+        let completion: ((Bool?, Error?) -> Void) = completion ?? {_,_ in}
         let result = realm?.objects(MovieModel.self).filter("id == %d", movieId).first
         if let result = result {
             do {
                 try realm?.write {
                     realm?.delete(result)
                 }
-                completion(nil)
+                completion(true, nil)
             }
             catch {
-                completion(error)
+                completion(nil, error)
             }
         }
     }
     
-    func checkFavoriteMovie(movieIds: [Int?]?, completion: (([Bool?]?, Error?) -> Void)?) {
-        let completion: (([Bool?]?, Error?) -> Void) = completion ?? {_,_ in}
-        var isFavoriteMovies: [Bool?]?
+    func checkFavoriteMovie(movieIds: [Int]?, completion: (([Int:Bool?]?, Error?) -> Void)?) {
+        let completion: (([Int:Bool?]?, Error?) -> Void) = completion ?? {_,_ in}
+        var isFavoriteMovies: [Int:Bool?]?
         if let movieIds = movieIds {
-            isFavoriteMovies = [Bool?]()
+            isFavoriteMovies = [Int:Bool?]()
             for movieId in movieIds {
-                if let movieId = movieId {
-                    isFavoriteMovies?.append(checkFavoriteMovie(movieId: movieId))
-                }
-                else {
-                    isFavoriteMovies?.append(nil)
-                }
+                isFavoriteMovies![movieId] = checkFavoriteMovie(movieId: movieId)
             }
             completion(isFavoriteMovies, nil)
         }
@@ -66,24 +61,30 @@ class RealmService {
         }
     }
     
-    func searchFavoriteMovie(searchText: String, completion: (([MovieModel]?) -> Void)?) {
-        let completion: (([MovieModel]?) -> Void) = completion ?? {_ in}
+    func searchFavoriteMovie(searchText: String, completion: (([Movie]?) -> Void)?) {
+        let completion: (([Movie]?) -> Void) = completion ?? {_ in}
         let searchStr = "*\(searchText)*"
         let predicate = NSPredicate(format: "title LIKE[c] %@", searchStr)
         if let results = realm?.objects(MovieModel.self).filter(predicate) {
             let movieModels = [MovieModel](results)
-            completion(movieModels)
+            let movies = movieModels.map { (movieModel) -> Movie in
+                return self.getMovie(from: movieModel)
+            }
+            completion(movies)
         }
         else {
             completion(nil)
         }
     }
     
-    func fetchFavoriteMovie(completion: (([MovieModel]?) -> Void)?) {
-        let completion: (([MovieModel]?) -> Void) = completion ?? {_ in}
+    func fetchFavoriteMovie(completion: (([Movie]?) -> Void)?) {
+        let completion: (([Movie]?) -> Void) = completion ?? {_ in}
         if let results = realm?.objects(MovieModel.self) {
             let movieModels = [MovieModel](results)
-            completion(movieModels)
+            let movies = movieModels.map { (movieModel) -> Movie in
+                return self.getMovie(from: movieModel)
+            }
+            completion(movies)
         }
         else {
             completion(nil)

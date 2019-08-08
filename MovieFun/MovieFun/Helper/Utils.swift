@@ -10,7 +10,7 @@ import Foundation
 
 class Utils {
     
-    static let YYYY_MM_DD = "yyyy-mm-dd"
+    static let YYYY_MM_DD = "yyyy-MM-dd"
     
     static func dateFromString(dateFormat: String, string: String?) -> Date? {
         guard let strDate = string else {

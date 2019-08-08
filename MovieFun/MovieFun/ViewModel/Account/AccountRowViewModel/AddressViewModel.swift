@@ -13,6 +13,8 @@ protocol AddressViewModelDelegate: class {
     
     func present(viewController: UIViewController, animated: Bool)
     
+    func updateAddress(address: String)
+    
 }
 
 class AddressViewModel: AccountRowViewModel {
