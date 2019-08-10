@@ -8,8 +8,15 @@
 
 import Foundation
 
+protocol CommentViewModelDelegate:class {
+    
+    func commentForMovie(movieId: Int)
+    
+}
+
 class CommentViewModel: MovieDetailRowViewModel {
     
     var movie: DynamicType<Movie>?
+    weak var delegate: CommentViewModelDelegate?
     
 }

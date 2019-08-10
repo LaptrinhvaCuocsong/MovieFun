@@ -13,5 +13,6 @@ class GroupComment {
     var movieId: String?
     var newMessage: String?
     var newSenderName: String?
+    var sendDate: Date?
     
 }

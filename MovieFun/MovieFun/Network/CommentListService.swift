@@ -46,14 +46,43 @@ class CommentListService {
         }
     }
     
+    func checkGroupComment(movieId: String, completion: ((Bool?, Error?) -> Void)?) {
+        let completion:((Bool?, Error?) -> Void) = completion ?? {_,_ in}
+        if let accountId = AccountService.share.getAccountId() {
+            let documentRef = db.collection(COLLECTION_NAME).document(accountId).collection(SUB_COLLECTION_NAME).document(movieId)
+            documentRef.getDocument(source: .default) { (snapShot, error) in
+                if error == nil {
+                    if let snapShot = snapShot {
+                        if snapShot.exists {
+                            completion(true, nil)
+                        }
+                        else {
+                            completion(false, nil)
+                        }
+                    }
+                    else {
+                        completion(false, nil)
+                    }
+                }
+                else {
+                    completion(nil, error)
+                }
+            }
+        }
+        else {
+            completion(nil, nil)
+        }
+    }
+    
     func addGroupComment(movieId: String, completion: ((Bool?, Error?) -> Void)?) {
         let completion:((Bool?, Error?) -> Void) = completion ?? {_,_ in}
         if let accountId = AccountService.share.getAccountId() {
             let collectionRef = db.collection(COLLECTION_NAME).document(accountId).collection(SUB_COLLECTION_NAME)
-            let dictionary = [
+            let dictionary:[String:Any] = [
                 "movieId": movieId,
                 "newMessage": "",
-                "newSenderName": ""
+                "newSenderName": "",
+                "sendDate": Date()
             ]
             collectionRef.document(movieId).setData(dictionary) { (error) in
                 if error == nil {
@@ -92,6 +121,9 @@ class CommentListService {
         groupComment.movieId = dictionary["movieId"] as? String
         groupComment.newMessage = dictionary["newMessage"] as? String
         groupComment.newSenderName = dictionary["newSenderName"] as? String
+        if let timeStamp = dictionary["sendDate"] as? Timestamp {
+            groupComment.sendDate = timeStamp.dateValue()
+        }
         return groupComment
     }
     

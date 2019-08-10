@@ -24,6 +24,11 @@
 		A102B2FF22F3F7230024E8FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102B2FE22F3F7230024E8FC /* LoginViewController.swift */; };
 		A102B30222F438210024E8FC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102B30122F438210024E8FC /* LoginViewModel.swift */; };
 		A102B30422F4398D0024E8FC /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102B30322F4398D0024E8FC /* LoginController.swift */; };
+		A103A92422FEB8CE00CFC2B3 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A103A92322FEB8CE00CFC2B3 /* ChatController.swift */; };
+		A103A92722FEB9F200CFC2B3 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A103A92622FEB9F200CFC2B3 /* ChatViewController.swift */; };
+		A103A92D22FEBA4700CFC2B3 /* ChatLeftTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A103A92B22FEBA4700CFC2B3 /* ChatLeftTableViewCell.xib */; };
+		A103A92F22FEBA6F00CFC2B3 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A103A92E22FEBA6F00CFC2B3 /* ChatTableViewCell.swift */; };
+		A103A93322FEC1C100CFC2B3 /* ChatRightTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A103A93222FEC1C100CFC2B3 /* ChatRightTableViewCell.xib */; };
 		A103F0A522F51AA700719D6F /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = A103F0A422F51AA700719D6F /* Account.swift */; };
 		A10435AB22DCCFDF00784A10 /* UIImageView+MF.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10435AA22DCCFDF00784A10 /* UIImageView+MF.swift */; };
 		A104A70A22C90EEA0039B5AA /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104A70922C90EEA0039B5AA /* MovieListCell.swift */; };
@@ -119,6 +124,7 @@
 		A1806DA722DFF95A009EA18F /* MovieDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1806DA622DFF95A009EA18F /* MovieDetailController.swift */; };
 		A1A3E31622C3C64900C5DF5F /* NewMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3E31422C3C64900C5DF5F /* NewMovieTableViewCell.swift */; };
 		A1A3E31722C3C64900C5DF5F /* NewMovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1A3E31522C3C64900C5DF5F /* NewMovieTableViewCell.xib */; };
+		A1A65DB222FE6AE400165373 /* Notification.Name + MF.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A65DB122FE6AE400165373 /* Notification.Name + MF.swift */; };
 		A1AA7CE722F1F2640013E6B6 /* SearchMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA7CE622F1F2640013E6B6 /* SearchMovieViewController.swift */; };
 		A1AA7CEB22F1F5B80013E6B6 /* SearchMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA7CE922F1F5B80013E6B6 /* SearchMovieTableViewCell.swift */; };
 		A1AA7CEC22F1F5B80013E6B6 /* SearchMovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1AA7CEA22F1F5B80013E6B6 /* SearchMovieTableViewCell.xib */; };
@@ -183,6 +189,11 @@
 		A102B2FE22F3F7230024E8FC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A102B30122F438210024E8FC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A102B30322F4398D0024E8FC /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		A103A92322FEB8CE00CFC2B3 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
+		A103A92622FEB9F200CFC2B3 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = "New Group/ChatViewController.swift"; sourceTree = "<group>"; };
+		A103A92B22FEBA4700CFC2B3 /* ChatLeftTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatLeftTableViewCell.xib; sourceTree = "<group>"; };
+		A103A92E22FEBA6F00CFC2B3 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		A103A93222FEC1C100CFC2B3 /* ChatRightTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatRightTableViewCell.xib; sourceTree = "<group>"; };
 		A103F0A422F51AA700719D6F /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		A10435AA22DCCFDF00784A10 /* UIImageView+MF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+MF.swift"; sourceTree = "<group>"; };
 		A104A70922C90EEA0039B5AA /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
@@ -280,6 +291,7 @@
 		A1806DA622DFF95A009EA18F /* MovieDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailController.swift; sourceTree = "<group>"; };
 		A1A3E31422C3C64900C5DF5F /* NewMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieTableViewCell.swift; sourceTree = "<group>"; };
 		A1A3E31522C3C64900C5DF5F /* NewMovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMovieTableViewCell.xib; sourceTree = "<group>"; };
+		A1A65DB122FE6AE400165373 /* Notification.Name + MF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification.Name + MF.swift"; sourceTree = "<group>"; };
 		A1AA7CE622F1F2640013E6B6 /* SearchMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieViewController.swift; sourceTree = "<group>"; };
 		A1AA7CE922F1F5B80013E6B6 /* SearchMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMovieTableViewCell.swift; sourceTree = "<group>"; };
 		A1AA7CEA22F1F5B80013E6B6 /* SearchMovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchMovieTableViewCell.xib; sourceTree = "<group>"; };
@@ -479,6 +491,16 @@
 				A102B30122F438210024E8FC /* LoginViewModel.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		A103A92922FEBA2300CFC2B3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A103A92E22FEBA6F00CFC2B3 /* ChatTableViewCell.swift */,
+				A103A92B22FEBA4700CFC2B3 /* ChatLeftTableViewCell.xib */,
+				A103A93222FEC1C100CFC2B3 /* ChatRightTableViewCell.xib */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		A105E03B22D9B8C600B85080 /* RowViewModel */ = {
@@ -851,6 +873,7 @@
 		A169EF9922C1459600AC7D6F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A1A65DAE22FE64D600165373 /* Chat */,
 				A102B2FD22F3F70B0024E8FC /* Login */,
 				A101AAED22F1D38100EF676B /* SearchMovie */,
 				A1FCB97522EA7CA20065595C /* VideoList */,
@@ -915,6 +938,7 @@
 				A1BFED2C22D2B13E005F4000 /* UInt64+MF.swift */,
 				A10435AA22DCCFDF00784A10 /* UIImageView+MF.swift */,
 				A1065C0A22ECABD00063DA69 /* UILabel+MF.swift */,
+				A1A65DB122FE6AE400165373 /* Notification.Name + MF.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -993,6 +1017,16 @@
 				A1806DA422DFEDFA009EA18F /* MovieDetailRowViewModel.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		A1A65DAE22FE64D600165373 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				A103A92622FEB9F200CFC2B3 /* ChatViewController.swift */,
+				A103A92322FEB8CE00CFC2B3 /* ChatController.swift */,
+				A103A92922FEBA2300CFC2B3 /* View */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		A1AA7CE822F1F4880013E6B6 /* View */ = {
@@ -1196,6 +1230,7 @@
 				A1460ACE22C692C300E4BAA5 /* Utils.storyboard in Resources */,
 				A1157C0822DAC93D008FC3D3 /* GoogleService-Info.plist in Resources */,
 				A1D1D72A22DB72FF001ABDE9 /* UsernameTableViewCell.xib in Resources */,
+				A103A93322FEC1C100CFC2B3 /* ChatRightTableViewCell.xib in Resources */,
 				A1FAEE1522E2F7B800FBF351 /* CommentTableViewCell.xib in Resources */,
 				A107EC1B22C5272A00A711DA /* NowMovieView.xib in Resources */,
 				A1A3E31722C3C64900C5DF5F /* NewMovieTableViewCell.xib in Resources */,
@@ -1211,6 +1246,7 @@
 				A12CD83E22E8D1D90060B096 /* TopRateListTableViewCell.xib in Resources */,
 				A1806D8B22DF854B009EA18F /* ContentTableViewCell.xib in Resources */,
 				A1396AE722D8E1C40046DE6A /* FavoriteTableViewCell.xib in Resources */,
+				A103A92D22FEBA4700CFC2B3 /* ChatLeftTableViewCell.xib in Resources */,
 				A1F75FB722E9DBC90097ADF1 /* TrailerMovieListTableViewCell.xib in Resources */,
 				A1FF5BCC22D0FF56004B334B /* NewMovieCollectionViewCell.xib in Resources */,
 				A1D1D73622DB7358001ABDE9 /* AddressTableViewCell.xib in Resources */,
@@ -1320,6 +1356,7 @@
 				A12CD83622E8CF040060B096 /* TrailerMovieListRowViewModel.swift in Sources */,
 				A12CD81B22E8C48C0060B096 /* NowMovieListSectionViewModel.swift in Sources */,
 				A12CD83822E8D1A70060B096 /* TopRateListController.swift in Sources */,
+				A103A92F22FEBA6F00CFC2B3 /* ChatTableViewCell.swift in Sources */,
 				A1AA7CF322F1FC330013E6B6 /* SearchMovieRowViewModel.swift in Sources */,
 				A1000B6C22E3FBC2004CB269 /* TopRateListViewController.swift in Sources */,
 				A1F75FB622E9DBC90097ADF1 /* TrailerMovieListTableViewCell.swift in Sources */,
@@ -1355,6 +1392,7 @@
 				A1FAEE1422E2F7B800FBF351 /* CommentTableViewCell.swift in Sources */,
 				A1FF5BC622D0E19B004B334B /* UIView+MF.swift in Sources */,
 				A1065C1722ED5C100063DA69 /* FavoriteMovieService.swift in Sources */,
+				A103A92722FEB9F200CFC2B3 /* ChatViewController.swift in Sources */,
 				A104A70A22C90EEA0039B5AA /* MovieListCell.swift in Sources */,
 				A1460ABB22C6801300E4BAA5 /* NowMovieCellViewModel.swift in Sources */,
 				A1D1D73522DB7358001ABDE9 /* AddressTableViewCell.swift in Sources */,
@@ -1372,6 +1410,7 @@
 				A1FD10EB22E08B3C004380FA /* MovieDetailCell.swift in Sources */,
 				A1083E0522C283CA0083F906 /* FavoriteMovieViewController.swift in Sources */,
 				A107EC2522C531F000A711DA /* TrailersMovieTableViewCell.swift in Sources */,
+				A1A65DB222FE6AE400165373 /* Notification.Name + MF.swift in Sources */,
 				A1000B7422E4087F004CB269 /* NewMovieListController.swift in Sources */,
 				A102B30222F438210024E8FC /* LoginViewModel.swift in Sources */,
 				A1AA7CEB22F1F5B80013E6B6 /* SearchMovieTableViewCell.swift in Sources */,
@@ -1408,6 +1447,7 @@
 				A103F0A522F51AA700719D6F /* Account.swift in Sources */,
 				A1157C1422DADCB4008FC3D3 /* AccountViewModel.swift in Sources */,
 				A1FE3F1122E62A5200F780DA /* ListController.swift in Sources */,
+				A103A92422FEB8CE00CFC2B3 /* ChatController.swift in Sources */,
 				A1FE3F0F22E6233100F780DA /* ListRowViewModel.swift in Sources */,
 				A12CD81D22E8C5360060B096 /* NowMovieListRowViewModel.swift in Sources */,
 				A1396AE622D8E1C40046DE6A /* FavoriteTableViewCell.swift in Sources */,

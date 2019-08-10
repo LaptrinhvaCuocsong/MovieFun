@@ -46,6 +46,7 @@ class MovieDetailController {
                 sectionVM.movieDetailRowViewModels?.value?.append(castVM)
             }
             let commentVM = CommentViewModel()
+            commentVM.delegate = movieDetailViewModel
             commentVM.movie = DynamicType<Movie>(value: movie)
             sectionVM.movieDetailRowViewModels?.value?.append(commentVM)
         }

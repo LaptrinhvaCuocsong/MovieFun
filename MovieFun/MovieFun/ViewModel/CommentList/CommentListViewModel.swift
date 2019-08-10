@@ -10,9 +10,11 @@ import Foundation
 
 class CommentListViewModel {
     
+    var isFetching: DynamicType<Bool>?
     var commentListSectionViewModels: DynamicType<[CommentListSectionViewModel]>?
     
     init() {
+        isFetching = DynamicType<Bool>(value: false)
         commentListSectionViewModels = DynamicType<[CommentListSectionViewModel]>(value: [CommentListSectionViewModel]())
     }
     

@@ -200,6 +200,19 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SRC-uf-wcy">
                                 <rect key="frame" x="0.0" y="148" width="414" height="665"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="BUj-kB-KOo">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BUj-kB-KOo" id="uru-g8-md9">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="tK7-J1-7Jf" kind="show" trigger="accessoryAction" id="b6G-Id-fmr"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="LaI-HY-JMu" id="vsJ-H2-0Tp"/>
                                     <outlet property="delegate" destination="LaI-HY-JMu" id="eoE-iQ-g3E"/>
@@ -221,12 +234,39 @@
                     <navigationItem key="navigationItem" title="Comment List" id="GqR-g1-CFi"/>
                     <connections>
                         <outlet property="commentListTableView" destination="SRC-uf-wcy" id="6P9-vI-ILe"/>
-                        <outlet property="searchBar" destination="uwB-sS-JDe" id="bew-kh-6q9"/>
+                        <outlet property="searchBar" destination="uwB-sS-JDe" id="PmG-Za-RfQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HQK-r0-BOQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3494.202898550725" y="675"/>
+        </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="Pw1-Jn-Vx0">
+            <objects>
+                <viewController storyboardIdentifier="ChatViewController" id="tK7-J1-7Jf" customClass="ChatViewController" customModule="MovieFun" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yxZ-Yv-QG9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RcO-Wj-bWJ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="RcO-Wj-bWJ" firstAttribute="leading" secondItem="tDO-tR-FOG" secondAttribute="leading" id="cTu-uz-Ql4"/>
+                            <constraint firstItem="tDO-tR-FOG" firstAttribute="trailing" secondItem="RcO-Wj-bWJ" secondAttribute="trailing" id="ddK-Vh-tnT"/>
+                            <constraint firstItem="tDO-tR-FOG" firstAttribute="bottom" secondItem="RcO-Wj-bWJ" secondAttribute="bottom" id="r6G-p0-5un"/>
+                            <constraint firstItem="RcO-Wj-bWJ" firstAttribute="top" secondItem="yxZ-Yv-QG9" secondAttribute="top" id="rfZ-vd-NBE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tDO-tR-FOG"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iLI-H2-onE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4454" y="666"/>
         </scene>
         <!--Movie List-->
         <scene sceneID="czG-DF-hs9">

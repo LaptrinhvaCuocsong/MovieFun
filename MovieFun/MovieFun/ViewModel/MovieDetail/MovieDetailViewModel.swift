@@ -12,6 +12,7 @@ import UIKit
 protocol MovieDetailViewModelDelegate: class {
     
     func pushToViewController(viewController: UIViewController, animated: Bool)
+    func commentForMovie(movieId: Int)
     
 }
 
@@ -30,10 +31,14 @@ class MovieDetailViewModel {
     
 }
 
-extension MovieDetailViewModel: MoviePlayerViewModelDelegate {
+extension MovieDetailViewModel: MoviePlayerViewModelDelegate, CommentViewModelDelegate {
     
     func pushToViewController(viewController: UIViewController, animated: Bool) {
         self.delegate?.pushToViewController(viewController: viewController, animated: animated)
+    }
+    
+    func commentForMovie(movieId: Int) {
+        delegate?.commentForMovie(movieId: movieId)
     }
     
 }

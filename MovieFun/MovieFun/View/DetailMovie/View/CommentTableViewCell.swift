@@ -23,6 +23,9 @@ class CommentTableViewCell: UITableViewCell, MovieDetailCell {
     //MARK: - IBAction
     
     @IBAction func commentForMovie(_ sender: Any) {
+        if let movie = commentVM?.movie?.value, let movieId = movie.id {
+            commentVM?.delegate?.commentForMovie(movieId: movieId)
+        }
     }
     
 }
