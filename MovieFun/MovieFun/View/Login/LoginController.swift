@@ -41,7 +41,6 @@ class LoginController {
             self?.loginViewModel?.isLoading?.value = false
             if error == nil {
                 if let user = user {
-                    AccountService.share.setAccountId(accountId: user.uid)
                     let account = Account()
                     account.accountId = user.uid
                     account.email = user.email!

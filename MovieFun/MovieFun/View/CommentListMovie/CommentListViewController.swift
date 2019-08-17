@@ -35,7 +35,19 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        controller.start()
+        if AccountService.share.isLogin() {
+            controller.start()
+        }
+        else {
+            AlertService.share.showAlertRequestLogin(for: self) {[weak self] in
+                if let tabBarController = self?.tabBarController, let viewControllers = tabBarController.viewControllers {
+                    let index = TabbarItem.account.rawValue
+                    if viewControllers.count > index {
+                        tabBarController.selectedIndex = index
+                    }
+                }
+            }
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -46,10 +58,9 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
     //MARK: - Private method
     
     @objc func commentForMovie(_ notification:Notification) {
-        if let userInfo = notification.userInfo, let movieId = userInfo[Constants.USER_INFO_MOVIE_ID_KEY] {
-            let chatVC = ChatViewController.createChatViewControlelr()
+        if let userInfo = notification.userInfo, let movieId = userInfo[Constants.USER_INFO_MOVIE_ID_KEY] as? Int {
+            let chatVC = ChatViewController.createChatViewControlelr(movieId: "\(movieId)")
             navigationController?.pushViewController(chatVC, animated: true)
-            controller.checkGroupComment(movieId: movieId as! Int, completionWhenAdd: nil)
         }
     }
     

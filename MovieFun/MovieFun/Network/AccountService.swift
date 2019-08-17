@@ -13,24 +13,32 @@ import FirebaseFirestore
 class AccountService {
     
     static let share = AccountService()
+    private var existAccount = false
+    private var account: Account?
     
-    private var accountId: String?
     private let db = Firestore.firestore()
     
+    func getAccountName() -> String? {
+        return account?.username
+    }
+    
     func getAccountId() -> String? {
-        if accountId == nil {
+        if account?.accountId == nil {
             return UserDefaults.standard.string(forKey: "userLogin")
         }
-        return accountId
+        return account?.accountId
     }
     
     func setAccountId(accountId: String) {
-        self.accountId = accountId
+        if account == nil {
+            account = Account()
+        }
+        account?.accountId = accountId
         UserDefaults.standard.set(accountId, forKey: "userLogin")
     }
     
     func isLogin() -> Bool {
-        return AccountService.share.getAccountId() == nil ? false : true
+        return account?.accountId == nil ? false : true
     }
     
     func login(email: String, password: String, completion: ((User?, Error?) -> Void)?) {
@@ -49,6 +57,7 @@ class AccountService {
     
     func updateAccount(account: Account, completion: ((Error?) -> Void)?) {
         let completion:((Error?) -> Void) = completion ?? {_ in}
+        AccountService.share.account = account
         db.collection("account").document(account.accountId).setData([
             "accountId": account.accountId,
             "username": account.username,
@@ -62,7 +71,7 @@ class AccountService {
     
     func fetchAccount(userId: String, completion: ((Account?, Error?) -> Void)?) {
         let completion:((Account?, Error?) -> Void) = completion ?? {_,_ in}
-        db.collection("account").document(userId).getDocument { (query, error) in
+        db.collection("account").document(userId).getDocument {[weak self] (query, error) in
             if error == nil {
                 if let document = query?.data() {
                     let account = Account()
@@ -71,6 +80,7 @@ class AccountService {
                     account.email = document["email"] as! String
                     account.address = document["address"] as! String
                     account.dateOfBirth = (document["dateOfBirth"] as! Timestamp).dateValue()
+                    self?.account = account
                     completion(account, nil)
                 }
                 else {
@@ -91,7 +101,10 @@ class AccountService {
             "email": account.email,
             "address": account.address,
             "dateOfBirth": account.dateOfBirth
-        ]) { (error) in
+        ]) {[weak self] (error) in
+            if error == nil {
+                self?.account = account
+            }
             completion(error)
         }
     }

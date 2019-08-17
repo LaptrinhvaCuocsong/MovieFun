@@ -19,8 +19,8 @@ target 'MovieFun' do
   
   pod 'Firebase/Storage'
   
-  pod 'SDWebImage'
-
+  pod 'FirebaseUI/Storage'
+  
   pod 'SVProgressHUD', '~> 2.2'
 
   pod 'YoutubePlayer-in-WKWebView', '~> 0.3'
