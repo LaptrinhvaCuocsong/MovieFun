@@ -29,7 +29,7 @@ class AccountController {
                 self?.dispatchGroup.leave()
             }
             dispatchGroup.enter()
-            StorageService.share.downloadImage {[weak self] (data, error) in
+            StorageService.share.downloadImage(accountId: accountId) {[weak self] (data, error) in
                 if error == nil && data != nil {
                     if let image = UIImage(data: data!) {
                         self?.accountViewModel?.accountImage?.value = image
@@ -66,6 +66,14 @@ class AccountController {
         dateOfBirthVM.delegate = accountViewModel
         dateOfBirthVM.dateOfBirth?.value = account.dateOfBirth
         accountSectionVM.accountRowViewModels?.value?.append(dateOfBirthVM)
+    }
+    
+    func logout(delay: TimeInterval) {
+        accountViewModel?.logoutSuccess?.value = false
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay) {[weak self] in
+            AccountService.share.logout()
+            self?.accountViewModel?.logoutSuccess?.value = true
+        }
     }
     
     func updateUsername(username: String) {

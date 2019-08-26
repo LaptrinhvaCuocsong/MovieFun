@@ -10,10 +10,10 @@ import Foundation
 
 class FavoriteSectionViewModel: NSObject {
     
-    var rowViewModels: DynamicType<[FavoriteRowViewModel]>?
+    var rowViewModels: DynamicType<[FavoriteBaseRowViewModel]>?
     
     override init() {
-        rowViewModels = DynamicType<[FavoriteRowViewModel]>(value: [FavoriteRowViewModel]())
+        rowViewModels = DynamicType<[FavoriteBaseRowViewModel]>(value: [FavoriteBaseRowViewModel]())
     }
     
 }

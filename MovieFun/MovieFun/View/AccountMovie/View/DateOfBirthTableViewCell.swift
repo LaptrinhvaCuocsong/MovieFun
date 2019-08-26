@@ -44,7 +44,7 @@ class DateOfBirthTableViewCell: UITableViewCell, AccountCell {
         }
         alertVC!.addAction(UIAlertAction(title: "Edit", style: .default, handler: {[weak self] (_) in
             if let textField = self?.alertVC?.textFields?.first, let text = textField.text {
-                if let date = Utils.dateFromString(dateFormat: Utils.YYYY_MM_DD, string: text) {
+                if let date = Utils.share.dateFromString(dateFormat: Utils.YYYY_MM_DD, string: text) {
                     self?.dateOfBirthVM?.delegate?.updateDateOfBirth(date: date)
                 }
             }
@@ -62,12 +62,12 @@ class DateOfBirthTableViewCell: UITableViewCell, AccountCell {
     
     @objc private func changeDate(sender: UIDatePicker) {
         if let alertVC = alertVC, let textField = alertVC.textFields?.first {
-            textField.text = Utils.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: sender.date)
+            textField.text = Utils.share.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: sender.date)
         }
     }
     
     private func setContent(dateOfBirth: Date?) {
-        dateOfBirthLabel.text = Utils.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: dateOfBirth)
+        dateOfBirthLabel.text = Utils.share.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: dateOfBirth)
     }
     
 }

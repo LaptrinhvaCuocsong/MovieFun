@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CommentListTableViewCell: UITableViewCell {
+class CommentListTableViewCell: UITableViewCell, CommentListCell {
 
     @IBOutlet weak var posterImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -22,19 +22,27 @@ class CommentListTableViewCell: UITableViewCell {
     
     var commentListRowVM: CommentListRowViewModel?
     
-    func setUp(with viewModel: CommentListRowViewModel) {
-        commentListRowVM = viewModel
-        setContent()
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        posterImage.layer.cornerRadius = CGFloat(posterImage.height / 2.0)
+        posterImage.clipsToBounds = true
+    }
+    
+    func setUp(with viewModel: CommentListBaseRowViewModel) {
+        if let viewModel = viewModel as? CommentListRowViewModel {
+            commentListRowVM = viewModel
+            setContent()
+        }
     }
     
     private func setContent() {
-        if let viewModel = commentListRowVM, let groupComment = viewModel.groupComment?.value, let movieInfo = viewModel.movieInformation {
-            titleLabel.text = movieInfo.title
+        if let viewModel = commentListRowVM, let groupComment = viewModel.groupComment?.value {
+            titleLabel.text = groupComment.movie?.title
             if let sendDate = groupComment.sendDate {
                 timeLabel.text = getTime(startDate: sendDate)
             }
             widthTimeLabel.constant = timeLabel.intrinsicContentSize.width
-            if let posterPath = movieInfo.posterPath {
+            if let posterPath = groupComment.movie?.posterPath {
                 posterImage.setImage(imageName: posterPath, imageSize: .w92)
             }
             if let newComment = groupComment.newMessage, let sender = groupComment.newSenderName {

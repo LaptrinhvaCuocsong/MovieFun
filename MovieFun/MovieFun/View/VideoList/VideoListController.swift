@@ -25,6 +25,9 @@ class VideoListController {
                     self?.videoListViewModel?.key?.value = key
                     self?.videoListViewModel?.title?.value = title
                 }
+                else {
+                    self?.videoListViewModel?.isLoadFail?.value = true
+                }
                 self?.videoListViewModel?.isFetching?.value = false
             }
         }

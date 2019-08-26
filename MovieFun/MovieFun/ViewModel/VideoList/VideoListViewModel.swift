@@ -14,11 +14,13 @@ class VideoListViewModel {
     var isFetching: DynamicType<Bool>?
     var key: DynamicType<String>?
     var title: DynamicType<String>?
+    var isLoadFail: DynamicType<Bool>?
     
     init() {
         title = DynamicType<String>(value: "")
         key = DynamicType<String>(value: "")
         isFetching = DynamicType<Bool>(value: false)
+        isLoadFail = DynamicType<Bool>(value: false)
     }
     
 }

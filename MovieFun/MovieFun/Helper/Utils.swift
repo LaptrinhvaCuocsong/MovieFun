@@ -11,21 +11,35 @@ import Foundation
 class Utils {
     
     static let YYYY_MM_DD = "yyyy-MM-dd"
+    static let YYYYMMDD = "yyyy/MM/dd"
+    static let YYYY_MM_DD_HH_MM_SS = "yyyy/MM/dd hh:mm:ss"
+    static let share = Utils()
     
-    static func dateFromString(dateFormat: String, string: String?) -> Date? {
+    private let dateFm = DateFormatter()
+    
+    private init() {
+        dateFm.locale = Locale.current
+        dateFm.timeZone = TimeZone.current
+    }
+    
+    func getCurrentDate() -> Date {
+        let currentDate = Date()
+        let dateStr = self.stringFromDate(dateFormat: Utils.YYYY_MM_DD_HH_MM_SS, date: currentDate)
+        return self.dateFromString(dateFormat: Utils.YYYY_MM_DD_HH_MM_SS, string: dateStr!)!
+    }
+    
+    func dateFromString(dateFormat: String, string: String?) -> Date? {
         guard let strDate = string else {
             return nil
         }
-        let dateFm = DateFormatter()
         dateFm.dateFormat = dateFormat
         return dateFm.date(from: strDate)
     }
     
-    static func stringFromDate(dateFormat: String, date: Date?) -> String? {
+    func stringFromDate(dateFormat: String, date: Date?) -> String? {
         guard let date = date else {
             return nil
         }
-        let dateFm = DateFormatter()
         dateFm.dateFormat = dateFormat
         return dateFm.string(from: date)
     }

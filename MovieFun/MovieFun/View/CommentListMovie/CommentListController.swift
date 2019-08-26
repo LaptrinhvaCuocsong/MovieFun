@@ -28,19 +28,23 @@ class CommentListController {
         }
     }
     
-    func checkGroupComment(movieId: Int, completionWhenAdd: ((Bool?, Error?) -> Void)?) {
-        CommentListService.share.checkGroupComment(movieId: "\(movieId)") { (exist, error) in
-            if error == nil {
-                if let exist = exist {
-                    if !exist {
-                        CommentListService.share.addGroupComment(movieId: "\(movieId)", completion: completionWhenAdd)
-                    }
-                }
-            }
+    func addGroupComment(groupMessage: GroupComment, completionWhenAdd: ((Bool?, Error?) -> Void)?) {
+        CommentListService.share.addGroupComment(groupMessage: groupMessage, completion: completionWhenAdd)
+    }
+    
+    func cellIdentify(rowVM: CommentListBaseRowViewModel) -> String? {
+        switch rowVM {
+        case is CommentListHeaderRowViewModel:
+            return CommentListHeaderTableViewCell.cellIdentify
+        case is CommentListRowViewModel:
+            return CommentListTableViewCell.cellIdentify
+        default:
+            return nil
         }
     }
     
     private func buildViewModels(groupComments: [GroupComment]) {
+        commentListViewModel?.isHiddenSearchBar?.value = false
         commentListViewModel?.commentListSectionViewModels?.value?.removeAll()
         let sectionVM = CommentListSectionViewModel()
         commentListViewModel?.commentListSectionViewModels?.value?.append(sectionVM)
@@ -48,6 +52,11 @@ class CommentListController {
             let rowVM = CommentListRowViewModel()
             rowVM.groupComment = DynamicType<GroupComment>(value: groupComment)
             sectionVM.commentListRowViewModels?.value?.append(rowVM)
+        }
+        if groupComments.count == 0 {
+            commentListViewModel?.isHiddenSearchBar?.value = true
+            let headerVM = CommentListHeaderRowViewModel()
+            sectionVM.commentListRowViewModels?.value?.append(headerVM)
         }
     }
     

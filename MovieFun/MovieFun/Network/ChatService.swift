@@ -26,7 +26,7 @@ class ChatService {
                     var messages = [Message]()
                     for documentChange in documentChanges {
                         let data = documentChange.document.data()
-                        if let message = self?.getMessage(dictionay: data) {
+                        if let message = self?.getMessage(messageId: documentChange.document.documentID, dictionay: data) {
                             messages.append(message)
                         }
                     }
@@ -49,8 +49,8 @@ class ChatService {
         }
     }
     
-    func addChatMessage(movieId: String, message: Message, completion: ((Bool?, Error?) -> Void)?) {
-        let completion:((Bool?, Error?) -> Void) = completion ?? {_,_ in}
+    func addChatMessage(movieId: String, message: Message, completion: ((String?, Error?) -> Void)?) {
+        let completion:((String?, Error?) -> Void) = completion ?? {_,_ in}
         let collectionRef = db.collection(COLLECTION_NAME).document(movieId).collection(SUB_COLLECTION_NAME)
         let dictionary:[String: Any] = [
             "accountId": message.accountId!,
@@ -58,12 +58,13 @@ class ChatService {
             "sendDate": message.sendDate ?? Date(),
             "content": message.content ?? ""
         ]
-        collectionRef.addDocument(data: dictionary) { (error) in
+        var docRef: DocumentReference?
+        docRef = collectionRef.addDocument(data: dictionary) { (error) in
             if error == nil {
-                completion(true, nil)
+                completion(docRef?.documentID, nil)
             }
             else {
-                completion(false, error)
+                completion(nil, error)
             }
         }
     }
@@ -77,7 +78,7 @@ class ChatService {
                     var messages = [Message]()
                     for document in documents {
                         let data = document.data()
-                        if let message = self?.getMessage(dictionay: data) {
+                        if let message = self?.getMessage(messageId: document.documentID, dictionay: data) {
                             messages.append(message)
                         }
                     }
@@ -90,12 +91,15 @@ class ChatService {
         }
     }
     
-    private func getMessage(dictionay: [String: Any]) -> Message {
+    private func getMessage(messageId: String, dictionay: [String: Any]) -> Message {
         var message = Message()
+        message.messageId = messageId
         message.accountId = dictionay["accountId"] as? String
         message.accountName = dictionay["accountName"] as? String
         if let timeStamp = dictionay["sendDate"] as? Timestamp {
-            message.sendDate = timeStamp.dateValue()
+            let sendDate = timeStamp.dateValue()
+            let sendDateStr = Utils.share.stringFromDate(dateFormat: Utils.YYYY_MM_DD_HH_MM_SS, date: sendDate)
+            message.sendDate = Utils.share.dateFromString(dateFormat: Utils.YYYY_MM_DD_HH_MM_SS, string: sendDateStr)
         }
         message.content = dictionay["content"] as? String
         return message

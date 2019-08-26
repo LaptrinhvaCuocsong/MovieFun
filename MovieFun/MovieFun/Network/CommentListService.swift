@@ -46,45 +46,18 @@ class CommentListService {
         }
     }
     
-    func checkGroupComment(movieId: String, completion: ((Bool?, Error?) -> Void)?) {
-        let completion:((Bool?, Error?) -> Void) = completion ?? {_,_ in}
-        if let accountId = AccountService.share.getAccountId() {
-            let documentRef = db.collection(COLLECTION_NAME).document(accountId).collection(SUB_COLLECTION_NAME).document(movieId)
-            documentRef.getDocument(source: .default) { (snapShot, error) in
-                if error == nil {
-                    if let snapShot = snapShot {
-                        if snapShot.exists {
-                            completion(true, nil)
-                        }
-                        else {
-                            completion(false, nil)
-                        }
-                    }
-                    else {
-                        completion(false, nil)
-                    }
-                }
-                else {
-                    completion(nil, error)
-                }
-            }
-        }
-        else {
-            completion(nil, nil)
-        }
-    }
-    
-    func addGroupComment(movieId: String, completion: ((Bool?, Error?) -> Void)?) {
+    func addGroupComment(groupMessage: GroupComment, completion: ((Bool?, Error?) -> Void)?) {
         let completion:((Bool?, Error?) -> Void) = completion ?? {_,_ in}
         if let accountId = AccountService.share.getAccountId() {
             let collectionRef = db.collection(COLLECTION_NAME).document(accountId).collection(SUB_COLLECTION_NAME)
+            let movieInfo = Movie.getDictionary(from: groupMessage.movie!)
             let dictionary:[String:Any] = [
-                "movieId": movieId,
-                "newMessage": "",
-                "newSenderName": "",
-                "sendDate": Date()
+                "movie": movieInfo,
+                "newMessage": groupMessage.newMessage!,
+                "newSenderName": groupMessage.newSenderName!,
+                "sendDate": groupMessage.sendDate!
             ]
-            collectionRef.document(movieId).setData(dictionary) { (error) in
+            collectionRef.document("\(groupMessage.movie!.id!)").setData(dictionary) { (error) in
                 if error == nil {
                     completion(true, nil)
                 }
@@ -118,7 +91,7 @@ class CommentListService {
     
     private func getGroupComment(dictionary: [String: Any]) -> GroupComment {
         let groupComment = GroupComment()
-        groupComment.movieId = dictionary["movieId"] as? String
+        groupComment.movie = Movie.getMovie(from: dictionary["movie"] as? [String: Any])
         groupComment.newMessage = dictionary["newMessage"] as? String
         groupComment.newSenderName = dictionary["newSenderName"] as? String
         if let timeStamp = dictionary["sendDate"] as? Timestamp {

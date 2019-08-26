@@ -12,7 +12,7 @@ class Constants {
     static let API_KEY = "b437aba8c658e4a9673766fc9923250f"
     static let IMAGE_NOT_FOUND = "image-not-found"
     static let PUSH_TO_CHAT_VIEW_CONTROLLER = "PUSH_TO_CHAT_VIEW_CONTROLLER"
-    static let USER_INFO_MOVIE_ID_KEY = "movieId"
+    static let USER_INFO_MOVIE_KEY = "movieId"
 }
 
 enum StoryBoardName: String {

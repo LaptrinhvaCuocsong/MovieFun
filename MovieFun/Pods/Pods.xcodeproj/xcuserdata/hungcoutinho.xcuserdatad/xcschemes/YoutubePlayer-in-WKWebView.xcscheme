@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1030"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "48252ED67F1857845357E5E4047F6F8C"
+               BlueprintIdentifier = "B93445CDCAC086F6B1B73B41A021E0A2"
                BuildableName = "YoutubePlayer_in_WKWebView.framework"
                BlueprintName = "YoutubePlayer-in-WKWebView"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "48252ED67F1857845357E5E4047F6F8C"
+            BlueprintIdentifier = "B93445CDCAC086F6B1B73B41A021E0A2"
             BuildableName = "YoutubePlayer_in_WKWebView.framework"
             BlueprintName = "YoutubePlayer-in-WKWebView"
             ReferencedContainer = "container:Pods.xcodeproj">

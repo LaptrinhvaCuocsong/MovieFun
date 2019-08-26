@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseUI
+import SDWebImage
 
 fileprivate let IMAGE_URL = "https://image.tmdb.org/t/p/%@/%@"
 
@@ -17,10 +17,6 @@ extension UIImageView {
         let urlStr = String(format: IMAGE_URL, imageSize.rawValue, imageName)
         let url = URL(string: urlStr)
         self.sd_setImage(with: url)
-    }
-    
-    func setImage(storeRef: StorageReference) {
-        self.sd_setImage(with: storeRef, placeholderImage: nil)
     }
     
 }

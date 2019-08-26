@@ -19,6 +19,13 @@
 		A1000B8322E418FE004CB269 /* NewMovieListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1000B8122E418FE004CB269 /* NewMovieListTableViewCell.xib */; };
 		A1007B2E22E4BA790086FD01 /* LoadingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1007B2D22E4BA790086FD01 /* LoadingTableView.swift */; };
 		A1007B3022E4BA930086FD01 /* LoadingTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1007B2F22E4BA930086FD01 /* LoadingTableView.xib */; };
+		A1010741231147B90098B7C6 /* FavoriteHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A101073F231147B90098B7C6 /* FavoriteHeaderTableViewCell.swift */; };
+		A1010742231147B90098B7C6 /* FavoriteHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1010740231147B90098B7C6 /* FavoriteHeaderTableViewCell.xib */; };
+		A101074423114A320098B7C6 /* FavoriteHeaderRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A101074323114A320098B7C6 /* FavoriteHeaderRowViewModel.swift */; };
+		A101074B23114B690098B7C6 /* FavoriteBaseRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A101074A23114B690098B7C6 /* FavoriteBaseRowViewModel.swift */; };
+		A101074E23114D370098B7C6 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A101074D23114D370098B7C6 /* FavoriteCell.swift */; };
+		A1013FF0231289950063200B /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1013FEF231289950063200B /* CacheService.swift */; };
+		A1013FF223129CED0063200B /* MovieChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1013FF123129CED0063200B /* MovieChatService.swift */; };
 		A1024B4622FF0E2200A33A68 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1024B4522FF0E2200A33A68 /* ChatViewModel.swift */; };
 		A1024B4C22FF0F1500A33A68 /* ChatRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1024B4B22FF0F1500A33A68 /* ChatRowViewModel.swift */; };
 		A1024B4E22FF0F2800A33A68 /* ChatSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1024B4D22FF0F2800A33A68 /* ChatSectionViewModel.swift */; };
@@ -33,8 +40,6 @@
 		A102B2FF22F3F7230024E8FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102B2FE22F3F7230024E8FC /* LoginViewController.swift */; };
 		A102B30222F438210024E8FC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102B30122F438210024E8FC /* LoginViewModel.swift */; };
 		A102B30422F4398D0024E8FC /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A102B30322F4398D0024E8FC /* LoginController.swift */; };
-		A1037B4D2301D27400177703 /* HeaderSectionChatTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1037B4C2301D27400177703 /* HeaderSectionChatTableView.swift */; };
-		A1037B4F2301D28700177703 /* HeaderSectionChatTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1037B4E2301D28700177703 /* HeaderSectionChatTableView.xib */; };
 		A103A92422FEB8CE00CFC2B3 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A103A92322FEB8CE00CFC2B3 /* ChatController.swift */; };
 		A103A92722FEB9F200CFC2B3 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A103A92622FEB9F200CFC2B3 /* ChatViewController.swift */; };
 		A103A92D22FEBA4700CFC2B3 /* ChatLeftTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A103A92B22FEBA4700CFC2B3 /* ChatLeftTableViewCell.xib */; };
@@ -45,6 +50,9 @@
 		A104A70A22C90EEA0039B5AA /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104A70922C90EEA0039B5AA /* MovieListCell.swift */; };
 		A104A70D22C91A080039B5AA /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104A70C22C91A080039B5AA /* MovieService.swift */; };
 		A104A71122C98D400039B5AA /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A104A71022C98D400039B5AA /* Utils.swift */; };
+		A105AE4C231201AE003CB9A3 /* CommentListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105AE4B231201AE003CB9A3 /* CommentListCell.swift */; };
+		A105AE4F231201E5003CB9A3 /* CommentListBaseRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105AE4E231201E5003CB9A3 /* CommentListBaseRowViewModel.swift */; };
+		A105AE512312020B003CB9A3 /* CommentListHeaderRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105AE502312020B003CB9A3 /* CommentListHeaderRowViewModel.swift */; };
 		A105E03E22D9BF3D00B85080 /* FavoriteMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105E03D22D9BF3D00B85080 /* FavoriteMovieViewModel.swift */; };
 		A105E04022D9BFDD00B85080 /* FavoriteSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105E03F22D9BFDD00B85080 /* FavoriteSectionViewModel.swift */; };
 		A105E04222D9BFED00B85080 /* FavoriteRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A105E04122D9BFED00B85080 /* FavoriteRowViewModel.swift */; };
@@ -173,6 +181,12 @@
 		A1FE3F0D22E6231F00F780DA /* ListSectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FE3F0C22E6231F00F780DA /* ListSectionViewModel.swift */; };
 		A1FE3F0F22E6233100F780DA /* ListRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FE3F0E22E6233100F780DA /* ListRowViewModel.swift */; };
 		A1FE3F1122E62A5200F780DA /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FE3F1022E62A5200F780DA /* ListController.swift */; };
+		A1FE5E122311B4FE00DF12EB /* CommentListHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FE5E102311B4FE00DF12EB /* CommentListHeaderTableViewCell.swift */; };
+		A1FE5E132311B4FE00DF12EB /* CommentListHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FE5E112311B4FE00DF12EB /* CommentListHeaderTableViewCell.xib */; };
+		A1FEF71C230D79FE00D1C23B /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FEF71A230D79FE00D1C23B /* HeaderTableViewCell.swift */; };
+		A1FEF71D230D79FE00D1C23B /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FEF71B230D79FE00D1C23B /* HeaderTableViewCell.xib */; };
+		A1FEF71F230D7B3200D1C23B /* ChatHeaderRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FEF71E230D7B3200D1C23B /* ChatHeaderRowViewModel.swift */; };
+		A1FEF724230D7C7D00D1C23B /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FEF723230D7C7D00D1C23B /* ChatCell.swift */; };
 		A1FF5BC622D0E19B004B334B /* UIView+MF.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FF5BC522D0E19B004B334B /* UIView+MF.swift */; };
 		A1FF5BCB22D0FF56004B334B /* NewMovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FF5BC922D0FF56004B334B /* NewMovieCollectionViewCell.swift */; };
 		A1FF5BCC22D0FF56004B334B /* NewMovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1FF5BCA22D0FF56004B334B /* NewMovieCollectionViewCell.xib */; };
@@ -195,6 +209,13 @@
 		A1000B8122E418FE004CB269 /* NewMovieListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMovieListTableViewCell.xib; sourceTree = "<group>"; };
 		A1007B2D22E4BA790086FD01 /* LoadingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableView.swift; sourceTree = "<group>"; };
 		A1007B2F22E4BA930086FD01 /* LoadingTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingTableView.xib; sourceTree = "<group>"; };
+		A101073F231147B90098B7C6 /* FavoriteHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		A1010740231147B90098B7C6 /* FavoriteHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		A101074323114A320098B7C6 /* FavoriteHeaderRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteHeaderRowViewModel.swift; sourceTree = "<group>"; };
+		A101074A23114B690098B7C6 /* FavoriteBaseRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBaseRowViewModel.swift; sourceTree = "<group>"; };
+		A101074D23114D370098B7C6 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
+		A1013FEF231289950063200B /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
+		A1013FF123129CED0063200B /* MovieChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieChatService.swift; sourceTree = "<group>"; };
 		A1024B4522FF0E2200A33A68 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		A1024B4B22FF0F1500A33A68 /* ChatRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRowViewModel.swift; sourceTree = "<group>"; };
 		A1024B4D22FF0F2800A33A68 /* ChatSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSectionViewModel.swift; sourceTree = "<group>"; };
@@ -209,8 +230,6 @@
 		A102B2FE22F3F7230024E8FC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A102B30122F438210024E8FC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A102B30322F4398D0024E8FC /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
-		A1037B4C2301D27400177703 /* HeaderSectionChatTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSectionChatTableView.swift; sourceTree = "<group>"; };
-		A1037B4E2301D28700177703 /* HeaderSectionChatTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderSectionChatTableView.xib; sourceTree = "<group>"; };
 		A103A92322FEB8CE00CFC2B3 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		A103A92622FEB9F200CFC2B3 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = "New Group/ChatViewController.swift"; sourceTree = "<group>"; };
 		A103A92B22FEBA4700CFC2B3 /* ChatLeftTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatLeftTableViewCell.xib; sourceTree = "<group>"; };
@@ -221,6 +240,9 @@
 		A104A70922C90EEA0039B5AA /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
 		A104A70C22C91A080039B5AA /* MovieService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
 		A104A71022C98D400039B5AA /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		A105AE4B231201AE003CB9A3 /* CommentListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListCell.swift; sourceTree = "<group>"; };
+		A105AE4E231201E5003CB9A3 /* CommentListBaseRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListBaseRowViewModel.swift; sourceTree = "<group>"; };
+		A105AE502312020B003CB9A3 /* CommentListHeaderRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListHeaderRowViewModel.swift; sourceTree = "<group>"; };
 		A105E03D22D9BF3D00B85080 /* FavoriteMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieViewModel.swift; sourceTree = "<group>"; };
 		A105E03F22D9BFDD00B85080 /* FavoriteSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSectionViewModel.swift; sourceTree = "<group>"; };
 		A105E04122D9BFED00B85080 /* FavoriteRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRowViewModel.swift; sourceTree = "<group>"; };
@@ -351,6 +373,12 @@
 		A1FE3F0C22E6231F00F780DA /* ListSectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSectionViewModel.swift; sourceTree = "<group>"; };
 		A1FE3F0E22E6233100F780DA /* ListRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowViewModel.swift; sourceTree = "<group>"; };
 		A1FE3F1022E62A5200F780DA /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
+		A1FE5E102311B4FE00DF12EB /* CommentListHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentListHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		A1FE5E112311B4FE00DF12EB /* CommentListHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentListHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		A1FEF71A230D79FE00D1C23B /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		A1FEF71B230D79FE00D1C23B /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
+		A1FEF71E230D7B3200D1C23B /* ChatHeaderRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHeaderRowViewModel.swift; sourceTree = "<group>"; };
+		A1FEF723230D7C7D00D1C23B /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		A1FF5BC522D0E19B004B334B /* UIView+MF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+MF.swift"; sourceTree = "<group>"; };
 		A1FF5BC922D0FF56004B334B /* NewMovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		A1FF5BCA22D0FF56004B334B /* NewMovieCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewMovieCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -488,6 +516,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		A101074723114ABD0098B7C6 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A101074A23114B690098B7C6 /* FavoriteBaseRowViewModel.swift */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		A101074C23114CDA0098B7C6 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A101074D23114D370098B7C6 /* FavoriteCell.swift */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
 		A101AAED22F1D38100EF676B /* SearchMovie */ = {
 			isa = PBXGroup;
 			children = (
@@ -522,6 +566,7 @@
 				A1024B5122FF300300A33A68 /* Base */,
 				A1024B5222FF302800A33A68 /* ChatLeftRowViewModel.swift */,
 				A1024B5422FF304400A33A68 /* ChatRightRowViewModel.swift */,
+				A1FEF71E230D7B3200D1C23B /* ChatHeaderRowViewModel.swift */,
 			);
 			path = RowViewModel;
 			sourceTree = "<group>";
@@ -546,6 +591,7 @@
 			isa = PBXGroup;
 			children = (
 				A1024B5C22FF523100A33A68 /* AlertService.swift */,
+				A1013FEF231289950063200B /* CacheService.swift */,
 			);
 			path = AppService;
 			sourceTree = "<group>";
@@ -570,19 +616,38 @@
 		A103A92922FEBA2300CFC2B3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A1FEF720230D7BBC00D1C23B /* Base */,
 				A103A92E22FEBA6F00CFC2B3 /* ChatTableViewCell.swift */,
 				A103A92B22FEBA4700CFC2B3 /* ChatLeftTableViewCell.xib */,
 				A103A93222FEC1C100CFC2B3 /* ChatRightTableViewCell.xib */,
-				A1037B4C2301D27400177703 /* HeaderSectionChatTableView.swift */,
-				A1037B4E2301D28700177703 /* HeaderSectionChatTableView.xib */,
+				A1FEF71A230D79FE00D1C23B /* HeaderTableViewCell.swift */,
+				A1FEF71B230D79FE00D1C23B /* HeaderTableViewCell.xib */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		A105AE4A23120194003CB9A3 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A105AE4B231201AE003CB9A3 /* CommentListCell.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		A105AE4D231201CA003CB9A3 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A105AE4E231201E5003CB9A3 /* CommentListBaseRowViewModel.swift */,
+			);
+			name = Base;
 			sourceTree = "<group>";
 		};
 		A105E03B22D9B8C600B85080 /* RowViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A101074723114ABD0098B7C6 /* Base */,
 				A105E04122D9BFED00B85080 /* FavoriteRowViewModel.swift */,
+				A101074323114A320098B7C6 /* FavoriteHeaderRowViewModel.swift */,
 			);
 			path = RowViewModel;
 			sourceTree = "<group>";
@@ -621,6 +686,7 @@
 				A1026F6322F8FF7F00D2C888 /* StorageService.swift */,
 				A175BEBB22FC6B09009718E3 /* CommentListService.swift */,
 				A1024B5622FF322800A33A68 /* ChatService.swift */,
+				A1013FF123129CED0063200B /* MovieChatService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -662,7 +728,9 @@
 		A1157BFC22DAC24F008FC3D3 /* CommentListRowViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A105AE4D231201CA003CB9A3 /* Base */,
 				A1157C0122DAC2CB008FC3D3 /* CommentListRowViewModel.swift */,
+				A105AE502312020B003CB9A3 /* CommentListHeaderRowViewModel.swift */,
 			);
 			path = CommentListRowViewModel;
 			sourceTree = "<group>";
@@ -812,8 +880,11 @@
 		A1396AE822D9045C0046DE6A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A101074C23114CDA0098B7C6 /* Base */,
 				A1396AE422D8E1C40046DE6A /* FavoriteTableViewCell.swift */,
 				A1396AE522D8E1C40046DE6A /* FavoriteTableViewCell.xib */,
+				A101073F231147B90098B7C6 /* FavoriteHeaderTableViewCell.swift */,
+				A1010740231147B90098B7C6 /* FavoriteHeaderTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -821,8 +892,8 @@
 		A1396AE922D9046E0046DE6A /* FavoriteMovie */ = {
 			isa = PBXGroup;
 			children = (
-				A105E03C22D9BF1800B85080 /* SectionViewModel */,
 				A105E03B22D9B8C600B85080 /* RowViewModel */,
+				A105E03C22D9BF1800B85080 /* SectionViewModel */,
 				A105E03D22D9BF3D00B85080 /* FavoriteMovieViewModel.swift */,
 			);
 			path = FavoriteMovie;
@@ -1218,8 +1289,11 @@
 		A1FEE11022DA3A3F000F317F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A105AE4A23120194003CB9A3 /* Base */,
 				A175BEBD22FC8610009718E3 /* CommentListTableViewCell.swift */,
 				A175BEBE22FC8610009718E3 /* CommentListTableViewCell.xib */,
+				A1FE5E102311B4FE00DF12EB /* CommentListHeaderTableViewCell.swift */,
+				A1FE5E112311B4FE00DF12EB /* CommentListHeaderTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1232,6 +1306,14 @@
 				A1157BFD22DAC271008FC3D3 /* CommentListViewModel.swift */,
 			);
 			path = CommentList;
+			sourceTree = "<group>";
+		};
+		A1FEF720230D7BBC00D1C23B /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A1FEF723230D7C7D00D1C23B /* ChatCell.swift */,
+			);
+			name = Base;
 			sourceTree = "<group>";
 		};
 		A1FFF3F722EB72D50059A860 /* VideoList */ = {
@@ -1320,15 +1402,17 @@
 				A169EF8D22C1440300AC7D6F /* Main.storyboard in Resources */,
 				A102B2FC22F3D5700024E8FC /* Login.storyboard in Resources */,
 				A1D1D73222DB7348001ABDE9 /* EmailTableViewCell.xib in Resources */,
-				A1037B4F2301D28700177703 /* HeaderSectionChatTableView.xib in Resources */,
+				A1FE5E132311B4FE00DF12EB /* CommentListHeaderTableViewCell.xib in Resources */,
 				A1187CE822D63F1300E596F7 /* TrailerMovieView.xib in Resources */,
 				A1000B8322E418FE004CB269 /* NewMovieListTableViewCell.xib in Resources */,
+				A1FEF71D230D79FE00D1C23B /* HeaderTableViewCell.xib in Resources */,
 				A1AA7CEC22F1F5B80013E6B6 /* SearchMovieTableViewCell.xib in Resources */,
 				A107EC2622C531F000A711DA /* TrailersMovieTableViewCell.xib in Resources */,
 				A12CD83E22E8D1D90060B096 /* TopRateListTableViewCell.xib in Resources */,
 				A1806D8B22DF854B009EA18F /* ContentTableViewCell.xib in Resources */,
 				A1396AE722D8E1C40046DE6A /* FavoriteTableViewCell.xib in Resources */,
 				A103A92D22FEBA4700CFC2B3 /* ChatLeftTableViewCell.xib in Resources */,
+				A1010742231147B90098B7C6 /* FavoriteHeaderTableViewCell.xib in Resources */,
 				A1F75FB722E9DBC90097ADF1 /* TrailerMovieListTableViewCell.xib in Resources */,
 				A1FF5BCC22D0FF56004B334B /* NewMovieCollectionViewCell.xib in Resources */,
 				A1D1D73622DB7358001ABDE9 /* AddressTableViewCell.xib in Resources */,
@@ -1425,6 +1509,7 @@
 				A1000B6822E3FBA7004CB269 /* NewMovieListViewController.swift in Sources */,
 				A1460AC422C687C000E4BAA5 /* MovieListController.swift in Sources */,
 				A1806DA722DFF95A009EA18F /* MovieDetailController.swift in Sources */,
+				A101074B23114B690098B7C6 /* FavoriteBaseRowViewModel.swift in Sources */,
 				A1FFF3F922EB73110059A860 /* VideoListViewModel.swift in Sources */,
 				A1806D8A22DF854B009EA18F /* ContentTableViewCell.swift in Sources */,
 				A1024B4E22FF0F2800A33A68 /* ChatSectionViewModel.swift in Sources */,
@@ -1432,6 +1517,7 @@
 				A1460AB722C67DB000E4BAA5 /* Movie.swift in Sources */,
 				A105E04022D9BFDD00B85080 /* FavoriteSectionViewModel.swift in Sources */,
 				A12CD82C22E8C9610060B096 /* NowMovieListTableViewCell.swift in Sources */,
+				A101074423114A320098B7C6 /* FavoriteHeaderRowViewModel.swift in Sources */,
 				A1157C1822DADD6F008FC3D3 /* AccountRowViewModel.swift in Sources */,
 				A107EC2122C52B9B00A711DA /* TopRateTableViewCell.swift in Sources */,
 				A1A3E31622C3C64900C5DF5F /* NewMovieTableViewCell.swift in Sources */,
@@ -1443,6 +1529,7 @@
 				A1024B5722FF322800A33A68 /* ChatService.swift in Sources */,
 				A1AA7CF322F1FC330013E6B6 /* SearchMovieRowViewModel.swift in Sources */,
 				A1000B6C22E3FBC2004CB269 /* TopRateListViewController.swift in Sources */,
+				A105AE4F231201E5003CB9A3 /* CommentListBaseRowViewModel.swift in Sources */,
 				A1F75FB622E9DBC90097ADF1 /* TrailerMovieListTableViewCell.swift in Sources */,
 				A175BEBF22FC8611009718E3 /* CommentListTableViewCell.swift in Sources */,
 				A1157C1622DADD1C008FC3D3 /* AccountSectionViewModel.swift in Sources */,
@@ -1458,8 +1545,10 @@
 				A1024B5522FF304400A33A68 /* ChatRightRowViewModel.swift in Sources */,
 				A1460AB322C6796A00E4BAA5 /* MovieListSectionViewModel.swift in Sources */,
 				A1000B6E22E3FBCF004CB269 /* TrailerListViewController.swift in Sources */,
+				A105AE512312020B003CB9A3 /* CommentListHeaderRowViewModel.swift in Sources */,
 				A175BEBC22FC6B09009718E3 /* CommentListService.swift in Sources */,
 				A104A70D22C91A080039B5AA /* MovieService.swift in Sources */,
+				A1FEF71C230D79FE00D1C23B /* HeaderTableViewCell.swift in Sources */,
 				A1806D9222DF8BB9009EA18F /* CastCollectionViewCell.swift in Sources */,
 				A1083E0922C284330083F906 /* AccountViewController.swift in Sources */,
 				A1157C1A22DAE04C008FC3D3 /* AccountController.swift in Sources */,
@@ -1470,11 +1559,13 @@
 				A1FAEE1722E2FA4000FBF351 /* CommentViewModel.swift in Sources */,
 				A1460AC122C682CF00E4BAA5 /* MovieListCellViewModel.swift in Sources */,
 				A1D1D72922DB72FF001ABDE9 /* UsernameTableViewCell.swift in Sources */,
+				A1FEF71F230D7B3200D1C23B /* ChatHeaderRowViewModel.swift in Sources */,
 				A1187CE622D63F0100E596F7 /* TrailerMovieView.swift in Sources */,
 				A1806D8222DF758D009EA18F /* MovieDetailViewController.swift in Sources */,
 				A1065C1122ED430E0063DA69 /* MovieModel.swift in Sources */,
 				A1D1D74522DB796D001ABDE9 /* DateOfBirthViewModel.swift in Sources */,
 				A1FF5BCB22D0FF56004B334B /* NewMovieCollectionViewCell.swift in Sources */,
+				A1FE5E122311B4FE00DF12EB /* CommentListHeaderTableViewCell.swift in Sources */,
 				A1FCB97722EA7CCD0065595C /* VideoListViewController.swift in Sources */,
 				A1FAEE1422E2F7B800FBF351 /* CommentTableViewCell.swift in Sources */,
 				A1FF5BC622D0E19B004B334B /* UIView+MF.swift in Sources */,
@@ -1491,7 +1582,9 @@
 				A12CD81722E8C43B0060B096 /* NowMovieListViewModel.swift in Sources */,
 				A1806D8E22DF88E0009EA18F /* CastTableViewCell.swift in Sources */,
 				A1026F6422F8FF7F00D2C888 /* StorageService.swift in Sources */,
+				A1010741231147B90098B7C6 /* FavoriteHeaderTableViewCell.swift in Sources */,
 				A1D1D73122DB7348001ABDE9 /* EmailTableViewCell.swift in Sources */,
+				A1FEF724230D7C7D00D1C23B /* ChatCell.swift in Sources */,
 				A1065C0B22ECABD00063DA69 /* UILabel+MF.swift in Sources */,
 				A1806DA022DFEDC9009EA18F /* ContentViewModel.swift in Sources */,
 				A1FD10EB22E08B3C004380FA /* MovieDetailCell.swift in Sources */,
@@ -1506,11 +1599,12 @@
 				A1FE3F0D22E6231F00F780DA /* ListSectionViewModel.swift in Sources */,
 				A1000B7822E4095A004CB269 /* NewMovieListViewModel.swift in Sources */,
 				A1806D9C22DFED86009EA18F /* MovieDetailSectionViewModel.swift in Sources */,
-				A1037B4D2301D27400177703 /* HeaderSectionChatTableView.swift in Sources */,
 				A12CD83D22E8D1D90060B096 /* TopRateListTableViewCell.swift in Sources */,
+				A1013FF223129CED0063200B /* MovieChatService.swift in Sources */,
 				A1806DA522DFEDFA009EA18F /* MovieDetailRowViewModel.swift in Sources */,
 				A1000B7C22E409DD004CB269 /* NewMovieListSectionViewModel.swift in Sources */,
 				A12CD83022E8CE990060B096 /* TrailerMovieListViewModel.swift in Sources */,
+				A105AE4C231201AE003CB9A3 /* CommentListCell.swift in Sources */,
 				A107EC1D22C5272A00A711DA /* NowMovieView.swift in Sources */,
 				A169EF8822C1440300AC7D6F /* AppDelegate.swift in Sources */,
 				A1D1D73B22DB737E001ABDE9 /* DateOfBirthTableViewCell.swift in Sources */,
@@ -1520,6 +1614,7 @@
 				A1024B4C22FF0F1500A33A68 /* ChatRowViewModel.swift in Sources */,
 				A1157C0022DAC29D008FC3D3 /* CommentListSectionViewModel.swift in Sources */,
 				A105E03E22D9BF3D00B85080 /* FavoriteMovieViewModel.swift in Sources */,
+				A101074E23114D370098B7C6 /* FavoriteCell.swift in Sources */,
 				A1157C1C22DB2366008FC3D3 /* AccountCell.swift in Sources */,
 				A1024B5322FF302800A33A68 /* ChatLeftRowViewModel.swift in Sources */,
 				A1083E0322C283AA0083F906 /* MovieListViewController.swift in Sources */,
@@ -1553,6 +1648,7 @@
 				A1AA7CE722F1F2640013E6B6 /* SearchMovieViewController.swift in Sources */,
 				A1157C0422DAC3F6008FC3D3 /* GroupComment.swift in Sources */,
 				A1024B4622FF0E2200A33A68 /* ChatViewModel.swift in Sources */,
+				A1013FF0231289950063200B /* CacheService.swift in Sources */,
 				A1BFED2D22D2B13E005F4000 /* UInt64+MF.swift in Sources */,
 				A10435AB22DCCFDF00784A10 /* UIImageView+MF.swift in Sources */,
 				A1065C1422ED59FF0063DA69 /* AccountService.swift in Sources */,

@@ -348,7 +348,7 @@ class MovieService {
         movie.backdropPath = movieJson["backdrop_path"]?.string
         movie.adult = movieJson["adult"]?.bool
         movie.overview = movieJson["overview"]?.string
-        movie.releaseDate = Utils.dateFromString(dateFormat: Utils.YYYY_MM_DD, string: movieJson["release_date"]?.string)
+        movie.releaseDate = Utils.share.dateFromString(dateFormat: Utils.YYYY_MM_DD, string: movieJson["release_date"]?.string)
         return movie
     }
     

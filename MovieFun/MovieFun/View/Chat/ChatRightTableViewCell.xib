@@ -19,17 +19,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cancel" translatesAutoresizingMaskIntoConstraints="NO" id="Kvy-1j-TaE">
-                        <rect key="frame" x="388" y="53.5" width="16" height="16"/>
+                        <rect key="frame" x="388" y="58.5" width="16" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="16" id="AhL-LE-ltW"/>
                             <constraint firstAttribute="height" constant="16" id="hpg-yf-TbJ"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pJi-w3-A1h" userLabel="Message View">
-                        <rect key="frame" x="10" y="10" width="368" height="59.5"/>
+                        <rect key="frame" x="364.5" y="5" width="39.5" height="69.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H09-gw-Exc">
-                                <rect key="frame" x="10" y="10" width="348" height="39.5"/>
+                                <rect key="frame" x="5" y="5" width="29.5" height="59.5"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -37,21 +37,21 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="H09-gw-Exc" firstAttribute="leading" secondItem="pJi-w3-A1h" secondAttribute="leading" constant="10" id="52n-Fb-a8u"/>
-                            <constraint firstAttribute="trailing" secondItem="H09-gw-Exc" secondAttribute="trailing" constant="10" id="6km-Ec-B44"/>
-                            <constraint firstItem="H09-gw-Exc" firstAttribute="top" secondItem="pJi-w3-A1h" secondAttribute="top" constant="10" id="6w1-ij-wK9"/>
-                            <constraint firstAttribute="width" constant="368" id="OLD-tU-RiO"/>
-                            <constraint firstAttribute="bottom" secondItem="H09-gw-Exc" secondAttribute="bottom" constant="10" id="hom-Bq-b3Z"/>
+                            <constraint firstItem="H09-gw-Exc" firstAttribute="leading" secondItem="pJi-w3-A1h" secondAttribute="leading" constant="5" id="52n-Fb-a8u"/>
+                            <constraint firstAttribute="trailing" secondItem="H09-gw-Exc" secondAttribute="trailing" constant="5" id="6km-Ec-B44"/>
+                            <constraint firstItem="H09-gw-Exc" firstAttribute="top" secondItem="pJi-w3-A1h" secondAttribute="top" constant="5" id="6w1-ij-wK9"/>
+                            <constraint firstAttribute="bottom" secondItem="H09-gw-Exc" secondAttribute="bottom" constant="5" id="hom-Bq-b3Z"/>
                         </constraints>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="pJi-w3-A1h" firstAttribute="top" secondItem="WmU-rk-GCF" secondAttribute="top" constant="10" id="8TH-te-4gG"/>
-                    <constraint firstAttribute="bottom" secondItem="Kvy-1j-TaE" secondAttribute="bottom" constant="10" id="KLq-W9-sIY"/>
-                    <constraint firstItem="Kvy-1j-TaE" firstAttribute="leading" secondItem="pJi-w3-A1h" secondAttribute="trailing" constant="10" id="Mpr-ey-Ko5"/>
+                    <constraint firstItem="pJi-w3-A1h" firstAttribute="top" secondItem="WmU-rk-GCF" secondAttribute="top" constant="5" id="8TH-te-4gG"/>
+                    <constraint firstAttribute="bottom" secondItem="Kvy-1j-TaE" secondAttribute="bottom" constant="5" id="KLq-W9-sIY"/>
+                    <constraint firstItem="Kvy-1j-TaE" firstAttribute="leading" secondItem="pJi-w3-A1h" secondAttribute="trailing" constant="-16" id="Mpr-ey-Ko5"/>
+                    <constraint firstItem="H09-gw-Exc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WmU-rk-GCF" secondAttribute="leading" constant="20" id="YX2-DE-tFS"/>
                     <constraint firstAttribute="trailing" secondItem="Kvy-1j-TaE" secondAttribute="trailing" constant="10" id="dPL-x5-4ID"/>
-                    <constraint firstAttribute="bottom" secondItem="pJi-w3-A1h" secondAttribute="bottom" constant="10" id="q5q-tl-jwp"/>
+                    <constraint firstAttribute="bottom" secondItem="pJi-w3-A1h" secondAttribute="bottom" constant="5" id="q5q-tl-jwp"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -59,7 +59,6 @@
                 <outlet property="marginRightMessageView" destination="Mpr-ey-Ko5" id="Zwz-rf-wIy"/>
                 <outlet property="messageLabel" destination="H09-gw-Exc" id="teo-T8-i7i"/>
                 <outlet property="messageView" destination="pJi-w3-A1h" id="yS1-lZ-q8H"/>
-                <outlet property="widthMessageViewConstraint" destination="OLD-tU-RiO" id="n9t-ll-VAy"/>
             </connections>
             <point key="canvasLocation" x="11.594202898550726" y="-8.0357142857142847"/>
         </tableViewCell>

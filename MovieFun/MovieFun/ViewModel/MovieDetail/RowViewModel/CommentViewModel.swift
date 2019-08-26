@@ -10,7 +10,7 @@ import Foundation
 
 protocol CommentViewModelDelegate:class {
     
-    func commentForMovie(movieId: Int)
+    func commentForMovie(movie: Movie)
     
 }
 

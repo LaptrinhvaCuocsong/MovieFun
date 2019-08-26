@@ -8,9 +8,8 @@
 
 import Foundation
 
-class CommentListRowViewModel {
+class CommentListRowViewModel: CommentListBaseRowViewModel {
     
     var groupComment: DynamicType<GroupComment>?
-    var movieInformation: Movie?
     
 }

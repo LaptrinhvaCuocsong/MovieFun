@@ -10,10 +10,12 @@ import Foundation
 
 class CommentListViewModel {
     
+    var isHiddenSearchBar: DynamicType<Bool>?
     var isFetching: DynamicType<Bool>?
     var commentListSectionViewModels: DynamicType<[CommentListSectionViewModel]>?
     
     init() {
+        isHiddenSearchBar = DynamicType<Bool>(value: false)
         isFetching = DynamicType<Bool>(value: false)
         commentListSectionViewModels = DynamicType<[CommentListSectionViewModel]>(value: [CommentListSectionViewModel]())
     }

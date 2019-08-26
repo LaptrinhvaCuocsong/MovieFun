@@ -36,7 +36,7 @@ class NowMovieView: UIView {
     func setContent(movieId: Int?, title: String?, rage: Double?, releaseDate: Date?, overview: String?, posterPath: String?) {
         titleLabel.text = title
         voteRageLabel.text = "\(rage ?? 0.0)"
-        releaseDateLabel.text = Utils.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: releaseDate)
+        releaseDateLabel.text = Utils.share.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: releaseDate)
         overviewLabel.text = overview
         imageView.image = nil
         if let posterPath = posterPath {

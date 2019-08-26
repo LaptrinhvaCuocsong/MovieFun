@@ -32,7 +32,7 @@ class NowMovieListTableViewCell: UITableViewCell {
     private func setContent() {
         if let viewModel = nowMovieListRowVM, let movie = viewModel.movie?.value {
             titleLabel.text = movie.title
-            releaseDateLabel.text = Utils.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: movie.releaseDate)
+            releaseDateLabel.text = Utils.share.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: movie.releaseDate)
             ratingLabel.text = "\(movie.voteAverage ?? 0.0)"
             overviewLabel.text = movie.overview
             adultImage.isHidden = !(movie.adult ?? true)

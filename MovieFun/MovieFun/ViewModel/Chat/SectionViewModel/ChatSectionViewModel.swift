@@ -10,7 +10,6 @@ import Foundation
 
 class ChatSectionViewModel {
     
-    var sendDateStr: String?
     var rowViewModels: DynamicType<[ChatRowViewModel]>?
     
     init() {

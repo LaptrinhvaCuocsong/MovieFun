@@ -11,10 +11,14 @@ import SVProgressHUD
 
 class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var searchBarView: UIView!
     @IBOutlet weak var favoriteTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var marginTopTableView: NSLayoutConstraint!
+    @IBOutlet weak var heightSearchBarView: NSLayoutConstraint!
     
-    let HEIGHT_OF_CELL = 200.0
+    private let HEIGHT_OF_CELL = 200.0
+    private let HEIGHT_OF_HEADER_CELL = 58.0
     
     var viewModel: FavoriteMovieViewModel {
         get {
@@ -55,10 +59,40 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
                 SVProgressHUD.show()
             }
         }
+        viewModel.isLoadFail?.listener = {[weak self] (isLoadFail) in
+            if isLoadFail {
+                self?.showAlertFetchingError()
+            }
+        }
+        viewModel.isHiddenSearchBar?.listener = {[weak self] (isHiddenSearchBar) in
+            if isHiddenSearchBar {
+                self?.hiddenSearchBar(true)
+            }
+            else {
+                self?.hiddenSearchBar(false)
+            }
+        }
+    }
+    
+    private func hiddenSearchBar(_ isHidden: Bool) {
+        if isHidden {
+            searchBarView.isHidden = true
+            marginTopTableView.constant = -1.0 * heightSearchBarView.constant
+        }
+        else {
+            searchBarView.isHidden = false
+            marginTopTableView.constant = 0.0
+        }
+        view.layoutIfNeeded()
+    }
+    
+    private func showAlertFetchingError() {
+        AlertService.share.showAlertError(for: self)
     }
     
     private func registerCell() {
         favoriteTableView.register(UINib(nibName: FavoriteTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: FavoriteTableViewCell.cellIdentify)
+        favoriteTableView.register(UINib(nibName: FavoriteHeaderTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: FavoriteHeaderTableViewCell.cellIdentify)
     }
 
     private func setFavoriteTableView() {
@@ -80,23 +114,35 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let sectionVM = viewModel.sectionViewModels!.value![indexPath.section]
         let rowVM = sectionVM.rowViewModels!.value![indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: FavoriteTableViewCell.cellIdentify, for: indexPath) as! FavoriteTableViewCell
-        cell.setUp(with: rowVM)
-        return cell
+        if let cellIdentify = controller.cellIdentify(rowVM: rowVM) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentify, for: indexPath)
+            if let cell = cell as? FavoriteCell {
+                cell.setUp(with: rowVM)
+            }
+            return cell
+        }
+        return UITableViewCell()
     }
     
     //MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let sectionVM = viewModel.sectionViewModels!.value![indexPath.section]
+        let rowVM = sectionVM.rowViewModels!.value![indexPath.row]
+        if rowVM is FavoriteHeaderRowViewModel {
+            return CGFloat(HEIGHT_OF_HEADER_CELL)
+        }
         return CGFloat(HEIGHT_OF_CELL)
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sectionVM = viewModel.sectionViewModels!.value![indexPath.section]
         let rowVM = sectionVM.rowViewModels!.value![indexPath.row]
-        if let movie = rowVM.favoriteMovie?.value, let movieId = movie.id {
-            let detailMovieVC = MovieDetailViewController.createMovieDetailViewController(with: "\(movieId)")
-            navigationController?.pushViewController(detailMovieVC, animated: true)
+        if let rowVM = rowVM as? FavoriteRowViewModel {
+            if let movie = rowVM.favoriteMovie?.value, let movieId = movie.id {
+                let detailMovieVC = MovieDetailViewController.createMovieDetailViewController(with: "\(movieId)")
+                navigationController?.pushViewController(detailMovieVC, animated: true)
+            }
         }
     }
     
@@ -104,8 +150,9 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
 
 extension FavoriteMovieViewController: FavoriteMovieViewModelDelegate {
     
-    func reloadData() {
+    func removeFavoriteMovie() {
         controller.start()
+        NotificationCenter.default.post(name: .REMOVE_FAVORITE_MOVIE_NOTIFICATION_KEY, object: nil, userInfo: nil)
     }
     
 }

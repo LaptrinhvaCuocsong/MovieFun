@@ -9,9 +9,9 @@
 import Foundation
 
 struct Message {
+    var messageId: String?
     var accountId: String?
     var accountName: String?
     var sendDate: Date?
     var content: String?
-    var addMessageSuccess = true
 }

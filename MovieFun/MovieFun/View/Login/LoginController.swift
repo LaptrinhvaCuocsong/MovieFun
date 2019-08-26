@@ -22,7 +22,7 @@ class LoginController {
             self?.loginViewModel?.isLoading?.value = false
             if error == nil {
                 if let user = user {
-                    AccountService.share.setAccountId(accountId: user.uid)
+                    AccountService.share.saveAccountId(accountId: user.uid)
                     self?.loginViewModel?.isLoginSuccess?.value = true
                 }
                 else {

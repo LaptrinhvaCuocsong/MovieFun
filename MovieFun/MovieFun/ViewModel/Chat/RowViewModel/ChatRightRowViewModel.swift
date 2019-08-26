@@ -10,15 +10,15 @@ import Foundation
 
 class ChatRightRowViewModel: ChatRowViewModel {
 
-    var addMessagesSuccess: Bool?
+    var addMessagesSuccess: DynamicType<Bool>?
     
     override init() {
         super.init()
-        addMessagesSuccess = true
+        addMessagesSuccess = DynamicType<Bool>(value: true)
     }
     
     init(addMessageSuccess: Bool) {
-        self.addMessagesSuccess = addMessageSuccess
+        self.addMessagesSuccess = DynamicType<Bool>(value: addMessageSuccess)
     }
     
 }

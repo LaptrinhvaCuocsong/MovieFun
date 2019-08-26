@@ -29,11 +29,7 @@ class AccountService {
         return account?.accountId
     }
     
-    func setAccountId(accountId: String) {
-        if account == nil {
-            account = Account()
-        }
-        account?.accountId = accountId
+    func saveAccountId(accountId: String) {
         UserDefaults.standard.set(accountId, forKey: "userLogin")
     }
     
@@ -55,9 +51,16 @@ class AccountService {
         }
     }
     
+    func logout() {
+        account = nil
+        UserDefaults.standard.removeObject(forKey: "userLogin")
+    }
+    
     func updateAccount(account: Account, completion: ((Error?) -> Void)?) {
         let completion:((Error?) -> Void) = completion ?? {_ in}
-        AccountService.share.account = account
+        self.account?.username = account.username
+        self.account?.address = account.address
+        self.account?.dateOfBirth = account.dateOfBirth
         db.collection("account").document(account.accountId).setData([
             "accountId": account.accountId,
             "username": account.username,
@@ -74,14 +77,19 @@ class AccountService {
         db.collection("account").document(userId).getDocument {[weak self] (query, error) in
             if error == nil {
                 if let document = query?.data() {
-                    let account = Account()
-                    account.accountId = document["accountId"] as! String
-                    account.username = document["username"] as! String
-                    account.email = document["email"] as! String
-                    account.address = document["address"] as! String
-                    account.dateOfBirth = (document["dateOfBirth"] as! Timestamp).dateValue()
-                    self?.account = account
-                    completion(account, nil)
+                    if let accountId = document["accountId"] as? String {
+                        let account = Account()
+                        account.accountId = accountId
+                        account.username = document["username"] as? String ?? ""
+                        account.email = document["email"] as? String ?? "email@gmail.com"
+                        account.address = document["address"] as? String ?? ""
+                        account.dateOfBirth = (document["dateOfBirth"] as? Timestamp)?.dateValue() ?? Date()
+                        self?.account = account
+                        completion(account, nil)
+                    }
+                    else {
+                        completion(nil, nil)
+                    }
                 }
                 else {
                     completion(nil, nil)
@@ -104,6 +112,7 @@ class AccountService {
         ]) {[weak self] (error) in
             if error == nil {
                 self?.account = account
+                self?.saveAccountId(accountId: account.accountId)
             }
             completion(error)
         }

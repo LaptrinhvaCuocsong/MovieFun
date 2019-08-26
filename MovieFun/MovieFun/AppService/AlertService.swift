@@ -28,4 +28,13 @@ class AlertService {
         viewController.present(alertVC, animated: true, completion: nil)
     }
     
+    func showAlert(for viewController: UIViewController, title: String?, message: String?, titleButton: String?, action: (() -> Void)?) {
+        let action: (() -> Void) = action ?? {}
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: titleButton ?? "OK", style: .default, handler: { (_) in
+            action()
+        }))
+        viewController.present(alertVC, animated: true, completion: nil)
+    }
+    
 }

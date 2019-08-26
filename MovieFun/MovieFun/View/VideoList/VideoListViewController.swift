@@ -56,6 +56,17 @@ class VideoListViewController: UIViewController {
                 SVProgressHUD.show()
             }
         }
+        viewModel.isLoadFail?.listener = {[weak self] (isLoadFail) in
+            if isLoadFail {
+                self?.showAlertLoadFail()
+            }
+        }
+    }
+    
+    private func showAlertLoadFail() {
+        AlertService.share.showAlert(for: self, title: "Video is unavailable", message: nil, titleButton: "Back") {[weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
     }
 
 }

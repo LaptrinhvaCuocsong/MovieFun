@@ -10,7 +10,7 @@ import Foundation
 
 class GroupComment {
     
-    var movieId: String?
+    var movie: Movie?
     var newMessage: String?
     var newSenderName: String?
     var sendDate: Date?

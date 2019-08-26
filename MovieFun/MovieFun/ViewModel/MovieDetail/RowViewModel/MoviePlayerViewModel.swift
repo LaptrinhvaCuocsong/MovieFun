@@ -12,7 +12,7 @@ import UIKit
 protocol MoviePlayerViewModelDelegate: class {
     
     func pushToViewController(viewController: UIViewController, animated: Bool)
-    
+        
 }
 
 class MoviePlayerViewModel: MovieDetailRowViewModel {

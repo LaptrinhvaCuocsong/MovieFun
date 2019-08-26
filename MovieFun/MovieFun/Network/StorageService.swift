@@ -34,13 +34,11 @@ class StorageService {
         }
     }
     
-    func downloadImage(completion: ((Data?, Error?) -> Void)?) {
+    func downloadImage(accountId: String, completion: ((Data?, Error?) -> Void)?) {
         let completion:((Data?, Error?) -> Void) = completion ?? {_,_ in}
-        if let accountId = AccountService.share.getAccountId() {
-            let storageRef = storage.reference().child(accountId)
-            storageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
-                completion(data, error)
-            }
+        let storageRef = storage.reference().child(accountId)
+        storageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+            completion(data, error)
         }
     }
     

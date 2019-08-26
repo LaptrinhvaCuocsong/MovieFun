@@ -16,6 +16,7 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var accountTableView: UITableView!
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
     
     var imagePickerController: UIImagePickerController?
     
@@ -37,6 +38,10 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         setAccountTableView()
         registerCell()
         initBinding()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         if !AccountService.share.isLogin() {
             addLoginViewController()
             return
@@ -67,6 +72,7 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         loginVC.view.frame = CGRect(x: 0.0, y: 0.0, width: view.width, height: view.height)
         view.addSubview(loginVC.view)
         didMove(toParent: self)
+        logoutButton.isEnabled = false
     }
     
     private func initBinding() {
@@ -96,15 +102,19 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         viewModel.username?.listener = {[weak self] (username) in
             self?.usernameLabel.text = username
         }
-        viewModel.isFetchFail?.listener = {[weak self] (isFetchFail) in
-            if isFetchFail {
+        viewModel.logoutSuccess?.listener = {[weak self] (logoutSuccess) in
+            if logoutSuccess {
+                SVProgressHUD.dismiss()
                 self?.addLoginViewController()
+            }
+            else {
+                SVProgressHUD.show()
             }
         }
     }
     
     private func showAlertError() {
-        let alertVC = UIAlertController(title: "Error", message: "Update faile", preferredStyle: .alert)
+        let alertVC = UIAlertController(title: "Error", message: "Update fail", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alertVC, animated: true, completion: nil)
     }
@@ -177,6 +187,10 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+    @IBAction func logout(_ sender: UIBarButtonItem) {
+        controller.logout(delay: 1.0)
+    }
+    
     //MARK: UIImagePickerControllerDelegate
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -219,6 +233,7 @@ extension AccountViewController: LoginViewControllerDelegate {
         viewController.view.removeFromSuperview()
         viewController.removeFromParent()
         controller.start()
+        logoutButton.isEnabled = true
     }
     
 }

@@ -10,11 +10,11 @@ import Foundation
 
 protocol FavoriteRowViewModelDelegate: class {
 
-    func reloadData()
+    func removeFavoriteMovie()
     
 }
 
-class FavoriteRowViewModel: NSObject {
+class FavoriteRowViewModel: FavoriteBaseRowViewModel {
     
     var favoriteMovie: DynamicType<Movie>?
     var isLoading: DynamicType<Bool>?
@@ -29,8 +29,8 @@ class FavoriteRowViewModel: NSObject {
         if let movieId = favoriteMovie?.value?.id {
             isLoading?.value = true
             FavoriteMovieService.share.removeFavoriteMovie(movieId: movieId) {[weak self] (deleteSuccess, error) in
-                if error == nil && deleteSuccess == nil {
-                    self?.delegate?.reloadData()
+                if error == nil && deleteSuccess != nil {
+                    self?.delegate?.removeFavoriteMovie()
                 }
                 self?.isLoading?.value = false
             }

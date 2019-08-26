@@ -35,6 +35,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.registerCell()
         self.initBinding()
         self.controller?.start()
+        NotificationCenter.default.addObserver(self, selector: #selector(handlerRemoveFavoriteMovie(notification:)), name: .REMOVE_FAVORITE_MOVIE_NOTIFICATION_KEY, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,12 +61,20 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         isDidAppear = false
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func initViewModel() {
         //Implement at child class
     }
     
     func setNavigationItem() {
         //Implement at child class
+    }
+    
+    @objc private func handlerRemoveFavoriteMovie(notification: Notification) {
+        controller?.loadFavoriteMovies()
     }
     
     private func setRefreshControl() {

@@ -11,15 +11,10 @@ import Foundation
 class ChatController {
     
     var chatViewModel: ChatViewModel?
-    var dateFormatter: DateFormatter!
     var messages: [Message]?
     
     init() {
         chatViewModel = ChatViewModel()
-        dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "vi_VN")
-        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-        dateFormatter.dateFormat = "yyyy/MM/dd"
     }
     
     func start() {
@@ -30,29 +25,35 @@ class ChatController {
                     if let messages = messages, let groupMessages = self?.createGroupMessage(messages: messages) {
                         self?.buildViewModels(groupMessages)
                     }
-                    self?.messages = messages
                     self?.chatViewModel?.isFetching?.value = false
+                    self?.messages = messages
                 }
+                self?.initListener(movieId: movieId)
             }
-            ChatService.share.addListener(movieId: movieId) {[weak self] (messageChanges, error) in
-                if error == nil {
-                    if let messageChanges = messageChanges, let accountId = AccountService.share.getAccountId() {
-                        var haveOtherAccount = false
-                        for message in messageChanges {
-                            if let accId = message.accountId {
-                                if accId != accountId {
-                                    self?.messages?.append(message)
-                                    haveOtherAccount = true
-                                }
+        }
+    }
+    
+    private func initListener(movieId: String) {
+        ChatService.share.addListener(movieId: movieId) {[weak self] (messageChanges, error) in
+            if error == nil {
+                if let messageChanges = messageChanges, let accountId = AccountService.share.getAccountId() {
+                    var haveAddMessage = false
+                    for message in messageChanges {
+                        if !(self?.checkExistMessage(message: message) ?? true) {
+                            self?.messages?.append(message)
+                            var rowVM: ChatRowViewModel?
+                            if message.accountId! != accountId {
+                                rowVM = ChatLeftRowViewModel()
                             }
-                        }
-                        if haveOtherAccount {
-                            if let messages = self?.messages, let groupMessages = self?.createGroupMessage(messages: messages) {
-                                self?.buildViewModels(groupMessages)
-                                self?.chatViewModel?.receiveMessageSuccess?.value = true
+                            else {
+                                rowVM = ChatRightRowViewModel()
                             }
+                            rowVM?.currentMessage = message
+                            self?.addRowViewModel(rowVM: rowVM!)
+                            haveAddMessage = true
                         }
                     }
+                    self?.chatViewModel?.haveAddMessage?.value = haveAddMessage
                 }
             }
         }
@@ -64,45 +65,70 @@ class ChatController {
         }
     }
     
-    func addMessage(_ text: String) {
+    func addMessage(_ text: String, addSuccess: ((Message) -> Void)?) {
         chatViewModel?.haveAddMessage?.value = false
         var message = Message()
         message.accountId = AccountService.share.getAccountId()
         message.accountName = AccountService.share.getAccountName()
-        message.sendDate = Date()
+        message.sendDate = Utils.share.getCurrentDate()
         message.content = text
-        message.addMessageSuccess = false
-        if var messages = self.messages {
-            messages.append(message)
-            buildViewModels(createGroupMessage(messages: messages))
-            chatViewModel?.haveAddMessage?.value = true
-            if let movieId = chatViewModel?.movieId {
-                chatViewModel?.addMessageSuccess?.value = false
-                ChatService.share.addChatMessage(movieId: movieId, message: message) {[weak self] (isSuccess, error) in
-                    if error == nil && isSuccess ?? false {
-                        message.addMessageSuccess = true
-                        self?.buildViewModels(self!.createGroupMessage(messages: messages))
-                        self?.chatViewModel?.addMessageSuccess?.value = true
+        messages?.append(message)
+        let rowVM = ChatRightRowViewModel(addMessageSuccess: false)
+        rowVM.currentMessage = message
+        addRowViewModel(rowVM: rowVM)
+        chatViewModel?.haveAddMessage?.value = true
+        if let movieId = chatViewModel?.movieId {
+            ChatService.share.addChatMessage(movieId: movieId, message: message) { (messageId, error) in
+                if error == nil && messageId != nil {
+                    message.messageId = messageId
+                    rowVM.addMessagesSuccess?.value = true
+                    if addSuccess != nil {
+                        addSuccess!(message)
                     }
+                }
+                else {
+                    rowVM.addMessagesSuccess?.value = false
                 }
             }
         }
     }
     
+    private func addRowViewModel(rowVM: ChatRowViewModel) {
+        if let lastSection = chatViewModel?.sectionViewModels?.value?.last {
+            if let headerVM = lastSection.rowViewModels?.value?.first as? ChatHeaderRowViewModel, let timeStr = headerVM.sendDateStr {
+                if timeStr == Utils.share.stringFromDate(dateFormat: Utils.YYYYMMDD, date: rowVM.currentMessage!.sendDate!) {
+                    if let previousRowVM = lastSection.rowViewModels?.value?.last {
+                        rowVM.previousMessage = previousRowVM.currentMessage
+                    }
+                    lastSection.rowViewModels?.value?.append(rowVM)
+                    return
+                }
+            }
+        }
+        let sectionVM = ChatSectionViewModel()
+        let headerVM = ChatHeaderRowViewModel()
+        headerVM.sendDateStr = Utils.share.stringFromDate(dateFormat: Utils.YYYYMMDD, date: rowVM.currentMessage!.sendDate!)
+        sectionVM.rowViewModels?.value?.append(headerVM)
+        sectionVM.rowViewModels?.value?.append(rowVM)
+        chatViewModel?.sectionViewModels?.value?.append(sectionVM)
+    }
+    
     private func buildViewModels(_ groupMessages: [[Message]]) {
-        chatViewModel?.sectionViewModels?.value?.removeAll()
         for groupMessage in groupMessages {
             let sectionVM = ChatSectionViewModel()
             chatViewModel?.sectionViewModels?.value?.append(sectionVM)
+            var headerVM: ChatHeaderRowViewModel?
             for (i, message) in groupMessage.enumerated() {
                 if let sendDate = message.sendDate {
-                    if sectionVM.sendDateStr == nil {
-                        sectionVM.sendDateStr = dateFormatter.string(from: sendDate)
+                    if headerVM == nil {
+                        headerVM = ChatHeaderRowViewModel()
+                        headerVM?.sendDateStr = Utils.share.stringFromDate(dateFormat: Utils.YYYYMMDD, date: sendDate)
+                        sectionVM.rowViewModels?.value?.append(headerVM!)
                     }
                     let accountId = AccountService.share.getAccountId()!
                     var rowVM: ChatRowViewModel!
                     if (accountId == message.accountId!) {
-                        rowVM = ChatRightRowViewModel(addMessageSuccess: message.addMessageSuccess)
+                        rowVM = ChatRightRowViewModel()
                     }
                     else {
                         rowVM = ChatLeftRowViewModel()
@@ -115,12 +141,23 @@ class ChatController {
         }
     }
     
+    private func checkExistMessage(message: Message) -> Bool {
+        if let messages = self.messages {
+            for mess in messages {
+                if mess.accountId! == message.accountId! && mess.sendDate! == message.sendDate! {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
     private func createGroupMessage(messages: [Message]) -> [[Message]] {
         var groupMessages = [[Message]]()
         var dictinary:[TimeInterval:[Message]] = [TimeInterval:[Message]]()
         for message in messages {
             if let sendDate = message.sendDate {
-                if let date = dateFormatter.date(from: dateFormatter.string(from: sendDate)) {
+                if let sendDateStr = Utils.share.stringFromDate(dateFormat: Utils.YYYYMMDD, date: sendDate), let date = Utils.share.dateFromString(dateFormat: Utils.YYYYMMDD, string: sendDateStr) {
                     let s = date.timeIntervalSince1970
                     if dictinary[s] == nil {
                         dictinary[s] = [Message]()
@@ -130,7 +167,9 @@ class ChatController {
             }
         }
         for key in dictinary.keys.sorted() {
-            groupMessages.append(dictinary[key]!)
+            groupMessages.append(dictinary[key]!.sorted(by: { (mess1, mess2) -> Bool in
+                return mess1.sendDate! < mess2.sendDate!
+            }))
         }
         return groupMessages
     }
@@ -141,6 +180,8 @@ class ChatController {
             return ChatTableViewCell.cellLeftIdentify
         case is ChatRightRowViewModel:
             return ChatTableViewCell.cellRightIdentify
+        case is ChatHeaderRowViewModel:
+            return HeaderTableViewCell.cellIdentify
         default:
             return nil
         }

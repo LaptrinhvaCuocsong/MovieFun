@@ -97,11 +97,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5hm-t2-gBz"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Account" id="MxC-kQ-Bs7"/>
+                    <navigationItem key="navigationItem" title="Account" id="MxC-kQ-Bs7">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" style="plain" id="0s6-bg-Fex">
+                            <connections>
+                                <action selector="logout:" destination="h6C-oH-3Vw" id="VhU-iQ-vY8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="accountImageView" destination="bdA-SP-mZ8" id="UUp-Wm-DMa"/>
                         <outlet property="accountTableView" destination="MHc-X3-HR1" id="O6e-VZ-MxF"/>
                         <outlet property="emailLabel" destination="UBs-x7-1PH" id="9Ex-Xh-Lyu"/>
+                        <outlet property="logoutButton" destination="0s6-bg-Fex" id="BqO-zn-Lj6"/>
                         <outlet property="usernameLabel" destination="Cpf-cA-0Sy" id="iib-F3-G5g"/>
                     </connections>
                 </viewController>
@@ -161,7 +168,10 @@
                     <navigationItem key="navigationItem" title="Favourite Movie" id="KS5-0c-iM0"/>
                     <connections>
                         <outlet property="favoriteTableView" destination="Uzy-7Z-HI4" id="MX1-XH-x0e"/>
+                        <outlet property="heightSearchBarView" destination="7qE-aI-cYv" id="4iq-3g-H2J"/>
+                        <outlet property="marginTopTableView" destination="dMD-3B-3EF" id="4fW-jf-y32"/>
                         <outlet property="searchBar" destination="wPD-gc-Q8t" id="Kio-fw-iE2"/>
+                        <outlet property="searchBarView" destination="HZl-BL-Qs1" id="C3e-FE-znQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZh-AJ-Lf0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -234,7 +244,10 @@
                     <navigationItem key="navigationItem" title="Comment List" id="GqR-g1-CFi"/>
                     <connections>
                         <outlet property="commentListTableView" destination="SRC-uf-wcy" id="6P9-vI-ILe"/>
+                        <outlet property="heightSearchBarView" destination="8mR-OW-7I1" id="Gw7-nA-07Y"/>
+                        <outlet property="marginTopTableView" destination="Ne5-uB-kni" id="PEL-xx-QuH"/>
                         <outlet property="searchBar" destination="uwB-sS-JDe" id="PmG-Za-RfQ"/>
+                        <outlet property="searchBarView" destination="SGE-tC-DD6" id="R1X-I8-1zL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HQK-r0-BOQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -244,21 +257,21 @@
         <!--Chat View Controller-->
         <scene sceneID="Pw1-Jn-Vx0">
             <objects>
-                <viewController storyboardIdentifier="ChatViewController" id="tK7-J1-7Jf" customClass="ChatViewController" customModule="MovieFun" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" hidesBottomBarWhenPushed="YES" id="tK7-J1-7Jf" customClass="ChatViewController" customModule="MovieFun" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yxZ-Yv-QG9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RcO-Wj-bWJ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="748"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="797"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="tK7-J1-7Jf" id="180-zg-iBC"/>
                                     <outlet property="delegate" destination="tK7-J1-7Jf" id="4cp-ec-DiZ"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HX2-RU-gZa">
-                                <rect key="frame" x="0.0" y="753" width="414" height="60"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HX2-RU-gZa" userLabel="Chat Text View">
+                                <rect key="frame" x="0.0" y="802" width="414" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yju-fu-Ps3">
                                         <rect key="frame" x="372" y="14" width="32" height="32"/>
@@ -274,6 +287,9 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jLc-Sp-klU">
                                         <rect key="frame" x="10" y="10" width="352" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="bsa-X8-4KQ"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <connections>
@@ -283,11 +299,9 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.83227204619999995" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="yju-fu-Ps3" secondAttribute="bottom" constant="14" id="8dp-DL-b9B"/>
                                     <constraint firstItem="jLc-Sp-klU" firstAttribute="top" secondItem="HX2-RU-gZa" secondAttribute="top" constant="10" id="DyT-dF-Ma5"/>
                                     <constraint firstAttribute="height" constant="60" id="OMy-Xt-A3N"/>
                                     <constraint firstAttribute="trailing" secondItem="yju-fu-Ps3" secondAttribute="trailing" constant="10" id="Z9w-GY-62f"/>
-                                    <constraint firstAttribute="bottom" secondItem="jLc-Sp-klU" secondAttribute="bottom" constant="10" id="f47-bf-glT"/>
                                     <constraint firstItem="yju-fu-Ps3" firstAttribute="leading" secondItem="jLc-Sp-klU" secondAttribute="trailing" constant="10" id="hOX-By-it9"/>
                                     <constraint firstItem="yju-fu-Ps3" firstAttribute="top" secondItem="HX2-RU-gZa" secondAttribute="top" constant="14" id="uBt-BS-FeG"/>
                                     <constraint firstItem="jLc-Sp-klU" firstAttribute="leading" secondItem="HX2-RU-gZa" secondAttribute="leading" constant="10" id="zMN-iC-3dj"/>
@@ -297,10 +311,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
                             <constraint firstItem="HX2-RU-gZa" firstAttribute="trailing" secondItem="tDO-tR-FOG" secondAttribute="trailing" id="2aM-p7-5Hb"/>
-                            <constraint firstItem="tDO-tR-FOG" firstAttribute="bottom" secondItem="HX2-RU-gZa" secondAttribute="bottom" id="FTR-o3-XUf"/>
                             <constraint firstItem="HX2-RU-gZa" firstAttribute="leading" secondItem="tDO-tR-FOG" secondAttribute="leading" id="IJc-iL-gEH"/>
                             <constraint firstItem="RcO-Wj-bWJ" firstAttribute="leading" secondItem="tDO-tR-FOG" secondAttribute="leading" id="IeS-Qa-Nbl"/>
                             <constraint firstItem="RcO-Wj-bWJ" firstAttribute="top" secondItem="yxZ-Yv-QG9" secondAttribute="top" id="RD5-1K-KcU"/>
+                            <constraint firstItem="tDO-tR-FOG" firstAttribute="bottom" secondItem="HX2-RU-gZa" secondAttribute="bottom" id="Vwb-Ln-vkX"/>
                             <constraint firstItem="RcO-Wj-bWJ" firstAttribute="trailing" secondItem="tDO-tR-FOG" secondAttribute="trailing" id="mUT-ij-gfd"/>
                             <constraint firstItem="HX2-RU-gZa" firstAttribute="top" secondItem="RcO-Wj-bWJ" secondAttribute="bottom" constant="5" id="q9E-ef-vQo"/>
                         </constraints>
@@ -308,7 +322,8 @@
                     </view>
                     <connections>
                         <outlet property="chatTableView" destination="RcO-Wj-bWJ" id="k1N-Hh-DWl"/>
-                        <outlet property="heightMessageView" destination="OMy-Xt-A3N" id="qWx-PJ-R0E"/>
+                        <outlet property="heightChatTextView" destination="OMy-Xt-A3N" id="YUr-Z3-AZD"/>
+                        <outlet property="heightMessageTextView" destination="bsa-X8-4KQ" id="5sS-9X-S6Z"/>
                         <outlet property="messageTextView" destination="jLc-Sp-klU" id="DgE-4X-ZY8"/>
                     </connections>
                 </viewController>

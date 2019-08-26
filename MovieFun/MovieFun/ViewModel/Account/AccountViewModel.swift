@@ -29,14 +29,14 @@ class AccountViewModel: NSObject, UITableViewDelegate, UITableViewDataSource {
     var username: DynamicType<String>?
     var email: DynamicType<String>?
     var accountSectionViewModels: DynamicType<[AccountSectionViewModel]>?
-    var isFetchFail: DynamicType<Bool>?
+    var logoutSuccess: DynamicType<Bool>?
     var account: Account?
     
     private let HEIGHT_OF_CELL = 80.0
     
     override init() {
         super.init()
-        isFetchFail = DynamicType<Bool>(value: false)
+        logoutSuccess = DynamicType<Bool>(value: false)
         isUpdate = DynamicType<Bool>(value: false)
         isFetching = DynamicType<Bool>(value: false)
         accountImage = DynamicType<UIImage>(value: UIImage(named: Constants.IMAGE_NOT_FOUND)!)

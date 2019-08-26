@@ -10,7 +10,7 @@ import Foundation
 
 protocol FavoriteMovieViewModelDelegate: class {
 
-    func reloadData()
+    func removeFavoriteMovie()
     
 }
 
@@ -18,19 +18,23 @@ class FavoriteMovieViewModel: NSObject {
     
     var sectionViewModels: DynamicType<[FavoriteSectionViewModel]>?
     var isFetching: DynamicType<Bool>?
+    var isLoadFail: DynamicType<Bool>?
+    var isHiddenSearchBar: DynamicType<Bool>?
     weak var delegate: FavoriteMovieViewModelDelegate?
     
     override init() {
         sectionViewModels = DynamicType<[FavoriteSectionViewModel]>(value: [FavoriteSectionViewModel]())
         isFetching = DynamicType<Bool>(value: false)
+        isLoadFail = DynamicType<Bool>(value: false)
+        isHiddenSearchBar = DynamicType<Bool>(value: false)
     }
     
 }
 
 extension FavoriteMovieViewModel: FavoriteRowViewModelDelegate {
     
-    func reloadData() {
-        delegate?.reloadData()
+    func removeFavoriteMovie() {
+        delegate?.removeFavoriteMovie()
     }
     
 }

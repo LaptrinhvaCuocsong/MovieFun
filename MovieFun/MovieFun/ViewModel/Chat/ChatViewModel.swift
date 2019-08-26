@@ -7,13 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
 class ChatViewModel {
     
     var movieId: String?
     var receiveMessageSuccess: DynamicType<Bool>?
     var haveAddMessage: DynamicType<Bool>?
-    var addMessageSuccess: DynamicType<Bool>?
     var isLoadmore: DynamicType<Bool>?
     var isFetching: DynamicType<Bool>?
     var sectionViewModels: DynamicType<[ChatSectionViewModel]>?
@@ -21,7 +21,6 @@ class ChatViewModel {
     init() {
         receiveMessageSuccess = DynamicType<Bool>(value: false)
         haveAddMessage = DynamicType<Bool>(value: false)
-        addMessageSuccess = DynamicType<Bool>(value: false)
         isLoadmore = DynamicType<Bool>(value: false)
         isFetching = DynamicType<Bool>(value: false)
         sectionViewModels = DynamicType<[ChatSectionViewModel]>(value: [ChatSectionViewModel]())

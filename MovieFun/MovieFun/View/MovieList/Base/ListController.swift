@@ -129,6 +129,25 @@ class ListController {
         }
     }
     
+    func loadFavoriteMovies() {
+        if let rowVMs = getRowVMFromListViewModel() {
+            FavoriteMovieService.share.checkFavoriteMovie(movieIds: getMovieIdsFromListViewModel(), completion: { (isFavoriteMovies, error) in
+                if error == nil {
+                    if let isFavoriteMovies = isFavoriteMovies {
+                        for rowVM in rowVMs {
+                            if let movieId = rowVM.movie?.value?.id {
+                                rowVM.isFavoriteMovie?.value = isFavoriteMovies[movieId] ?? false
+                            }
+                            else {
+                                rowVM.isFavoriteMovie?.value = false
+                            }
+                        }
+                    }
+                }
+            })
+        }
+    }
+    
     func buildViewModel(totalPages: Int?, movies: [Movie]?) {
         //Implement at child class
     }
