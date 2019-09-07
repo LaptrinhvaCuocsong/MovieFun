@@ -19,6 +19,7 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
     
     private let HEIGHT_OF_CELL = 200.0
     private let HEIGHT_OF_HEADER_CELL = 58.0
+    private let HEIGHT_OF_HEADER_SEARCH_CELL = 30.0
     
     var viewModel: FavoriteMovieViewModel {
         get {
@@ -30,8 +31,14 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
         return FavoriteMovieController()
     }()
     
+    lazy var buttonAddFavoriteMovie: UIBarButtonItem = {
+        let btn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addFavoriteMovie))
+        return btn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItem = buttonAddFavoriteMovie
         searchBar.delegate = self
         setFavoriteTableView()
         viewModel.delegate = self
@@ -52,8 +59,10 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
     private func initBinding() {
         viewModel.isFetching?.listener = {[weak self] (isFetching) in
             if !isFetching {
-                SVProgressHUD.dismiss()
-                self?.favoriteTableView.reloadData()
+                DispatchQueue.main.async {
+                    SVProgressHUD.dismiss()
+                    self?.favoriteTableView.reloadData()
+                }
             }
             else {
                 SVProgressHUD.show()
@@ -93,11 +102,16 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
     private func registerCell() {
         favoriteTableView.register(UINib(nibName: FavoriteTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: FavoriteTableViewCell.cellIdentify)
         favoriteTableView.register(UINib(nibName: FavoriteHeaderTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: FavoriteHeaderTableViewCell.cellIdentify)
+        favoriteTableView.register(UINib(nibName: FavoriteHeaderSearchTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: FavoriteHeaderSearchTableViewCell.cellIdentify)
     }
 
     private func setFavoriteTableView() {
         favoriteTableView.separatorStyle = .none
         favoriteTableView.separatorColor = .clear
+    }
+    
+    @objc private func addFavoriteMovie() {
+        showSearchMovieViewController()
     }
     
     //MARK: - UITableViewDataSource
@@ -132,6 +146,9 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
         if rowVM is FavoriteHeaderRowViewModel {
             return CGFloat(HEIGHT_OF_HEADER_CELL)
         }
+        else if rowVM is FavoriteHeaderSearchRowViewModel {
+            return CGFloat(HEIGHT_OF_HEADER_SEARCH_CELL)
+        }
         return CGFloat(HEIGHT_OF_CELL)
     }
 
@@ -153,6 +170,11 @@ extension FavoriteMovieViewController: FavoriteMovieViewModelDelegate {
     func removeFavoriteMovie() {
         controller.start()
         NotificationCenter.default.post(name: .REMOVE_FAVORITE_MOVIE_NOTIFICATION_KEY, object: nil, userInfo: nil)
+    }
+    
+    func showSearchMovieViewController() {
+        let searchMovieNC = SearchMovieViewController.createSearchMovieNavigationController()
+        present(searchMovieNC, animated: true, completion: nil)
     }
     
 }

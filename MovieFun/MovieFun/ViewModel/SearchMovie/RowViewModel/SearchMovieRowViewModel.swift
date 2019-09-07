@@ -16,14 +16,14 @@ protocol SearchMovieRowViewModelDelegate: class {
     
 }
 
-class SearchMovieRowViewModel {
+class SearchMovieRowViewModel: SearchMovieBaseRowViewModel {
     
     var movie: DynamicType<Movie>?
     var isFavoriteMovie: DynamicType<Bool>?
     var isLoading: DynamicType<Bool>?
     weak var delegate: SearchMovieRowViewModelDelegate?
     
-    init() {
+    override init() {
         isLoading = DynamicType<Bool>(value: false)
         isFavoriteMovie = DynamicType<Bool>(value: false)
     }
@@ -35,6 +35,7 @@ class SearchMovieRowViewModel {
                 FavoriteMovieService.share.removeFavoriteMovie(movieId: movie!.value!.id!) {[weak self] (deleteSucces, error) in
                     if error == nil && deleteSucces == true {
                         self?.isFavoriteMovie?.value = !isFavoriteMovie
+                        NotificationCenter.default.post(name: .REMOVE_FAVORITE_MOVIE_NOTIFICATION_KEY, object: nil)
                     }
                     self?.isLoading?.value = false
                 }
@@ -43,6 +44,7 @@ class SearchMovieRowViewModel {
                 FavoriteMovieService.share.addFavoriteMovie(movie: movie!.value!) {[weak self] (error) in
                     if error == nil {
                         self?.isFavoriteMovie?.value = !isFavoriteMovie
+                        NotificationCenter.default.post(name: .ADD_FAVORITE_MOVIE_NOTIFICATION_KEY, object: nil)
                     }
                     self?.isLoading?.value = false
                 }

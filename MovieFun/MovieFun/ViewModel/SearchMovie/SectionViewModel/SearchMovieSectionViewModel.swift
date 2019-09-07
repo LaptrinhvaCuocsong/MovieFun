@@ -10,10 +10,10 @@ import Foundation
 
 class SearchMovieSectionViewModel {
     
-    var rowViewModels: DynamicType<[SearchMovieRowViewModel]>?
+    var rowViewModels: DynamicType<[SearchMovieBaseRowViewModel]>?
     
     init() {
-        rowViewModels = DynamicType<[SearchMovieRowViewModel]>(value: [SearchMovieRowViewModel]())
+        rowViewModels = DynamicType<[SearchMovieBaseRowViewModel]>(value: [SearchMovieBaseRowViewModel]())
     }
     
 }

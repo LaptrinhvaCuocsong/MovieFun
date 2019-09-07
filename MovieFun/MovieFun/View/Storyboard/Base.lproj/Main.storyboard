@@ -186,29 +186,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SGE-tC-DD6">
-                                <rect key="frame" x="0.0" y="88" width="414" height="60"/>
-                                <subviews>
-                                    <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="uwB-sS-JDe">
-                                        <rect key="frame" x="10" y="10" width="394" height="40"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="LaI-HY-JMu" id="f0s-cf-wAB"/>
-                                        </connections>
-                                    </searchBar>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="8mR-OW-7I1"/>
-                                    <constraint firstItem="uwB-sS-JDe" firstAttribute="leading" secondItem="SGE-tC-DD6" secondAttribute="leading" constant="10" id="MYk-BB-Oiu"/>
-                                    <constraint firstAttribute="trailing" secondItem="uwB-sS-JDe" secondAttribute="trailing" constant="10" id="OXz-zk-7yC"/>
-                                    <constraint firstItem="uwB-sS-JDe" firstAttribute="top" secondItem="SGE-tC-DD6" secondAttribute="top" constant="10" id="Rke-aA-pgS"/>
-                                    <constraint firstAttribute="bottom" secondItem="uwB-sS-JDe" secondAttribute="bottom" constant="10" id="v7z-Zf-O9f"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SRC-uf-wcy">
-                                <rect key="frame" x="0.0" y="148" width="414" height="665"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="BUj-kB-KOo">
@@ -231,23 +210,16 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
-                            <constraint firstItem="SRC-uf-wcy" firstAttribute="top" secondItem="SGE-tC-DD6" secondAttribute="bottom" id="Ne5-uB-kni"/>
                             <constraint firstItem="SRC-uf-wcy" firstAttribute="leading" secondItem="BXb-RI-ApT" secondAttribute="leading" id="Ni1-ZA-egJ"/>
-                            <constraint firstItem="SGE-tC-DD6" firstAttribute="leading" secondItem="BXb-RI-ApT" secondAttribute="leading" id="P9n-fT-UEB"/>
                             <constraint firstItem="BXb-RI-ApT" firstAttribute="bottom" secondItem="SRC-uf-wcy" secondAttribute="bottom" id="QG9-Sq-bb1"/>
                             <constraint firstItem="BXb-RI-ApT" firstAttribute="trailing" secondItem="SRC-uf-wcy" secondAttribute="trailing" id="Qck-iB-md9"/>
-                            <constraint firstItem="SGE-tC-DD6" firstAttribute="trailing" secondItem="BXb-RI-ApT" secondAttribute="trailing" id="XMj-ls-eLr"/>
-                            <constraint firstItem="SGE-tC-DD6" firstAttribute="top" secondItem="BXb-RI-ApT" secondAttribute="top" id="g6K-dk-AYc"/>
+                            <constraint firstItem="SRC-uf-wcy" firstAttribute="top" secondItem="BXb-RI-ApT" secondAttribute="top" id="zee-Cr-tIK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BXb-RI-ApT"/>
                     </view>
                     <navigationItem key="navigationItem" title="Comment List" id="GqR-g1-CFi"/>
                     <connections>
                         <outlet property="commentListTableView" destination="SRC-uf-wcy" id="6P9-vI-ILe"/>
-                        <outlet property="heightSearchBarView" destination="8mR-OW-7I1" id="Gw7-nA-07Y"/>
-                        <outlet property="marginTopTableView" destination="Ne5-uB-kni" id="PEL-xx-QuH"/>
-                        <outlet property="searchBar" destination="uwB-sS-JDe" id="PmG-Za-RfQ"/>
-                        <outlet property="searchBarView" destination="SGE-tC-DD6" id="R1X-I8-1zL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HQK-r0-BOQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -376,7 +348,7 @@
         <!--Navigation Controller-->
         <scene sceneID="c5D-1f-rUh">
             <objects>
-                <navigationController id="6Us-EV-ZbI" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SearchMovieNavigationController" id="6Us-EV-ZbI" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4cp-Yh-IhF">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

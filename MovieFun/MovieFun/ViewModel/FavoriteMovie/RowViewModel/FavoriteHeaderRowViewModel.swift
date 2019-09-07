@@ -8,6 +8,14 @@
 
 import Foundation
 
+protocol FavoriteHeaderRowViewModelDelegate: class {
+    
+    func showSearchMovieViewController()
+    
+}
+
 class FavoriteHeaderRowViewModel: FavoriteBaseRowViewModel {
+    
+    weak var delegate: FavoriteHeaderRowViewModelDelegate?
     
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchMovieTableViewCell: UITableViewCell {
+class SearchMovieTableViewCell: UITableViewCell, SearchCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var releaseDateLabel: UILabel!
@@ -22,9 +22,11 @@ class SearchMovieTableViewCell: UITableViewCell {
     static let cellIdentify = "searchMovieTableViewCell"
     var searchMovieRowVM: SearchMovieRowViewModel?
     
-    func setUp(with viewModel: SearchMovieRowViewModel) {
-        searchMovieRowVM = viewModel
-        setContent()
+    func setUp(with viewModel: SearchMovieBaseRowViewModel) {
+        if let searchMovieRowVM = viewModel as? SearchMovieRowViewModel {
+            self.searchMovieRowVM = searchMovieRowVM
+            setContent()
+        }
     }
     
     func setContent() {
@@ -34,7 +36,7 @@ class SearchMovieTableViewCell: UITableViewCell {
             ratingLabel.text = "\(movie.voteAverage ?? 0.0)"
             overviewLabel.text = movie.overview
             adultImage.isHidden = !(movie.adult ?? true)
-            movieImage.image = nil
+            movieImage.myImage = nil
             if let posterPath = movie.posterPath {
                 movieImage.setImage(imageName: posterPath, imageSize: .original)
             }

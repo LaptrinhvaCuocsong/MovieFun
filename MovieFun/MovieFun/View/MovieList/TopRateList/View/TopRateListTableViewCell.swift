@@ -36,7 +36,7 @@ class TopRateListTableViewCell: UITableViewCell {
             ratingLabel.text = "\(movie.voteAverage ?? 0.0)"
             overviewLabel.text = movie.overview
             adultImage.isHidden = !(movie.adult ?? true)
-            movieImage.image = nil
+            movieImage.myImage = nil
             if let posterPath = movie.posterPath {
                 movieImage.setImage(imageName: posterPath, imageSize: .original)
             }

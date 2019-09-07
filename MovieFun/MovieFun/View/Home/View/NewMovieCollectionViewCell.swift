@@ -29,7 +29,7 @@ class NewMovieCollectionViewCell: UICollectionViewCell {
     func setContent(title: String?, voteAverage: Double?, posterPath: String?) {
         titleLabel.text = title
         rageLabel.text = "\(voteAverage ?? 0.0)"
-        imageView.image = nil
+        imageView.myImage = nil
         if let posterPath = posterPath {
             imageView.setImage(imageName: posterPath, imageSize: .original)
         }

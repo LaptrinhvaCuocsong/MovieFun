@@ -55,6 +55,7 @@ class FavoriteMovieController {
         if favoriteMovies.count == 0 {
             favoriteMovieViewModel?.isHiddenSearchBar?.value = true
             let favoriteHeaderRowVM = FavoriteHeaderRowViewModel()
+            favoriteHeaderRowVM.delegate = favoriteMovieViewModel
             favoriteSectionVM.rowViewModels?.value?.append(favoriteHeaderRowVM)
         }
     }
@@ -69,7 +70,8 @@ class FavoriteMovieController {
             favoriteSectionVM.rowViewModels!.value!.append(favoriteRowVM)
         }
         if favoriteMovies.count == 0 {
-            
+            let favoriteHeaderSearchRowVM = FavoriteHeaderSearchRowViewModel()
+            favoriteSectionVM.rowViewModels?.value?.append(favoriteHeaderSearchRowVM)
         }
     }
     
@@ -79,6 +81,8 @@ class FavoriteMovieController {
             return FavoriteTableViewCell.cellIdentify
         case is FavoriteHeaderRowViewModel:
             return FavoriteHeaderTableViewCell.cellIdentify
+        case is FavoriteHeaderSearchRowViewModel:
+            return FavoriteHeaderSearchTableViewCell.cellIdentify
         default:
             return nil
         }

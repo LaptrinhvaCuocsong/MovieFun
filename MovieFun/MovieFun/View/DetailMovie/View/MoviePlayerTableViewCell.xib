@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="299.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OKD-wn-1tR">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OKD-wn-1tR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="OKD-wn-1tR" secondAttribute="height" multiplier="16:9" id="fYV-Hb-HAb"/>
@@ -40,11 +40,12 @@
                     <constraint firstAttribute="trailing" secondItem="OKD-wn-1tR" secondAttribute="trailing" id="Xte-fn-onz"/>
                     <constraint firstItem="TU9-AH-g1m" firstAttribute="bottom" secondItem="OKD-wn-1tR" secondAttribute="bottom" constant="32" id="kLC-eJ-dJe"/>
                     <constraint firstItem="OKD-wn-1tR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="oCP-5b-NdN"/>
-                    <constraint firstAttribute="bottom" secondItem="TU9-AH-g1m" secondAttribute="bottom" constant="10" id="rma-eF-L7s"/>
+                    <constraint firstAttribute="bottom" secondItem="TU9-AH-g1m" secondAttribute="bottom" constant="34.5" id="qIS-Mk-4SH"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="marginTopAppearImage" destination="oCP-5b-NdN" id="SOW-hf-9nb"/>
                 <outlet property="movieImageView" destination="OKD-wn-1tR" id="ggd-2I-cei"/>
             </connections>
             <point key="canvasLocation" x="47.826086956521742" y="35.491071428571423"/>

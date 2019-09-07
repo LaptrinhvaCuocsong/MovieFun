@@ -21,6 +21,7 @@ class FavoriteHeaderTableViewCell: UITableViewCell, FavoriteCell {
     }
     
     @IBAction func addFavoriteMovie(_ sender: Any) {
+        favHeaderVM?.delegate?.showSearchMovieViewController()
     }
     
 }

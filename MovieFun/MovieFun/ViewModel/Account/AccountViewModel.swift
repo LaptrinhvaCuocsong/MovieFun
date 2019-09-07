@@ -23,6 +23,7 @@ protocol AccountViewModelDelegate: class {
 class AccountViewModel: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     weak var delegate: AccountViewModelDelegate?
+    var haveChangeAccountInfo: DynamicType<Bool>?
     var isUpdate: DynamicType<Bool>?
     var isFetching: DynamicType<Bool>?
     var accountImage: DynamicType<UIImage>?
@@ -36,6 +37,7 @@ class AccountViewModel: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     override init() {
         super.init()
+        haveChangeAccountInfo = DynamicType<Bool>(value: false)
         logoutSuccess = DynamicType<Bool>(value: false)
         isUpdate = DynamicType<Bool>(value: false)
         isFetching = DynamicType<Bool>(value: false)

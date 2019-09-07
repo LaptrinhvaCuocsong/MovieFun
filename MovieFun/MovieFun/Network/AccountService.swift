@@ -15,6 +15,7 @@ class AccountService {
     static let share = AccountService()
     private var existAccount = false
     private var account: Account?
+    private var listener: ListenerRegistration?
     
     private let db = Firestore.firestore()
     
@@ -54,6 +55,39 @@ class AccountService {
     func logout() {
         account = nil
         UserDefaults.standard.removeObject(forKey: "userLogin")
+    }
+    
+    func addListener(completion: ((Account?,Error?) -> Void)?) {
+        let completion:((Account?,Error?) -> Void) = completion ?? {_,_ in}
+        if let accountId = account?.accountId {
+            listener = db.collection("account").document(accountId).addSnapshotListener({[weak self] (documentSnapshot, error) in
+                if error == nil {
+                    if let document = documentSnapshot?.data(), let accountId = document["accountId"] as? String {
+                        let account = Account()
+                        account.accountId = accountId
+                        account.username = document["username"] as? String ?? ""
+                        account.email = document["email"] as? String ?? "email@gmail.com"
+                        account.address = document["address"] as? String ?? ""
+                        account.dateOfBirth = (document["dateOfBirth"] as? Timestamp)?.dateValue() ?? Date()
+                        self?.account = account
+                        completion(account, nil)
+                    }
+                    else {
+                        completion(nil, nil)
+                    }
+                }
+                else {
+                    completion(nil, error)
+                }
+            })
+        }
+        else {
+            completion(nil, nil)
+        }
+    }
+    
+    func removeListener() {
+        listener?.remove()
     }
     
     func updateAccount(account: Account, completion: ((Error?) -> Void)?) {

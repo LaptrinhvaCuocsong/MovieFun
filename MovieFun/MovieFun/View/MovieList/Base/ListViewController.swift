@@ -36,6 +36,7 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.initBinding()
         self.controller?.start()
         NotificationCenter.default.addObserver(self, selector: #selector(handlerRemoveFavoriteMovie(notification:)), name: .REMOVE_FAVORITE_MOVIE_NOTIFICATION_KEY, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handlerAddFavoriteMovie(notification:)), name: .ADD_FAVORITE_MOVIE_NOTIFICATION_KEY, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,6 +77,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     @objc private func handlerRemoveFavoriteMovie(notification: Notification) {
         controller?.loadFavoriteMovies()
     }
+
+    @objc private func handlerAddFavoriteMovie(notification: Notification) {
+        controller?.loadFavoriteMovies()
+    }
     
     private func setRefreshControl() {
         refreshControl = UIRefreshControl()
@@ -94,9 +99,19 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func initBinding() {
+        self.viewModel?.isLoadFail?.listener = {[weak self] (isLoadFail) in
+            guard let strongSelf = self else {
+                return
+            }
+            if isLoadFail {
+                AlertService.share.showAlertError(for: strongSelf)
+            }
+        }
         self.viewModel?.isLoadMore?.listener = {[weak self] (isLoadMore) in
             if !isLoadMore {
-                self?.movieListTableView.reloadData()
+                DispatchQueue.main.async {
+                    self?.movieListTableView.reloadData()
+                }
             }
         }
         self.viewModel?.currentPage?.listener = {[weak self] (currentPage) in
@@ -111,9 +126,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         self.viewModel?.isPullToRefresh?.listener = {[weak self] (isPullToRefresh) in
             if !isPullToRefresh {
-                self?.movieListTableView.reloadData()
-                SVProgressHUD.dismiss()
-                self?.refreshControl?.endRefreshing()
+                DispatchQueue.main.async {
+                    self?.movieListTableView.reloadData()
+                    SVProgressHUD.dismiss()
+                    self?.refreshControl?.endRefreshing()
+                }
             }
             else {
                 SVProgressHUD.show()
@@ -121,9 +138,11 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         self.viewModel?.isFetching?.listener = {[weak self] (isFetching) in
             if !isFetching {
-                self?.movieListTableView.isHidden = false
-                self?.movieListTableView.reloadData()
-                SVProgressHUD.dismiss()
+                DispatchQueue.main.async {
+                    self?.movieListTableView.isHidden = false
+                    self?.movieListTableView.reloadData()
+                    SVProgressHUD.dismiss()
+                }
             }
             else {
                 self?.movieListTableView.isHidden = true

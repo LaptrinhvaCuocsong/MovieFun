@@ -34,6 +34,7 @@ class VideoListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        wkYoutubeView.addSpinnerView()
         if let movieId = movieId {
             initBinding()
             viewModel.movieId = DynamicType<String>(value: movieId)
@@ -47,6 +48,7 @@ class VideoListViewController: UIViewController {
         }
         viewModel.key?.listener = {[weak self] (key) in
             self?.wkYoutubeView.load(withVideoId: key)
+            self?.wkYoutubeView.removeSpinnerView()
         }
         viewModel.isFetching?.listener = {(isFetching) in
             if !isFetching {

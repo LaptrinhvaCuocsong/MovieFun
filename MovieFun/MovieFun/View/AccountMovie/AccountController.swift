@@ -12,19 +12,27 @@ class AccountController {
     
     var accountViewModel: AccountViewModel?
     var dispatchGroup: DispatchGroup!
+    var didStart = false
     
     init(viewModel: AccountViewModel) {
         accountViewModel = viewModel
         dispatchGroup = DispatchGroup()
     }
     
+    deinit {
+        removeListener()
+    }
+    
     func start() {
         if let accountId = AccountService.share.getAccountId() {
+            didStart = false
+            removeListener()
             dispatchGroup.enter()
             accountViewModel?.isFetching?.value = true
             AccountService.share.fetchAccount(userId: accountId) {[weak self] (account, error) in
                 if error == nil && account != nil {
                     self?.buildViewModel(account: account!)
+                    self?.addListener()
                 }
                 self?.dispatchGroup.leave()
             }
@@ -41,6 +49,26 @@ class AccountController {
                 self?.accountViewModel?.isFetching?.value = false
             }
         }
+    }
+    
+    func addListener() {
+        AccountService.share.addListener {[weak self] (account, error) in
+            if !(self?.didStart ?? false) {
+                self?.didStart = true
+                return
+            }
+            if error == nil {
+                if let account = account {
+                    self?.accountViewModel?.haveChangeAccountInfo?.value = false
+                    self?.buildViewModel(account: account)
+                    self?.accountViewModel?.haveChangeAccountInfo?.value = true
+                }
+            }
+        }
+    }
+    
+    func removeListener() {
+        AccountService.share.removeListener()
     }
     
     private func buildViewModel(account: Account) {

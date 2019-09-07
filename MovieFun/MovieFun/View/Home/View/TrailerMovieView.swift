@@ -32,7 +32,7 @@ class TrailerMovieView: UIView {
     
     func setContent(movieId: Int?, title: String?, posterPath: String?) {
         titleLabel.text = title
-        imageView.image = nil
+        imageView.myImage = nil
         if let posterPath = posterPath {
             imageView.setImage(imageName: posterPath, imageSize: .original)
         }

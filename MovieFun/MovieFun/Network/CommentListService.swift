@@ -15,6 +15,36 @@ class CommentListService {
     let db = Firestore.firestore()
     private let COLLECTION_NAME = "groupComment"
     private let SUB_COLLECTION_NAME = "groupComments"
+    private var listener: ListenerRegistration?
+    
+    func addListener(completion: (([GroupComment]?, Error?) -> Void)?) {
+        let completion:(([GroupComment]?, Error?) -> Void) = completion ?? {_,_ in}
+        if let accountId = AccountService.share.getAccountId() {
+            listener = db.collection(COLLECTION_NAME).document(accountId).collection(SUB_COLLECTION_NAME).addSnapshotListener {[weak self] (querySnapshot, error) in
+                if error == nil {
+                    if let documents = querySnapshot?.documents {
+                        var groupComments = [GroupComment]()
+                        for document in documents {
+                            if let groupComment = self?.getGroupComment(dictionary: document.data()) {
+                                groupComments.append(groupComment)
+                            }
+                        }
+                        completion(groupComments, nil)
+                    }
+                    else {
+                        completion(nil, nil)
+                    }
+                }
+                else {
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
+    func removeListener() {
+        listener?.remove()
+    }
     
     func fetchGroupComments(completion: (([GroupComment]?, Error?) -> Void)?) {
         let completion:(([GroupComment]?, Error?) -> Void) = completion ?? {_,_ in}

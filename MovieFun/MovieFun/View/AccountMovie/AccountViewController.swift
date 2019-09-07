@@ -38,10 +38,6 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         setAccountTableView()
         registerCell()
         initBinding()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         if !AccountService.share.isLogin() {
             addLoginViewController()
             return
@@ -81,13 +77,17 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self?.showAlertError()
             }
             else {
-                self?.accountTableView.reloadData()
+                DispatchQueue.main.async {
+                    self?.accountTableView.reloadData()
+                }
             }
         }
         viewModel.isFetching?.listener = {[weak self] (isFetching) in
             if !isFetching {
-                self?.accountTableView.reloadData()
-                SVProgressHUD.dismiss()
+                DispatchQueue.main.async {
+                    self?.accountTableView.reloadData()
+                    SVProgressHUD.dismiss()
+                }
             }
             else {
                 SVProgressHUD.show()
@@ -104,11 +104,19 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         viewModel.logoutSuccess?.listener = {[weak self] (logoutSuccess) in
             if logoutSuccess {
+                NotificationCenter.default.post(name: .DID_LOGOUT_SUCCESS_NOTIFICATION_KEY, object: nil)
                 SVProgressHUD.dismiss()
                 self?.addLoginViewController()
             }
             else {
                 SVProgressHUD.show()
+            }
+        }
+        viewModel.haveChangeAccountInfo?.listener = {[weak self] (haveChange) in
+            if haveChange {
+                DispatchQueue.main.async {
+                    self?.accountTableView.reloadData()
+                }
             }
         }
     }

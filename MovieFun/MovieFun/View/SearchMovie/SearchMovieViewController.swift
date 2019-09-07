@@ -14,9 +14,16 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var movieTableView: UITableView!
     
+    let HEIGHT_OF_HEADER_CELL = 30.0
     let HEIGHT_OF_CELL = 200.0
     var isDidViewAppear = false
     var needLoadMore = true
+    
+    static func createSearchMovieNavigationController() -> UINavigationController {
+        let storyBoard = UIStoryboard(name: StoryBoardName.MAIN.rawValue, bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "SearchMovieNavigationController") as! UINavigationController
+        return vc
+    }
     
     var viewModel: SearchMovieViewModel {
         get {
@@ -56,12 +63,15 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     
     private func registerCell() {
         movieTableView.register(UINib(nibName: SearchMovieTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: SearchMovieTableViewCell.cellIdentify)
+        movieTableView.register(UINib(nibName: SearchHeaderTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: SearchHeaderTableViewCell.cellIdentify)
     }
     
     private func initBinding() {
         viewModel.isLoadMore?.listener = {[weak self] (isLoadMore) in
             if !isLoadMore {
-                self?.movieTableView.reloadData()
+                DispatchQueue.main.async {
+                    self?.movieTableView.reloadData()
+                }
             }
         }
         viewModel.currentPage?.listener = {[weak self] (currentPage) in
@@ -76,11 +86,21 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         }
         viewModel.isFetching?.listener = {[weak self] (isFetching) in
             if !isFetching {
-                self?.movieTableView.reloadData()
-                SVProgressHUD.dismiss()
+                DispatchQueue.main.async {
+                    self?.movieTableView.reloadData()
+                    SVProgressHUD.dismiss()
+                }
             }
             else {
                 SVProgressHUD.show()
+            }
+        }
+        viewModel.isLoadFail?.listener = {[weak self] (isLoadFail) in
+            guard let strongSelf = self else {
+                return
+            }
+            if isLoadFail {
+                AlertService.share.showAlertError(for: strongSelf)
             }
         }
     }
@@ -105,23 +125,34 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let sectionVM = viewModel.sectionViewModels!.value![indexPath.section]
         let rowVM = sectionVM.rowViewModels!.value![indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchMovieTableViewCell.cellIdentify, for: indexPath) as! SearchMovieTableViewCell
-        cell.setUp(with: rowVM)
-        return cell
+        if let cellIdentify = controller.cellIdentify(rowVM: rowVM) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentify, for: indexPath)
+            if let cell = cell as? SearchCell {
+                cell.setUp(with: rowVM)
+            }
+            return cell
+        }
+        return UITableViewCell()
     }
     
     //MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let sectionVM = viewModel.sectionViewModels!.value![indexPath.section]
-        let rowVM = sectionVM.rowViewModels!.value![indexPath.row]
-        if let movie = rowVM.movie?.value, let movieId = movie.id {
-            let movieDetailVC = MovieDetailViewController.createMovieDetailViewController(with: "\(movieId)")
-            navigationController?.pushViewController(movieDetailVC, animated: true)
+        if let rowVM = sectionVM.rowViewModels!.value![indexPath.row] as? SearchMovieRowViewModel {
+            if let movie = rowVM.movie?.value, let movieId = movie.id {
+                let movieDetailVC = MovieDetailViewController.createMovieDetailViewController(with: "\(movieId)")
+                navigationController?.pushViewController(movieDetailVC, animated: true)
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let sectionVM = viewModel.sectionViewModels!.value![indexPath.section]
+        let rowVM = sectionVM.rowViewModels!.value![indexPath.row]
+        if rowVM is SearchMovieHeaderRowViewModel {
+            return CGFloat(HEIGHT_OF_HEADER_CELL)
+        }
         return CGFloat(HEIGHT_OF_CELL)
     }
     

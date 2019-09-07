@@ -18,6 +18,11 @@ protocol MoviePlayerViewModelDelegate: class {
 class MoviePlayerViewModel: MovieDetailRowViewModel {
     
     var movie: DynamicType<Movie>?
+    var contentOffsetY: DynamicType<Double>?
     weak var delegate: MoviePlayerViewModelDelegate?
+    
+    init() {
+        contentOffsetY = DynamicType<Double>(value: 0.0)
+    }
     
 }

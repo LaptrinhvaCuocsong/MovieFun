@@ -25,10 +25,12 @@ class ListViewModel {
     var totalPage: Int = 1
     var currentPage: DynamicType<Int>?
     var url: String?
+    var isLoadFail: DynamicType<Bool>?
     weak var delegate: ListViewModelDelegate?
     
     init() {
         url = ""
+        isLoadFail = DynamicType<Bool>(value: false)
         isPullToRefresh = DynamicType<Bool>(value: false)
         isLoadMore = DynamicType<Bool>(value: false)
         currentPage = DynamicType<Int>(value: 1)

@@ -38,7 +38,7 @@ class FavoriteTableViewCell: UITableViewCell, FavoriteCell {
         overviewLabel.text = movie.overview
         adultImage.isHidden = !(movie.adult ?? true)
         starButton.setImage(UIImage(named: "star-64-yellow"), for: .normal)
-        posterImage.image = nil
+        posterImage.myImage = nil
         if let posterPath = movie.posterPath {
             posterImage.setImage(imageName: posterPath, imageSize: .original)
         }

@@ -12,12 +12,20 @@ class ChatController {
     
     var chatViewModel: ChatViewModel?
     var messages: [Message]?
+    var didStart = false
     
     init() {
         chatViewModel = ChatViewModel()
     }
     
+    deinit {
+        if let movieId = chatViewModel?.movieId {
+            ChatService.share.removeListener(movieId: movieId)
+        }
+    }
+    
     func start() {
+        didStart = false
         if let movieId = chatViewModel?.movieId {
             chatViewModel?.isFetching?.value = true
             ChatService.share.fetchChatMessages(movieId: movieId) {[weak self] (messages, error) in
@@ -35,9 +43,16 @@ class ChatController {
     
     private func initListener(movieId: String) {
         ChatService.share.addListener(movieId: movieId) {[weak self] (messageChanges, error) in
+            if !(self?.didStart ?? false) {
+                self?.didStart = true
+                return
+            }
             if error == nil {
                 if let messageChanges = messageChanges, let accountId = AccountService.share.getAccountId() {
                     var haveAddMessage = false
+                    let messageChanges = messageChanges.sorted(by: { (mess1, mess2) -> Bool in
+                        return mess1.sendDate! < mess2.sendDate!
+                    })
                     for message in messageChanges {
                         if !(self?.checkExistMessage(message: message) ?? true) {
                             self?.messages?.append(message)
@@ -56,12 +71,6 @@ class ChatController {
                     self?.chatViewModel?.haveAddMessage?.value = haveAddMessage
                 }
             }
-        }
-    }
-    
-    deinit {
-        if let movieId = chatViewModel?.movieId {
-            ChatService.share.removeListener(movieId: movieId)
         }
     }
     

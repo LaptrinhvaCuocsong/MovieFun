@@ -18,11 +18,9 @@ class CastCollectionViewCell: UICollectionViewCell {
     
     func setContent(imageName: String?, castName: String?) {
         nameLabel.text = castName
+        castImageView.myImage = nil
         if let castImageName = imageName {
             castImageView.setImage(imageName: castImageName, imageSize: .original)
-        }
-        else {
-            castImageView.image = UIImage(named: Constants.IMAGE_NOT_FOUND)
         }
     }
     

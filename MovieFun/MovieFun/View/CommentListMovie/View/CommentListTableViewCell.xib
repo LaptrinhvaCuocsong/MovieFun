@@ -27,7 +27,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJR-HZ-eZX">
-                        <rect key="frame" x="90" y="5.5" width="277" height="17"/>
+                        <rect key="frame" x="90" y="15.5" width="277" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="K72-CO-FeY"/>
                         </constraints>
@@ -36,13 +36,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ve5-3m-hPt">
-                        <rect key="frame" x="90" y="27.5" width="314" height="15.5"/>
+                        <rect key="frame" x="90" y="37.5" width="314" height="15.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kv9-4o-Q18">
-                        <rect key="frame" x="377" y="5.5" width="27" height="14"/>
+                        <rect key="frame" x="377" y="15.5" width="27" height="14"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="27" id="sMt-b9-rDC"/>
                         </constraints>
@@ -56,11 +56,11 @@
                     <constraint firstAttribute="trailing" secondItem="Kv9-4o-Q18" secondAttribute="trailing" constant="10" id="17U-tO-ffq"/>
                     <constraint firstItem="mJR-HZ-eZX" firstAttribute="leading" secondItem="F5x-PV-6Dt" secondAttribute="trailing" constant="20" id="23Y-V4-QTd"/>
                     <constraint firstAttribute="trailing" secondItem="Ve5-3m-hPt" secondAttribute="trailing" constant="10" id="7Vz-ji-AVh"/>
-                    <constraint firstItem="mJR-HZ-eZX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="UZn-zG-hYc"/>
+                    <constraint firstItem="mJR-HZ-eZX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="UZn-zG-hYc"/>
                     <constraint firstItem="Ve5-3m-hPt" firstAttribute="leading" secondItem="F5x-PV-6Dt" secondAttribute="trailing" constant="20" id="XO4-zL-mS0"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ve5-3m-hPt" secondAttribute="bottom" constant="5" id="XWP-p8-Jne"/>
                     <constraint firstItem="F5x-PV-6Dt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="abU-oO-VDC"/>
-                    <constraint firstItem="Kv9-4o-Q18" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="fc6-7J-Cwj"/>
+                    <constraint firstItem="Kv9-4o-Q18" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="fc6-7J-Cwj"/>
                     <constraint firstItem="Kv9-4o-Q18" firstAttribute="leading" secondItem="mJR-HZ-eZX" secondAttribute="trailing" constant="10" id="j7J-Gg-gwj"/>
                     <constraint firstItem="Ve5-3m-hPt" firstAttribute="top" secondItem="mJR-HZ-eZX" secondAttribute="bottom" constant="5" id="vSa-hV-krf"/>
                     <constraint firstAttribute="bottom" secondItem="F5x-PV-6Dt" secondAttribute="bottom" constant="10" id="xV6-CW-JSI"/>

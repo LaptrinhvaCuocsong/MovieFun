@@ -56,7 +56,7 @@ class ChatTableViewCell: UITableViewCell, ChatCell {
         messageLabel.text = viewModel.currentMessage?.content
         let previousAccId = viewModel.previousMessage?.accountId
         let currentAccId = viewModel.currentMessage?.accountId
-        if previousAccId == nil || previousAccId! != currentAccId! {
+        if previousAccId != currentAccId {
             setUpAccountImage(accountId: currentAccId!)
             accountNameLabel.text = viewModel.currentMessage?.accountName
             accountNameLabel.isHidden = false

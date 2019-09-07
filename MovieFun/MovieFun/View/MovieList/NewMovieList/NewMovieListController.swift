@@ -15,31 +15,27 @@ class NewMovieListController: ListController {
         listViewModel = NewMovieListViewModel()
     }
     
-    override func buildViewModel(totalPages: Int?, movies: [Movie]?) {
-        if let movies = movies, let totalPages = totalPages {
-            listViewModel?.listSectionViewModels?.value?.removeAll()
-            listViewModel?.totalPage = totalPages
-            let newMovieSectionVM = NewMovieListSectionViewModel()
-            listViewModel!.listSectionViewModels?.value?.append(newMovieSectionVM)
-            for (_, movie) in movies.enumerated() {
-                let newMovieListRowVM = NewMovieListRowViewModel()
-                newMovieListRowVM.delegate = listViewModel
-                newMovieListRowVM.movie = DynamicType<Movie>(value: movie)
-                newMovieSectionVM.listRowViewModels?.value?.append(newMovieListRowVM)
-            }
+    override func buildViewModel(totalPages: Int, movies: [Movie]) {
+        listViewModel?.listSectionViewModels?.value?.removeAll()
+        listViewModel?.totalPage = totalPages
+        let newMovieSectionVM = NewMovieListSectionViewModel()
+        listViewModel!.listSectionViewModels?.value?.append(newMovieSectionVM)
+        for (_, movie) in movies.enumerated() {
+            let newMovieListRowVM = NewMovieListRowViewModel()
+            newMovieListRowVM.delegate = listViewModel
+            newMovieListRowVM.movie = DynamicType<Movie>(value: movie)
+            newMovieSectionVM.listRowViewModels?.value?.append(newMovieListRowVM)
         }
     }
     
-    override func buildViewModelAfterLoadMore(totalPages: Int?, movies: [Movie]?) {
-        if let movies = movies, let totalPages = totalPages {
-            listViewModel?.totalPage = totalPages
-            let newMovieSectionVM = listViewModel!.listSectionViewModels!.value![0]
-            for (_, movie) in movies.enumerated() {
-                let newMovieListRowVM = NewMovieListRowViewModel()
-                newMovieListRowVM.delegate = listViewModel
-                newMovieListRowVM.movie = DynamicType<Movie>(value: movie)
-                newMovieSectionVM.listRowViewModels?.value?.append(newMovieListRowVM)
-            }
+    override func buildViewModelAfterLoadMore(totalPages: Int, movies: [Movie]) {
+        listViewModel?.totalPage = totalPages
+        let newMovieSectionVM = listViewModel!.listSectionViewModels!.value![0]
+        for (_, movie) in movies.enumerated() {
+            let newMovieListRowVM = NewMovieListRowViewModel()
+            newMovieListRowVM.delegate = listViewModel
+            newMovieListRowVM.movie = DynamicType<Movie>(value: movie)
+            newMovieSectionVM.listRowViewModels?.value?.append(newMovieListRowVM)
         }
     }
     

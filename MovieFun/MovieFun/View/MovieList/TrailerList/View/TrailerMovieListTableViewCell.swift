@@ -27,7 +27,7 @@ class TrailerMovieListTableViewCell: UITableViewCell {
     func setContent() {
         if let viewModel = trailerRowVM, let movie = viewModel.movie?.value {
             titleLabel.text = movie.title
-            trailerImageView.image = nil
+            trailerImageView.myImage = nil
             if let backdropPath = movie.backdropPath {
                 trailerImageView.setImage(imageName: backdropPath, imageSize: .original)
             }

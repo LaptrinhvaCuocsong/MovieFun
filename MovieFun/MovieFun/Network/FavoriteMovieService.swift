@@ -105,7 +105,7 @@ class FavoriteMovieService {
         }
     }
     
-    private func checkFavoriteMovie(movieId: Int, completion: ((Bool?, Error?) -> Void)?) {
+    func checkFavoriteMovie(movieId: Int, completion: ((Bool?, Error?) -> Void)?) {
         let completion:((Bool?, Error?) -> Void) = completion ?? {_,_ in}
         if let accountId = AccountService.share.getAccountId() {
             let movieId = "\(movieId)"

@@ -114,9 +114,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     private func initBinding() {
         viewModel.isFetching?.listener = {[weak self] (isFetching) in
             if !isFetching {
-                self?.chatTableView.reloadData()
-                SVProgressHUD.dismiss()
-                self?.scrollToBottomTableView(false)
+                DispatchQueue.main.async {
+                    self?.chatTableView.reloadData()
+                    SVProgressHUD.dismiss()
+                    self?.scrollToBottomTableView(false)
+                }
             }
             else {
                 SVProgressHUD.show()
@@ -126,8 +128,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             if (haveAddMessage) {
                 let length = self?.viewModel.sectionViewModels?.value?.count ?? 0
                 if length > 0 {
-                    self?.chatTableView.reloadData()
-                    self?.scrollToBottomTableView(true)
+                    DispatchQueue.main.async {
+                        self?.chatTableView.reloadData()
+                        self?.scrollToBottomTableView(true)
+                    }
                 }
             }
         }
@@ -135,7 +139,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             if (receiveMessageSuccess) {
                 let length = self?.viewModel.sectionViewModels?.value?.count ?? 0
                 if length > 0 {
-                    self?.chatTableView.reloadData()
+                    DispatchQueue.main.async {
+                        self?.chatTableView.reloadData()
+                    }
                 }
             }
         }

@@ -10,15 +10,12 @@ import UIKit
 import SVProgressHUD
 
 class CommentListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    @IBOutlet weak var searchBarView: UIView!
-    @IBOutlet weak var searchBar: UISearchBar!
+
     @IBOutlet weak var commentListTableView: UITableView!
-    @IBOutlet weak var heightSearchBarView: NSLayoutConstraint!
-    @IBOutlet weak var marginTopTableView: NSLayoutConstraint!
     
     private let HEIGHT_OF_CELL = 80.0
     private let HEIGHT_OF_HEADER_CELL = 58.0
+    private var needUpdateGroupComment = true
     
     var viewModel: CommentListViewModel {
         get {
@@ -35,22 +32,16 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
         registerCell()
         initBinding()
         NotificationCenter.default.addObserver(self, selector: #selector(commentForMovie(_:)), name: .COMMENT_TO_MOVIE_NOTIFICATION_KEY, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setNeedUpdateGroupComment), name: .DID_LOGIN_SUCCESS_NOTIFICATION_KEY, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setNeedUpdateGroupComment), name: .DID_REGISTER_SUCCESS_NOTIFICATION_KEY, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setNeedUpdateGroupComment), name: .DID_LOGOUT_SUCCESS_NOTIFICATION_KEY, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if AccountService.share.isLogin() {
-            controller.start()
-        }
-        else {
-            AlertService.share.showAlertRequestLogin(for: self) {[weak self] in
-                if let tabBarController = self?.tabBarController, let viewControllers = tabBarController.viewControllers {
-                    let index = TabbarItem.account.rawValue
-                    if viewControllers.count > index {
-                        tabBarController.selectedIndex = index
-                    }
-                }
-            }
+        if needUpdateGroupComment {
+            fetchGroupComments()
+            needUpdateGroupComment = false
         }
     }
     
@@ -64,6 +55,28 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     //MARK: - Private method
+    
+    private func fetchGroupComments() {
+        if AccountService.share.isLogin() {
+            controller.start()
+        }
+        else {
+            AlertService.share.showAlertRequestLogin(for: self) {[weak self] in
+                if let tabBarController = self?.tabBarController, let viewControllers = tabBarController.viewControllers {
+                    let index = TabbarItem.account.rawValue
+                    if viewControllers.count > index {
+                        tabBarController.selectedIndex = index
+                    }
+                }
+            }
+            viewModel.commentListSectionViewModels?.value?.removeAll()
+            commentListTableView.reloadData()
+        }
+    }
+    
+    @objc func setNeedUpdateGroupComment() {
+        self.needUpdateGroupComment = true
+    }
     
     @objc func commentForMovie(_ notification:Notification) {
         if let userInfo = notification.userInfo, let movie = userInfo[Constants.USER_INFO_MOVIE_KEY] as? Movie {
@@ -82,31 +95,21 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
     private func initBinding() {
         viewModel.isFetching?.listener = {[weak self] (isFetching) in
             if !isFetching {
-                self?.commentListTableView.reloadData()
-                SVProgressHUD.dismiss()
+                DispatchQueue.main.async {
+                    self?.commentListTableView.reloadData()
+                    SVProgressHUD.dismiss()
+                }
             }
             else {
                 SVProgressHUD.show()
             }
         }
-        viewModel.isHiddenSearchBar?.listener = {[weak self] (isHidden) in
-            if isHidden {
-                self?.hideSearchBarView(isHidden: true)
+        viewModel.haveChangeData?.listener = {[weak self] (haveChangeData) in
+            if haveChangeData {
+                DispatchQueue.main.async {
+                    self?.commentListTableView.reloadData()
+                }
             }
-            else {
-                self?.hideSearchBarView(isHidden: false)
-            }
-        }
-    }
-    
-    private func hideSearchBarView(isHidden: Bool) {
-        if isHidden {
-            searchBarView.isHidden = true
-            marginTopTableView.constant = -1.0 * heightSearchBarView.constant
-        }
-        else {
-            searchBarView.isHidden = false
-            marginTopTableView.constant = 0.0
         }
     }
     

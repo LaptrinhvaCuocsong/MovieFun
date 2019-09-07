@@ -60,6 +60,7 @@ class LoginViewController: UIViewController {
                 strongSelf.showAlertError(with: "Login fail")
             }
             else {
+                NotificationCenter.default.post(name: .DID_LOGIN_SUCCESS_NOTIFICATION_KEY, object: nil)
                 strongSelf.delegate?.dismissFromParent(viewController: strongSelf)
             }
         }
@@ -71,6 +72,7 @@ class LoginViewController: UIViewController {
                 strongSelf.showAlertError(with: "Register fail")
             }
             else {
+                NotificationCenter.default.post(name: .DID_REGISTER_SUCCESS_NOTIFICATION_KEY, object: nil)
                 strongSelf.delegate?.dismissFromParent(viewController: strongSelf)
             }
         }

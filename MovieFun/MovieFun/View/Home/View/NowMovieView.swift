@@ -38,7 +38,7 @@ class NowMovieView: UIView {
         voteRageLabel.text = "\(rage ?? 0.0)"
         releaseDateLabel.text = Utils.share.stringFromDate(dateFormat: Utils.YYYY_MM_DD, date: releaseDate)
         overviewLabel.text = overview
-        imageView.image = nil
+        imageView.myImage = nil
         if let posterPath = posterPath {
             imageView.setImage(imageName: posterPath, imageSize: .original)
         }

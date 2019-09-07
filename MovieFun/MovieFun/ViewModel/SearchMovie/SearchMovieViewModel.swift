@@ -18,6 +18,7 @@ protocol SearchMovieViewModelDelegate: class {
 
 class SearchMovieViewModel {
  
+    var isLoadFail: DynamicType<Bool>?
     var searchText: String?
     var totalPage = 0
     var currentPage: DynamicType<Int>?
@@ -28,6 +29,7 @@ class SearchMovieViewModel {
     weak var delegate: SearchMovieViewModelDelegate?
     
     init() {
+        isLoadFail = DynamicType<Bool>(value: false)
         isLoadMore = DynamicType<Bool>(value: false)
         isFetching = DynamicType<Bool>(value: false)
         currentPage = DynamicType<Int>(value: 0)

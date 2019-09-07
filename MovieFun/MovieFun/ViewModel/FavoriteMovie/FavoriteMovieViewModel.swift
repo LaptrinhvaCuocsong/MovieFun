@@ -12,6 +12,8 @@ protocol FavoriteMovieViewModelDelegate: class {
 
     func removeFavoriteMovie()
     
+    func showSearchMovieViewController()
+    
 }
 
 class FavoriteMovieViewModel: NSObject {
@@ -31,10 +33,14 @@ class FavoriteMovieViewModel: NSObject {
     
 }
 
-extension FavoriteMovieViewModel: FavoriteRowViewModelDelegate {
+extension FavoriteMovieViewModel: FavoriteRowViewModelDelegate, FavoriteHeaderRowViewModelDelegate {
     
     func removeFavoriteMovie() {
         delegate?.removeFavoriteMovie()
+    }
+    
+    func showSearchMovieViewController() {
+        delegate?.showSearchMovieViewController()
     }
     
 }

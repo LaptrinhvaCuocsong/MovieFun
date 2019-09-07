@@ -50,14 +50,16 @@ class MovieListViewController: UIViewController, UITableViewDelegate, UITableVie
             guard let strongSelf = self else {
                 return
             }
-            if isLoading {
-                let loadingVC = LoadingViewController.createLoadingViewController()
-                loadingVC.modalTransitionStyle = .crossDissolve
-                strongSelf.present(loadingVC, animated: true, completion: nil)
-            }
-            else {
-                strongSelf.dismiss(animated: true, completion: nil)
-                strongSelf.movieTableView.reloadData()
+            DispatchQueue.main.async {
+                if isLoading {
+                    let loadingVC = LoadingViewController.createLoadingViewController()
+                    loadingVC.modalTransitionStyle = .crossDissolve
+                    strongSelf.present(loadingVC, animated: true, completion: nil)
+                }
+                else {
+                    strongSelf.dismiss(animated: true, completion: nil)
+                    strongSelf.movieTableView.reloadData()
+                }
             }
         }
         
@@ -74,7 +76,9 @@ class MovieListViewController: UIViewController, UITableViewDelegate, UITableVie
             guard let strongSelf = self else {
                 return
             }
-            strongSelf.movieTableView.reloadData()
+            DispatchQueue.main.async {
+                strongSelf.movieTableView.reloadData()
+            }
         }
     }
 

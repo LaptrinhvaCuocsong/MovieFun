@@ -18,12 +18,22 @@ protocol MovieDetailViewModelDelegate: class {
 
 class MovieDetailViewModel {
     
+    var isChangeFavorite: DynamicType<Bool>?
+    var removeFavoriteSuccess: DynamicType<Bool>?
+    var addFavoriteSuccess: DynamicType<Bool>?
+    var isLoadFail: DynamicType<Bool>?
+    var isFavoriteMovie: DynamicType<Bool>?
     var isFetching: DynamicType<Bool>?
     var movieId: DynamicType<String>?
     var movieDetailSectionViewModels: DynamicType<[MovieDetailSectionViewModel]>?
     weak var delegate: MovieDetailViewModelDelegate?
     
     init() {
+        isChangeFavorite = DynamicType<Bool>(value: false)
+        removeFavoriteSuccess = DynamicType<Bool>(value: false)
+        addFavoriteSuccess = DynamicType<Bool>(value: false)
+        isLoadFail = DynamicType<Bool>(value: false)
+        isFavoriteMovie = DynamicType<Bool>(value: false)
         isFetching = DynamicType<Bool>(value: false)
         movieId = DynamicType<String>(value: "")
         movieDetailSectionViewModels = DynamicType<[MovieDetailSectionViewModel]>(value: [MovieDetailSectionViewModel]())

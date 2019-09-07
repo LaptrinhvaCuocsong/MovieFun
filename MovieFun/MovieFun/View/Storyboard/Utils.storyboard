@@ -88,7 +88,6 @@
         <!--Video List View Controller-->
         <scene sceneID="5hK-c0-cXK">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2kJ-7t-tjE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="VideoListViewController" id="MJV-cC-PbL" customClass="VideoListViewController" customModule="MovieFun" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sM8-Ik-WFn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -125,6 +124,7 @@
                         <outlet property="wkYoutubeView" destination="y1X-9Z-t4Q" id="KyM-vJ-Rmp"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2kJ-7t-tjE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="63.768115942028992" y="1529.4642857142856"/>
         </scene>
@@ -137,7 +137,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dqk-dF-KLr">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="F1r-D5-WyJ" id="PZB-h3-CfI"/>
@@ -147,7 +147,7 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
-                            <constraint firstItem="dqk-dF-KLr" firstAttribute="top" secondItem="Tih-0S-IaN" secondAttribute="top" id="3c0-Qx-SRS"/>
+                            <constraint firstItem="dqk-dF-KLr" firstAttribute="top" secondItem="ASd-LL-ezt" secondAttribute="top" id="UGf-NA-Ktg"/>
                             <constraint firstItem="dqk-dF-KLr" firstAttribute="leading" secondItem="Tih-0S-IaN" secondAttribute="leading" id="Vhb-kl-Jhy"/>
                             <constraint firstItem="dqk-dF-KLr" firstAttribute="bottom" secondItem="ASd-LL-ezt" secondAttribute="bottom" id="dfy-3V-LnJ"/>
                             <constraint firstAttribute="trailing" secondItem="dqk-dF-KLr" secondAttribute="trailing" id="pei-Fd-RAW"/>
@@ -160,7 +160,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c3U-aQ-FRK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1012" y="192"/>
+            <point key="canvasLocation" x="1011.5942028985507" y="191.51785714285714"/>
         </scene>
         <!--Now Movie List View Controller-->
         <scene sceneID="aNK-nc-bEL">

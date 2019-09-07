@@ -22,7 +22,11 @@ class ListController {
             guard let strongSelf = self else {
                 return
             }
-            if error == nil {
+            if let _ = error {
+                self?.listViewModel?.isLoadFail?.value = true
+                return
+            }
+            if let totalPages = totalPages, let movies = movies {
                 strongSelf.buildViewModel(totalPages: totalPages, movies: movies)
                 strongSelf.listViewModel?.currentPage?.value = 2
                 if let rowVMs = self?.getRowVMFromListViewModel() {
@@ -47,6 +51,7 @@ class ListController {
                 }
             }
             else {
+                strongSelf.listViewModel?.isLoadFail?.value = true
                 strongSelf.listViewModel?.isFetching?.value = false
             }
         }
@@ -59,7 +64,11 @@ class ListController {
                 return
             }
             MovieService.share.fetchMovie(url: strongSelf.listViewModel!.url!, language: .en_US, page: 1, completion: { (totalPages, movies, error) in
-                if error == nil {
+                if let _ = error {
+                    self?.listViewModel?.isLoadFail?.value = true
+                    return
+                }
+                if let totalPages = totalPages, let movies = movies {
                     strongSelf.buildViewModel(totalPages: totalPages, movies: movies)
                     strongSelf.listViewModel?.currentPage?.value = 2
                     if let rowVMs = self?.getRowVMFromListViewModel() {
@@ -97,7 +106,11 @@ class ListController {
                 return
             }
             MovieService.share.fetchMovie(url: strongSelf.listViewModel!.url!, language: .en_US, page: strongSelf.listViewModel!.currentPage!.value!, completion: { (totalPages, movies, error) in
-                if error == nil {
+                if let _ = error {
+                    self?.listViewModel?.isLoadFail?.value = true
+                    return
+                }
+                if let totalPages = totalPages, let movies = movies {
                     strongSelf.buildViewModelAfterLoadMore(totalPages: totalPages, movies: movies)
                     let currentPage = strongSelf.listViewModel!.currentPage!.value!
                     strongSelf.listViewModel?.currentPage?.value = currentPage + 1
@@ -148,11 +161,11 @@ class ListController {
         }
     }
     
-    func buildViewModel(totalPages: Int?, movies: [Movie]?) {
+    func buildViewModel(totalPages: Int, movies: [Movie]) {
         //Implement at child class
     }
     
-    func buildViewModelAfterLoadMore(totalPages: Int?, movies: [Movie]?) {
+    func buildViewModelAfterLoadMore(totalPages: Int, movies: [Movie]) {
         //Implement at child class
     }
     
