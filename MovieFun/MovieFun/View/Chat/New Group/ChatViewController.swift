@@ -18,14 +18,20 @@ protocol ChatViewControllerDelegate: class {
 class ChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var chatTableView: UITableView!
-    @IBOutlet weak var messageTextView: UITextView!
+    @IBOutlet weak var messageTextView: MFTextView!
     @IBOutlet weak var heightMessageTextView: NSLayoutConstraint!
     @IBOutlet weak var heightChatTextView: NSLayoutConstraint!
+    @IBOutlet weak var imageCollectionView: UICollectionView!
     
     weak var delegate: ChatViewControllerDelegate?
     var movie: Movie!
     private let HEIGHT_OF_HEADER_VIEW = 30.0
+    private let defaultHeightMessageTextView: CGFloat = 40.0
+    private var maxHeightMessageTextView: CGFloat = 160.0
+    private let defaultHeightCollectionView: CGFloat = 0.0
+    private var maxHeightCollectionView: CGFloat!
     private var tapViewGesture: UIGestureRecognizer!
+    private var isSelectingImage: Bool = false
     
     static func createChatViewControlelr(movie: Movie) -> ChatViewController {
         let storyBoard = UIStoryboard(name: StoryBoardName.MAIN.rawValue, bundle: nil)
@@ -46,9 +52,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         messageTextView.layer.cornerRadius = 6.0
         messageTextView.clipsToBounds = true
+        messageTextView.placeholder = "Send your comment ..."
+        messageTextView.myDelegate = self
         tapViewGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.view.addGestureRecognizer(tapViewGesture!)
         chatTableView.estimatedRowHeight = CGFloat(80.0)
+        imageCollectionView.backgroundColor = .gray
         registerCell()
         initBinding()
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -62,6 +71,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             controller.start()
         }
         navigationController?.hidesBarsOnSwipe = true
+        messageTextView.becomeFirstResponder()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -79,6 +89,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         if messageTextView.isFirstResponder {
             messageTextView.resignFirstResponder()
         }
+        if isSelectingImage {
+            resetMessageTextView()
+        }
     }
     
     @objc private func showKeyboard(notification: Notification) {
@@ -92,6 +105,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let userInfo = notification.userInfo {
             UIView.animate(withDuration: 0.5) {[weak self] in
                 let keyboardFrame = userInfo["UIKeyboardFrameEndUserInfoKey"]! as! CGRect
+                self?.maxHeightCollectionView = keyboardFrame.size.height
                 self?.heightChatTextView.constant = CGFloat(10.0) + CGFloat(self?.heightMessageTextView.constant ?? 0) + CGFloat(10.0) + keyboardFrame.size.height - safeAreaInsetBottom
                 self?.view.layoutIfNeeded()
             }
@@ -100,7 +114,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @objc private func willHideKeyboard(notification: Notification) {
         UIView.animate(withDuration: 0.5) {[weak self] in
-            self?.heightChatTextView.constant = CGFloat(10.0) + CGFloat(self?.heightMessageTextView.constant ?? 0) + CGFloat(10.0)
+            self?.resetMessageTextView()
             self?.view.layoutIfNeeded()
         }
     }
@@ -111,10 +125,22 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         chatTableView.register(UINib(nibName: HeaderTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: HeaderTableViewCell.cellIdentify)
     }
     
+    private func resetMessageTextView() {
+        if !isSelectingImage {
+            heightMessageTextView.constant = defaultHeightMessageTextView
+            messageTextView.isScrollEnabled = true
+            heightChatTextView.constant = CGFloat(10.0) + CGFloat(heightMessageTextView.constant) + CGFloat(10.0)
+        }
+        else {
+            
+            isSelectingImage = false
+        }
+    }
+    
     private func initBinding() {
         viewModel.isFetching?.listener = {[weak self] (isFetching) in
             if !isFetching {
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
                     self?.chatTableView.reloadData()
                     SVProgressHUD.dismiss()
                     self?.scrollToBottomTableView(false)
@@ -179,6 +205,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         if messageTextView.isFirstResponder {
             messageTextView.resignFirstResponder()
         }
+        if isSelectingImage {
+            resetMessageTextView()
+        }
     }
     
     //MARK: - UITableViewDatasource
@@ -212,6 +241,43 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             return CGFloat(HEIGHT_OF_HEADER_VIEW)
         }
         return UITableView.automaticDimension
+    }
+    
+    @IBAction func selectImages(_ sender: Any) {
+        isSelectingImage = true
+    }
+    
+}
+
+extension ChatViewController: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let previousHeight = heightMessageTextView.constant
+        let estimatedSize = textView.sizeThatFits(CGSize(width: messageTextView.frame.size.width, height: CGFloat.infinity))
+        if estimatedSize.height > defaultHeightMessageTextView && estimatedSize.height <= maxHeightMessageTextView {
+            heightMessageTextView.constant = estimatedSize.height
+            messageTextView.isScrollEnabled = false
+        }
+        else if estimatedSize.height > maxHeightMessageTextView {
+            messageTextView.isScrollEnabled = true
+        }
+        else {
+            heightMessageTextView.constant = defaultHeightMessageTextView
+        }
+        let lastHeight = heightMessageTextView.constant
+        heightChatTextView.constant += lastHeight - previousHeight
+    }
+    
+}
+
+extension ChatViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
     }
     
 }

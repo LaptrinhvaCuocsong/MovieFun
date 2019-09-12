@@ -28,7 +28,6 @@ extension UIImageView {
             else {
                 removeSpinnerView()
             }
-            self.image = newValue
         }
     }
     

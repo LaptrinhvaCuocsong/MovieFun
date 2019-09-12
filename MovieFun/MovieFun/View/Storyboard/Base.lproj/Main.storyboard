@@ -256,27 +256,66 @@
                                             <action selector="sendMessage:" destination="tK7-J1-7Jf" eventType="touchUpInside" id="GjY-6N-Gmf"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jLc-Sp-klU">
-                                        <rect key="frame" x="10" y="10" width="352" height="40"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLc-Sp-klU" customClass="MFTextView" customModule="MovieFun" customModuleProvider="target">
+                                        <rect key="frame" x="52" y="10" width="310" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="bsa-X8-4KQ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                         <connections>
                                             <outlet property="delegate" destination="tK7-J1-7Jf" id="fka-Gi-YAX"/>
                                         </connections>
                                     </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Zj-z8-wau">
+                                        <rect key="frame" x="10" y="14" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="PCi-lM-xGU"/>
+                                            <constraint firstAttribute="width" constant="32" id="Scg-bd-U0g"/>
+                                        </constraints>
+                                        <state key="normal" image="polaroid"/>
+                                        <connections>
+                                            <action selector="selectImages:" destination="tK7-J1-7Jf" eventType="touchUpInside" id="jSq-iP-waJ"/>
+                                        </connections>
+                                    </button>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fan-X6-Eko">
+                                        <rect key="frame" x="10" y="58" width="394" height="0.0"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cl1-tZ-Zds">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Yv0-WC-duW">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="tK7-J1-7Jf" id="4iS-8s-7hs"/>
+                                            <outlet property="delegate" destination="tK7-J1-7Jf" id="bl9-8p-zFO"/>
+                                        </connections>
+                                    </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.83227204619999995" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="jLc-Sp-klU" firstAttribute="top" secondItem="HX2-RU-gZa" secondAttribute="top" constant="10" id="DyT-dF-Ma5"/>
                                     <constraint firstAttribute="height" constant="60" id="OMy-Xt-A3N"/>
                                     <constraint firstAttribute="trailing" secondItem="yju-fu-Ps3" secondAttribute="trailing" constant="10" id="Z9w-GY-62f"/>
+                                    <constraint firstItem="jLc-Sp-klU" firstAttribute="leading" secondItem="2Zj-z8-wau" secondAttribute="trailing" constant="10" id="e14-Yk-Qmx"/>
                                     <constraint firstItem="yju-fu-Ps3" firstAttribute="leading" secondItem="jLc-Sp-klU" secondAttribute="trailing" constant="10" id="hOX-By-it9"/>
+                                    <constraint firstItem="2Zj-z8-wau" firstAttribute="top" secondItem="HX2-RU-gZa" secondAttribute="top" constant="14" id="j7m-5g-QIH"/>
+                                    <constraint firstItem="2Zj-z8-wau" firstAttribute="leading" secondItem="HX2-RU-gZa" secondAttribute="leading" constant="10" id="pui-ti-EEM"/>
                                     <constraint firstItem="yju-fu-Ps3" firstAttribute="top" secondItem="HX2-RU-gZa" secondAttribute="top" constant="14" id="uBt-BS-FeG"/>
-                                    <constraint firstItem="jLc-Sp-klU" firstAttribute="leading" secondItem="HX2-RU-gZa" secondAttribute="leading" constant="10" id="zMN-iC-3dj"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -296,6 +335,7 @@
                         <outlet property="chatTableView" destination="RcO-Wj-bWJ" id="k1N-Hh-DWl"/>
                         <outlet property="heightChatTextView" destination="OMy-Xt-A3N" id="YUr-Z3-AZD"/>
                         <outlet property="heightMessageTextView" destination="bsa-X8-4KQ" id="5sS-9X-S6Z"/>
+                        <outlet property="imageCollectionView" destination="fan-X6-Eko" id="cYf-cq-2af"/>
                         <outlet property="messageTextView" destination="jLc-Sp-klU" id="DgE-4X-ZY8"/>
                     </connections>
                 </viewController>
@@ -525,6 +565,7 @@
         <image name="chat" width="32" height="32"/>
         <image name="heart" width="32" height="32"/>
         <image name="image-not-found" width="137.5" height="137.5"/>
+        <image name="polaroid" width="32" height="32"/>
         <image name="search" width="32" height="32"/>
         <image name="send" width="32" height="32"/>
         <image name="user" width="32" height="32"/>

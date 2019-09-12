@@ -45,9 +45,11 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        SVProgressHUD.dismiss()
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if SVProgressHUD.isVisible() {
+            SVProgressHUD.dismiss()
+        }
     }
     
     deinit {
@@ -95,7 +97,7 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
     private func initBinding() {
         viewModel.isFetching?.listener = {[weak self] (isFetching) in
             if !isFetching {
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
                     self?.commentListTableView.reloadData()
                     SVProgressHUD.dismiss()
                 }

@@ -160,6 +160,25 @@ class SearchMovieController {
         }
     }
     
+    func loadFavoriteMovies() {
+        if let rowVMs = getRowVMFromListViewModel() {
+            FavoriteMovieService.share.checkFavoriteMovie(movieIds: getMovieIdsFromListViewModel(), completion: { (isFavoriteMovies, error) in
+                if error == nil {
+                    if let isFavoriteMovies = isFavoriteMovies {
+                        for rowVM in rowVMs {
+                            if let movieId = rowVM.movie?.value?.id {
+                                rowVM.isFavoriteMovie?.value = isFavoriteMovies[movieId] ?? false
+                            }
+                            else {
+                                rowVM.isFavoriteMovie?.value = false
+                            }
+                        }
+                    }
+                }
+            })
+        }
+    }
+    
     private func loadMoreForNewMovie() {
         MovieService.share.fetchMovie(url: searchMovieViewModel!.url!, language: .en_US, page: searchMovieViewModel!.currentPage!.value!, completion: {[weak self] (totalPages, movies, error) in
             guard let _ = error else {

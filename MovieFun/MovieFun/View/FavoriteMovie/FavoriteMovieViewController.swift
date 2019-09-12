@@ -53,7 +53,9 @@ class FavoriteMovieViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        SVProgressHUD.dismiss()
+        if SVProgressHUD.isVisible() {
+            SVProgressHUD.dismiss()
+        }
     }
     
     private func initBinding() {

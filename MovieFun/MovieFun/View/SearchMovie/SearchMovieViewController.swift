@@ -43,6 +43,8 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
         viewModel.delegate = self
         initBinding()
         controller.start()
+        NotificationCenter.default.addObserver(self, selector: #selector(handlerRemoveFavoriteMovie(notification:)), name: .REMOVE_FAVORITE_MOVIE_NOTIFICATION_KEY, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handlerAddFavoriteMovie(notification:)), name: .ADD_FAVORITE_MOVIE_NOTIFICATION_KEY, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,8 +54,10 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        SVProgressHUD.dismiss()
         isDidViewAppear = false
+        if SVProgressHUD.isVisible() {
+            SVProgressHUD.dismiss()
+        }
     }
 
     private func setFooterTableView() {
@@ -102,6 +106,20 @@ class SearchMovieViewController: UIViewController, UITableViewDelegate, UITableV
             if isLoadFail {
                 AlertService.share.showAlertError(for: strongSelf)
             }
+        }
+    }
+    
+    @objc private func handlerRemoveFavoriteMovie(notification: Notification) {
+        guard let _ = notification.object as? SearchMovieRowViewModel else {
+            controller.loadFavoriteMovies()
+            return
+        }
+    }
+    
+    @objc private func handlerAddFavoriteMovie(notification: Notification) {
+        guard let _ = notification.object as? SearchMovieRowViewModel else {
+            controller.loadFavoriteMovies()
+            return
         }
     }
     

@@ -54,6 +54,10 @@ class ChatTableViewCell: UITableViewCell, ChatCell {
     
     private func setUpChatLeft(viewModel: ChatLeftRowViewModel) {
         messageLabel.text = viewModel.currentMessage?.content
+        //set account image
+        for subView in accountImageView.subviews {
+            subView.removeFromSuperview()
+        }
         let previousAccId = viewModel.previousMessage?.accountId
         let currentAccId = viewModel.currentMessage?.accountId
         if previousAccId != currentAccId {
@@ -80,10 +84,13 @@ class ChatTableViewCell: UITableViewCell, ChatCell {
             return
         }
         accountImageView.image = nil
-        StorageService.share.downloadImage(accountId: accountId, completion: {[weak self] (data, error) in
+        let accImageView = UIImageView()
+        accountImageView.addSubview(accImageView)
+        accImageView.fillSuperView()
+        StorageService.share.downloadImage(accountId: accountId, completion: { (data, error) in
             if error == nil && data != nil {
                 let image = UIImage(data: data!)
-                self?.accountImageView.image = image
+                accImageView.image = image
                 CacheService.share.setObject(key: accountId as NSString, image: image!)
             }
         })

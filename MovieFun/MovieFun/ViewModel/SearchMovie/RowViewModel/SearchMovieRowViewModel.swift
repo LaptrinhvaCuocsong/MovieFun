@@ -35,7 +35,7 @@ class SearchMovieRowViewModel: SearchMovieBaseRowViewModel {
                 FavoriteMovieService.share.removeFavoriteMovie(movieId: movie!.value!.id!) {[weak self] (deleteSucces, error) in
                     if error == nil && deleteSucces == true {
                         self?.isFavoriteMovie?.value = !isFavoriteMovie
-                        NotificationCenter.default.post(name: .REMOVE_FAVORITE_MOVIE_NOTIFICATION_KEY, object: nil)
+                        NotificationCenter.default.post(name: .REMOVE_FAVORITE_MOVIE_NOTIFICATION_KEY, object: self)
                     }
                     self?.isLoading?.value = false
                 }
@@ -44,7 +44,7 @@ class SearchMovieRowViewModel: SearchMovieBaseRowViewModel {
                 FavoriteMovieService.share.addFavoriteMovie(movie: movie!.value!) {[weak self] (error) in
                     if error == nil {
                         self?.isFavoriteMovie?.value = !isFavoriteMovie
-                        NotificationCenter.default.post(name: .ADD_FAVORITE_MOVIE_NOTIFICATION_KEY, object: nil)
+                        NotificationCenter.default.post(name: .ADD_FAVORITE_MOVIE_NOTIFICATION_KEY, object: self)
                     }
                     self?.isLoading?.value = false
                 }

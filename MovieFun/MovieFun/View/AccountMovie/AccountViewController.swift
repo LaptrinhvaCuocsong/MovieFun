@@ -49,7 +49,9 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        SVProgressHUD.dismiss()
+        if SVProgressHUD.isVisible() {
+            SVProgressHUD.dismiss()
+        }
     }
     
     //MARK: - Private method
@@ -84,7 +86,7 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         viewModel.isFetching?.listener = {[weak self] (isFetching) in
             if !isFetching {
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
                     self?.accountTableView.reloadData()
                     SVProgressHUD.dismiss()
                 }

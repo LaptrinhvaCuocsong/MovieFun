@@ -58,8 +58,10 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        SVProgressHUD.dismiss()
         isDidAppear = false
+        if SVProgressHUD.isVisible() {
+            SVProgressHUD.dismiss()
+        }
     }
     
     deinit {
