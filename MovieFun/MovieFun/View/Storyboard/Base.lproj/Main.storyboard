@@ -280,10 +280,12 @@
                                             <action selector="selectImages:" destination="tK7-J1-7Jf" eventType="touchUpInside" id="jSq-iP-waJ"/>
                                         </connections>
                                     </button>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fan-X6-Eko">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fan-X6-Eko">
                                         <rect key="frame" x="10" y="58" width="394" height="0.0"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" id="Sbn-cU-ogs"/>
+                                        </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cl1-tZ-Zds">
                                             <size key="itemSize" width="50" height="50"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -309,13 +311,16 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.83227204619999995" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="jLc-Sp-klU" firstAttribute="top" secondItem="HX2-RU-gZa" secondAttribute="top" constant="10" id="DyT-dF-Ma5"/>
+                                    <constraint firstItem="fan-X6-Eko" firstAttribute="leading" secondItem="HX2-RU-gZa" secondAttribute="leading" constant="10" id="IAd-bZ-Ww6"/>
                                     <constraint firstAttribute="height" constant="60" id="OMy-Xt-A3N"/>
+                                    <constraint firstAttribute="trailing" secondItem="fan-X6-Eko" secondAttribute="trailing" constant="10" id="U3l-iX-3d1"/>
                                     <constraint firstAttribute="trailing" secondItem="yju-fu-Ps3" secondAttribute="trailing" constant="10" id="Z9w-GY-62f"/>
                                     <constraint firstItem="jLc-Sp-klU" firstAttribute="leading" secondItem="2Zj-z8-wau" secondAttribute="trailing" constant="10" id="e14-Yk-Qmx"/>
                                     <constraint firstItem="yju-fu-Ps3" firstAttribute="leading" secondItem="jLc-Sp-klU" secondAttribute="trailing" constant="10" id="hOX-By-it9"/>
                                     <constraint firstItem="2Zj-z8-wau" firstAttribute="top" secondItem="HX2-RU-gZa" secondAttribute="top" constant="14" id="j7m-5g-QIH"/>
                                     <constraint firstItem="2Zj-z8-wau" firstAttribute="leading" secondItem="HX2-RU-gZa" secondAttribute="leading" constant="10" id="pui-ti-EEM"/>
                                     <constraint firstItem="yju-fu-Ps3" firstAttribute="top" secondItem="HX2-RU-gZa" secondAttribute="top" constant="14" id="uBt-BS-FeG"/>
+                                    <constraint firstItem="fan-X6-Eko" firstAttribute="top" secondItem="jLc-Sp-klU" secondAttribute="bottom" constant="8" id="uo5-Y2-fMM"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -334,6 +339,7 @@
                     <connections>
                         <outlet property="chatTableView" destination="RcO-Wj-bWJ" id="k1N-Hh-DWl"/>
                         <outlet property="heightChatTextView" destination="OMy-Xt-A3N" id="YUr-Z3-AZD"/>
+                        <outlet property="heightImageCollectionView" destination="Sbn-cU-ogs" id="sIg-lQ-tdT"/>
                         <outlet property="heightMessageTextView" destination="bsa-X8-4KQ" id="5sS-9X-S6Z"/>
                         <outlet property="imageCollectionView" destination="fan-X6-Eko" id="cYf-cq-2af"/>
                         <outlet property="messageTextView" destination="jLc-Sp-klU" id="DgE-4X-ZY8"/>

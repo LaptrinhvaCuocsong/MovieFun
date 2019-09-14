@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import Photos
 
 protocol ChatViewControllerDelegate: class {
     
@@ -22,6 +23,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var heightMessageTextView: NSLayoutConstraint!
     @IBOutlet weak var heightChatTextView: NSLayoutConstraint!
     @IBOutlet weak var imageCollectionView: UICollectionView!
+    @IBOutlet weak var heightImageCollectionView: NSLayoutConstraint!
     
     weak var delegate: ChatViewControllerDelegate?
     var movie: Movie!
@@ -29,7 +31,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     private let defaultHeightMessageTextView: CGFloat = 40.0
     private var maxHeightMessageTextView: CGFloat = 160.0
     private let defaultHeightCollectionView: CGFloat = 0.0
-    private var maxHeightCollectionView: CGFloat!
+    private var maxHeightCollectionView: CGFloat = 0.0
     private var tapViewGesture: UIGestureRecognizer!
     private var isSelectingImage: Bool = false
     
@@ -57,11 +59,10 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         tapViewGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         self.view.addGestureRecognizer(tapViewGesture!)
         chatTableView.estimatedRowHeight = CGFloat(80.0)
-        imageCollectionView.backgroundColor = .gray
         registerCell()
         initBinding()
-        NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willHideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willHideKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,7 +106,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let userInfo = notification.userInfo {
             UIView.animate(withDuration: 0.5) {[weak self] in
                 let keyboardFrame = userInfo["UIKeyboardFrameEndUserInfoKey"]! as! CGRect
-                self?.maxHeightCollectionView = keyboardFrame.size.height
+                self?.maxHeightCollectionView = keyboardFrame.size.height - safeAreaInsetBottom
                 self?.heightChatTextView.constant = CGFloat(10.0) + CGFloat(self?.heightMessageTextView.constant ?? 0) + CGFloat(10.0) + keyboardFrame.size.height - safeAreaInsetBottom
                 self?.view.layoutIfNeeded()
             }
@@ -114,8 +115,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @objc private func willHideKeyboard(notification: Notification) {
         UIView.animate(withDuration: 0.5) {[weak self] in
-            self?.resetMessageTextView()
-            self?.view.layoutIfNeeded()
+            if !(self?.isSelectingImage ?? false) {
+                self?.resetMessageTextView()
+            }
         }
     }
     
@@ -126,15 +128,14 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     private func resetMessageTextView() {
-        if !isSelectingImage {
-            heightMessageTextView.constant = defaultHeightMessageTextView
-            messageTextView.isScrollEnabled = true
-            heightChatTextView.constant = CGFloat(10.0) + CGFloat(heightMessageTextView.constant) + CGFloat(10.0)
-        }
-        else {
-            
-            isSelectingImage = false
-        }
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {[weak self] in
+            self?.heightMessageTextView.constant = self?.defaultHeightMessageTextView ?? 0.0
+            self?.messageTextView.isScrollEnabled = true
+            self?.heightChatTextView.constant = CGFloat(10.0) + CGFloat(self?.heightMessageTextView.constant ?? 0.0) + CGFloat(10.0)
+            self?.heightImageCollectionView.constant = 0.0
+            self?.view.layoutIfNeeded()
+        }, completion: nil)
+        isSelectingImage = false
     }
     
     private func initBinding() {
@@ -244,7 +245,45 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func selectImages(_ sender: Any) {
+        requestAuthentication()
+    }
+    
+    private func showImageCollection() {
         isSelectingImage = true
+        if !messageTextView.isFirstResponder {
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {[weak self] in
+                self?.heightImageCollectionView.constant = self?.maxHeightCollectionView ?? 0.0
+                self?.heightChatTextView.constant = CGFloat(10.0) + CGFloat(self?.heightMessageTextView.constant ?? 0.0) + CGFloat(8.0) + CGFloat(self?.heightImageCollectionView.constant ?? 0.0)
+                self?.view.layoutIfNeeded()
+                }, completion: nil)
+        }
+        else {
+            messageTextView.resignFirstResponder()
+            heightImageCollectionView.constant = maxHeightCollectionView
+        }
+    }
+    
+    private func requestAuthentication() {
+        let state = PHPhotoLibrary.authorizationStatus()
+        switch state {
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization {[weak self] (status) in
+                if status == .authorized {
+                    self?.showImageCollection()
+                }
+            }
+            break
+        case .restricted:
+            fallthrough
+        case .denied:
+            AlertService.share.showAlertRequestOpenSetting(for: self, title: nil, message: "Allow us to use your photo gallery")
+            break
+        case .authorized:
+            showImageCollection()
+            break
+        default:
+            break
+        }
     }
     
 }

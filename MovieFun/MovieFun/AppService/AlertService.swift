@@ -37,4 +37,14 @@ class AlertService {
         viewController.present(alertVC, animated: true, completion: nil)
     }
     
+    func showAlertRequestOpenSetting(for viewController: UIViewController, title: String?, message: String?) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Open Setting", style: .default, handler: { (_) in
+            let urlSetting = URL(string: UIApplication.openSettingsURLString)!
+            UIApplication.shared.open(urlSetting, options: [:], completionHandler: nil)
+        }))
+        alertVC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        viewController.present(alertVC, animated: true, completion: nil)
+    }
+    
 }

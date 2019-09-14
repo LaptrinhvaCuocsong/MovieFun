@@ -117,6 +117,8 @@
 		A1460AC722C6885C00E4BAA5 /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1460AC622C6885C00E4BAA5 /* MovieListViewModel.swift */; };
 		A1460ACE22C692C300E4BAA5 /* Utils.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1460ACD22C692C300E4BAA5 /* Utils.storyboard */; };
 		A1460AD122C6950E00E4BAA5 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1460AD022C6950E00E4BAA5 /* LoadingViewController.swift */; };
+		A1546E9B232C027900C23F7C /* ChatImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1546E99232C027900C23F7C /* ChatImageCollectionViewCell.swift */; };
+		A1546E9C232C027900C23F7C /* ChatImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1546E9A232C027900C23F7C /* ChatImageCollectionViewCell.xib */; };
 		A15F9DD32327E35900EB4980 /* MFTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15F9DD22327E35900EB4980 /* MFTextView.swift */; };
 		A169EF8822C1440300AC7D6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A169EF8722C1440300AC7D6F /* AppDelegate.swift */; };
 		A169EF8D22C1440300AC7D6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A169EF8B22C1440300AC7D6F /* Main.storyboard */; };
@@ -316,6 +318,8 @@
 		A1460AC622C6885C00E4BAA5 /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
 		A1460ACD22C692C300E4BAA5 /* Utils.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Utils.storyboard; sourceTree = "<group>"; };
 		A1460AD022C6950E00E4BAA5 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		A1546E99232C027900C23F7C /* ChatImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		A1546E9A232C027900C23F7C /* ChatImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		A15F9DD22327E35900EB4980 /* MFTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFTextView.swift; sourceTree = "<group>"; };
 		A169EF8422C1440300AC7D6F /* MovieFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A169EF8722C1440300AC7D6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -634,12 +638,8 @@
 		A103A92922FEBA2300CFC2B3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				A1FEF720230D7BBC00D1C23B /* Base */,
-				A103A92E22FEBA6F00CFC2B3 /* ChatTableViewCell.swift */,
-				A103A92B22FEBA4700CFC2B3 /* ChatLeftTableViewCell.xib */,
-				A103A93222FEC1C100CFC2B3 /* ChatRightTableViewCell.xib */,
-				A1FEF71A230D79FE00D1C23B /* HeaderTableViewCell.swift */,
-				A1FEF71B230D79FE00D1C23B /* HeaderTableViewCell.xib */,
+				A1546E98232C025A00C23F7C /* ImageCollection */,
+				A1546E97232C023700C23F7C /* Chat */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1003,6 +1003,28 @@
 				A1460AD022C6950E00E4BAA5 /* LoadingViewController.swift */,
 			);
 			path = LoadingMovie;
+			sourceTree = "<group>";
+		};
+		A1546E97232C023700C23F7C /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				A1FEF720230D7BBC00D1C23B /* Base */,
+				A103A92E22FEBA6F00CFC2B3 /* ChatTableViewCell.swift */,
+				A103A92B22FEBA4700CFC2B3 /* ChatLeftTableViewCell.xib */,
+				A103A93222FEC1C100CFC2B3 /* ChatRightTableViewCell.xib */,
+				A1FEF71A230D79FE00D1C23B /* HeaderTableViewCell.swift */,
+				A1FEF71B230D79FE00D1C23B /* HeaderTableViewCell.xib */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
+		A1546E98232C025A00C23F7C /* ImageCollection */ = {
+			isa = PBXGroup;
+			children = (
+				A1546E99232C027900C23F7C /* ChatImageCollectionViewCell.swift */,
+				A1546E9A232C027900C23F7C /* ChatImageCollectionViewCell.xib */,
+			);
+			name = ImageCollection;
 			sourceTree = "<group>";
 		};
 		A169EF7B22C1440300AC7D6F = {
@@ -1444,6 +1466,7 @@
 				A1A3E31722C3C64900C5DF5F /* NewMovieTableViewCell.xib in Resources */,
 				A169EF8F22C1440500AC7D6F /* Assets.xcassets in Resources */,
 				A107EC1C22C5272A00A711DA /* NowMovieTableViewCell.xib in Resources */,
+				A1546E9C232C027900C23F7C /* ChatImageCollectionViewCell.xib in Resources */,
 				A169EF8D22C1440300AC7D6F /* Main.storyboard in Resources */,
 				A102B2FC22F3D5700024E8FC /* Login.storyboard in Resources */,
 				A1D1D73222DB7348001ABDE9 /* EmailTableViewCell.xib in Resources */,
@@ -1678,6 +1701,7 @@
 				A1460AB922C67FD700E4BAA5 /* NewMovieCellViewModel.swift in Sources */,
 				A1065C0E22ED41C50063DA69 /* RealmService.swift in Sources */,
 				A1AA7CF522F1FCE90013E6B6 /* SearchMovieSectionViewModel.swift in Sources */,
+				A1546E9B232C027900C23F7C /* ChatImageCollectionViewCell.swift in Sources */,
 				A102B2FF22F3F7230024E8FC /* LoginViewController.swift in Sources */,
 				A103F0A522F51AA700719D6F /* Account.swift in Sources */,
 				A1157C1422DADCB4008FC3D3 /* AccountViewModel.swift in Sources */,
