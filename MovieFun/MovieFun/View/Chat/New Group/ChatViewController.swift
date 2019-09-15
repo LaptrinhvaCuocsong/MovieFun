@@ -34,6 +34,9 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var maxHeightCollectionView: CGFloat = 0.0
     private var tapViewGesture: UIGestureRecognizer!
     private var isSelectingImage: Bool = false
+    private let imageCachingManager = PHCachingImageManager()
+    private var imageRequestOptions: PHImageRequestOptions!
+    private let WIDTH_OF_IMAGE_COLLECTION_VIEW_CELL: CGFloat = 300.0
     
     static func createChatViewControlelr(movie: Movie) -> ChatViewController {
         let storyBoard = UIStoryboard(name: StoryBoardName.MAIN.rawValue, bundle: nil)
@@ -57,10 +60,11 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         messageTextView.placeholder = "Send your comment ..."
         messageTextView.myDelegate = self
         tapViewGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        self.view.addGestureRecognizer(tapViewGesture!)
+        chatTableView.addGestureRecognizer(tapViewGesture!)
         chatTableView.estimatedRowHeight = CGFloat(80.0)
         registerCell()
         initBinding()
+        setImageRequestOption()
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(willHideKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -85,6 +89,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     //MARK: - Private method
+    
+    private func setImageRequestOption() {
+        imageRequestOptions = PHImageRequestOptions()
+        imageRequestOptions.deliveryMode = .fastFormat
+        imageRequestOptions.isNetworkAccessAllowed = false
+    }
     
     @objc private func hideKeyboard() {
         if messageTextView.isFirstResponder {
@@ -125,6 +135,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         chatTableView.register(UINib(nibName: ChatTableViewCell.cellLeftNibName, bundle: nil), forCellReuseIdentifier: ChatTableViewCell.cellLeftIdentify)
         chatTableView.register(UINib(nibName: ChatTableViewCell.cellRightNibName, bundle: nil), forCellReuseIdentifier: ChatTableViewCell.cellRightIdentify)
         chatTableView.register(UINib(nibName: HeaderTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: HeaderTableViewCell.cellIdentify)
+        imageCollectionView.register(UINib(nibName: ChatImageCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: ChatImageCollectionViewCell.cellIdentify)
     }
     
     private func resetMessageTextView() {
@@ -152,7 +163,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         viewModel.haveAddMessage?.listener = {[weak self] (haveAddMessage) in
-            if (haveAddMessage) {
+            if haveAddMessage {
                 let length = self?.viewModel.sectionViewModels?.value?.count ?? 0
                 if length > 0 {
                     DispatchQueue.main.async {
@@ -163,12 +174,19 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         viewModel.receiveMessageSuccess?.listener = {[weak self] (receiveMessageSuccess) in
-            if (receiveMessageSuccess) {
+            if receiveMessageSuccess {
                 let length = self?.viewModel.sectionViewModels?.value?.count ?? 0
                 if length > 0 {
                     DispatchQueue.main.async {
                         self?.chatTableView.reloadData()
                     }
+                }
+            }
+        }
+        viewModel.isFetchingAssets?.listener = {[weak self] (isFetching) in
+            if !isFetching {
+                DispatchQueue.main.async {
+                    self?.imageCollectionView.reloadData()
                 }
             }
         }
@@ -261,6 +279,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
             messageTextView.resignFirstResponder()
             heightImageCollectionView.constant = maxHeightCollectionView
         }
+        controller.fetchAssetImages()
     }
     
     private func requestAuthentication() {
@@ -311,12 +330,68 @@ extension ChatViewController: UITextViewDelegate {
 
 extension ChatViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return viewModel.phassets?.count ?? 0
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatImageCollectionViewCell.cellIdentify, for: indexPath) as! ChatImageCollectionViewCell
+        let phAssetWrapper = viewModel.phassets![indexPath.section]
+        let targetSize = CGSize(width: WIDTH_OF_IMAGE_COLLECTION_VIEW_CELL, height: heightImageCollectionView.constant)
+        cell.setContent(assetWrapper: phAssetWrapper, imageManager: imageCachingManager, imageRequestOption: imageRequestOptions, targetSizeImage: targetSize)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let targetSize = CGSize(width: WIDTH_OF_IMAGE_COLLECTION_VIEW_CELL, height: heightImageCollectionView.constant)
+        return targetSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        for item in viewModel.phassets! {
+            item.isSelectedAsset?.value = false
+        }
+        let phAssetWrapper = viewModel.phassets![indexPath.section]
+        phAssetWrapper.isSelectedAsset?.value = true
+    }
+
+}
+
+extension ChatViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if let phAssets = viewModel.phassets {
+            let startX = scrollView.contentOffset.x
+            var indexStartX = Int(startX / WIDTH_OF_IMAGE_COLLECTION_VIEW_CELL)
+            let endX = startX + CGFloat(imageCollectionView.width)
+            var indexEndX = Int(endX / WIDTH_OF_IMAGE_COLLECTION_VIEW_CELL)
+            indexStartX = indexStartX - 10 < 0 ? 0 : indexStartX - 10
+            indexEndX = indexEndX + 10 > phAssets.count ? phAssets.count - 1 : indexEndX + 10
+            let addCacheAssetWrappers = [PHAssetWrapper](phAssets[indexStartX...indexEndX])
+            let addCacheAssets = [PHAsset](addCacheAssetWrappers.map({ (assetWrapper) -> PHAsset in
+                return assetWrapper.phAsset!
+            }))
+            var removeCacheAssets = [PHAsset]()
+            if indexStartX > 0 {
+                let assetWrappers = [PHAssetWrapper](phAssets[0..<indexStartX])
+                removeCacheAssets.append(contentsOf: assetWrappers.map({ (assetWrapper) -> PHAsset in
+                    return assetWrapper.phAsset!
+                }))
+            }
+            if indexEndX < phAssets.count - 1 {
+                let assetWrappers = [PHAssetWrapper](phAssets[(indexEndX+1)..<phAssets.count])
+                removeCacheAssets.append(contentsOf: assetWrappers.map({ (assetWrapper) -> PHAsset in
+                    return assetWrapper.phAsset!
+                }))
+            }
+            let targetSize = CGSize(width: WIDTH_OF_IMAGE_COLLECTION_VIEW_CELL, height: heightImageCollectionView.constant)
+            imageCachingManager.startCachingImages(for: addCacheAssets, targetSize: targetSize, contentMode: .default, options: imageRequestOptions)
+            imageCachingManager.stopCachingImages(for: removeCacheAssets, targetSize: targetSize, contentMode: .default, options: imageRequestOptions)
+        }
     }
     
 }

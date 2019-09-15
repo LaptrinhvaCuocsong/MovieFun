@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Photos
 
 class ChatController {
     
@@ -194,6 +195,19 @@ class ChatController {
         default:
             return nil
         }
+    }
+    
+    //MARK: Image chat collection
+    
+    func fetchAssetImages() {
+        chatViewModel?.isFetchingAssets?.value = true
+        let phResult = PHAsset.fetchAssets(with: .image, options: nil)
+        let indexSet = IndexSet(0..<phResult.count)
+        let phAssets = phResult.objects(at: indexSet)
+        chatViewModel?.phassets = phAssets.map({ (asset) -> PHAssetWrapper in
+            return PHAssetWrapper(asset: asset)
+        })
+        chatViewModel?.isFetchingAssets?.value = false
     }
     
 }

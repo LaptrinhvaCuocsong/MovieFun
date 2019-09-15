@@ -7,10 +7,65 @@
 //
 
 import UIKit
+import Photos
 
 class ChatImageCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var buttonSend: UIButton!
+    
     static let nibName = "ChatImageCollectionViewCell"
     static let cellIdentify = "chatImageCollectionViewCell"
+    var assetWrapper: PHAssetWrapper?
+    
+    func setContent(assetWrapper: PHAssetWrapper, imageManager: PHCachingImageManager, imageRequestOption: PHImageRequestOptions?, targetSizeImage: CGSize) {
+        self.assetWrapper = assetWrapper
+        initBinding()
+        imageView.image = nil
+        if let asset = assetWrapper.phAsset {
+            imageManager.requestImage(for: asset, targetSize: targetSizeImage, contentMode: .default, options: imageRequestOption) {[weak self] (image, _) in
+                self?.imageView.image = image
+            }
+        }
+        if assetWrapper.isSelectedAsset?.value ?? false {
+            displayButtonSend()
+        }
+        else {
+            hideButtonSend()
+        }
+    }
+    
+    func displayButtonSend() {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let effectView = UIVisualEffectView(effect: blurEffect)
+        effectView.frame = CGRect(x: imageView.frame.midX, y: imageView.frame.midY, width: 0.0, height: 0.0)
+        imageView.addSubview(effectView)
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveLinear, animations: {
+            effectView.fillSuperView()
+            self.layoutIfNeeded()
+        }, completion: nil)
+        buttonSend.isHidden = false
+    }
+    
+    func hideButtonSend() {
+        for subView in imageView.subviews {
+            subView.removeFromSuperview()
+        }
+        buttonSend.isHidden = true
+    }
         
+    @IBAction func sendImage(_ sender: Any) {
+    }
+    
+    private func initBinding() {
+        assetWrapper?.isSelectedAsset?.listener = {[weak self] (isSelectedAsset) in
+            if isSelectedAsset {
+                self?.displayButtonSend()
+            }
+            else {
+                self?.hideButtonSend()
+            }
+        }
+    }
+    
 }

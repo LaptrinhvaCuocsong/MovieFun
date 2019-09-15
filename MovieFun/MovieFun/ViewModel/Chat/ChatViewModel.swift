@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Photos
 
 class ChatViewModel {
     
@@ -17,8 +18,11 @@ class ChatViewModel {
     var isLoadmore: DynamicType<Bool>?
     var isFetching: DynamicType<Bool>?
     var sectionViewModels: DynamicType<[ChatSectionViewModel]>?
+    var phassets: [PHAssetWrapper]?
+    var isFetchingAssets: DynamicType<Bool>?
     
     init() {
+        isFetchingAssets = DynamicType<Bool>(value: false)
         receiveMessageSuccess = DynamicType<Bool>(value: false)
         haveAddMessage = DynamicType<Bool>(value: false)
         isLoadmore = DynamicType<Bool>(value: false)
