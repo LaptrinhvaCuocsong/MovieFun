@@ -9,6 +9,8 @@
 import Foundation
 
 struct Message {
+    var isMessageImage: Bool?
+    var imageName: String?
     var messageId: String?
     var accountId: String?
     var accountName: String?

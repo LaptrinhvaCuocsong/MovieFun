@@ -34,10 +34,28 @@ class StorageService {
         }
     }
     
+    func putImage(imageName: String, imageData: Data, completion: ((StorageMetadata?,Error?) -> Void)?) {
+        let completion:((StorageMetadata?,Error?) -> Void) = completion ?? {_,_ in}
+        if let accountId = AccountService.share.getAccountId() {
+            let storageRef = storage.reference().child("\(accountId)/\(imageName)")
+            storageRef.putData(imageData, metadata: nil) { (metadata, error) in
+                completion(metadata, error)
+            }
+        }
+    }
+    
     func downloadImage(accountId: String, completion: ((Data?, Error?) -> Void)?) {
         let completion:((Data?, Error?) -> Void) = completion ?? {_,_ in}
         let storageRef = storage.reference().child(accountId)
-        storageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+        storageRef.getData(maxSize: 3 * 1024 * 1024) { (data, error) in
+            completion(data, error)
+        }
+    }
+    
+    func downloadImage(accountId: String, imageName: String, completion: ((Data?, Error?) -> Void)?) {
+        let completion:((Data?, Error?) -> Void) = completion ?? {_,_ in}
+        let storageRef = storage.reference().child("\(accountId)/\(imageName)")
+        storageRef.getData(maxSize: 3 * 1024 * 1024) { (data, error) in
             completion(data, error)
         }
     }

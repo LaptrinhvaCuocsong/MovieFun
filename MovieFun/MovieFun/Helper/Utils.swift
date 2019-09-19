@@ -22,6 +22,22 @@ class Utils {
         dateFm.timeZone = TimeZone.current
     }
     
+    func getFileName(from url: URL) -> String? {
+        let urlStr = url.absoluteString as NSString
+        let regex = "/\\w+.\\w+$"
+        do {
+            let regularExpression = try NSRegularExpression(pattern: regex, options: .caseInsensitive)
+            let results = regularExpression.matches(in: urlStr as String, range: NSRange(location: 0, length: urlStr.length))
+            if let resultRange = results.last?.range {
+                let range = NSRange(location: resultRange.location+1, length: resultRange.length-1)
+                return urlStr.substring(with: range)
+            }
+            return nil
+        } catch {
+            return nil
+        }
+    }
+    
     func getCurrentDate() -> Date {
         let currentDate = Date()
         let dateStr = self.stringFromDate(dateFormat: Utils.YYYY_MM_DD_HH_MM_SS, date: currentDate)
@@ -62,6 +78,10 @@ class Utils {
         else {
             return nil
         }
+    }
+    
+    static func trim(_ str: String) -> String {
+        return str.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
     }
     
 }

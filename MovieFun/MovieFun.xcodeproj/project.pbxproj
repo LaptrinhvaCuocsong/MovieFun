@@ -176,6 +176,7 @@
 		A1D1D74322DB794D001ABDE9 /* AddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D1D74222DB794D001ABDE9 /* AddressViewModel.swift */; };
 		A1D1D74522DB796D001ABDE9 /* DateOfBirthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D1D74422DB796D001ABDE9 /* DateOfBirthViewModel.swift */; };
 		A1E882D0232D6AF800E776C2 /* PHAssetWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E882CF232D6AF800E776C2 /* PHAssetWrapper.swift */; };
+		A1E89003232FC55700F1BFF2 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E89002232FC55700F1BFF2 /* PhotoService.swift */; };
 		A1F75FB222E9D9FD0097ADF1 /* TrailerListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F75FB122E9D9FD0097ADF1 /* TrailerListController.swift */; };
 		A1F75FB622E9DBC90097ADF1 /* TrailerMovieListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1F75FB422E9DBC90097ADF1 /* TrailerMovieListTableViewCell.swift */; };
 		A1F75FB722E9DBC90097ADF1 /* TrailerMovieListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1F75FB522E9DBC90097ADF1 /* TrailerMovieListTableViewCell.xib */; };
@@ -380,6 +381,7 @@
 		A1D1D74222DB794D001ABDE9 /* AddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressViewModel.swift; sourceTree = "<group>"; };
 		A1D1D74422DB796D001ABDE9 /* DateOfBirthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateOfBirthViewModel.swift; sourceTree = "<group>"; };
 		A1E882CF232D6AF800E776C2 /* PHAssetWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHAssetWrapper.swift; sourceTree = "<group>"; };
+		A1E89002232FC55700F1BFF2 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		A1F75FB122E9D9FD0097ADF1 /* TrailerListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerListController.swift; sourceTree = "<group>"; };
 		A1F75FB422E9DBC90097ADF1 /* TrailerMovieListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerMovieListTableViewCell.swift; sourceTree = "<group>"; };
 		A1F75FB522E9DBC90097ADF1 /* TrailerMovieListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrailerMovieListTableViewCell.xib; sourceTree = "<group>"; };
@@ -616,6 +618,7 @@
 			children = (
 				A1024B5C22FF523100A33A68 /* AlertService.swift */,
 				A1013FEF231289950063200B /* CacheService.swift */,
+				A1E89002232FC55700F1BFF2 /* PhotoService.swift */,
 			);
 			path = AppService;
 			sourceTree = "<group>";
@@ -1698,6 +1701,7 @@
 				A1187CE322D6281400E596F7 /* TrailerCollectionViewCell.swift in Sources */,
 				A1000B8222E418FE004CB269 /* NewMovieListTableViewCell.swift in Sources */,
 				A175BEBA22FC3F24009718E3 /* CommentListViewController.swift in Sources */,
+				A1E89003232FC55700F1BFF2 /* PhotoService.swift in Sources */,
 				A12CD82422E8C5EC0060B096 /* TopRateListSectionViewModel.swift in Sources */,
 				A1FFF3F622EB5C2D0059A860 /* Video.swift in Sources */,
 				A1FE3F0622E6204700F780DA /* ListViewController.swift in Sources */,

@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Photos
 
 class ChatTableViewCell: UITableViewCell, ChatCell {
 
+    @IBOutlet weak var messageImageView: UIImageView!
+    @IBOutlet weak var heightMessageImageView: NSLayoutConstraint!
     @IBOutlet weak var accountNameLabel: UILabel!
     @IBOutlet weak var accountImageView: UIImageView!
     @IBOutlet weak var messageView: UIView!
@@ -17,6 +20,9 @@ class ChatTableViewCell: UITableViewCell, ChatCell {
     @IBOutlet weak var errorIcon: UIImageView!
     @IBOutlet weak var marginRightMessageView: NSLayoutConstraint!
     @IBOutlet weak var marginTopMessageViewChatLeft: NSLayoutConstraint!
+    @IBOutlet weak var marginRightMessImageView: NSLayoutConstraint!
+    @IBOutlet weak var marginTopMessageLabel: NSLayoutConstraint!
+    @IBOutlet weak var marginBottomMessageLabel: NSLayoutConstraint!
     
     static let cellLeftNibName = "ChatLeftTableViewCell"
     static let cellRightNibName = "ChatRightTableViewCell"
@@ -24,10 +30,15 @@ class ChatTableViewCell: UITableViewCell, ChatCell {
     static let cellRightIdentify = "chatRightTableViewCell"
     private let storageRef = StorageService.share.storage
     var chatViewModel: ChatRowViewModel?
+    private let HEIGHT_CHAT_IMAGE: CGFloat = 300.0
+    private let MIN_WIDTH_MESSAGE_LABEL: CGFloat = 40.0
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        messageView.layer.cornerRadius = 5.0
+        messageView.layer.cornerRadius = 8.0
+        messageImageView.layer.cornerRadius = 8.0
+        messageImageView.layer.borderColor = UIColor.lightGray.cgColor
+        messageImageView.layer.borderWidth = 1.0
     }
     
     override func layoutSubviews() {
@@ -43,6 +54,10 @@ class ChatTableViewCell: UITableViewCell, ChatCell {
     func setUp(with viewModel: ChatRowViewModel) {
         chatViewModel = viewModel
         messageView.isHidden = true
+        //set message image
+        for subView in messageImageView.subviews {
+            subView.removeFromSuperview()
+        }
         if viewModel is ChatLeftRowViewModel {
             setUpChatLeft(viewModel: viewModel as! ChatLeftRowViewModel)
         }
@@ -50,6 +65,21 @@ class ChatTableViewCell: UITableViewCell, ChatCell {
             setUpChatRight(viewModel: viewModel as! ChatRightRowViewModel)
         }
         messageView.isHidden = false
+        if messageLabel.text?.isEmpty ?? true {
+            marginTopMessageLabel.constant = 0.0
+            marginBottomMessageLabel.constant = 0.0
+        }
+        else {
+            marginTopMessageLabel.constant = 15.0
+            marginBottomMessageLabel.constant = 15.0
+            let intrinsicSize = messageLabel.intrinsicContentSize
+            if intrinsicSize.width <= MIN_WIDTH_MESSAGE_LABEL {
+                messageLabel.textAlignment = .center
+            }
+            else {
+                messageLabel.textAlignment = .left
+            }
+        }
     }
     
     private func setUpChatLeft(viewModel: ChatLeftRowViewModel) {
@@ -71,11 +101,66 @@ class ChatTableViewCell: UITableViewCell, ChatCell {
             accountNameLabel.isHidden = true
             marginTopMessageViewChatLeft.constant = -20.0
         }
+        if viewModel.currentMessage?.isMessageImage ?? false && viewModel.currentMessage?.imageName != nil {
+            setUpChatImage(accountId: currentAccId!, viewModel: viewModel)
+            heightMessageImageView.constant = HEIGHT_CHAT_IMAGE
+        }
+        else {
+            messageImageView.image = nil
+            heightMessageImageView.constant = 0.0
+        }
     }
     
     private func setUpChatRight(viewModel: ChatRightRowViewModel) {
         initBinding()
         messageLabel.text = viewModel.currentMessage?.content
+        //set hidden error icon
+        errorIcon.isHidden = true
+        //set message chat image
+        let currentAccId = viewModel.currentMessage?.accountId
+        if viewModel.currentMessage?.isMessageImage ?? false && (viewModel.currentMessage?.imageName != nil || viewModel.phAsset != nil) {
+            setUpChatImage(accountId: currentAccId!, viewModel: viewModel)
+            heightMessageImageView.constant = HEIGHT_CHAT_IMAGE
+        }
+        else {
+            messageImageView.image = nil
+            heightMessageImageView.constant = 0.0
+        }
+    }
+    
+    private func setUpChatImage(accountId: String, viewModel: ChatRowViewModel) {
+        guard let imageName = viewModel.currentMessage?.imageName else {
+            return
+        }
+        if let chatImage = CacheService.share.getObject(key: "\(accountId)/\(imageName)" as NSString) {
+            messageImageView.image = chatImage
+            return
+        }
+        messageImageView.image = nil
+        messageImageView.addSpinnerView()
+        let messImageView = UIImageView()
+        messageImageView.addSubview(messImageView)
+        messImageView.fillSuperView()
+        if let viewModel = viewModel as? ChatRightRowViewModel, let phAsset = viewModel.phAsset {
+            let targetSize = messageImageView.frame.size
+            PhotoService.share.fetchImage(phAsset: phAsset, targetSize: targetSize) {[weak self] (image) in
+                if let image = image {
+                    messImageView.image = image
+                    self?.messageImageView.removeSpinnerView()
+                    CacheService.share.setObject(key: "\(accountId)/\(imageName)" as NSString, image: image)
+                }
+            }
+        }
+        else {
+            StorageService.share.downloadImage(accountId: accountId, imageName: imageName) { (data, error) in
+                if error == nil && data != nil {
+                    let image = UIImage(data: data!)
+                    messImageView.image = image
+                    self.messageImageView.removeSpinnerView()
+                    CacheService.share.setObject(key: "\(accountId)/\(imageName)" as NSString, image: image!)
+                }
+            }
+        }
     }
     
     private func setUpAccountImage(accountId: String) {
@@ -102,10 +187,12 @@ class ChatTableViewCell: UITableViewCell, ChatCell {
                 if success {
                     self?.errorIcon.isHidden = true
                     self?.marginRightMessageView.constant = -16.0
+                    self?.marginRightMessImageView.constant = -16.0
                 }
                 else {
                     self?.errorIcon.isHidden = false
                     self?.marginRightMessageView.constant = 10.0
+                    self?.marginRightMessImageView.constant = 10.0
                 }
                 self?.layoutIfNeeded()
             }

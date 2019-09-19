@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import Photos
 
 class ChatRightRowViewModel: ChatRowViewModel {
 
     var addMessagesSuccess: DynamicType<Bool>?
+    var phAsset: PHAsset?
     
     override init() {
         super.init()

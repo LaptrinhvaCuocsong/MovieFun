@@ -53,6 +53,8 @@ class ChatService {
         let completion:((String?, Error?) -> Void) = completion ?? {_,_ in}
         let collectionRef = db.collection(COLLECTION_NAME).document(movieId).collection(SUB_COLLECTION_NAME)
         let dictionary:[String: Any] = [
+            "isMessageImage": message.isMessageImage ?? false,
+            "imageName": message.imageName ?? "",
             "accountId": message.accountId!,
             "accountName": message.accountName ?? "",
             "sendDate": message.sendDate ?? Date(),
@@ -94,6 +96,8 @@ class ChatService {
     private func getMessage(messageId: String, dictionay: [String: Any]) -> Message {
         var message = Message()
         message.messageId = messageId
+        message.isMessageImage = dictionay["isMessageImage"] as? Bool
+        message.imageName = dictionay["imageName"] as? String
         message.accountId = dictionay["accountId"] as? String
         message.accountName = dictionay["accountName"] as? String
         if let timeStamp = dictionay["sendDate"] as? Timestamp {

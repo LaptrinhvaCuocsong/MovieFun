@@ -92,7 +92,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     private func setImageRequestOption() {
         imageRequestOptions = PHImageRequestOptions()
-        imageRequestOptions.deliveryMode = .fastFormat
+        imageRequestOptions.deliveryMode = .highQualityFormat
         imageRequestOptions.isNetworkAccessAllowed = false
     }
     
@@ -207,7 +207,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - IBAction
     
     @IBAction func sendMessage(_ sender: Any) {
-        let text = messageTextView.text!
+        let text = Utils.trim(messageTextView.text!)
         if text != "" {
             controller.addMessage(text) {[weak self] (message) in
                 if let movie = self?.movie {
@@ -343,6 +343,7 @@ extension ChatViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let phAssetWrapper = viewModel.phassets![indexPath.section]
         let targetSize = CGSize(width: WIDTH_OF_IMAGE_COLLECTION_VIEW_CELL, height: heightImageCollectionView.constant)
         cell.setContent(assetWrapper: phAssetWrapper, imageManager: imageCachingManager, imageRequestOption: imageRequestOptions, targetSizeImage: targetSize)
+        cell.delegate = self
         return cell
     }
     
@@ -364,33 +365,58 @@ extension ChatViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension ChatViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if let phAssets = viewModel.phassets {
-            let startX = scrollView.contentOffset.x
-            var indexStartX = Int(startX / WIDTH_OF_IMAGE_COLLECTION_VIEW_CELL)
-            let endX = startX + CGFloat(imageCollectionView.width)
-            var indexEndX = Int(endX / WIDTH_OF_IMAGE_COLLECTION_VIEW_CELL)
-            indexStartX = indexStartX - 10 < 0 ? 0 : indexStartX - 10
-            indexEndX = indexEndX + 10 > phAssets.count ? phAssets.count - 1 : indexEndX + 10
-            let addCacheAssetWrappers = [PHAssetWrapper](phAssets[indexStartX...indexEndX])
-            let addCacheAssets = [PHAsset](addCacheAssetWrappers.map({ (assetWrapper) -> PHAsset in
-                return assetWrapper.phAsset!
-            }))
-            var removeCacheAssets = [PHAsset]()
-            if indexStartX > 0 {
-                let assetWrappers = [PHAssetWrapper](phAssets[0..<indexStartX])
-                removeCacheAssets.append(contentsOf: assetWrappers.map({ (assetWrapper) -> PHAsset in
+        if scrollView is UICollectionView {
+            if let phAssets = viewModel.phassets {
+                let startX = scrollView.contentOffset.x
+                var indexStartX = Int(startX / WIDTH_OF_IMAGE_COLLECTION_VIEW_CELL)
+                let endX = startX + CGFloat(imageCollectionView.width)
+                var indexEndX = Int(endX / WIDTH_OF_IMAGE_COLLECTION_VIEW_CELL)
+                indexStartX = indexStartX - 10 < 0 ? 0 : indexStartX - 10
+                indexEndX = indexEndX + 10 > phAssets.count ? phAssets.count - 1 : indexEndX + 10
+                let addCacheAssetWrappers = [PHAssetWrapper](phAssets[indexStartX...indexEndX])
+                let addCacheAssets = [PHAsset](addCacheAssetWrappers.map({ (assetWrapper) -> PHAsset in
                     return assetWrapper.phAsset!
                 }))
+                var removeCacheAssets = [PHAsset]()
+                if indexStartX > 0 {
+                    let assetWrappers = [PHAssetWrapper](phAssets[0..<indexStartX])
+                    removeCacheAssets.append(contentsOf: assetWrappers.map({ (assetWrapper) -> PHAsset in
+                        return assetWrapper.phAsset!
+                    }))
+                }
+                if indexEndX < phAssets.count - 1 {
+                    let assetWrappers = [PHAssetWrapper](phAssets[(indexEndX+1)..<phAssets.count])
+                    removeCacheAssets.append(contentsOf: assetWrappers.map({ (assetWrapper) -> PHAsset in
+                        return assetWrapper.phAsset!
+                    }))
+                }
+                let targetSize = CGSize(width: WIDTH_OF_IMAGE_COLLECTION_VIEW_CELL, height: heightImageCollectionView.constant)
+                imageCachingManager.startCachingImages(for: addCacheAssets, targetSize: targetSize, contentMode: .default, options: imageRequestOptions)
+                imageCachingManager.stopCachingImages(for: removeCacheAssets, targetSize: targetSize, contentMode: .default, options: imageRequestOptions)
             }
-            if indexEndX < phAssets.count - 1 {
-                let assetWrappers = [PHAssetWrapper](phAssets[(indexEndX+1)..<phAssets.count])
-                removeCacheAssets.append(contentsOf: assetWrappers.map({ (assetWrapper) -> PHAsset in
-                    return assetWrapper.phAsset!
-                }))
+        }
+    }
+    
+}
+
+extension ChatViewController: ChatImageCollectionViewCellDelegate {
+    
+    func sendImage(asset: PHAsset) {
+        controller.addMessageImage(asset: asset, addSuccess: {[weak self] (message) in
+            if let movie = self?.movie {
+                let groupMessage = GroupComment()
+                groupMessage.movie = movie
+                groupMessage.newMessage = "Image"
+                groupMessage.newSenderName = message.accountName
+                groupMessage.sendDate = message.sendDate
+                self?.delegate?.addGroupMessage(groupMessage, nil)
             }
-            let targetSize = CGSize(width: WIDTH_OF_IMAGE_COLLECTION_VIEW_CELL, height: heightImageCollectionView.constant)
-            imageCachingManager.startCachingImages(for: addCacheAssets, targetSize: targetSize, contentMode: .default, options: imageRequestOptions)
-            imageCachingManager.stopCachingImages(for: removeCacheAssets, targetSize: targetSize, contentMode: .default, options: imageRequestOptions)
+        })
+        if messageTextView.isFirstResponder {
+            messageTextView.resignFirstResponder()
+        }
+        if isSelectingImage {
+            resetMessageTextView()
         }
     }
     

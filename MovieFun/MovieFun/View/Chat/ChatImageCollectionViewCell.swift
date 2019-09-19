@@ -9,6 +9,12 @@
 import UIKit
 import Photos
 
+protocol ChatImageCollectionViewCellDelegate: class {
+    
+    func sendImage(asset: PHAsset)
+    
+}
+
 class ChatImageCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var imageView: UIImageView!
@@ -16,7 +22,8 @@ class ChatImageCollectionViewCell: UICollectionViewCell {
     
     static let nibName = "ChatImageCollectionViewCell"
     static let cellIdentify = "chatImageCollectionViewCell"
-    var assetWrapper: PHAssetWrapper?
+    private var assetWrapper: PHAssetWrapper?
+    weak var delegate: ChatImageCollectionViewCellDelegate?
     
     func setContent(assetWrapper: PHAssetWrapper, imageManager: PHCachingImageManager, imageRequestOption: PHImageRequestOptions?, targetSizeImage: CGSize) {
         self.assetWrapper = assetWrapper
@@ -38,9 +45,9 @@ class ChatImageCollectionViewCell: UICollectionViewCell {
     func displayButtonSend() {
         let blurEffect = UIBlurEffect(style: .regular)
         let effectView = UIVisualEffectView(effect: blurEffect)
-        effectView.frame = CGRect(x: imageView.frame.midX, y: imageView.frame.midY, width: 0.0, height: 0.0)
+        effectView.frame = CGRect(x: imageView.frame.midX, y: imageView.frame.midY, width: 64.0, height: 64.0)
         imageView.addSubview(effectView)
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveLinear, animations: {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveLinear, animations: {
             effectView.fillSuperView()
             self.layoutIfNeeded()
         }, completion: nil)
@@ -55,6 +62,9 @@ class ChatImageCollectionViewCell: UICollectionViewCell {
     }
         
     @IBAction func sendImage(_ sender: Any) {
+        if let asset = assetWrapper?.phAsset {
+            delegate?.sendImage(asset: asset)
+        }
     }
     
     private func initBinding() {

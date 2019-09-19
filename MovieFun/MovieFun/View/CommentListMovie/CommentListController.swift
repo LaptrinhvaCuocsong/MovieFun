@@ -55,7 +55,11 @@ class CommentListController {
     }
     
     func initListenerForMovieChat(movie: Movie) {
-        ChatService.share.addListener(movieId: "\(movie.id!)") { (messageChanges, error) in
+        ChatService.share.addListener(movieId: "\(movie.id!)") {[weak self] (messageChanges, error) in
+            if !(self?.didStart ?? false) {
+                self?.didStart = true
+                return
+            }
             if error == nil {
                 let messageChanges = messageChanges?.sorted(by: { (mess1, mess2) -> Bool in
                     return mess1.sendDate! < mess2.sendDate!

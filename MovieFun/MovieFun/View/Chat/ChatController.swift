@@ -103,6 +103,58 @@ class ChatController {
         }
     }
     
+    func addMessageImage(asset: PHAsset, addSuccess: ((Message) -> Void)?) {
+        let phContentEditInputRequestOptions = PHContentEditingInputRequestOptions()
+        phContentEditInputRequestOptions.isNetworkAccessAllowed = false
+        asset.requestContentEditingInput(with: phContentEditInputRequestOptions) {[weak self] (phContentInput, _) in
+            if let url = phContentInput?.fullSizeImageURL {
+                if let fileName = Utils.share.getFileName(from: url) {
+                    self?.chatViewModel?.haveAddMessage?.value = false
+                    var message = Message()
+                    message.accountId = AccountService.share.getAccountId()
+                    message.accountName = AccountService.share.getAccountName()
+                    message.sendDate = Utils.share.getCurrentDate()
+                    message.isMessageImage = true
+                    message.imageName = fileName
+                    self?.messages?.append(message)
+                    let rowVM = ChatRightRowViewModel(addMessageSuccess: false)
+                    rowVM.phAsset = asset
+                    rowVM.currentMessage = message
+                    self?.addRowViewModel(rowVM: rowVM)
+                    self?.chatViewModel?.haveAddMessage?.value = true
+                    if let movieId = self?.chatViewModel?.movieId {
+                        ChatService.share.addChatMessage(movieId: movieId, message: message) { (messageId, error) in
+                            if error == nil && messageId != nil {
+                                message.messageId = messageId
+                                PhotoService.share.fetchImage(phAsset: asset, targetSize: nil, completion: { (image) in
+                                    if let image = image, let imageData = StorageService.share.getData(image: image) {
+                                        StorageService.share.putImage(imageName: message.imageName!, imageData: imageData, completion: { (metadata, error) in
+                                            if error == nil && metadata != nil {
+                                                rowVM.addMessagesSuccess?.value = true
+                                                if addSuccess != nil {
+                                                    addSuccess!(message)
+                                                }
+                                            }
+                                            else {
+                                                rowVM.addMessagesSuccess?.value = false
+                                            }
+                                        })
+                                    }
+                                    else {
+                                        rowVM.addMessagesSuccess?.value = false
+                                    }
+                                })
+                            }
+                            else {
+                                rowVM.addMessagesSuccess?.value = false
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     private func addRowViewModel(rowVM: ChatRowViewModel) {
         if let lastSection = chatViewModel?.sectionViewModels?.value?.last {
             if let headerVM = lastSection.rowViewModels?.value?.first as? ChatHeaderRowViewModel, let timeStr = headerVM.sendDateStr {
