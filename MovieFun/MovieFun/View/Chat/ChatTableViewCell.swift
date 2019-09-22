@@ -23,6 +23,7 @@ class ChatTableViewCell: UITableViewCell, ChatCell {
     @IBOutlet weak var marginRightMessImageView: NSLayoutConstraint!
     @IBOutlet weak var marginTopMessageLabel: NSLayoutConstraint!
     @IBOutlet weak var marginBottomMessageLabel: NSLayoutConstraint!
+    @IBOutlet weak var buttonMessageImageView: UIButton!
     
     static let cellLeftNibName = "ChatLeftTableViewCell"
     static let cellRightNibName = "ChatRightTableViewCell"
@@ -32,6 +33,7 @@ class ChatTableViewCell: UITableViewCell, ChatCell {
     var chatViewModel: ChatRowViewModel?
     private let HEIGHT_CHAT_IMAGE: CGFloat = 300.0
     private let MIN_WIDTH_MESSAGE_LABEL: CGFloat = 40.0
+    private var gestureLongPressButton: UIGestureRecognizer!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,9 +53,26 @@ class ChatTableViewCell: UITableViewCell, ChatCell {
         }
     }
     
+    @objc private func longPressButtonMessageImageView(gesture: UIGestureRecognizer) {
+        if gesture.state == .began {
+            buttonMessageImageView.backgroundColor = .clear
+            UIView.animate(withDuration: 0.3) {[weak self] in
+                self?.buttonMessageImageView.backgroundColor = .lightGray
+            }
+        }
+        else if gesture.state == .ended {
+            buttonMessageImageView.backgroundColor = .clear
+            print("long touch end")
+        }
+    }
+    
     func setUp(with viewModel: ChatRowViewModel) {
         chatViewModel = viewModel
         messageView.isHidden = true
+        //set button message image view
+        buttonMessageImageView.alpha = 0.5
+        gestureLongPressButton = UILongPressGestureRecognizer(target: self, action: #selector(longPressButtonMessageImageView(gesture:)))
+        buttonMessageImageView.addGestureRecognizer(gestureLongPressButton)
         //set message image
         for subView in messageImageView.subviews {
             subView.removeFromSuperview()
@@ -196,6 +215,13 @@ class ChatTableViewCell: UITableViewCell, ChatCell {
                 }
                 self?.layoutIfNeeded()
             }
+        }
+    }
+    
+    @IBAction func tapButtonMessageImageView(_ sender: Any) {
+        if let imageName = chatViewModel?.currentMessage?.imageName, let accountId = chatViewModel?.currentMessage?.accountId {
+            let asset = (accountId: accountId, imageName: imageName)
+            chatViewModel?.delegate?.didTapButtonMessageImageView(asset: asset)
         }
     }
     

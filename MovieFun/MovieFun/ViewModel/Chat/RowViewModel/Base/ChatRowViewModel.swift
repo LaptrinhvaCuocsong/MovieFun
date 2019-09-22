@@ -9,9 +9,16 @@
 import Foundation
 import UIKit
 
-class ChatRowViewModel {
+protocol ChatRowViewModelDelegate: class {
     
+    func didTapButtonMessageImageView(asset: (accountId: String, imageName: String))
+    
+}
+
+class ChatRowViewModel {
+
     var previousMessage: Message?
     var currentMessage: Message?
+    weak var delegate: ChatRowViewModelDelegate?
     
 }

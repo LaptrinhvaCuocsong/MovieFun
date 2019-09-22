@@ -55,6 +55,7 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         messageTextView.layer.cornerRadius = 6.0
         messageTextView.clipsToBounds = true
         messageTextView.placeholder = "Send your comment ..."
@@ -418,6 +419,17 @@ extension ChatViewController: ChatImageCollectionViewCellDelegate {
         if isSelectingImage {
             resetMessageTextView()
         }
+    }
+    
+}
+
+extension ChatViewController: ChatViewModelDelegate {
+    
+    func didTapButtonMessageImageView(asset: (accountId: String, imageName: String)) {
+        let (photoGalleryNC, photoGalleryVC) = PhotoGalleryViewController.createPhotoGalleryNavigationController()
+        photoGalleryVC.currectAsset = asset
+        photoGalleryVC.assets = viewModel.assets?.value
+        present(photoGalleryNC, animated: true, completion: nil)
     }
     
 }

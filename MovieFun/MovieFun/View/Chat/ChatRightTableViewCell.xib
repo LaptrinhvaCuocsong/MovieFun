@@ -51,20 +51,32 @@
                             <constraint firstAttribute="height" id="wBa-gr-tK7"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="02S-C0-lpB">
+                        <rect key="frame" x="154" y="74.5" width="250" height="0.0"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <connections>
+                            <action selector="tapButtonMessageImageView:" destination="TQz-AO-EDu" eventType="touchUpInside" id="sIb-F2-oyb"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="pJi-w3-A1h" firstAttribute="top" secondItem="WmU-rk-GCF" secondAttribute="top" constant="5" id="8TH-te-4gG"/>
+                    <constraint firstItem="02S-C0-lpB" firstAttribute="trailing" secondItem="6kc-6v-RSX" secondAttribute="trailing" id="B2P-i1-Qh8"/>
                     <constraint firstAttribute="bottom" secondItem="Kvy-1j-TaE" secondAttribute="bottom" constant="5" id="KLq-W9-sIY"/>
                     <constraint firstItem="Kvy-1j-TaE" firstAttribute="leading" secondItem="pJi-w3-A1h" secondAttribute="trailing" constant="-16" id="Mpr-ey-Ko5"/>
+                    <constraint firstItem="02S-C0-lpB" firstAttribute="height" secondItem="6kc-6v-RSX" secondAttribute="height" id="Nfb-ls-tE8"/>
                     <constraint firstItem="Kvy-1j-TaE" firstAttribute="leading" secondItem="6kc-6v-RSX" secondAttribute="trailing" constant="-16" id="Vz9-pT-gLD"/>
                     <constraint firstItem="H09-gw-Exc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WmU-rk-GCF" secondAttribute="leading" constant="20" id="YX2-DE-tFS"/>
                     <constraint firstAttribute="trailing" secondItem="Kvy-1j-TaE" secondAttribute="trailing" constant="10" id="dPL-x5-4ID"/>
+                    <constraint firstItem="02S-C0-lpB" firstAttribute="top" secondItem="6kc-6v-RSX" secondAttribute="top" id="luG-BV-FFt"/>
                     <constraint firstItem="6kc-6v-RSX" firstAttribute="top" secondItem="pJi-w3-A1h" secondAttribute="bottom" id="wG1-e7-7ge"/>
+                    <constraint firstItem="02S-C0-lpB" firstAttribute="width" secondItem="6kc-6v-RSX" secondAttribute="width" id="xyK-nP-TD1"/>
                     <constraint firstAttribute="bottom" secondItem="6kc-6v-RSX" secondAttribute="bottom" constant="5" id="zjI-QX-vNT"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="buttonMessageImageView" destination="02S-C0-lpB" id="6NT-vn-imW"/>
                 <outlet property="errorIcon" destination="Kvy-1j-TaE" id="XSl-g8-zgk"/>
                 <outlet property="heightMessageImageView" destination="wBa-gr-tK7" id="i2O-tF-DAD"/>
                 <outlet property="marginBottomMessageLabel" destination="hom-Bq-b3Z" id="col-e6-PbR"/>

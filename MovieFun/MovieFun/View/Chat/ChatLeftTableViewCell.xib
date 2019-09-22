@@ -61,17 +61,28 @@
                             <constraint firstAttribute="width" constant="250" id="VOy-Z6-lIe"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFi-0W-E1G">
+                        <rect key="frame" x="60" y="84.5" width="250" height="0.0"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <connections>
+                            <action selector="tapButtonMessageImageView:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ezv-hM-dsd"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="EKz-qJ-ddD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="1NY-Q2-awy"/>
                     <constraint firstItem="jmW-fo-yFO" firstAttribute="top" secondItem="EKz-qJ-ddD" secondAttribute="bottom" constant="5" id="4IQ-aU-irE"/>
                     <constraint firstItem="jmW-fo-yFO" firstAttribute="leading" secondItem="UmB-2P-wjl" secondAttribute="trailing" constant="10" id="6Fg-8z-X2O"/>
+                    <constraint firstItem="sFi-0W-E1G" firstAttribute="leading" secondItem="S00-hd-ALK" secondAttribute="leading" id="JbY-zb-Rlr"/>
                     <constraint firstItem="EKz-qJ-ddD" firstAttribute="leading" secondItem="UmB-2P-wjl" secondAttribute="trailing" constant="10" id="MNk-3t-4yC"/>
+                    <constraint firstItem="sFi-0W-E1G" firstAttribute="top" secondItem="S00-hd-ALK" secondAttribute="top" id="NOp-Hx-4sW"/>
+                    <constraint firstItem="sFi-0W-E1G" firstAttribute="height" secondItem="S00-hd-ALK" secondAttribute="height" id="RwO-Yx-GAX"/>
                     <constraint firstAttribute="bottom" secondItem="S00-hd-ALK" secondAttribute="bottom" constant="5" id="Yal-mM-Tk4"/>
                     <constraint firstItem="UmB-2P-wjl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="dDb-I1-Gau"/>
                     <constraint firstItem="S00-hd-ALK" firstAttribute="top" secondItem="jmW-fo-yFO" secondAttribute="bottom" id="dJg-NA-ueh"/>
                     <constraint firstItem="UmB-2P-wjl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="gHc-cb-aQT"/>
+                    <constraint firstItem="sFi-0W-E1G" firstAttribute="width" secondItem="S00-hd-ALK" secondAttribute="width" id="kqq-fq-SBn"/>
                     <constraint firstItem="S00-hd-ALK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="60" id="oc9-rp-r3T"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="brE-Gl-xov" secondAttribute="trailing" constant="20" id="rK0-fz-BSv"/>
                 </constraints>
@@ -80,6 +91,7 @@
             <connections>
                 <outlet property="accountImageView" destination="UmB-2P-wjl" id="kJB-q2-46E"/>
                 <outlet property="accountNameLabel" destination="EKz-qJ-ddD" id="5YB-rg-2OH"/>
+                <outlet property="buttonMessageImageView" destination="sFi-0W-E1G" id="fmQ-SP-eNO"/>
                 <outlet property="heightMessageImageView" destination="3j7-IE-l6A" id="Pr2-sH-f4f"/>
                 <outlet property="marginBottomMessageLabel" destination="suV-X0-l3S" id="SGr-JU-vl3"/>
                 <outlet property="marginTopMessageLabel" destination="SRh-It-Z1D" id="E1L-wE-wrb"/>

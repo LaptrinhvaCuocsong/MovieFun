@@ -12,8 +12,8 @@ import Photos
 class ChatController {
     
     var chatViewModel: ChatViewModel?
-    var messages: [Message]?
-    var didStart = false
+    private var messages: [Message]?
+    private var didStart = false
     
     init() {
         chatViewModel = ChatViewModel()
@@ -131,6 +131,11 @@ class ChatController {
                                         StorageService.share.putImage(imageName: message.imageName!, imageData: imageData, completion: { (metadata, error) in
                                             if error == nil && metadata != nil {
                                                 rowVM.addMessagesSuccess?.value = true
+                                                // if message is message image then add imageName to imageNames
+                                                if let imageName = rowVM.currentMessage?.imageName, !Utils.trim(imageName).isEmpty {
+                                                    let asset = (accountId: message.accountId!, imageName: message.imageName!)
+                                                    self?.chatViewModel?.assets?.value?.append(asset)
+                                                }
                                                 if addSuccess != nil {
                                                     addSuccess!(message)
                                                 }
@@ -156,6 +161,7 @@ class ChatController {
     }
     
     private func addRowViewModel(rowVM: ChatRowViewModel) {
+        rowVM.delegate = chatViewModel
         if let lastSection = chatViewModel?.sectionViewModels?.value?.last {
             if let headerVM = lastSection.rowViewModels?.value?.first as? ChatHeaderRowViewModel, let timeStr = headerVM.sendDateStr {
                 if timeStr == Utils.share.stringFromDate(dateFormat: Utils.YYYYMMDD, date: rowVM.currentMessage!.sendDate!) {
@@ -197,7 +203,12 @@ class ChatController {
                     }
                     rowVM!.previousMessage = i == 0 ? nil : groupMessage[i-1]
                     rowVM!.currentMessage = message
+                    rowVM.delegate = chatViewModel
                     sectionVM.rowViewModels?.value?.append(rowVM)
+                    if let imageName = rowVM.currentMessage?.imageName, !Utils.trim(imageName).isEmpty {
+                        let asset = (accountId: accountId, imageName: imageName)
+                        chatViewModel?.assets?.value?.append(asset)
+                    }
                 }
             }
         }
