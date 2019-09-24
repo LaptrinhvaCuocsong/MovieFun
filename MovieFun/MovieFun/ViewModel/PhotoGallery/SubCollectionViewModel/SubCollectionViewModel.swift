@@ -13,11 +13,12 @@ class SubCollectionViewModel: NSObject {
     
     weak var subCollectionView: UICollectionView?
     var currentAssetIndex: Int = 0
-    var ratioIndex: DynamicType<Double>?
+    var ratioIndex: DynamicType<CGFloat>?
     var subSectionViewModel: DynamicType<[SubSectionViewModel]>?
+    private let widthCell: CGFloat = 150.0
     
     override init() {
-        ratioIndex = DynamicType<Double>(value: 0.0)
+        ratioIndex = DynamicType<CGFloat>(value: 0.0)
         subSectionViewModel = DynamicType<[SubSectionViewModel]>(value: [SubSectionViewModel]())
     }
     
@@ -25,6 +26,14 @@ class SubCollectionViewModel: NSObject {
         subCollectionView?.reloadData()
         let indexPath = IndexPath(item: 0, section: currentAssetIndex)
         subCollectionView?.scrollToItem(at: indexPath, at: .left, animated: false)
+    }
+    
+    func scrollToPosition(with ratioIndex: CGFloat) {
+        if let subCollectionView = self.subCollectionView {
+            let assetIndex = ratioIndex * subCollectionView.contentSize.width / widthCell
+            let indexPath = IndexPath(item: 0, section: Int(assetIndex))
+            subCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
+        }
     }
     
 }
@@ -49,7 +58,13 @@ extension SubCollectionViewModel: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150.0, height: CGFloat(collectionView.height))
+        return CGSize(width: widthCell, height: CGFloat(collectionView.height))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let offsetX = collectionView.contentOffset.x
+        let x = offsetX / collectionView.contentSize.width
+        self.ratioIndex?.value = x < 0 ? x * -1 : x
     }
     
 }

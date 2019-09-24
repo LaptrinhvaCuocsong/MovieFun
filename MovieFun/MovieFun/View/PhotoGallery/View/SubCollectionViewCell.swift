@@ -22,6 +22,10 @@ class SubCollectionViewCell: UICollectionViewCell {
     }
     
     func setUp(with viewModel: SubRowViewModel) {
+        for imgView in imageView.subviews {
+            imgView.removeFromSuperview()
+        }
+        imageView.image = nil
         if let imageName = viewModel.imageName, let accountId = viewModel.accountId {
             if let image = CacheService.share.getObject(key: "\(accountId)/\(imageName)" as NSString) {
                 imageView.image = image

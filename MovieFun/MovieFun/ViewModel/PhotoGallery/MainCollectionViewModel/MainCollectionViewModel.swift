@@ -13,11 +13,11 @@ class MainCollectionViewModel: NSObject {
     
     weak var mainCollectionView: UICollectionView?
     var currentAssetIndex: Int = 0
-    var ratioIndex: DynamicType<Double>?
+    var ratioIndex: DynamicType<CGFloat>?
     var mainSectionViewModels: DynamicType<[MainSectionViewModel]>?
     
     override init() {
-        ratioIndex = DynamicType<Double>(value: 0.0)
+        ratioIndex = DynamicType<CGFloat>(value: 0.0)
         mainSectionViewModels = DynamicType<[MainSectionViewModel]>(value: [MainSectionViewModel]())
     }
  
@@ -25,6 +25,24 @@ class MainCollectionViewModel: NSObject {
         mainCollectionView?.reloadData()
         let indexPath = IndexPath(item: 0, section: currentAssetIndex)
         mainCollectionView?.scrollToItem(at: indexPath, at: .left, animated: false)
+    }
+    
+    func scrollToPosition(with ratioIndex: CGFloat) {
+        if let mainCollectionView = self.mainCollectionView {
+            let assetIndex = ratioIndex * mainCollectionView.contentSize.width / mainCollectionView.frame.width
+            let indexPath = IndexPath(item: 0, section: Int(assetIndex))
+            mainCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
+        }
+    }
+    
+}
+
+extension MainCollectionViewModel: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetX = scrollView.contentOffset.x
+        let x = offsetX / scrollView.contentSize.width
+        self.ratioIndex?.value = x < 0 ? x * -1 : x
     }
     
 }

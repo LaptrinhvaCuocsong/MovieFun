@@ -20,6 +20,16 @@ class PhotoGalleryViewModel {
         isFetching = DynamicType<Bool>(value: false)
         subCollectionViewModel =  SubCollectionViewModel()
         mainCollectionViewModel = MainCollectionViewModel()
+        initBinding()
+    }
+    
+    private func initBinding() {
+        mainCollectionViewModel?.ratioIndex?.listener = {[weak self] ratioIndex in
+            self?.subCollectionViewModel?.scrollToPosition(with: ratioIndex)
+        }
+        subCollectionViewModel?.ratioIndex?.listener = {[weak self] ratioIndex in
+            self?.mainCollectionViewModel?.scrollToPosition(with: ratioIndex)
+        }
     }
     
 }

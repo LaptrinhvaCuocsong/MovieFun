@@ -115,7 +115,7 @@ class ChatController {
                     message.accountName = AccountService.share.getAccountName()
                     message.sendDate = Utils.share.getCurrentDate()
                     message.isMessageImage = true
-                    message.imageName = fileName
+                    message.imageName = "\(fileName)-\(String(message.sendDate!.timeIntervalSince1970))"
                     self?.messages?.append(message)
                     let rowVM = ChatRightRowViewModel(addMessageSuccess: false)
                     rowVM.phAsset = asset
@@ -183,6 +183,8 @@ class ChatController {
     
     private func buildViewModels(_ groupMessages: [[Message]]) {
         for groupMessage in groupMessages {
+            chatViewModel?.sectionViewModels?.value?.removeAll()
+            chatViewModel?.assets?.value?.removeAll()
             let sectionVM = ChatSectionViewModel()
             chatViewModel?.sectionViewModels?.value?.append(sectionVM)
             var headerVM: ChatHeaderRowViewModel?

@@ -66,12 +66,12 @@ class ChatViewController: UIViewController, UITableViewDelegate, UITableViewData
         registerCell()
         initBinding()
         setImageRequestOption()
+        start()
         NotificationCenter.default.addObserver(self, selector: #selector(showKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(willHideKeyboard(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    private func start() {
         if let movieId = self.movie.id {
             viewModel.movieId = "\(movieId)"
             controller.start()
