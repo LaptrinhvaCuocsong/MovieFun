@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var marginBottomRegisterButton: NSLayoutConstraint!
     
     weak var delegate: LoginViewControllerDelegate?
     
@@ -47,9 +48,25 @@ class LoginViewController: UIViewController {
         passwordTextField.delegate = self
         setLoginGoogleButton()
         initBinding()
+        setUpLayout()
     }
     
     //MARK: - Private method
+    
+    private func setUpLayout() {
+        if let tabBarController = self.tabBarController {
+            let tabBarHeight = tabBarController.tabBar.frame.size.height
+            let registerBottom = CGFloat(registerButton.bottom)
+            if registerBottom < view.frame.size.height - tabBarHeight {
+                marginBottomRegisterButton.constant = view.frame.size.height - tabBarHeight - registerBottom
+            }
+            else {
+                marginBottomRegisterButton.constant = 24.0
+            }
+        }
+        loginButton.layer.cornerRadius = 5.0
+        registerButton.layer.cornerRadius = 5.0
+    }
     
     private func initBinding() {
         viewModel.isLoginSuccess?.listener = {[weak self] (isLoginSuccess) in
@@ -131,8 +148,10 @@ class LoginViewController: UIViewController {
 extension LoginViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        let y = textField.frame.origin.y
-        loginScrollView.setContentOffset(CGPoint(x: 0.0, y: Double(y)), animated: true)
+        if DeviceUtils.isIphoneSE {
+            let y = loginGoogleButton.frame.origin.y
+            loginScrollView.setContentOffset(CGPoint(x: 0.0, y: Double(y)), animated: true)
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

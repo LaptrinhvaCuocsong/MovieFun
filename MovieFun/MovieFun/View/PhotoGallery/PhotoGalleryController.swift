@@ -36,6 +36,7 @@ class PhotoGalleryController {
             let mainRowVM = MainRowViewModel()
             mainRowVM.accountId = asset.accountId
             mainRowVM.imageName = asset.imageName
+            mainRowVM.delegate = photoGalleryVM?.mainCollectionViewModel
             mainSectionVM.mainRowViewModels?.value?.append(mainRowVM)
         }
         // build sub collection view model

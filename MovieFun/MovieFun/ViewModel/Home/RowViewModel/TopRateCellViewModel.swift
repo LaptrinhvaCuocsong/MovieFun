@@ -49,7 +49,7 @@ extension TopRateCellViewModel: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 5.0, bottom: 0, right: 5.0)
+        return UIEdgeInsets(top: 0, left: 0.0, bottom: 0, right: 0.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -223,15 +223,8 @@ extension MovieDetailViewController: MovieDetailViewModelDelegate {
     
     func commentForMovie(movie: Movie) {
         if AccountService.share.isLogin() {
-            if let tabBarController = self.tabBarController, let viewControllers = tabBarController.viewControllers {
-                let index = TabbarItem.commentList.rawValue
-                if viewControllers.count > index {
-                    tabBarController.selectedIndex = index
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-                        NotificationCenter.default.post(name: .COMMENT_TO_MOVIE_NOTIFICATION_KEY, object: nil, userInfo: [Constants.USER_INFO_MOVIE_KEY: movie])
-                    }
-                }
-            }
+            let userInfo = [Constants.USER_INFO_MOVIE_KEY: movie]
+            NotificationCenter.default.post(name: .PUSH_TO_COMMENT_LIST_NOTIFICATION_KEY, object: nil, userInfo: userInfo)
         }
         else {
             AlertService.share.showAlertRequestLogin(for: self) {

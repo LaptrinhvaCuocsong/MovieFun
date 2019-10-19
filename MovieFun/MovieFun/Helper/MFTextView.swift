@@ -17,8 +17,7 @@ class MFTextView: UITextView {
             self.delegate = self
         }
     }
-    
-    
+ 
     override var text: String! {
         didSet {
             if text == nil || text.isEmpty {

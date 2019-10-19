@@ -15,11 +15,6 @@ class CommentListHeaderTableViewCell: UITableViewCell, CommentListCell {
     var commHeaderVM: CommentListHeaderRowViewModel?
     
     func setUp(with viewModel: CommentListBaseRowViewModel) {
-        if let viewModel = viewModel as? CommentListHeaderRowViewModel {
-            commHeaderVM = viewModel
-        }
     }
-    
-    @IBAction func addComment(_ sender: Any) {
-    }
+
 }

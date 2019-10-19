@@ -33,9 +33,26 @@ class MovieListViewController: UIViewController, UITableViewDelegate, UITableVie
             }
             strongSelf.controller.start()
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(pushToCommentList(notification:)), name: .PUSH_TO_COMMENT_LIST_NOTIFICATION_KEY, object: nil)
     }
     
     //MARK: - Private method
+    
+    @objc private func pushToCommentList(notification: Notification) {
+        if let userInfo = notification.userInfo, let movie = userInfo[Constants.USER_INFO_MOVIE_KEY] as? Movie {
+            if let tabBarController = self.tabBarController, let selectedVC = tabBarController.selectedViewController as? UINavigationController, let viewControllers = tabBarController.viewControllers {
+                selectedVC.popToRootViewController(animated: false)
+                selectedVC.dismiss(animated: true, completion: nil)
+                let index = TabbarItem.commentList.rawValue
+                if viewControllers.count > index {
+                    tabBarController.selectedIndex = index
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+                        NotificationCenter.default.post(name: .COMMENT_TO_MOVIE_NOTIFICATION_KEY, object: nil, userInfo: [Constants.USER_INFO_MOVIE_KEY: movie])
+                    }
+                }
+            }
+        }
+    }
     
     private func registerCell() {
         movieTableView.register(UINib(nibName: NowMovieTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: NowMovieTableViewCell.cellIdentify)

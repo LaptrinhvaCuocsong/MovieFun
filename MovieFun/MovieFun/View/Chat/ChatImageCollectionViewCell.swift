@@ -28,6 +28,9 @@ class ChatImageCollectionViewCell: UICollectionViewCell {
     func setContent(assetWrapper: PHAssetWrapper, imageManager: PHCachingImageManager, imageRequestOption: PHImageRequestOptions?, targetSizeImage: CGSize) {
         self.assetWrapper = assetWrapper
         initBinding()
+        for subView in imageView.subviews {
+            subView.removeSpinnerView()
+        }
         imageView.image = nil
         if let asset = assetWrapper.phAsset {
             imageManager.requestImage(for: asset, targetSize: targetSizeImage, contentMode: .default, options: imageRequestOption) {[weak self] (image, _) in
@@ -60,7 +63,7 @@ class ChatImageCollectionViewCell: UICollectionViewCell {
         }
         buttonSend.isHidden = true
     }
-        
+    
     @IBAction func sendImage(_ sender: Any) {
         if let asset = assetWrapper?.phAsset {
             delegate?.sendImage(asset: asset)

@@ -7,6 +7,13 @@
 //
 
 import Foundation
+import UIKit
+
+protocol PhotoGalleryViewModelDelegate: class {
+    
+    func showPresentImageViewController(with image: UIImage)
+    
+}
 
 class PhotoGalleryViewModel {
     
@@ -15,11 +22,13 @@ class PhotoGalleryViewModel {
     var currentAsset: (accountId: String, imageName: String)?
     var subCollectionViewModel: SubCollectionViewModel?
     var mainCollectionViewModel: MainCollectionViewModel?
+    weak var delegate: PhotoGalleryViewModelDelegate?
     
     init() {
         isFetching = DynamicType<Bool>(value: false)
         subCollectionViewModel =  SubCollectionViewModel()
         mainCollectionViewModel = MainCollectionViewModel()
+        mainCollectionViewModel?.delegate = self
         initBinding()
     }
     
@@ -30,6 +39,14 @@ class PhotoGalleryViewModel {
         subCollectionViewModel?.ratioIndex?.listener = {[weak self] ratioIndex in
             self?.mainCollectionViewModel?.scrollToPosition(with: ratioIndex)
         }
+    }
+    
+}
+
+extension PhotoGalleryViewModel: MainCollectionViewModelDelegate {
+    
+    func showPresentImageViewController(with image: UIImage) {
+        delegate?.showPresentImageViewController(with: image)
     }
     
 }

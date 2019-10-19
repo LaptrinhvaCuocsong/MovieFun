@@ -36,6 +36,7 @@ class PhotoGalleryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         viewModel.assets = assets
         viewModel.currentAsset = currectAsset
         mainCollectionView.delegate = viewModel.mainCollectionViewModel
@@ -67,6 +68,16 @@ class PhotoGalleryViewController: UIViewController {
 
     @IBAction func dismissViewController(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+extension PhotoGalleryViewController: PhotoGalleryViewModelDelegate {
+    
+    func showPresentImageViewController(with image: UIImage) {
+        let presentImageVC = PresentImageViewController.createPresentImageViewController(with: image)
+        presentImageVC.modalTransitionStyle = .crossDissolve
+        present(presentImageVC, animated: true, completion: nil)
     }
     
 }

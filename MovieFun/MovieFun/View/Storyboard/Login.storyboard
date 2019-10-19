@@ -22,51 +22,51 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCr-6Q-htk">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="678"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Fun" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkg-mn-h7c">
-                                                <rect key="frame" x="120" y="80" width="174.5" height="39.5"/>
+                                                <rect key="frame" x="120" y="40" width="174.5" height="39.5"/>
                                                 <fontDescription key="fontDescription" name="AppleColorEmoji" family="Apple Color Emoji" pointSize="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PVc-YQ-UEs">
-                                                <rect key="frame" x="30" y="169.5" width="354" height="50"/>
+                                                <rect key="frame" x="30" y="99.5" width="354" height="50"/>
                                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="hxy-Ex-QKq"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="18" maxY="0.0"/>
                                                 <state key="normal" title="Connect with Google" image="google-plus">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Xot-rs-JVV">
-                                                <rect key="frame" x="30" y="269.5" width="354" height="50"/>
+                                                <rect key="frame" x="30" y="189.5" width="354" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="U9h-fL-cDY"/>
+                                                    <constraint firstAttribute="height" constant="40" id="U9h-fL-cDY"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="g3y-lf-cpC">
-                                                <rect key="frame" x="30" y="344.5" width="354" height="50"/>
+                                                <rect key="frame" x="30" y="239.5" width="354" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="58a-e7-VUe"/>
+                                                    <constraint firstAttribute="height" constant="40" id="58a-e7-VUe"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDL-OW-d4b">
-                                                <rect key="frame" x="30" y="444.5" width="354" height="50"/>
+                                                <rect key="frame" x="30" y="319.5" width="354" height="50"/>
                                                 <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="9Yf-gl-d7O"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                 <state key="normal" title="Login">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -75,12 +75,12 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxJ-B9-UWv">
-                                                <rect key="frame" x="30" y="519.5" width="354" height="50"/>
+                                                <rect key="frame" x="30" y="379.5" width="354" height="50"/>
                                                 <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="jfJ-E6-cvy"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                                 <state key="normal" title="Register">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -91,19 +91,19 @@
                                         </subviews>
                                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <constraints>
-                                            <constraint firstItem="xxJ-B9-UWv" firstAttribute="top" secondItem="mDL-OW-d4b" secondAttribute="bottom" constant="25" id="5Ka-dR-VwT"/>
+                                            <constraint firstItem="xxJ-B9-UWv" firstAttribute="top" secondItem="mDL-OW-d4b" secondAttribute="bottom" constant="10" id="5Ka-dR-VwT"/>
                                             <constraint firstItem="tkg-mn-h7c" firstAttribute="centerX" secondItem="cCr-6Q-htk" secondAttribute="centerX" id="5lL-nA-1SG"/>
-                                            <constraint firstItem="mDL-OW-d4b" firstAttribute="top" secondItem="g3y-lf-cpC" secondAttribute="bottom" constant="50" id="8OD-cw-cki"/>
+                                            <constraint firstItem="mDL-OW-d4b" firstAttribute="top" secondItem="g3y-lf-cpC" secondAttribute="bottom" constant="40" id="8OD-cw-cki"/>
                                             <constraint firstItem="xxJ-B9-UWv" firstAttribute="leading" secondItem="cCr-6Q-htk" secondAttribute="leading" constant="30" id="Bhy-i7-Ss0"/>
-                                            <constraint firstItem="g3y-lf-cpC" firstAttribute="top" secondItem="Xot-rs-JVV" secondAttribute="bottom" constant="25" id="C5Y-1v-14s"/>
+                                            <constraint firstItem="g3y-lf-cpC" firstAttribute="top" secondItem="Xot-rs-JVV" secondAttribute="bottom" constant="10" id="C5Y-1v-14s"/>
                                             <constraint firstAttribute="trailing" secondItem="Xot-rs-JVV" secondAttribute="trailing" constant="30" id="RLJ-Ag-Y0y"/>
-                                            <constraint firstItem="Xot-rs-JVV" firstAttribute="top" secondItem="PVc-YQ-UEs" secondAttribute="bottom" constant="50" id="SR3-Ku-Unp"/>
-                                            <constraint firstItem="tkg-mn-h7c" firstAttribute="top" secondItem="cCr-6Q-htk" secondAttribute="top" constant="80" id="SmT-M6-BVb"/>
+                                            <constraint firstItem="Xot-rs-JVV" firstAttribute="top" secondItem="PVc-YQ-UEs" secondAttribute="bottom" constant="40" id="SR3-Ku-Unp"/>
+                                            <constraint firstItem="tkg-mn-h7c" firstAttribute="top" secondItem="cCr-6Q-htk" secondAttribute="top" constant="40" id="SmT-M6-BVb"/>
                                             <constraint firstItem="PVc-YQ-UEs" firstAttribute="leading" secondItem="cCr-6Q-htk" secondAttribute="leading" constant="30" id="ZTl-UZ-Y75"/>
                                             <constraint firstItem="PVc-YQ-UEs" firstAttribute="centerX" secondItem="cCr-6Q-htk" secondAttribute="centerX" id="bBx-Ee-mbr"/>
                                             <constraint firstItem="Xot-rs-JVV" firstAttribute="leading" secondItem="cCr-6Q-htk" secondAttribute="leading" constant="30" id="cyS-St-Ilm"/>
                                             <constraint firstAttribute="trailing" secondItem="mDL-OW-d4b" secondAttribute="trailing" constant="30" id="e1F-4b-kac"/>
-                                            <constraint firstItem="PVc-YQ-UEs" firstAttribute="top" secondItem="tkg-mn-h7c" secondAttribute="bottom" constant="50" id="f9Y-FW-Sz1"/>
+                                            <constraint firstItem="PVc-YQ-UEs" firstAttribute="top" secondItem="tkg-mn-h7c" secondAttribute="bottom" constant="20" id="f9Y-FW-Sz1"/>
                                             <constraint firstAttribute="trailing" secondItem="xxJ-B9-UWv" secondAttribute="trailing" constant="30" id="kca-Qw-XQO"/>
                                             <constraint firstAttribute="bottom" secondItem="xxJ-B9-UWv" secondAttribute="bottom" constant="248.5" id="lvj-7A-bdD"/>
                                             <constraint firstAttribute="trailing" secondItem="g3y-lf-cpC" secondAttribute="trailing" constant="30" id="o7B-jV-iFc"/>
@@ -136,6 +136,7 @@
                         <outlet property="loginButton" destination="mDL-OW-d4b" id="Fmr-Lk-zPM"/>
                         <outlet property="loginGoogleButton" destination="PVc-YQ-UEs" id="n4f-QC-kYZ"/>
                         <outlet property="loginScrollView" destination="Ob7-cP-sAt" id="yaT-n8-PYQ"/>
+                        <outlet property="marginBottomRegisterButton" destination="lvj-7A-bdD" id="wGD-4p-Jfu"/>
                         <outlet property="passwordTextField" destination="g3y-lf-cpC" id="RAF-4L-kBt"/>
                         <outlet property="registerButton" destination="xxJ-B9-UWv" id="bgI-EI-sm5"/>
                     </connections>

@@ -41,7 +41,6 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewWillAppear(animated)
         if needUpdateGroupComment {
             fetchGroupComments()
-            needUpdateGroupComment = false
         }
     }
     
@@ -61,6 +60,7 @@ class CommentListViewController: UIViewController, UITableViewDelegate, UITableV
     private func fetchGroupComments() {
         if AccountService.share.isLogin() {
             controller.start()
+            needUpdateGroupComment = false
         }
         else {
             AlertService.share.showAlertRequestLogin(for: self) {[weak self] in

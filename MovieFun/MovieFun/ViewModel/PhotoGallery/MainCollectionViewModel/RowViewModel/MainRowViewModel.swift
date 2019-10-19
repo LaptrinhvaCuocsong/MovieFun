@@ -7,10 +7,23 @@
 //
 
 import Foundation
+import UIKit
+
+protocol MainRowViewModelDelegate: class {
+    
+    func showPresentImageViewController(with image: UIImage)
+    
+}
 
 class MainRowViewModel {
     
     var imageName: String?
     var accountId: String?
+    var isSelectedCell: DynamicType<Bool>?
+    weak var delegate: MainRowViewModelDelegate?
+    
+    init() {
+        isSelectedCell = DynamicType<Bool>(value: false)
+    }
     
 }

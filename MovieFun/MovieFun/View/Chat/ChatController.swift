@@ -182,9 +182,9 @@ class ChatController {
     }
     
     private func buildViewModels(_ groupMessages: [[Message]]) {
+        chatViewModel?.sectionViewModels?.value?.removeAll()
+        chatViewModel?.assets?.value?.removeAll()
         for groupMessage in groupMessages {
-            chatViewModel?.sectionViewModels?.value?.removeAll()
-            chatViewModel?.assets?.value?.removeAll()
             let sectionVM = ChatSectionViewModel()
             chatViewModel?.sectionViewModels?.value?.append(sectionVM)
             var headerVM: ChatHeaderRowViewModel?

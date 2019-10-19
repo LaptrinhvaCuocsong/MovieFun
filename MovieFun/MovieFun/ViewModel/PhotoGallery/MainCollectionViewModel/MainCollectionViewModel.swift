@@ -9,12 +9,19 @@
 import Foundation
 import UIKit
 
+protocol MainCollectionViewModelDelegate: class {
+    
+    func showPresentImageViewController(with image: UIImage)
+    
+}
+
 class MainCollectionViewModel: NSObject {
     
     weak var mainCollectionView: UICollectionView?
     var currentAssetIndex: Int = 0
     var ratioIndex: DynamicType<CGFloat>?
     var mainSectionViewModels: DynamicType<[MainSectionViewModel]>?
+    weak var delegate: MainCollectionViewModelDelegate?
     
     override init() {
         ratioIndex = DynamicType<CGFloat>(value: 0.0)
@@ -68,6 +75,23 @@ extension MainCollectionViewModel: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: CGFloat(collectionView.width), height: CGFloat(collectionView.height))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let sectionVM = mainSectionViewModels!.value!.first!
+        sectionVM.mainRowViewModels?.value?.forEach({ (mainRowVM) in
+            mainRowVM.isSelectedCell?.value = false
+        })
+        let rowVM = sectionVM.mainRowViewModels!.value![indexPath.section]
+        rowVM.isSelectedCell?.value = true
+    }
+    
+}
+
+extension MainCollectionViewModel: MainRowViewModelDelegate {
+    
+    func showPresentImageViewController(with image: UIImage) {
+        delegate?.showPresentImageViewController(with: image)
     }
     
 }

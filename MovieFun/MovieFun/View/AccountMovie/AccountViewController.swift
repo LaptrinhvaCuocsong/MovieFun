@@ -106,6 +106,7 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         viewModel.logoutSuccess?.listener = {[weak self] (logoutSuccess) in
             if logoutSuccess {
+                self?.accountImageView.image = UIImage(named: Constants.IMAGE_NOT_FOUND)
                 NotificationCenter.default.post(name: .DID_LOGOUT_SUCCESS_NOTIFICATION_KEY, object: nil)
                 SVProgressHUD.dismiss()
                 self?.addLoginViewController()
